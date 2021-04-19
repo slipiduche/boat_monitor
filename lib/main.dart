@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:boat_monitor/generated/l10n.dart';
 
 /// Forces portrait-only mode application-wide
 /// Use this Mixin on the main app widget i.e. app.Dart
@@ -65,6 +67,13 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
       theme: ThemeData(fontFamily: 'Roboto'),
       debugShowCheckedModeBanner: false,
       title: 'Material App',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        AppLocalizations.delegate
+      ],
+      supportedLocales: AppLocalizations.delegate.supportedLocales,
       initialRoute: 'homePage',
       //routes: getAppRoutes(),
       onGenerateRoute: (RouteSettings settings) {
