@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
         return MaterialPageRoute(
             builder: (BuildContext context) => Container(
                   child: Text(
-                    'Hola Boat monitor',
+                    'Here will start your project',
                     style: TextStyle(fontSize: 40.0),
                   ),
                 ));
