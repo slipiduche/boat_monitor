@@ -42,3 +42,9 @@ final LinearGradient gradient2 = LinearGradient(
   begin: FractionalOffset.topCenter,
   end: FractionalOffset.bottomCenter,
 );
+final Color colorShadow = Color.fromRGBO(0, 0, 0, 0.25);
+final BoxShadow boxShadow1 = BoxShadow(
+    color: colorShadow,
+    blurRadius: 4.0,
+    spreadRadius: 0.0,
+    offset: Offset(0, 4.0));

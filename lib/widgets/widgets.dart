@@ -9,7 +9,8 @@ PreferredSizeWidget gradientAppBar(String title, Function onBackPressed) {
     child: Container(
       height: 50.0,
       width: double.infinity,
-      decoration: BoxDecoration(gradient: blueGradient1),
+      decoration:
+          BoxDecoration(gradient: blueGradient1, boxShadow: [boxShadow1]),
       child: Stack(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
