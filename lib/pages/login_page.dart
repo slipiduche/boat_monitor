@@ -1,3 +1,4 @@
+import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
@@ -12,17 +13,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            
-          ),
+      appBar: gradientAppBar('Login', () {}),
       body: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 50.0,
-              width: double.infinity,
-              decoration: BoxDecoration(gradient: blueGradient1),
-            ),
             Text(
               'Here will start your project',
               style: TextStyle(fontSize: 40.0),
