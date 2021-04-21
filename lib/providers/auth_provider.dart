@@ -15,8 +15,8 @@ class AuthProvider {
     };
     print(json.encode(authData));
     final resp = await http.post(
-        Uri.parse('http://orbittas.ddns.net:8081/api/deviceLogin'),
-        body: authData);
+        Uri.parse('http://orbittas.ddns.net:8081/api/login'),
+        headers: authData);
 
     Map<String, dynamic> decodedResp = json.decode(resp.body);
 
