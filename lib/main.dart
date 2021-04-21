@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 
+import 'pages/login_page.dart';
+import 'styles/colors.dart';
+
 /// Forces portrait-only mode application-wide
 /// Use this Mixin on the main app widget i.e. app.Dart
 /// Flutter's 'App' has to extend Stateless widget.
@@ -80,12 +83,7 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
         print('ruta llamada ${settings.name}');
         //Navigator.pop(context);
         return MaterialPageRoute(
-            builder: (BuildContext context) => Container(
-                  child: Text(
-                    'Here will start your project',
-                    style: TextStyle(fontSize: 40.0),
-                  ),
-                ));
+            builder: (BuildContext context) => LoginPage());
       },
     );
   }

@@ -15,7 +15,7 @@ final Color blue3 = Color.fromRGBO(0, 56, 112, 1.0);
 final Color blueUnselect = Color.fromRGBO(69, 108, 147, 1.0);
 
 final LinearGradient blueGradient1 = LinearGradient(
-  colors: [blue, blue1],
+  colors: [blue1, blue],
   stops: [0.0, 1.0],
   begin: FractionalOffset.topCenter,
   end: FractionalOffset.bottomCenter,
