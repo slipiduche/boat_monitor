@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:boat_monitor/bloc/error_bloc.dart';
+import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,8 +13,7 @@ class AuthProvider {
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$email:$password'));
     print(basicAuth);
 
-    http.Response response = await http.get(
-        Uri.parse('https://api.somewhere.io'),
+    http.Response response = await http.get(Uri.parse(Parameters().loginUrl),
         headers: <String, String>{'authorization': basicAuth});
     print(response.statusCode);
     print(response.body);

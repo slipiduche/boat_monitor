@@ -1,15 +1,16 @@
 class Parameters {
-  final domain = 'www.orbittas.com'; //server domain
-  final login = '/login'; //endpoints
-  final recovery = '/recovery';
-  final historics = '/historics';
-  final users = '/users';
-  final boats = '/boats';
+  //final domain = 'https://www.orbittas.com/'; //server domain
+  final domain = '192.168.0.103'; //server domain
+  final login = 'login'; //endpoints
+  final recovery = 'recovery';
+  final historics = 'historics';
+  final users = 'users';
+  final boats = 'boats';
   final journeys = 'journeys';
-  final files = '/files';
+  final files = 'files';
   final create = 'create';
   final modify = 'modify';
-  final status = '/status';
+  final status = 'status';
 
   Parameters();
   String get loginUrl {
