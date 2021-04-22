@@ -34,11 +34,11 @@ class UserPreferences {
   }
 
   // GET y SET del nombre
-  get nombre {
+  get name {
     return _prefs.getString('nombre') ?? '';
   }
 
-  set nombre(String value) {
+  set name(String value) {
     _prefs.setString('nombre', value);
   }
 

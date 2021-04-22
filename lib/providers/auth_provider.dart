@@ -9,24 +9,24 @@ class AuthProvider {
 
   final _prefs = new UserPreferences();
   Future<Map<String, dynamic>> login(String email, String password) async {
-    final authData = {
-      "email": email,
-      "password": password,
-    };
-    print(json.encode(authData));
-    final resp = await http.post(
-        Uri.parse('http://orbittas.ddns.net:8081/api/login'),
-        headers: authData);
+    String basicAuth = 'Basic ' + base64Encode(utf8.encode('$email:$password'));
+    print(basicAuth);
 
-    Map<String, dynamic> decodedResp = json.decode(resp.body);
+    http.Response response = await http.get(
+        Uri.parse('https://api.somewhere.io'),
+        headers: <String, String>{'authorization': basicAuth});
+    print(response.statusCode);
+    print(response.body);
+
+    Map<String, dynamic> decodedResp = json.decode(response.body);
 
     print(decodedResp);
 
     if (decodedResp.containsKey('token')) {
       _prefs.token = decodedResp['token'];
       _prefs.email = decodedResp['user'];
-      if (_prefs.nombre == '') {
-        _prefs.nombre = decodedResp['firstName'];
+      if (_prefs.name == '') {
+        _prefs.name = decodedResp['firstName'];
       }
       _prefs.userId = decodedResp['userId'];
 
