@@ -1,6 +1,6 @@
 class Parameters {
   //final domain = 'https://www.orbittas.com/'; //server domain
-  final domain = '192.168.0.103'; //server domain
+  final domain = '192.168.0.103:9443'; //server domain
   final login = 'login'; //endpoints
   final recovery = 'recovery';
   final historics = 'historics';

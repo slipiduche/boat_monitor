@@ -33,6 +33,76 @@ class AuthProvider {
       return {'ok': true, 'token': decodedResp['token']};
     } else {
       _errorBloc.errorStreamSink(decodedResp);
+      return {'ok': false, 'mensaje': 'failure'};
+    }
+  }
+
+  Future<Map<String, dynamic>> signUp(
+      String name, String email, String password) async {
+    final request = {
+      'tab': 'USERS',
+      'username': name,
+      'password': password,
+      'names': 'string',
+      'mail': email
+    };
+
+    http.Response response =
+        await http.post(Uri.parse(Parameters().create), body: request);
+    print(response.statusCode);
+    print(response.body);
+
+    return _result(response);
+  }
+
+  Future<Map<String, dynamic>> recovery(String email) async {
+    final request = {'mail': email};
+
+    http.Response response =
+        await http.get(Uri.parse(Parameters().recovery), headers: request);
+    print(response.statusCode);
+    print(response.body);
+
+    return _result(response);
+  }
+
+  Future<Map<String, dynamic>> passwordChange(String token, String email,
+      String userName, String newPassword, int userType) async {
+    final request = {
+      'token': token,
+      'tab': 'USERS',
+      'password': newPassword,
+      'mail': email,
+      'usertype': userType,
+    };
+
+    http.Response response =
+        await http.put(Uri.parse(Parameters().modify), body: request);
+    print(response.statusCode);
+    print(response.body);
+
+    return _result(response);
+  }
+
+  Future<Map<String, dynamic>> authorizeUsers(
+      String token, String email, List<String> users) async {
+    final request = {"token": token, "email": email, "listUsers": users};
+
+    http.Response response =
+        await http.put(Uri.parse(Parameters().modify), body: request);
+    print(response.statusCode);
+    print(response.body);
+
+    return _result(response);
+  }
+
+  Map<String, dynamic> _result(http.Response response) {
+    Map<String, dynamic> decodedResp = json.decode(response.body);
+    if (decodedResp['status'] == 'succes') {
+      _errorBloc.errorStreamSink(decodedResp);
+      return {'ok': true, 'mensaje': 'succes'};
+    } else {
+      _errorBloc.errorStreamSink(decodedResp);
       return {'ok': false, 'mensaje': decodedResp['message']};
     }
   }
