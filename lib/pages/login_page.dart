@@ -14,15 +14,17 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar('Login', () {}),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Here will start your project',
-              style: TextStyle(fontSize: 40.0),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Here will start your project',
+                style: TextStyle(fontSize: 40.0),
+              ),
+            ],
+          ),
         ),
       ),
     ));

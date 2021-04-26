@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+final Color colorBorderButton = Color.fromRGBO(196, 196, 196, 1.0);
 final LinearGradient whiteGradient = LinearGradient(
   colors: [Colors.white60, Color.fromRGBO(255, 255, 255, 0)],
   stops: [0.099, 1.0],
