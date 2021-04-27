@@ -29,7 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   http:
   shared_preferences: ^0.5.10
-  rxdart: ^0.25.0
+  rxdart: ^0.22.0
   flutter_localizations:
     sdk: flutter
 dev_dependencies:

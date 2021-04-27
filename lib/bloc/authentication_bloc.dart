@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:boat_monitor/bloc/validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AuthBloc with Validators {
@@ -33,6 +34,9 @@ class AuthBloc with Validators {
   deletePassword() {
     _passwordController.add(null);
   }
+
+  Stream<bool> get formValidStream =>
+      Observable.combineLatest2(email, password, (e, p) => true);
 
   final _nameController = new BehaviorSubject<String>();
   Stream<String> get name => _nameController.stream;
