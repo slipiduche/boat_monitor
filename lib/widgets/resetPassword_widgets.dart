@@ -1,3 +1,4 @@
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -9,19 +10,20 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'login_widgets.dart';
 
 Widget formReset(BuildContext context) {
-  final email = '';
+  AuthBloc auth = AuthBloc();
   return Container(
     width: double.infinity,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        createEmail(context, ''),
+        createEmail(context),
         SizedBox(
           height: marginBox,
         ),
         GestureDetector(
             onTap: () async {
-              await AuthProvider().recovery(email);
+              print(auth.emailValue);
+              await AuthProvider().recovery(auth.emailValue);
             },
             child: flatButton(
                 TextLanguage.of(context).passwordRecovery, blue, Colors.white)),

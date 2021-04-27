@@ -1,3 +1,4 @@
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/name_icon_icons.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
@@ -24,20 +25,21 @@ class _FormSignupState extends State<FormSignup> {
   }
 
   Widget _formSignUp(BuildContext context) {
+    AuthBloc auth = AuthBloc();
     return Container(
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          createName(context, ''),
+          createName(context),
           SizedBox(
             height: marginBox,
           ),
-          createEmail(context, ''),
+          createEmail(context),
           SizedBox(
             height: marginBox,
           ),
-          createPassword(context, ''),
+          createPassword(context),
           SizedBox(
             height: marginBox,
           ),
@@ -85,8 +87,11 @@ class _FormSignupState extends State<FormSignup> {
           ),
           GestureDetector(
               onTap: () async {
+                print(auth.nameValue);
+                print(auth.emailValue);
+                print(auth.passwordValue);
                 await AuthProvider().signUp(
-                    'alejandro', 'alejandrocamacaro91@gmail.com', '20075194');
+                    auth.nameValue, auth.emailValue, auth.passwordValue);
               },
               child: flatButton(
                   TextLanguage.of(context).signUp, blue, Colors.white)),
@@ -98,7 +103,8 @@ class _FormSignupState extends State<FormSignup> {
   }
 }
 
-Widget createName(BuildContext context, _name) {
+Widget createName(BuildContext context) {
+  AuthBloc auth = AuthBloc();
   return Container(
     //padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
@@ -116,7 +122,7 @@ Widget createName(BuildContext context, _name) {
       ),
       onChanged: (valor) {
         //setState(() {});
-        _name = valor;
+        auth.setName = valor;
       },
     ),
   );

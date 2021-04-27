@@ -1,3 +1,4 @@
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -27,6 +28,7 @@ Widget upButton(String texto, Color color, textColor) {
 }
 
 Widget flatButton(String texto, Color color, textColor) {
+  AuthBloc auth = AuthBloc();
   return Container(
     width: double.infinity,
     //margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 25.0),
@@ -47,24 +49,25 @@ Widget flatButton(String texto, Color color, textColor) {
 }
 
 Widget form(BuildContext context) {
+  AuthBloc auth = AuthBloc();
   return Container(
     width: double.infinity,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        createEmail(context, ''),
+        createEmail(context),
         SizedBox(
           height: marginBox,
         ),
-        createPassword(context, ''),
+        createPassword(context),
         SizedBox(
           height: marginBox,
         ),
         GestureDetector(
             onTap: () async {
-              final email = '@Orbittas';
-              final password = 'test';
-              await AuthProvider().login(email, password);
+              print(auth.emailValue);
+              print(auth.passwordValue);
+              await AuthProvider().login(auth.emailValue, auth.passwordValue);
             },
             child: flatButton(
                 TextLanguage.of(context).loginButtonText, blue, Colors.white)),
@@ -75,7 +78,8 @@ Widget form(BuildContext context) {
   );
 }
 
-Widget createEmail(BuildContext context, _email) {
+Widget createEmail(BuildContext context) {
+  AuthBloc auth = AuthBloc();
   return Container(
     //padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
@@ -93,13 +97,14 @@ Widget createEmail(BuildContext context, _email) {
       ),
       onChanged: (valor) {
         //setState(() {});
-        _email = valor;
+        auth.setEmail = valor;
       },
     ),
   );
 }
 
-Widget createPassword(BuildContext context, _password) {
+Widget createPassword(BuildContext context) {
+  AuthBloc auth = AuthBloc();
   return Container(
     //padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
@@ -116,7 +121,8 @@ Widget createPassword(BuildContext context, _password) {
       ),
       onChanged: (valor) {
         //setState(() {});
-        _password = valor;
+
+        auth.setPassword = valor;
       },
     ),
   );

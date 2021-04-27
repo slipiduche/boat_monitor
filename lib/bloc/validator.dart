@@ -1,21 +1,25 @@
-
 import 'dart:async';
 
-
-
-
 class Validators {
+  final validateEmail =
+      StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
 
-  final validarId = StreamTransformer<List, List>.fromHandlers(
-    handleData: ( dispositivos, sink ) {
-
-      final idDispositivo = dispositivos.where( (s) => s.chipId.length == 12 ).toList();
-      sink.add(idDispositivo);
+    if (regExp.hasMatch(email)) {
+      sink.add(email);
+    } else {
+      sink.addError(1);
     }
-  );
+  });
 
-  
-
-
-
+  final validatePassword = StreamTransformer<String, String>.fromHandlers(
+      handleData: (password, sink) {
+    if (password.length >= 6) {
+      sink.add(password);
+    } else {
+      sink.addError(2);
+    }
+  });
 }

@@ -205,6 +205,26 @@ class TextLanguage {
     );
   }
 
+  /// `Is not an email`
+  String get isNotEmail {
+    return Intl.message(
+      'Is not an email',
+      name: 'isNotEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Must have more 6 characters`
+  String get mustHave {
+    return Intl.message(
+      'Must have more 6 characters',
+      name: 'mustHave',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hello world`
   String get simpleText {
     return Intl.message(
