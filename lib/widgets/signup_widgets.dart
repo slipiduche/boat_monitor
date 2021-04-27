@@ -1,4 +1,5 @@
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/name_icon_icons.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
@@ -105,7 +106,7 @@ Widget createName(BuildContext context, _name) {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
         hintText: TextLanguage.of(context).name,
         labelText: TextLanguage.of(context).name,
-        suffixIcon: Icon(Icons.email),
+        suffixIcon: Icon(NameIcon.nameicon),
 
         //icon: Icon(Icons.email)
       ),

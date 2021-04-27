@@ -17,7 +17,9 @@ class _PrivacyPageState extends State<PrivacyPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: gradientAppBar(TextLanguage.of(context).privacyPolicy, () {}),
+      appBar: gradientAppBar(TextLanguage.of(context).privacyPolicy, () {
+        Navigator.of(context).pushReplacementNamed('signUpPage');
+      }),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal:marginExt,vertical:marginExt),
