@@ -1,39 +1,53 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:boat_monitor/bloc/error_bloc.dart';
 import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:http/io_client.dart';
+
 class AuthProvider {
   final _errorBloc = ErrorBloc();
 
   final _prefs = new UserPreferences();
   Future<Map<String, dynamic>> login(String email, String password) async {
+    Map<String, dynamic> decodedResp;
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$email:$password'));
     print(basicAuth);
 
-    http.Response response = await http.get(Uri.parse(Parameters().loginUrl),
-        headers: <String, String>{'authorization': basicAuth});
-    print(response.statusCode);
-    print(response.body);
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http.get(Uri.parse(Parameters().loginUrl),
+          headers: <String, String>{
+            'authorization': basicAuth
+          }).then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+        print(decodedResp);
+      });
 
-    Map<String, dynamic> decodedResp = json.decode(response.body);
+      if (decodedResp["token"] != null) {
+        _prefs.token = decodedResp["token"];
+        print(_prefs.token);
+        //_prefs.email = decodedResp['user'];
 
-    print(decodedResp);
-
-    if (decodedResp.containsKey('token')) {
-      _prefs.token = decodedResp['token'];
-      _prefs.email = decodedResp['user'];
-      if (_prefs.name == '') {
-        _prefs.name = decodedResp['firstName'];
+        return {'ok': true, 'token': decodedResp['token']};
+      } else {
+        _errorBloc.errorStreamSink(decodedResp);
+        return {'ok': false, 'mensaje': 'failure'};
       }
-      _prefs.userId = decodedResp['userId'];
-
-      return {'ok': true, 'token': decodedResp['token']};
-    } else {
+    } catch (e) {
+      print('error:');
+      print(e.toString());
       _errorBloc.errorStreamSink(decodedResp);
-      return {'ok': false, 'mensaje': 'failure'};
+      return {'ok': false, 'mensaje': e.toString()};
     }
   }
 
@@ -46,24 +60,43 @@ class AuthProvider {
       'names': 'string',
       'mail': email
     };
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      final response =
+          await http.post(Uri.parse(Parameters().createUrl), body: request);
+      print(response.statusCode);
+      print(response.body);
 
-    http.Response response =
-        await http.post(Uri.parse(Parameters().create), body: request);
-    print(response.statusCode);
-    print(response.body);
-
-    return _result(response);
+      return _result(response);
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      return {'ok': false, 'mensaje': e.toString()};
+    }
   }
 
   Future<Map<String, dynamic>> recovery(String email) async {
     final request = {'mail': email};
 
-    http.Response response =
-        await http.get(Uri.parse(Parameters().recovery), headers: request);
-    print(response.statusCode);
-    print(response.body);
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      final response =
+          await http.get(Uri.parse(Parameters().recoveryUrl), headers: request);
+      print(response.statusCode);
+      print(response.body);
 
-    return _result(response);
+      return _result(response);
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      return {'ok': false, 'mensaje': e.toString()};
+    }
   }
 
   Future<Map<String, dynamic>> passwordChange(String token, String email,
@@ -76,24 +109,44 @@ class AuthProvider {
       'usertype': userType,
     };
 
-    http.Response response =
-        await http.put(Uri.parse(Parameters().modify), body: request);
-    print(response.statusCode);
-    print(response.body);
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      final response =
+          await http.put(Uri.parse(Parameters().modifyUrl), body: request);
+      print(response.statusCode);
+      print(response.body);
 
-    return _result(response);
+      return _result(response);
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      return {'ok': false, 'mensaje': e.toString()};
+    }
   }
 
   Future<Map<String, dynamic>> authorizeUsers(
       String token, String email, List<String> users) async {
     final request = {"token": token, "email": email, "listUsers": users};
 
-    http.Response response =
-        await http.put(Uri.parse(Parameters().modify), body: request);
-    print(response.statusCode);
-    print(response.body);
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      final response =
+          await http.put(Uri.parse(Parameters().modifyUrl), body: request);
+      print(response.statusCode);
+      print(response.body);
 
-    return _result(response);
+      return _result(response);
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      return {'ok': false, 'mensaje': e.toString()};
+    }
   }
 
   Map<String, dynamic> _result(http.Response response) {

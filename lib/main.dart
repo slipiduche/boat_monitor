@@ -1,4 +1,5 @@
 import 'package:boat_monitor/routes/routes.dart';
+import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -59,7 +60,8 @@ void _enableRotation() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  final prefs = new UserPreferences();
+  await prefs.initPrefs();
   runApp(MyApp());
 }
 

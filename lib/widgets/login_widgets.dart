@@ -1,4 +1,5 @@
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
@@ -57,10 +58,14 @@ Widget form(BuildContext context) {
         ),
         createPassword(context, ''),
         SizedBox(
-          height: marginBox ,
+          height: marginBox,
         ),
         GestureDetector(
-            onTap: () async {},
+            onTap: () async {
+              final email = '@Orbittas';
+              final password = 'test';
+              await AuthProvider().login(email, password);
+            },
             child: flatButton(
                 TextLanguage.of(context).loginButtonText, blue, Colors.white)),
 

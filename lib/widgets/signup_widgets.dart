@@ -1,5 +1,6 @@
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/name_icon_icons.dart';
+import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
@@ -83,9 +84,12 @@ class _FormSignupState extends State<FormSignup> {
             ),
           ),
           GestureDetector(
-              onTap: () async {},
-              child: flatButton(TextLanguage.of(context).signUp, blue,
-                  Colors.white)),
+              onTap: () async {
+                await AuthProvider().signUp(
+                    'alejandro', 'alejandrocamacaro91@gmail.com', '20075194');
+              },
+              child: flatButton(
+                  TextLanguage.of(context).signUp, blue, Colors.white)),
 
           //Expanded(child: Container()),
         ],
