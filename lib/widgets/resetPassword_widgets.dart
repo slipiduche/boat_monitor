@@ -1,4 +1,5 @@
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
@@ -8,20 +9,22 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'login_widgets.dart';
 
 Widget formReset(BuildContext context) {
+  final email = '';
   return Container(
     width: double.infinity,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        
         createEmail(context, ''),
         SizedBox(
           height: marginBox,
         ),
         GestureDetector(
-            onTap: () async {},
-            child: flatButton(TextLanguage.of(context).passwordRecovery,
-                blue, Colors.white)),
+            onTap: () async {
+              await AuthProvider().recovery(email);
+            },
+            child: flatButton(
+                TextLanguage.of(context).passwordRecovery, blue, Colors.white)),
 
         //Expanded(child: Container()),
       ],
