@@ -84,7 +84,7 @@ class _FormSignupState extends State<FormSignup> {
           ),
           GestureDetector(
               onTap: () async {},
-              child: flatButton(TextLanguage.of(context).loginButtonText, blue,
+              child: flatButton(TextLanguage.of(context).signUp, blue,
                   Colors.white)),
 
           //Expanded(child: Container()),
