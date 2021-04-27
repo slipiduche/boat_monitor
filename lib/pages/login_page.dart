@@ -30,8 +30,9 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.symmetric(horizontal: marginExt),
                 child: form(context),
               ),
+              SizedBox(height: 20.0),
               Container(
-                height: 210.0,
+                height: 250.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

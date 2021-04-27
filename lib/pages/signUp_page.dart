@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/Signup_widgets.dart';
 import 'package:boat_monitor/widgets/login_widgets.dart';
@@ -27,42 +30,18 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: marginSupicon),
               signUpIcon(100.0, blue1),
               SizedBox(height: 14.0),
-              Text(TextLanguage.of(context).signUpMessage),
+              Text(
+                TextLanguage.of(context).signUpMessage,
+                style: TextStyle(
+                    color: blue1,
+                    fontSize: messageTitle,
+                    fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 40.0),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: marginExt),
-                child: formSignUp(context),
+                child: FormSignup(),
               ),
-              Container(
-                height: 210.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                        child: SizedBox(
-                      width: 50.0,
-                    )),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(TextLanguage.of(context).forgot,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center),
-                        Text(' ' + TextLanguage.of(context).clicHere,
-                            style: TextStyle(
-                                color: blue1,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center),
-                      ],
-                    ),
-                    SizedBox(height: 60)
-                  ],
-                ),
-              )
             ],
           ),
         ),

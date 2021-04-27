@@ -28,7 +28,7 @@ Widget upButton(String texto, Color color, textColor) {
 Widget flatButton(String texto, Color color, textColor) {
   return Container(
     width: double.infinity,
-    margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 25.0),
+    //margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 25.0),
     padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 10.0),
     decoration: BoxDecoration(
       color: color,
@@ -57,7 +57,7 @@ Widget form(BuildContext context) {
         ),
         createPassword(context, ''),
         SizedBox(
-          height: marginBox - 20,
+          height: marginBox ,
         ),
         GestureDetector(
             onTap: () async {},
@@ -72,7 +72,7 @@ Widget form(BuildContext context) {
 
 Widget createEmail(BuildContext context, _email) {
   return Container(
-    padding: EdgeInsets.only(left: 18.0, right: 18.0),
+    //padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
       //autofocus: true,
       //textCapitalization: TextCapitalization.sentences,
@@ -96,7 +96,7 @@ Widget createEmail(BuildContext context, _email) {
 
 Widget createPassword(BuildContext context, _password) {
   return Container(
-    padding: EdgeInsets.only(left: 18.0, right: 18.0),
+    //padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
       //autofocus: true,
       //textCapitalization: TextCapitalization.sentences,

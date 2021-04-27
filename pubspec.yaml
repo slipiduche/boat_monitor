@@ -62,7 +62,7 @@ flutter:
         - asset: assets/fonts/Roboto-Light.ttf
     - family:  NameIcon
       fonts:
-        - asset: fonts/NameIcon.ttf
+        - asset: assets/fonts/NameIcon.ttf
         # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

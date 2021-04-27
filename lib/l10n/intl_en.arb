@@ -1,5 +1,5 @@
 {
-    "name": "name",
+    "name": "Name",
     "email": "Email",
     "passWord": "Password",
     "signUp": "Sign Up",
@@ -9,6 +9,8 @@
     "signUpMessage": "Sign up and start working with us",
     "forgot": "Forgot your password ?",
     "clicHere": "Clic here",
+    "iRead": "I’ve read and accept all the",
+    "privacyPolicy": "Privacy Policy",
     "simpleText": "Hello world",
     "textWithPlaceholder": "Welcome {name}",
     "textWithPlaceholders": "My name is {lastName}, {firstName} {lastName}",

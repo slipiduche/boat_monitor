@@ -35,10 +35,10 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
-  /// `name`
+  /// `Name`
   String get name {
     return Intl.message(
-      'name',
+      'Name',
       name: 'name',
       desc: '',
       args: [],
@@ -130,6 +130,26 @@ class TextLanguage {
     return Intl.message(
       'Clic here',
       name: 'clicHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I’ve read and accept all the`
+  String get iRead {
+    return Intl.message(
+      'I’ve read and accept all the',
+      name: 'iRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
       desc: '',
       args: [],
     );
