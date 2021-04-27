@@ -12,27 +12,117 @@ import 'intl/messages_all.dart';
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
 // ignore_for_file: avoid_redundant_argument_values
 
-class AppLocalizations {
-  AppLocalizations();
+class TextLanguage {
+  TextLanguage();
   
-  static AppLocalizations current;
+  static TextLanguage current;
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
-  static Future<AppLocalizations> load(Locale locale) {
+  static Future<TextLanguage> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      AppLocalizations.current = AppLocalizations();
+      TextLanguage.current = TextLanguage();
       
-      return AppLocalizations.current;
+      return TextLanguage.current;
     });
   } 
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static TextLanguage of(BuildContext context) {
+    return Localizations.of<TextLanguage>(context, TextLanguage);
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get passWord {
+    return Intl.message(
+      'Password',
+      name: 'passWord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get loginButtonText {
+    return Intl.message(
+      'Login',
+      name: 'loginButtonText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don’t have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up here`
+  String get signupHere {
+    return Intl.message(
+      'Sign up here',
+      name: 'signupHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up and start working with us`
+  String get signUpMessage {
+    return Intl.message(
+      'Sign up and start working with us',
+      name: 'signUpMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot your password ?`
+  String get forgot {
+    return Intl.message(
+      'Forgot your password ?',
+      name: 'forgot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clic here`
+  String get clicHere {
+    return Intl.message(
+      'Clic here',
+      name: 'clicHere',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Hello world`
@@ -78,7 +168,7 @@ class AppLocalizations {
   }
 }
 
-class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
+class AppLocalizationDelegate extends LocalizationsDelegate<TextLanguage> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
@@ -90,7 +180,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);
+  Future<TextLanguage> load(Locale locale) => TextLanguage.load(locale);
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

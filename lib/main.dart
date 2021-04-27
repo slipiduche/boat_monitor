@@ -1,3 +1,4 @@
+import 'package:boat_monitor/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -74,11 +75,11 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        AppLocalizations.delegate
+        TextLanguage.delegate
       ],
-      supportedLocales: AppLocalizations.delegate.supportedLocales,
+      supportedLocales: TextLanguage.delegate.supportedLocales,
       initialRoute: 'homePage',
-      //routes: getAppRoutes(),
+      routes: getAppRoutes(),
       onGenerateRoute: (RouteSettings settings) {
         print('ruta llamada ${settings.name}');
         //Navigator.pop(context);

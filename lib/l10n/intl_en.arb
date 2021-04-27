@@ -1,4 +1,13 @@
 {
+    "email": "Email",
+    "passWord": "Password",
+    "signUp": "Sign Up",
+    "loginButtonText": "Login",
+    "dontHaveAccount": "Don’t have an account?",
+    "signupHere": "Sign up here",
+    "signUpMessage": "Sign up and start working with us",
+    "forgot": "Forgot your password ?",
+    "clicHere": "Clic here",
     "simpleText": "Hello world",
     "textWithPlaceholder": "Welcome {name}",
     "textWithPlaceholders": "My name is {lastName}, {firstName} {lastName}",

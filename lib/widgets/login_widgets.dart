@@ -1,25 +1,23 @@
+import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 
-Widget botonSuperior(String texto, Color color, textColor) {
+Widget upButton(String texto, Color color, textColor) {
   return Container(
-    //color: colorResaltadoBoton,
-    //height: 50.0,
     width: 134.0,
-    //margin: EdgeInsets.symmetric(horizontal: 31.0),
     padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 10.0),
     decoration: BoxDecoration(
       color: color,
       border: Border.all(
-        color: colorBorderButton,
+        color: borderButton,
         width: 1.0,
       ),
       borderRadius: BorderRadius.circular(4.0),
       boxShadow: <BoxShadow>[boxShadow1],
     ),
-
     child: Text(texto,
         style:
             TextStyle(color: textColor, fontSize: 20.0, fontFamily: 'Archivo'),
@@ -29,20 +27,17 @@ Widget botonSuperior(String texto, Color color, textColor) {
 
 Widget flatButton(String texto, Color color, textColor) {
   return Container(
-    //color: colorResaltadoBoton,
-    //height: 50.0,
     width: double.infinity,
     margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 25.0),
     padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 10.0),
     decoration: BoxDecoration(
       color: color,
       border: Border.all(
-        color: colorBorderButton,
+        color: borderButton,
         width: 1.0,
       ),
       borderRadius: BorderRadius.circular(4.0),
     ),
-
     child: Text(texto,
         style:
             TextStyle(color: textColor, fontSize: 20.0, fontFamily: 'Archivo'),
@@ -50,54 +45,34 @@ Widget flatButton(String texto, Color color, textColor) {
   );
 }
 
-Widget formulario(BuildContext context) {
+Widget form(BuildContext context) {
   return Container(
-    //color: colorResaltadoBoton,
-    //height: 50.0,
     width: double.infinity,
-    margin: EdgeInsets.symmetric(horizontal: 15.0),
-    //padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      border: Border.all(
-        color: colorBorderButton,
-        width: 1.0,
-      ),
-      //borderRadius: BorderRadius.circular(6.0),
-      boxShadow: <BoxShadow>[boxShadow1],
-    ),
-
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        crearEmail(''),
+        createEmail(context, ''),
         SizedBox(
-          height: 30.0,
+          height: marginBox,
         ),
-        crearPassword(''),
+        createPassword(context, ''),
         SizedBox(
-          height: 20.0,
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, 'resetPasswordPage');
-          },
-          child: Text('¿No recuerdas la contraseña?',
-              style: TextStyle(
-                  color: blue1, fontSize: 20.0, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center),
+          height: marginBox - 20,
         ),
         GestureDetector(
             onTap: () async {},
-            child: flatButton('Entrar', blue1, Colors.white)),
+            child: flatButton(
+                TextLanguage.of(context).loginButtonText, blue, Colors.white)),
+
+        //Expanded(child: Container()),
       ],
     ),
   );
 }
 
-Widget crearEmail(_email) {
+Widget createEmail(BuildContext context, _email) {
   return Container(
-    padding: EdgeInsets.only(top: 20.0, left: 18.0, right: 18.0),
+    padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
       //autofocus: true,
       //textCapitalization: TextCapitalization.sentences,
@@ -105,9 +80,10 @@ Widget crearEmail(_email) {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
-        hintText: 'Correo',
-        labelText: 'Correo',
-        suffixIcon: Icon(Icons.alternate_email),
+        hintText: TextLanguage.of(context).email,
+        labelText: TextLanguage.of(context).email,
+        suffixIcon: Icon(Icons.email),
+
         //icon: Icon(Icons.email)
       ),
       onChanged: (valor) {
@@ -118,9 +94,9 @@ Widget crearEmail(_email) {
   );
 }
 
-Widget crearPassword(_password) {
+Widget createPassword(BuildContext context, _password) {
   return Container(
-    padding: EdgeInsets.only(top: 20.0, left: 18.0, right: 18.0),
+    padding: EdgeInsets.only(left: 18.0, right: 18.0),
     child: TextField(
       //autofocus: true,
       //textCapitalization: TextCapitalization.sentences,
@@ -128,9 +104,9 @@ Widget crearPassword(_password) {
       obscureText: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
-        hintText: 'Contraseña',
-        labelText: 'Contraseña',
-        suffixIcon: Icon(Icons.lock_open),
+        hintText: TextLanguage.of(context).passWord,
+        labelText: TextLanguage.of(context).passWord,
+        suffixIcon: Icon(Icons.vpn_key_rounded),
         // icon: Icon(Icons.lock)
       ),
       onChanged: (valor) {

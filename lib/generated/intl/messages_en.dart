@@ -27,6 +27,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "clicHere" : MessageLookupByLibrary.simpleMessage("Clic here"),
+    "dontHaveAccount" : MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
+    "email" : MessageLookupByLibrary.simpleMessage("Email"),
+    "forgot" : MessageLookupByLibrary.simpleMessage("Forgot your password ?"),
+    "loginButtonText" : MessageLookupByLibrary.simpleMessage("Login"),
+    "passWord" : MessageLookupByLibrary.simpleMessage("Password"),
+    "signUp" : MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "signUpMessage" : MessageLookupByLibrary.simpleMessage("Sign up and start working with us"),
+    "signupHere" : MessageLookupByLibrary.simpleMessage("Sign up here"),
     "simpleText" : MessageLookupByLibrary.simpleMessage("Hello world"),
     "textWithPlaceholder" : m0,
     "textWithPlaceholders" : m1,
