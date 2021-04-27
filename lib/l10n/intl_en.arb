@@ -1,4 +1,8 @@
 {
+    "passwordRecovery": "Password Recovery",
+    "recoveryText":"Please introduce your email and check your inbox.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
     "name": "Name",
     "email": "Email",
     "passWord": "Password",
@@ -11,6 +15,7 @@
     "clicHere": "Clic here",
     "iRead": "I’ve read and accept all the",
     "privacyPolicy": "Privacy Policy",
+    "resetPasswordButtonText": "Acept",
     "simpleText": "Hello world",
     "textWithPlaceholder": "Welcome {name}",
     "textWithPlaceholders": "My name is {lastName}, {firstName} {lastName}",

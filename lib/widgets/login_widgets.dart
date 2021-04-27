@@ -29,7 +29,7 @@ Widget flatButton(String texto, Color color, textColor) {
   return Container(
     width: double.infinity,
     //margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 25.0),
-    padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 10.0),
+    padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 17.0),
     decoration: BoxDecoration(
       color: color,
       border: Border.all(

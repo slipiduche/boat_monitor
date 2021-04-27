@@ -1,4 +1,5 @@
-final marginExt = 25.0;
+final marginExt = 33.0;
+final marginExt1 = 25.0;
 final marginInt = 27.0;
 final marginInt1 = 26.0;
 

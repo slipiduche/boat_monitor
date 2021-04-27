@@ -48,8 +48,8 @@ class _FormSignupState extends State<FormSignup> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Checkbox(
-                      splashRadius: 4.0,
-                      activeColor: blue1,
+                        splashRadius: 4.0,
+                        activeColor: blue1,
                         value: _checkState,
                         onChanged: (value) {
                           _checkState = value;
@@ -59,14 +59,20 @@ class _FormSignupState extends State<FormSignup> {
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: privacyPolicySize,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.w400),
                         textAlign: TextAlign.center),
-                    Text(' ' + TextLanguage.of(context).privacyPolicy,
-                        style: TextStyle(
-                            color: blue1,
-                            fontSize: privacyPolicySize,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed('privacyPage');
+                      },
+                      child: Text(' ' + TextLanguage.of(context).privacyPolicy,
+                          style: TextStyle(
+                              color: blue1,
+                              fontSize: privacyPolicySize,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center),
+                    ),
                   ],
                 ),
                 SizedBox(

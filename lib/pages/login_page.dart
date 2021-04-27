@@ -74,12 +74,18 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center),
-                        Text(' ' + TextLanguage.of(context).clicHere,
-                            style: TextStyle(
-                                color: blue1,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed('resetPasswordPage');
+                          },
+                          child: Text(' ' + TextLanguage.of(context).clicHere,
+                              style: TextStyle(
+                                  color: blue1,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center),
+                        ),
                       ],
                     ),
                     SizedBox(height: 60)

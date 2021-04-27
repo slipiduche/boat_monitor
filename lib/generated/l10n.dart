@@ -35,6 +35,46 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
+  /// `Password Recovery`
+  String get passwordRecovery {
+    return Intl.message(
+      'Password Recovery',
+      name: 'passwordRecovery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please introduce your email and check your inbox.`
+  String get recoveryText {
+    return Intl.message(
+      'Please introduce your email and check your inbox.',
+      name: 'recoveryText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name`
   String get name {
     return Intl.message(
@@ -150,6 +190,16 @@ class TextLanguage {
     return Intl.message(
       'Privacy Policy',
       name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acept`
+  String get resetPasswordButtonText {
+    return Intl.message(
+      'Acept',
+      name: 'resetPasswordButtonText',
       desc: '',
       args: [],
     );
