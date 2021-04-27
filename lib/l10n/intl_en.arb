@@ -1,4 +1,5 @@
 {
+    "name": "name",
     "email": "Email",
     "passWord": "Password",
     "signUp": "Sign Up",
