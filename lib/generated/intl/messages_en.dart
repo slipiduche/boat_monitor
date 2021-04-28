@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "iRead" : MessageLookupByLibrary.simpleMessage("I’ve read and accept all the"),
     "isNotEmail" : MessageLookupByLibrary.simpleMessage("Is not an email"),
     "loginButtonText" : MessageLookupByLibrary.simpleMessage("Login"),
-    "mustHave" : MessageLookupByLibrary.simpleMessage("Must have more 6 characters"),
+    "mustHave" : MessageLookupByLibrary.simpleMessage("Passwords must be at least 6 characters long"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "newPassword" : MessageLookupByLibrary.simpleMessage("New Password"),
     "passWord" : MessageLookupByLibrary.simpleMessage("Password"),

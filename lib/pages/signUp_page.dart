@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -17,6 +18,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  AuthBloc auth=AuthBloc();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    auth.deleteAll();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -215,10 +215,10 @@ class TextLanguage {
     );
   }
 
-  /// `Must have more 6 characters`
+  /// `Passwords must be at least 6 characters long`
   String get mustHave {
     return Intl.message(
-      'Must have more 6 characters',
+      'Passwords must be at least 6 characters long',
       name: 'mustHave',
       desc: '',
       args: [],

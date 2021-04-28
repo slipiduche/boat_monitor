@@ -63,14 +63,17 @@ Widget form(BuildContext context) {
         SizedBox(
           height: marginBox,
         ),
-        GestureDetector(
-            onTap: () async {
-              print(auth.emailValue);
-              print(auth.passwordValue);
-              await AuthProvider().login(auth.emailValue, auth.passwordValue);
-            },
-            child: flatButton(
-                TextLanguage.of(context).loginButtonText, blue, Colors.white)),
+        StreamBuilder(
+            stream: auth.formValidStream,
+            builder: (context, snapshot) {
+              return GestureDetector(
+                  onTap: snapshot.hasData ? _login(context) : null,
+                  child: snapshot.hasData
+                      ? flatButton(TextLanguage.of(context).loginButtonText,
+                          blue, Colors.white)
+                      : flatButton(TextLanguage.of(context).loginButtonText,
+                          gray2, Colors.white));
+            }),
 
         //Expanded(child: Container()),
       ],
@@ -78,52 +81,85 @@ Widget form(BuildContext context) {
   );
 }
 
+_login(BuildContext context) {
+  _login1(context);
+}
+
+_login1(BuildContext context) async {
+  await AuthProvider().login(AuthBloc().emailValue, AuthBloc().emailValue);
+}
+
 Widget createEmail(BuildContext context) {
   AuthBloc auth = AuthBloc();
-  return Container(
-    //padding: EdgeInsets.only(left: 18.0, right: 18.0),
-    child: TextField(
-      //autofocus: true,
-      //textCapitalization: TextCapitalization.sentences,
+  String _errorText;
+  return StreamBuilder(
+      stream: auth.email,
+      builder: (context, snapshot) {
+        if (snapshot.error == 1) {
+          _errorText = TextLanguage.of(context).isNotEmail;
+        } else {
+          _errorText = null;
+        }
+        return Container(
+          //padding: EdgeInsets.only(left: 18.0, right: 18.0),
+          child: TextField(
+            //autofocus: true,
+            //textCapitalization: TextCapitalization.sentences,
 
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
-        hintText: TextLanguage.of(context).email,
-        labelText: TextLanguage.of(context).email,
-        suffixIcon: Icon(Icons.email),
-
-        //icon: Icon(Icons.email)
-      ),
-      onChanged: (valor) {
-        //setState(() {});
-        auth.setEmail = valor;
-      },
-    ),
-  );
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0)),
+                hintText: TextLanguage.of(context).email,
+                labelText: TextLanguage.of(context).email,
+                suffixIcon: Icon(Icons.email),
+                //counterText: snapshot.data,
+                errorText: _errorText
+                //icon: Icon(Icons.email)
+                ),
+            onChanged: (valor) {
+              //setState(() {});
+              auth.setEmail = valor;
+            },
+          ),
+        );
+      });
 }
 
 Widget createPassword(BuildContext context) {
   AuthBloc auth = AuthBloc();
-  return Container(
-    //padding: EdgeInsets.only(left: 18.0, right: 18.0),
-    child: TextField(
-      //autofocus: true,
-      //textCapitalization: TextCapitalization.sentences,
-      //keyboardType: TextInputType.emailAddress,
-      obscureText: true,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
-        hintText: TextLanguage.of(context).passWord,
-        labelText: TextLanguage.of(context).passWord,
-        suffixIcon: Icon(Icons.vpn_key_rounded),
-        // icon: Icon(Icons.lock)
-      ),
-      onChanged: (valor) {
-        //setState(() {});
+  String _errorText;
+  return StreamBuilder(
+      stream: auth.password,
+      builder: (context, snapshot) {
+        if (snapshot.error == 2) {
+          _errorText = TextLanguage.of(context).mustHave;
+        } else {
+          _errorText = null;
+        }
+        return Container(
+          //padding: EdgeInsets.only(left: 18.0, right: 18.0),
+          child: TextField(
+            //autofocus: true,
+            //textCapitalization: TextCapitalization.sentences,
+            //keyboardType: TextInputType.emailAddress,
+            obscureText: true,
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
+              hintText: TextLanguage.of(context).passWord,
+              labelText: TextLanguage.of(context).passWord,
+              suffixIcon: Icon(Icons.vpn_key_rounded),
+              //counterText: snapshot.data,
+              errorText: _errorText,
+              // icon: Icon(Icons.lock)
+            ),
+            onChanged: (valor) {
+              //setState(() {});
 
-        auth.setPassword = valor;
-      },
-    ),
-  );
+              auth.setPassword = valor;
+            },
+          ),
+        );
+      });
 }

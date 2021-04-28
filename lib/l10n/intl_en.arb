@@ -17,7 +17,7 @@
     "privacyPolicy": "Privacy Policy",
     "resetPasswordButtonText": "Acept",
     "isNotEmail": "Is not an email",
-    "mustHave": "Must have more 6 characters",
+    "mustHave": "Passwords must be at least 6 characters long",
     "simpleText": "Hello world",
     "textWithPlaceholder": "Welcome {name}",
     "textWithPlaceholders": "My name is {lastName}, {firstName} {lastName}",

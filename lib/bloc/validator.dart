@@ -22,4 +22,20 @@ class Validators {
       sink.addError(2);
     }
   });
+  final validateName =
+      StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
+    if (name.length >= 1) {
+      sink.add(name);
+    } else {
+      sink.addError(3);
+    }
+  });
+  final validateCheck =
+      StreamTransformer<bool, bool>.fromHandlers(handleData: (check, sink) {
+    if (check) {
+      sink.add(check);
+    } else {
+      sink.addError(4);
+    }
+  });
 }

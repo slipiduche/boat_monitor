@@ -57,6 +57,7 @@ class _FormSignupState extends State<FormSignup> {
                         value: _checkState,
                         onChanged: (value) {
                           _checkState = value;
+                          auth.setCheck = value;
                           setState(() {});
                         }),
                     Text(TextLanguage.of(context).iRead,
@@ -85,22 +86,35 @@ class _FormSignupState extends State<FormSignup> {
               ],
             ),
           ),
-          GestureDetector(
-              onTap: () async {
-                print(auth.nameValue);
-                print(auth.emailValue);
-                print(auth.passwordValue);
-                await AuthProvider().signUp(
-                    auth.nameValue, auth.emailValue, auth.passwordValue);
-              },
-              child: flatButton(
-                  TextLanguage.of(context).signUp, blue, Colors.white)),
+          StreamBuilder(
+              stream: auth.form2ValidStream,
+              builder: (context, snapshot) {
+                return GestureDetector(
+                    onTap: snapshot.hasData ? _signUp(context) : null,
+                    child: snapshot.hasData
+                        ? flatButton(
+                            TextLanguage.of(context).signUp, blue, Colors.white)
+                        : flatButton(TextLanguage.of(context).signUp, gray2,
+                            Colors.white));
+              }),
 
           //Expanded(child: Container()),
         ],
       ),
     );
   }
+}
+
+_signUp(BuildContext context) {
+  _signUp1(context);
+}
+
+_signUp1(BuildContext context) async {
+  print(AuthBloc().nameValue);
+  print(AuthBloc().emailValue);
+  print(AuthBloc().passwordValue);
+  await AuthProvider().signUp(
+      AuthBloc().nameValue, AuthBloc().emailValue, AuthBloc().passwordValue);
 }
 
 Widget createName(BuildContext context) {
