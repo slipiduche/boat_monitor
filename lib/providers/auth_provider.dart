@@ -41,13 +41,13 @@ class AuthProvider {
         return {'ok': true, 'token': decodedResp['token']};
       } else {
         _errorBloc.errorStreamSink(decodedResp);
-        return {'ok': false, 'mensaje': 'failure'};
+        return {'ok': false, 'message': decodedResp['message']};
       }
     } catch (e) {
       print('error:');
       print(e.toString());
       _errorBloc.errorStreamSink(decodedResp);
-      return {'ok': false, 'mensaje': e.toString()};
+      return {'ok': false, 'message': e.toString()};
     }
   }
 
@@ -74,7 +74,7 @@ class AuthProvider {
     } catch (e) {
       print('error:');
       print(e.toString());
-      return {'ok': false, 'mensaje': e.toString()};
+      return {'ok': false, 'message': e.toString()};
     }
   }
 
@@ -95,7 +95,7 @@ class AuthProvider {
     } catch (e) {
       print('error:');
       print(e.toString());
-      return {'ok': false, 'mensaje': e.toString()};
+      return {'ok': false, 'message': e.toString()};
     }
   }
 
@@ -123,7 +123,7 @@ class AuthProvider {
     } catch (e) {
       print('error:');
       print(e.toString());
-      return {'ok': false, 'mensaje': e.toString()};
+      return {'ok': false, 'message': e.toString()};
     }
   }
 
@@ -145,7 +145,7 @@ class AuthProvider {
     } catch (e) {
       print('error:');
       print(e.toString());
-      return {'ok': false, 'mensaje': e.toString()};
+      return {'ok': false, 'message': e.toString()};
     }
   }
 
@@ -153,10 +153,10 @@ class AuthProvider {
     Map<String, dynamic> decodedResp = json.decode(response.body);
     if (decodedResp['status'] == 'succes') {
       _errorBloc.errorStreamSink(decodedResp);
-      return {'ok': true, 'mensaje': 'succes'};
+      return {'ok': true, 'message': 'succes'};
     } else {
       _errorBloc.errorStreamSink(decodedResp);
-      return {'ok': false, 'mensaje': decodedResp['message']};
+      return {'ok': false, 'message': decodedResp['message']};
     }
   }
 }

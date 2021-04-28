@@ -1,7 +1,9 @@
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/login_widgets.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  AuthBloc auth=AuthBloc();
+  AuthBloc auth = AuthBloc();
   @override
   void initState() {
     // TODO: implement initState
@@ -40,67 +42,88 @@ class _LoginPageState extends State<LoginPage> {
                 child: form(context),
               ),
               SizedBox(height: 20.0),
-              Container(
-                height: 250.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(context, 'signUpPage');
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+              StreamBuilder(
+                  stream: auth.formValidStream,
+                  builder: (context, snapshot) {
+                    double _height = 260;
+                    if (snapshot.hasError) {
+                      _height = 200.0;
+                    } else {
+                      _height = 260.0;
+                    }
+                    return Container(
+                      height: _height,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(TextLanguage.of(context).dontHaveAccount,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center),
                           GestureDetector(
-                            child: Text(
-                                ' ' + TextLanguage.of(context).signupHere,
-                                style: TextStyle(
-                                    color: blue1,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center),
+                            onTap: () {
+                              Navigator.pushReplacementNamed(
+                                  context, 'signUpPage');
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(TextLanguage.of(context).dontHaveAccount,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center),
+                                GestureDetector(
+                                  child: Text(
+                                      ' ' + TextLanguage.of(context).signupHere,
+                                      style: TextStyle(
+                                          color: blue1,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center),
+                                ),
+                              ],
+                            ),
                           ),
+                          Expanded(
+                              child: SizedBox(
+                            width: 50.0,
+                          )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(TextLanguage.of(context).forgot,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      'resetPasswordPage');
+                                },
+                                child: Text(
+                                    ' ' + TextLanguage.of(context).clicHere,
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center),
+                              ),
+                              StreamBuilder(
+                                stream: AlertsBloc().alert,
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  WidgetsBinding.instance.addPostFrameCallback(
+                                      (_) => onAfterBuild(context));
+                                  return Container();
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 60)
                         ],
                       ),
-                    ),
-                    Expanded(
-                        child: SizedBox(
-                      width: 50.0,
-                    )),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(TextLanguage.of(context).forgot,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed('resetPasswordPage');
-                          },
-                          child: Text(' ' + TextLanguage.of(context).clicHere,
-                              style: TextStyle(
-                                  color: blue1,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 60)
-                  ],
-                ),
-              )
+                    );
+                  })
             ],
           ),
         ),

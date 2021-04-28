@@ -1,7 +1,9 @@
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
@@ -67,7 +69,9 @@ Widget form(BuildContext context) {
             stream: auth.formValidStream,
             builder: (context, snapshot) {
               return GestureDetector(
-                  onTap: snapshot.hasData ? _login(context) : null,
+                  onTap: () {
+                    if (snapshot.hasData) _login(context);
+                  },
                   child: snapshot.hasData
                       ? flatButton(TextLanguage.of(context).loginButtonText,
                           blue, Colors.white)
@@ -86,7 +90,25 @@ _login(BuildContext context) {
 }
 
 _login1(BuildContext context) async {
-  await AuthProvider().login(AuthBloc().emailValue, AuthBloc().emailValue);
+  AlertsBloc().setAlert =
+      Alerts(TextLanguage.of(context).loginButtonText, "Updating");
+  //updating(context, TextLanguage.of(context).loginButtonText);
+  var _login =
+      await AuthProvider().login(AuthBloc().emailValue, AuthBloc().emailValue);
+  print(_login);
+  if (_login["ok"] == true) {
+    // Navigator.of(context).pop();
+
+    Navigator.of(context).pushReplacementNamed('changePasswordPage');
+  } else {
+    print(_login["message"]);
+    AlertsBloc().setAlert = Alerts(_login["message"], "Error");
+    // Navigator.of(context).pop();
+    // //errorPopUp(context, _login["message"], () {
+    //   Navigator.of(context).pop();
+    //   Navigator.of(context).pushReplacementNamed('homePage');
+    //});
+  }
 }
 
 Widget createEmail(BuildContext context) {
