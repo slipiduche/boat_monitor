@@ -37,14 +37,8 @@ class AuthBloc with Validators {
 
   Stream<bool> get formValidStream =>
       Observable.combineLatest2(email, password, (e, p) => true);
-  Stream<bool> get form2ValidStream =>
-      Observable.combineLatest3(name, check, formValidStream, (n, c, f) {
-        if (c.data == true) {
-          return true;
-        } else {
-          return false;
-        }
-      });
+  Stream<bool> get form2ValidStream => Observable.combineLatest3(
+      name, check, formValidStream, (n, c, f) => true);
   final _nameController = new BehaviorSubject<String>();
   Stream<String> get name => _nameController.stream.transform(validateName);
   String get nameValue => _nameController.value;

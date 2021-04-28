@@ -20,18 +20,31 @@ Widget formReset(BuildContext context) {
         SizedBox(
           height: marginBox,
         ),
-        GestureDetector(
-            onTap: () async {
-              print(auth.emailValue);
-              await AuthProvider().recovery(auth.emailValue);
-            },
-            child: flatButton(
-                TextLanguage.of(context).passwordRecovery, blue, Colors.white)),
+        StreamBuilder(
+            stream: auth.email,
+            builder: (context, snapshot) {
+              return GestureDetector(
+                  onTap: snapshot.hasData ? _reset(context) : null,
+                  child: snapshot.hasData
+                      ? flatButton(TextLanguage.of(context).passwordRecovery,
+                          blue, Colors.white)
+                      : flatButton(TextLanguage.of(context).passwordRecovery,
+                          gray2, Colors.white));
+            }),
 
         //Expanded(child: Container()),
       ],
     ),
   );
+}
+
+_reset(BuildContext context) {
+  _reset1(context);
+}
+
+_reset1(BuildContext context) async {
+  print(AuthBloc().emailValue);
+  await AuthProvider().recovery(AuthBloc().emailValue);
 }
 
 Widget _createConfirmPassword(BuildContext context, _password) {
