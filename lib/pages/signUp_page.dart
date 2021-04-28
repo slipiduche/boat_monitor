@@ -1,11 +1,13 @@
 import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/Signup_widgets.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/login_widgets.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +20,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  AuthBloc auth=AuthBloc();
+  AuthBloc auth = AuthBloc();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,6 +54,14 @@ class _SignUpPageState extends State<SignUpPage> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: marginExt),
                 child: FormSignup(),
+              ),
+              StreamBuilder(
+                stream: AlertsBloc().alert,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => onAfterBuild(context));
+                  return Container();
+                },
               ),
             ],
           ),

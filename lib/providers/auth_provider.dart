@@ -66,7 +66,7 @@ class AuthProvider {
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       final response =
-          await http.post(Uri.parse(Parameters().createUrl), body: request);
+          await http.post(Uri.parse(Parameters().signUpUrl), body: request);
       print(response.statusCode);
       print(response.body);
 

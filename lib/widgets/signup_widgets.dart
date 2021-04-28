@@ -1,3 +1,4 @@
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/name_icon_icons.dart';
@@ -90,7 +91,9 @@ class _FormSignupState extends State<FormSignup> {
               stream: auth.form2ValidStream,
               builder: (context, snapshot) {
                 return GestureDetector(
-                    onTap: snapshot.hasData ? _signUp(context) : null,
+                    onTap: () {
+                      if (snapshot.hasData) _signUp(context);
+                    },
                     child: snapshot.hasData
                         ? flatButton(
                             TextLanguage.of(context).signUp, blue, Colors.white)
@@ -110,11 +113,19 @@ _signUp(BuildContext context) {
 }
 
 _signUp1(BuildContext context) async {
+  AlertsBloc().setAlert =
+      Alerts(TextLanguage.of(context).signUp, "Updating");
   print(AuthBloc().nameValue);
   print(AuthBloc().emailValue);
   print(AuthBloc().passwordValue);
-  await AuthProvider().signUp(
+  var _signUp = await AuthProvider().signUp(
       AuthBloc().nameValue, AuthBloc().emailValue, AuthBloc().passwordValue);
+  if (_signUp["ok"] == true) {
+    AlertsBloc().setAlert = Alerts(_signUp["message"], "Updated");
+  } else {
+    print(_signUp["message"]);
+    AlertsBloc().setAlert = Alerts(_signUp["message"], "Error");
+  }
 }
 
 Widget createName(BuildContext context) {

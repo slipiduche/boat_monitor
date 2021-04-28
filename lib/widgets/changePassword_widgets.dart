@@ -1,4 +1,7 @@
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/providers/auth_provider.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
@@ -21,15 +24,50 @@ Widget formChange(BuildContext context) {
         SizedBox(
           height: marginBox,
         ),
-        GestureDetector(
-            onTap: () async {},
-            child: flatButton(TextLanguage.of(context).resetPasswordButtonText,
-                blue, Colors.white)),
+        StreamBuilder(
+            stream: AuthBloc().password,
+            builder: (context, snapshot) {
+              return GestureDetector(
+                  onTap: () async {
+                    if (snapshot.hasData) change1(context);
+                  },
+                  child: snapshot.hasData
+                      ? flatButton(
+                          TextLanguage.of(context).resetPasswordButtonText,
+                          blue,
+                          Colors.white)
+                      : flatButton(
+                          TextLanguage.of(context).resetPasswordButtonText,
+                          gray2,
+                          Colors.white));
+            }),
 
         //Expanded(child: Container()),
       ],
     ),
   );
+}
+
+change1(BuildContext context) async {
+  AlertsBloc().setAlert =
+      Alerts(TextLanguage.of(context).loginButtonText, "Updating");
+  //updating(context, TextLanguage.of(context).loginButtonText);
+  var _change = await AuthProvider().passwordChange(AuthBloc().emailValue,
+      AuthBloc().emailValue, AuthBloc().emailValue, AuthBloc().emailValue, 1);
+  print(_change);
+  if (_change["ok"] == true) {
+    // Navigator.of(context).pop();
+
+    Navigator.of(context).pushReplacementNamed('changePasswordPage');
+  } else {
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Error");
+    // Navigator.of(context).pop();
+    // //errorPopUp(context, _login["message"], () {
+    //   Navigator.of(context).pop();
+    //   Navigator.of(context).pushReplacementNamed('homePage');
+    //});
+  }
 }
 
 Widget _createConfirmPassword(BuildContext context, _password) {

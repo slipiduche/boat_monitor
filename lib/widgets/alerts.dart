@@ -55,7 +55,7 @@ void updating(BuildContext _context, String message) {
                 ),
                 Text(
                   '$message...',
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontSize: 20.0, color: blue1, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: 50.0,

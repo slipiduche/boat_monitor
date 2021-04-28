@@ -52,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                       _height = 260.0;
                     }
                     return Container(
+                      margin: EdgeInsets.symmetric(horizontal: marginExt),
                       height: _height,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -86,38 +87,42 @@ class _LoginPageState extends State<LoginPage> {
                               child: SizedBox(
                             width: 50.0,
                           )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(TextLanguage.of(context).forgot,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushReplacementNamed(
-                                      'resetPasswordPage');
-                                },
-                                child: Text(
-                                    ' ' + TextLanguage.of(context).clicHere,
+                          Container(
+                            //margin: EdgeInsets.symmetric(horizontal: marginExt),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(TextLanguage.of(context).forgot,
                                     style: TextStyle(
-                                        color: blue1,
+                                        color: Colors.black,
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center),
-                              ),
-                              StreamBuilder(
-                                stream: AlertsBloc().alert,
-                                builder: (BuildContext context,
-                                    AsyncSnapshot snapshot) {
-                                  WidgetsBinding.instance.addPostFrameCallback(
-                                      (_) => onAfterBuild(context));
-                                  return Container();
-                                },
-                              ),
-                            ],
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacementNamed(
+                                        'resetPasswordPage');
+                                  },
+                                  child: Text(
+                                      ' ' + TextLanguage.of(context).clicHere,
+                                      style: TextStyle(
+                                          color: blue1,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center),
+                                ),
+                                StreamBuilder(
+                                  stream: AlertsBloc().alert,
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot snapshot) {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback(
+                                            (_) => onAfterBuild(context));
+                                    return Container();
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(height: 60)
                         ],

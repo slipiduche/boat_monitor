@@ -1,3 +1,4 @@
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
@@ -24,7 +25,9 @@ Widget formReset(BuildContext context) {
             stream: auth.email,
             builder: (context, snapshot) {
               return GestureDetector(
-                  onTap: snapshot.hasData ? _reset(context) : null,
+                  onTap: () {
+                    if (snapshot.hasData) _reset(context);
+                  },
                   child: snapshot.hasData
                       ? flatButton(TextLanguage.of(context).passwordRecovery,
                           blue, Colors.white)
@@ -43,8 +46,16 @@ _reset(BuildContext context) {
 }
 
 _reset1(BuildContext context) async {
+  AlertsBloc().setAlert =
+      Alerts(TextLanguage.of(context).passwordRecovery, "Updating");
   print(AuthBloc().emailValue);
-  await AuthProvider().recovery(AuthBloc().emailValue);
+  var _reset = await AuthProvider().recovery(AuthBloc().emailValue);
+  if (_reset["ok"] == true) {
+    AlertsBloc().setAlert = Alerts(_reset["message"], "Updated");
+  } else {
+    print(_reset["message"]);
+    AlertsBloc().setAlert = Alerts(_reset["message"], "Error");
+  }
 }
 
 Widget _createConfirmPassword(BuildContext context, _password) {

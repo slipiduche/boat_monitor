@@ -1,8 +1,10 @@
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/changePassword_widgets.dart';
 
 import 'package:boat_monitor/widgets/widgets.dart';
@@ -16,7 +18,7 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  AuthBloc auth=AuthBloc();
+  AuthBloc auth = AuthBloc();
   @override
   void initState() {
     // TODO: implement initState
@@ -50,6 +52,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 child: formChange(context),
               ),
               SizedBox(height: 20.0),
+              StreamBuilder(
+                stream: AlertsBloc().alert,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => onAfterBuild(context));
+                  return Container();
+                },
+              ),
             ],
           ),
         ),

@@ -9,6 +9,7 @@ class Parameters {
   final journeys = 'journeys';
   final files = 'files';
   final create = 'create';
+  final signUp = 'signup';
   final modify = 'modify';
   final status = 'status';
 
@@ -43,6 +44,10 @@ class Parameters {
 
   String get createUrl {
     return domain + create;
+  }
+
+  String get signUpUrl {
+    return domain + signUp;
   }
 
   String get modifyUrl {
