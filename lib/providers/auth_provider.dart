@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:boat_monitor/bloc/error_bloc.dart';
@@ -53,11 +54,14 @@ class AuthProvider {
 
   Future<Map<String, dynamic>> signUp(
       String name, String email, String password) async {
+    String basicAuth = 'Basic ' +
+        base64Encode(
+            utf8.encode('SUD@orbittas.com:p<RhA7#X_LWBB(O_0&<a,D/,f#2")7B+'));
     final request = {
       'tab': 'USERS',
-      'username': name,
-      'password': password,
-      'names': 'string',
+      'username': email,
+      'pswrd': password,
+      'names': name,
       'mail': email
     };
     try {
@@ -65,8 +69,8 @@ class AuthProvider {
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      final response =
-          await http.post(Uri.parse(Parameters().signUpUrl), body: request);
+      final response = await http.post(Uri.parse(Parameters().signUpUrl),
+          body: request, headers: <String, String>{'authorization': basicAuth});
       print(response.statusCode);
       print(response.body);
 
@@ -104,7 +108,7 @@ class AuthProvider {
     final request = {
       'token': token,
       'tab': 'USERS',
-      'password': newPassword,
+      'pswrd': newPassword,
       'mail': email,
       'usertype': userType,
     };
@@ -151,9 +155,9 @@ class AuthProvider {
 
   Map<String, dynamic> _result(http.Response response) {
     Map<String, dynamic> decodedResp = json.decode(response.body);
-    if (decodedResp['status'] == 'succes') {
+    if (decodedResp['status'] == 'success') {
       _errorBloc.errorStreamSink(decodedResp);
-      return {'ok': true, 'message': 'succes'};
+      return {'ok': true, 'message': 'success'};
     } else {
       _errorBloc.errorStreamSink(decodedResp);
       return {'ok': false, 'message': decodedResp['message']};

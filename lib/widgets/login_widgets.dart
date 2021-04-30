@@ -93,8 +93,8 @@ _login1(BuildContext context) async {
   AlertsBloc().setAlert =
       Alerts(TextLanguage.of(context).loginButtonText, "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
-  var _login =
-      await AuthProvider().login(AuthBloc().emailValue, AuthBloc().emailValue);
+  var _login = await AuthProvider()
+      .login(AuthBloc().emailValue, AuthBloc().passwordValue);
   print(_login);
   if (_login["ok"] == true) {
     // Navigator.of(context).pop();
