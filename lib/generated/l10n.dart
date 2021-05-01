@@ -75,6 +75,16 @@ class TextLanguage {
     );
   }
 
+  /// `Updating`
+  String get updating {
+    return Intl.message(
+      'Updating',
+      name: 'updating',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name`
   String get name {
     return Intl.message(

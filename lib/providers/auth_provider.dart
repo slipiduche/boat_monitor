@@ -36,6 +36,8 @@ class AuthProvider {
 
       if (decodedResp["token"] != null) {
         _prefs.token = decodedResp["token"];
+        _prefs.email = email;
+        _prefs.userType = decodedResp["usertype"];
         print(_prefs.token);
         //_prefs.email = decodedResp['user'];
 
@@ -91,9 +93,7 @@ class AuthProvider {
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       final response =
-          await http.get(Uri.parse(Parameters().recoveryUrl), headers: request);
-      print(response.statusCode);
-      print(response.body);
+          await http.post(Uri.parse(Parameters().modifyUrl), body: request);
 
       return _result(response);
     } catch (e) {
@@ -103,29 +103,32 @@ class AuthProvider {
     }
   }
 
-  Future<Map<String, dynamic>> passwordChange(String token, String email,
-      String userName, String newPassword, int userType) async {
+  Future<Map<String, dynamic>> passwordChange(String newPassword) async {
     final request = {
-      'token': token,
+      'token': _prefs.token,
       'tab': 'USERS',
       'pswrd': newPassword,
-      'mail': email,
-      'usertype': userType,
+      'mail': _prefs.email,
+      //'usertype': _prefs.userType,
     };
+    print(request);
 
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
+      print('antes');
       final response =
-          await http.put(Uri.parse(Parameters().modifyUrl), body: request);
+          await http.post(Uri.parse(Parameters().modifyUrl), body: request);
+      print('despues');
       print(response.statusCode);
       print(response.body);
 
       return _result(response);
     } catch (e) {
       print('error:');
+      print(e);
       print(e.toString());
       return {'ok': false, 'message': e.toString()};
     }
@@ -141,13 +144,14 @@ class AuthProvider {
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       final response =
-          await http.put(Uri.parse(Parameters().modifyUrl), body: request);
+          await http.post(Uri.parse(Parameters().modifyUrl), body: request);
       print(response.statusCode);
       print(response.body);
 
       return _result(response);
     } catch (e) {
       print('error:');
+      print(e);
       print(e.toString());
       return {'ok': false, 'message': e.toString()};
     }

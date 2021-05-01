@@ -22,6 +22,15 @@ class Validators {
       sink.addError(2);
     }
   });
+  final validatenewPassword = StreamTransformer<String, String>.fromHandlers(
+      handleData: (newPassword, sink) {
+    if (newPassword.length >= 6) {
+      sink.add(newPassword);
+    } else {
+      sink.addError(2);
+    }
+  });
+
   final validateName =
       StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
     if (name.length >= 1) {

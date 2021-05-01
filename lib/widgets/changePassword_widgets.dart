@@ -25,11 +25,11 @@ Widget formChange(BuildContext context) {
           height: marginBox,
         ),
         StreamBuilder(
-            stream: AuthBloc().password,
+            stream: AuthBloc().newPasswordValidStream,
             builder: (context, snapshot) {
               return GestureDetector(
                   onTap: () async {
-                    if (snapshot.hasData) change1(context);
+                    if (snapshot.hasData) change(context);
                   },
                   child: snapshot.hasData
                       ? flatButton(
@@ -48,17 +48,21 @@ Widget formChange(BuildContext context) {
   );
 }
 
+change(BuildContext context) {
+  print('cambiando');
+  change1(context);
+}
+
 change1(BuildContext context) async {
-  AlertsBloc().setAlert =
-      Alerts(TextLanguage.of(context).loginButtonText, "Updating");
+  AlertsBloc().setAlert = Alerts(TextLanguage.of(context).updating, "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
-  var _change = await AuthProvider().passwordChange(AuthBloc().emailValue,
-      AuthBloc().emailValue, AuthBloc().emailValue, AuthBloc().emailValue, 1);
+  var _change =
+      await AuthProvider().passwordChange(AuthBloc().newPasswordValue);
   print(_change);
   if (_change["ok"] == true) {
     // Navigator.of(context).pop();
 
-    Navigator.of(context).pushReplacementNamed('changePasswordPage');
+    Navigator.of(context).pushReplacementNamed('loginPage');
   } else {
     print(_change["message"]);
     AlertsBloc().setAlert = Alerts(_change["message"], "Error");
@@ -87,7 +91,7 @@ Widget _createConfirmPassword(BuildContext context, _password) {
       ),
       onChanged: (valor) {
         //setState(() {});
-        _password = valor;
+        AuthBloc().setNewPassword = valor;
       },
     ),
   );
@@ -110,7 +114,7 @@ Widget _createNewPassword(BuildContext context, _password) {
       ),
       onChanged: (valor) {
         //setState(() {});
-        _password = valor;
+        AuthBloc().setPassword = valor;
       },
     ),
   );

@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "simpleText" : MessageLookupByLibrary.simpleMessage("Hello world"),
     "textWithPlaceholder" : m0,
     "textWithPlaceholders" : m1,
-    "textWithPlural" : m2
+    "textWithPlural" : m2,
+    "updating" : MessageLookupByLibrary.simpleMessage("Updating")
   };
 }

@@ -35,8 +35,27 @@ class AuthBloc with Validators {
     _passwordController.add(null);
   }
 
+  final _newPasswordController = new BehaviorSubject<String>();
+  Stream<String> get newPassword =>
+      _newPasswordController.stream.transform(validatenewPassword);
+  String get newPasswordValue => _newPasswordController.value;
+  set setNewPassword(String event) => _newPasswordController.add(event);
+  deletenewPassword() {
+    _newPasswordController.add(null);
+  }
+
   Stream<bool> get formValidStream =>
       Observable.combineLatest2(email, password, (e, p) => true);
+  bool validateNewPassword(n, p) {
+    if (n == p) {
+      return true;
+    }
+    print('no son iguales');
+  }
+
+  Stream<bool> get newPasswordValidStream => Observable.combineLatest2(
+      newPassword, password, (n, p) => validateNewPassword(n, p));
+
   Stream<bool> get form2ValidStream => Observable.combineLatest3(
       name, check, formValidStream, (n, c, f) => true);
   final _nameController = new BehaviorSubject<String>();

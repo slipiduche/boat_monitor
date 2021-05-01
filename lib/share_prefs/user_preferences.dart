@@ -66,11 +66,11 @@ class UserPreferences {
   }
 
   // GET y SET del userId
-  get userId {
-    return _prefs.getInt('userId') ?? '';
+  get userType {
+    return _prefs.getInt('userType') ?? '';
   }
 
-  set userId(int value) {
-    _prefs.setInt('userId', value);
+  set userType(int value) {
+    _prefs.setInt('userType', value);
   }
 }

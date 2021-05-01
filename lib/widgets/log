@@ -1,0 +1,159 @@
+Launching lib\main.dart on sdk gphone x86 in debug mode...
+√ Built build\app\outputs\flutter-apk\app-debug.apk.
+Connecting to VM Service at ws://127.0.0.1:57070/Qnb81TDmXjs=/ws
+I/flutter (11659): ruta llamada homePage
+W/IInputConnectionWrapper(11659): getTextBeforeCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): getSelectedText on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextAfterCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): beginBatchEdit on inactive InputConnection
+W/IInputConnectionWrapper(11659): endBatchEdit on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextBeforeCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): getSelectedText on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextAfterCursor on inactive InputConnection
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): error:
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): error:
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): error:
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): error:
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): error:
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): 200
+I/flutter (11659): {"message":"User Created","status":"success","code":1}
+I/flutter (11659): alejandro
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): alexandra
+I/flutter (11659): 403
+I/flutter (11659): {"message":"User Already Exists","status":"unchanged","code":3}
+I/flutter (11659): User Already Exists
+E/libEGL  (11659): call to OpenGL ES API with no current context (logged once per thread)
+D/EGL_emulation(11659): eglCreateContext: 0xf6d92ae0: maj 2 min 0 rcv 2
+D/EGL_emulation(11659): eglCreateContext: 0xf6d90f50: maj 2 min 0 rcv 2
+D/HostConnection(11659): HostConnection::get() New Host Connection established 0xf6da24b0, tid 11912
+D/HostConnection(11659): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_native_sync_v3 ANDROID_EMU_native_sync_v4 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_async_unmap_buffer ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_2
+D/EGL_emulation(11659): eglMakeCurrent: 0xf6d90f50: ver 2 0 (tinfo 0xb5b03770) (first time)
+D/HostConnection(11659): HostConnection::get() New Host Connection established 0xf6d92f40, tid 11911
+D/HostConnection(11659): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_native_sync_v3 ANDROID_EMU_native_sync_v4 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_async_unmap_buffer ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_2
+D/EGL_emulation(11659): eglMakeCurrent: 0xf6d92ae0: ver 2 0 (tinfo 0xf70f5d90) (first time)
+D/EGL_emulation(11659): eglCreateContext: 0xf6da5850: maj 2 min 0 rcv 2
+I/OpenGLRenderer(11659): Davey! duration=871ms; Flags=1, IntendedVsync=458491114559458, Vsync=458491131226124, OldestInputEvent=9223372036854775807, NewestInputEvent=0, HandleInputStart=458491144967300, AnimationStart=458491144993500, PerformTraversalsStart=458491145030600, DrawStart=458491954822900, SyncQueued=458491955518000, SyncStart=458491966975100, IssueDrawCommandsStart=458491967557700, SwapBuffers=458491971566000, FrameCompleted=458491997213300, DequeueBufferDuration=11974300, QueueBufferDuration=1549900, GpuCompleted=301989865,
+I/Choreographer(11659): Skipped 50 frames!  The application may be doing too much work on its main thread.
+I/flutter (11659): ruta llamada homePage
+I/le.boat_monito(11659): Background young concurrent copying GC freed 36199(1757KB) AllocSpace objects, 0(0B) LOS objects, 46% free, 2108KB/3907KB, paused 445us total 130.809ms
+I/flutter (11659): Basic YWxlamFuZHJvY2FtYWNhckBnbWFpbC5jb206YWxleGFuZHJh
+I/flutter (11659): Reponse status : 401
+I/flutter (11659): Response body : {"message":"User not registered","status":"unregistered","code":11}
+I/flutter (11659): {message: User not registered, status: unregistered, code: 11}
+I/flutter (11659): {ok: false, message: User not registered}
+I/flutter (11659): User not registered
+I/flutter (11659): Basic YWxlamFuZHJvY2FtYWNhcm85MUBnbWFpbC5jb206YWxleGFuZHJh
+I/flutter (11659): Reponse status : 401
+I/flutter (11659): Response body : {"message":"User is not enabled","status":"unavailable","code":6}
+I/flutter (11659): {message: User is not enabled, status: unavailable, code: 6}
+I/flutter (11659): {ok: false, message: User is not enabled}
+I/flutter (11659): User is not enabled
+W/IInputConnectionWrapper(11659): getSelectedText on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextAfterCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): beginBatchEdit on inactive InputConnection
+W/IInputConnectionWrapper(11659): endBatchEdit on inactive InputConnection
+I/flutter (11659): Basic YWxlamFuZHJvY2FtYWNhckBnbWFpbC5jb206YWxleGFuZHJh
+I/flutter (11659): Reponse status : 401
+I/flutter (11659): Response body : {"message":"User not registered","status":"unregistered","code":11}
+I/flutter (11659): {message: User not registered, status: unregistered, code: 11}
+I/flutter (11659): {ok: false, message: User not registered}
+I/flutter (11659): User not registered
+W/IInputConnectionWrapper(11659): getTextBeforeCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): getSelectedText on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextAfterCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): beginBatchEdit on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextBeforeCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): endBatchEdit on inactive InputConnection
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+I/chatty  (11659): uid=10157(com.example.boat_monitor) identical 2 lines
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+I/chatty  (11659): uid=10157(com.example.boat_monitor) identical 2 lines
+E/SpannableStringBuilder(11659): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+I/flutter (11659): Basic b3JiaXR0YXNAb3JiaXR0YXMuY29tOiNCMDR0VHI0Y2szcisr
+I/flutter (11659): Reponse status : 200
+I/flutter (11659): Response body : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYxOTgxOTg2MSwiZXhwIjoxNjE5ODIzNDYxfQ.VyVvHbVq3Tn9kUdxBY6TGCJqQ2eSfAxnd7ePqN51Q881","usertype":1,"status":"success","code":1}
+I/flutter (11659): {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYxOTgxOTg2MSwiZXhwIjoxNjE5ODIzNDYxfQ.VyVvHbVq3Tn9kUdxBY6TGCJqQ2eSfAxnd7ePqN51Q881, usertype: 1, status: success, code: 1}
+I/flutter (11659): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYxOTgxOTg2MSwiZXhwIjoxNjE5ODIzNDYxfQ.VyVvHbVq3Tn9kUdxBY6TGCJqQ2eSfAxnd7ePqN51Q881
+I/flutter (11659): {ok: true, token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYxOTgxOTg2MSwiZXhwIjoxNjE5ODIzNDYxfQ.VyVvHbVq3Tn9kUdxBY6TGCJqQ2eSfAxnd7ePqN51Q881}
+I/flutter (11659): ruta llamada loginPage
+W/IInputConnectionWrapper(11659): getSelectedText on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextAfterCursor on inactive InputConnection
+I/flutter (11659): alejandrocamacaro91@gmail.com
+I/flutter (11659): error:
+I/flutter (11659): Connection closed before full header was received
+I/flutter (11659): Connection closed before full header was received
+W/IInputConnectionWrapper(11659): getSelectedText on inactive InputConnection
+W/IInputConnectionWrapper(11659): getTextAfterCursor on inactive InputConnection
+W/IInputConnectionWrapper(11659): beginBatchEdit on inactive InputConnection
+W/IInputConnectionWrapper(11659): endBatchEdit on inactive InputConnection
+Reloaded 0 libraries in 404ms.
