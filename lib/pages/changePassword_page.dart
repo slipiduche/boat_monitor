@@ -2,6 +2,7 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/alerts.dart';
@@ -9,6 +10,7 @@ import 'package:boat_monitor/widgets/changePassword_widgets.dart';
 
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../styles/colors.dart';
 
@@ -19,6 +21,7 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   AuthBloc auth = AuthBloc();
+  final _prefs = new UserPreferences();
   @override
   void initState() {
     // TODO: implement initState
@@ -40,7 +43,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             children: [
               SizedBox(height: marginSupicon),
               SizedBox(height: 73.0),
-              Text('Correo@.com',
+              Text(_prefs.email,
                   style: TextStyle(
                       color: blue1,
                       fontSize: correoSize,

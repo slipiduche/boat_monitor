@@ -22,3 +22,11 @@ Widget nameIcon(size) {
     //color: color,
   );
 }
+
+Widget managerIcon(size) {
+  return Image(
+    image: AssetImage('assets/managerIcon.png'),
+    height: size,
+    //color: color,
+  );
+}

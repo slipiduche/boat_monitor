@@ -99,7 +99,7 @@ _login1(BuildContext context) async {
   if (_login["ok"] == true) {
     // Navigator.of(context).pop();
 
-    Navigator.of(context).pushReplacementNamed('changePasswordPage');
+    Navigator.of(context).pushReplacementNamed('managerPage');
   } else {
     print(_login["message"]);
     AlertsBloc().setAlert = Alerts(_login["message"], "Error");

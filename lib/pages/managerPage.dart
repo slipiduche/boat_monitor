@@ -35,9 +35,8 @@ class _ManagerPageState extends State<ManagerPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: marginSupicon),
-              boatIconBlue(100.0, blue1),
+              managerIcon(100.0),
               SizedBox(height: 73.0),
-              
               SizedBox(height: 20.0),
               StreamBuilder(
                   stream: auth.formValidStream,
@@ -51,79 +50,7 @@ class _ManagerPageState extends State<ManagerPage> {
                     return Container(
                       margin: EdgeInsets.symmetric(horizontal: marginExt),
                       height: _height,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, 'signUpPage');
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(TextLanguage.of(context).dontHaveAccount,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center),
-                                GestureDetector(
-                                  child: Text(
-                                      ' ' + TextLanguage.of(context).signupHere,
-                                      style: TextStyle(
-                                          color: blue1,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                              child: SizedBox(
-                            width: 50.0,
-                          )),
-                          Container(
-                            //margin: EdgeInsets.symmetric(horizontal: marginExt),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(TextLanguage.of(context).forgot,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pushReplacementNamed(
-                                        'resetPasswordPage');
-                                  },
-                                  child: Text(
-                                      ' ' + TextLanguage.of(context).clicHere,
-                                      style: TextStyle(
-                                          color: blue1,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center),
-                                ),
-                                StreamBuilder(
-                                  stream: AlertsBloc().alert,
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot snapshot) {
-                                    WidgetsBinding.instance
-                                        .addPostFrameCallback(
-                                            (_) => onAfterBuild(context));
-                                    return Container();
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 60)
-                        ],
-                      ),
+                      
                     );
                   })
             ],
