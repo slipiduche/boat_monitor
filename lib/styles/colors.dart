@@ -14,6 +14,7 @@ final Color blue1_2 = Color.fromRGBO(0, 56, 112, 0.2);
 final Color blue2 = Color.fromRGBO(61, 169, 216, 0.6);
 final Color blue3 = Color.fromRGBO(0, 56, 112, 1.0);
 final Color blueUnselect = Color.fromRGBO(69, 108, 147, 1.0);
+final Color redAlert = Color.fromRGBO(249, 22, 22, 1.0);
 
 final LinearGradient blueGradient1 = LinearGradient(
   colors: [blue1, blue],

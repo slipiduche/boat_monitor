@@ -8,18 +8,18 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/managerWidgets.dart';
-//import 'package:boat_monitor/widgets/manager_widgets.dart';
+//import 'package:boat_monitor/widgets/supervisor_widgets.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
 
-class ManagerPage extends StatefulWidget {
+class SupervisorPage extends StatefulWidget {
   @override
-  _ManagerPageState createState() => _ManagerPageState();
+  _SupervisorPageState createState() => _SupervisorPageState();
 }
 
-class _ManagerPageState extends State<ManagerPage> {
+class _SupervisorPageState extends State<SupervisorPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   @override
@@ -33,21 +33,21 @@ class _ManagerPageState extends State<ManagerPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      //appBar: gradientAppBar(TextLanguage.of(context).managerButtonText, () {}),
+      //appBar: gradientAppBar(TextLanguage.of(context).supervisorButtonText, () {}),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: marginSupicon2),
-              managerIcon(100.0),
-              SizedBox(height: 17.0),
               Builder(builder: (context) {
-                if (_prefs.userType == 1) {
+                if (_prefs.userType == 3) {
                   return Column(
                     children: [
+                      supervisorIcon(100.0),
+                      SizedBox(height: 17.0),
                       Text(
-                        'Manager',
+                        'Supervisor',
                         style: TextStyle(
                             fontSize: correoSize,
                             fontWeight: FontWeight.bold,
@@ -59,31 +59,13 @@ class _ManagerPageState extends State<ManagerPage> {
                         thickness: 1.0,
                       ),
                       managerOption(
-                          'Manage boat',blue1, boatIconBlue(20.0, blue1), () {}, 0),
+                          'Alerts', blue1, boatIconBlue(20.0, blue1), () {}, 1),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Approval', blue1, approvalIcon(20.0), () {}, 1),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(
-                          'Alerts', blue1, alertsIcon(20.0), () {}, 2),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption('Change Password', blue1,
+                      managerOption('Change password', blue1,
                           keyIcon(20.0, blue1), () {}, 0),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption('Parameters', blue1,
-                          parametersIcon(20.0, blue1), () {}, 0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
@@ -95,7 +77,28 @@ class _ManagerPageState extends State<ManagerPage> {
                 } else if (_prefs.userType == 2) {
                   return Container();
                 } else {
-                  return Container();
+                  return Column(
+                    children: [
+                      waitingIcon(100.0),
+                      SizedBox(height: 17.0),
+                      Text(
+                        'Supervisor',
+                        style: TextStyle(
+                            fontSize: correoSize,
+                            fontWeight: FontWeight.bold,
+                            color: blue1),
+                      ),
+                      SizedBox(height: 20.0),
+                      managerOption('Waiting for approval', Colors.black,
+                          Icon(Icons.cancel, color: redAlert), null, 0),
+                      Divider(
+                        height: 1.0,
+                        thickness: 1.0,
+                      ),
+                      managerOption(
+                          'Logout', blue1, logoutIcon(20.0, blue1), () {}, 0),
+                    ],
+                  );
                 }
               }),
               StreamBuilder(

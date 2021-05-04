@@ -65,7 +65,7 @@ class UserPreferences {
     _prefs.setString('email', value);
   }
 
-  // GET y SET del userId
+  // GET y SET del userType
   get userType {
     return _prefs.getInt('userType') ?? '';
   }
@@ -73,4 +73,13 @@ class UserPreferences {
   set userType(int value) {
     _prefs.setInt('userType', value);
   }
+  // GET y SET del userId
+  get userId {
+    return _prefs.getInt('userId') ?? '';
+  }
+
+  set userId(int value) {
+    _prefs.setInt('userId', value);
+  }
 }
+

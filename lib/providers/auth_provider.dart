@@ -10,6 +10,37 @@ import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 
 class AuthProvider {
+  bool _digit(String char) {
+    try {
+      int digit = int.parse(char);
+      print(digit);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void naNFinder(String token) {
+    int position = token.length - 1;
+    int result;
+    for (var i = position; i >= 0; i--) {
+      if (!_digit(token[i])) {
+        result = i;
+
+        break;
+      }
+    }
+    print(result);
+    print(token.length);
+    if (result != null) {
+      _prefs.token = token.substring(0, result - 2);
+      print(_prefs.token);
+      print(token.substring(result - 1, position));
+      _prefs.userId = int.parse(token.substring(result - 1, position));
+      print(_prefs.userId);
+    }
+  }
+
   final _errorBloc = ErrorBloc();
 
   final _prefs = new UserPreferences();
@@ -35,10 +66,16 @@ class AuthProvider {
       });
 
       if (decodedResp["token"] != null) {
+        String _token, _filteredToken;
+
+        int userId;
+        _token = decodedResp["token"];
+        print(_token.substring(_token.length - 2, _token.length - 1));
+        naNFinder(_token);
         _prefs.token = decodedResp["token"];
         _prefs.email = email;
         _prefs.userType = decodedResp["usertype"];
-        print(_prefs.token);
+        // print(_prefs.token);
         //_prefs.email = decodedResp['user'];
 
         return {'ok': true, 'token': decodedResp['token']};
