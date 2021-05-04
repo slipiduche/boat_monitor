@@ -1,3 +1,4 @@
+import 'package:boat_monitor/Icons/icons.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
@@ -40,4 +41,59 @@ PreferredSizeWidget gradientAppBar(String title, Function onBackPressed) {
       ]),
     ),
   );
+}
+
+BottomNavigationBar botomBar(_itemselected, context) {
+  return BottomNavigationBar(
+    showSelectedLabels: false,
+    showUnselectedLabels: false,
+    backgroundColor: blue1,
+    items: [
+      BottomNavigationBarItem(
+          label: '',
+          icon: homeIcon(25.0, gray),
+          activeIcon: homeIcon(25.0, blue)),
+      BottomNavigationBarItem(
+          label: '',
+          icon: historicsIcon(25.0, gray),
+          activeIcon: historicsIcon(25.0, blue)),
+      BottomNavigationBarItem(
+          label: '',
+          icon: storageIcon(25.0, gray),
+          activeIcon: storageIcon(25.0, blue)),
+      BottomNavigationBarItem(
+          label: '',
+          icon: profileIcon(25.0, gray),
+          activeIcon: profileIcon(25.0, blue)),
+    ],
+    type: BottomNavigationBarType.fixed,
+    //currentIndex: _itemselected,
+    onTap: (valor) {
+      _onItemTapped(context, valor);
+    },
+  );
+}
+
+void _onItemTapped(context, index) async {
+  //_itemselected = index;
+  print('presionaste:');
+  print(index);
+
+  if (index == 0) {
+    await Navigator.of(context)
+        .pushReplacementNamed('managerPage', arguments: null);
+  }
+
+  if (index == 1) {
+    await Navigator.of(context)
+        .pushReplacementNamed('managerPage', arguments: null);
+  }
+  if (index == 2) {
+    await Navigator.of(context)
+        .pushReplacementNamed('managerPage', arguments: null);
+  }
+  if (index == 3) {
+    await Navigator.of(context)
+        .pushReplacementNamed('managerPage', arguments: null);
+  }
 }

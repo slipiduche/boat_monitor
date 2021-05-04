@@ -58,8 +58,8 @@ class _ManagerPageState extends State<ManagerPage> {
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Manage boat',blue1, boatIconBlue(20.0, blue1), () {}, 0),
+                      managerOption('Manage boat', blue1,
+                          boatIconBlue(20.0, blue1), () {}, 0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
@@ -108,6 +108,7 @@ class _ManagerPageState extends State<ManagerPage> {
           ),
         ),
       ),
+      bottomNavigationBar: botomBar(1, context),
     ));
   }
 }
