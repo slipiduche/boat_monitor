@@ -1,7 +1,9 @@
-{   "manager":"Manager",
-    "approval":"Approval",
-    "parameters":"Parameters",
-    "manageBoat":"Manage boat",
+{
+    "home": "Home",
+    "manager": "Manager",
+    "approval": "Approval",
+    "parameters": "Parameters",
+    "manageBoat": "Manage boat",
     "alerts": "Alerts",
     "changePassword": "Change password",
     "supervisor": "Supervisor",

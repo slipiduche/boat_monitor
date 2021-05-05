@@ -64,7 +64,7 @@ PreferredSizeWidget gradientAppBar2(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       icon,
-                      SizedBox(width:10.0),
+                      SizedBox(width: 10.0),
                       Text(
                         title,
                         style: TextStyle(
@@ -85,6 +85,47 @@ PreferredSizeWidget gradientAppBar2(
               color: blue,
             ),
             onPressed: onBackPressed),
+      ]),
+    ),
+  );
+}
+
+PreferredSizeWidget gradientAppBar3(
+    String title, Widget icon, Function onBackPressed) {
+  return PreferredSize(
+    preferredSize: Size.fromHeight(50.0),
+    child: Container(
+      height: 50.0,
+      width: double.infinity,
+      decoration:
+          BoxDecoration(gradient: blueGradient1, boxShadow: [boxShadow1]),
+      child: Stack(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      icon,
+                      SizedBox(width: 10.0),
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontSize: correoSize,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ]),
     ),
   );

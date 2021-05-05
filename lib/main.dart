@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
         TextLanguage.delegate
       ],
       supportedLocales: TextLanguage.delegate.supportedLocales,
-      initialRoute: 'parametersPage',
+      initialRoute: 'homePage',
       routes: getAppRoutes(),
       onGenerateRoute: (RouteSettings settings) {
         print('ruta llamada ${settings.name}');
