@@ -2,6 +2,7 @@ import 'package:boat_monitor/pages/alertsPage.dart';
 import 'package:boat_monitor/pages/approvalPage.dart';
 import 'package:boat_monitor/pages/manageBoatPage.dart';
 import 'package:boat_monitor/pages/managerPage.dart';
+import 'package:boat_monitor/pages/parametersPage.dart';
 
 import 'package:boat_monitor/pages/supervisorPage.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ Map<String, WidgetBuilder> getAppRoutes() {
     'managerPage': (BuildContext context) => ManagerPage(),
     'alertsPage': (BuildContext context) => AlertPage(),
     'approvalPage': (BuildContext context) => ApprovalPage(),
+    'parametersPage': (BuildContext context) => ParametersPage(),
     'manageBoatPage': (BuildContext context) => ManageBoatPage(),
     'supervisorPage': (BuildContext context) => SupervisorPage(),
   };

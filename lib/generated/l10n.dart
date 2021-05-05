@@ -55,10 +55,10 @@ class TextLanguage {
     );
   }
 
-  /// `parameters`
+  /// `Parameters`
   String get parameters {
     return Intl.message(
-      'parameters',
+      'Parameters',
       name: 'parameters',
       desc: '',
       args: [],

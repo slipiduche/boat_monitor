@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mustHave" : MessageLookupByLibrary.simpleMessage("Passwords must be at least 6 characters long"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "newPassword" : MessageLookupByLibrary.simpleMessage("New Password"),
-    "parameters" : MessageLookupByLibrary.simpleMessage("parameters"),
+    "parameters" : MessageLookupByLibrary.simpleMessage("Parameters"),
     "passWord" : MessageLookupByLibrary.simpleMessage("Password"),
     "passwordRecovery" : MessageLookupByLibrary.simpleMessage("Password Recovery"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Privacy Policy"),
