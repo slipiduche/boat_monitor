@@ -32,11 +32,11 @@ Widget managerIcon(size) {
   );
 }
 
-Widget alertsIcon(size) {
-  return Image(
-    image: AssetImage('assets/alertsIcon.png'),
-    height: size,
-    //color: color,
+Widget alertsIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/alertsIcon.png'),
+    size: size,
+    color: color,
   );
 }
 
@@ -45,6 +45,14 @@ Widget approvalIcon(size) {
     image: AssetImage('assets/approvalIcon.png'),
     height: size,
     //color: color,
+  );
+}
+
+Widget approvalsIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/approvalsIcon.png'),
+    size: size,
+    color: color,
   );
 }
 
@@ -88,6 +96,14 @@ Widget historicsIcon(size, color) {
   );
 }
 
+Widget editIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/editIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+
 Widget storageIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/storageIcon.png'),
@@ -95,6 +111,7 @@ Widget storageIcon(size, color) {
     color: color,
   );
 }
+
 Widget profileIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/profileIconBar.png'),

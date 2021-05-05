@@ -10,6 +10,7 @@ final LinearGradient whiteGradient = LinearGradient(
 final Color blue = Color.fromRGBO(73, 185, 219, 1.0);
 final Color blue1 = Color.fromRGBO(0, 56, 112, 1.0);
 final Color blue0_1 = Color.fromRGBO(73, 185, 219, 0.5);
+
 final Color blue1_2 = Color.fromRGBO(0, 56, 112, 0.2);
 final Color blue2 = Color.fromRGBO(61, 169, 216, 0.6);
 final Color blue3 = Color.fromRGBO(0, 56, 112, 1.0);

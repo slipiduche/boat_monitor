@@ -27,6 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "alerts" : MessageLookupByLibrary.simpleMessage("Alerts"),
+    "approval" : MessageLookupByLibrary.simpleMessage("Approval"),
+    "changePassword" : MessageLookupByLibrary.simpleMessage("Change password"),
     "clicHere" : MessageLookupByLibrary.simpleMessage("Clic here"),
     "confirmPassword" : MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "dontHaveAccount" : MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
@@ -35,9 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "iRead" : MessageLookupByLibrary.simpleMessage("I’ve read and accept all the"),
     "isNotEmail" : MessageLookupByLibrary.simpleMessage("Is not an email"),
     "loginButtonText" : MessageLookupByLibrary.simpleMessage("Login"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "manageBoat" : MessageLookupByLibrary.simpleMessage("Manage boat"),
+    "manager" : MessageLookupByLibrary.simpleMessage("Manager"),
     "mustHave" : MessageLookupByLibrary.simpleMessage("Passwords must be at least 6 characters long"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "newPassword" : MessageLookupByLibrary.simpleMessage("New Password"),
+    "parameters" : MessageLookupByLibrary.simpleMessage("parameters"),
     "passWord" : MessageLookupByLibrary.simpleMessage("Password"),
     "passwordRecovery" : MessageLookupByLibrary.simpleMessage("Password Recovery"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Privacy Policy"),
@@ -47,9 +54,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpMessage" : MessageLookupByLibrary.simpleMessage("Sign up and start working with us"),
     "signupHere" : MessageLookupByLibrary.simpleMessage("Sign up here"),
     "simpleText" : MessageLookupByLibrary.simpleMessage("Hello world"),
+    "supervisor" : MessageLookupByLibrary.simpleMessage("Supervisor"),
     "textWithPlaceholder" : m0,
     "textWithPlaceholders" : m1,
     "textWithPlural" : m2,
-    "updating" : MessageLookupByLibrary.simpleMessage("Updating")
+    "updating" : MessageLookupByLibrary.simpleMessage("Updating"),
+    "waiting" : MessageLookupByLibrary.simpleMessage("Waiting for approval")
   };
 }

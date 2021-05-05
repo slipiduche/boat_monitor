@@ -1,4 +1,12 @@
-{
+{   "manager":"Manager",
+    "approval":"Approval",
+    "parameters":"parameters",
+    "manageBoat":"Manage boat",
+    "alerts": "Alerts",
+    "changePassword": "Change password",
+    "supervisor": "Supervisor",
+    "logout": "Logout",
+    "waiting": "Waiting for approval",
     "passwordRecovery": "Password Recovery",
     "recoveryText": "Please introduce your email and check your inbox.",
     "newPassword": "New Password",

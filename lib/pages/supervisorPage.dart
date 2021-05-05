@@ -47,7 +47,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
                       supervisorIcon(100.0),
                       SizedBox(height: 17.0),
                       Text(
-                        'Supervisor',
+                        TextLanguage.of(context).supervisor,
                         style: TextStyle(
                             fontSize: correoSize,
                             fontWeight: FontWeight.bold,
@@ -58,20 +58,20 @@ class _SupervisorPageState extends State<SupervisorPage> {
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Alerts', blue1, boatIconBlue(20.0, blue1), () {}, 1),
+                      managerOption(TextLanguage.of(context).alerts, blue1,
+                          boatIconBlue(20.0, blue1), () {}, 1),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption('Change password', blue1,
-                          keyIcon(20.0, blue1), () {}, 0),
+                      managerOption(TextLanguage.of(context).changePassword,
+                          blue1, keyIcon(20.0, blue1), () {}, 0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Logout', blue1, logoutIcon(20.0, blue1), () {}, 0),
+                      managerOption(TextLanguage.of(context).logout, blue1,
+                          logoutIcon(20.0, blue1), () {}, 0),
                     ],
                   );
                 } else if (_prefs.userType == 2) {
@@ -82,21 +82,25 @@ class _SupervisorPageState extends State<SupervisorPage> {
                       waitingIcon(100.0),
                       SizedBox(height: 17.0),
                       Text(
-                        'Supervisor',
+                        TextLanguage.of(context).supervisor,
                         style: TextStyle(
                             fontSize: correoSize,
                             fontWeight: FontWeight.bold,
                             color: blue1),
                       ),
                       SizedBox(height: 20.0),
-                      managerOption('Waiting for approval', Colors.black,
-                          Icon(Icons.cancel, color: redAlert), null, 0),
+                      managerOption(
+                          TextLanguage.of(context).waiting,
+                          Colors.black,
+                          Icon(Icons.cancel, color: redAlert),
+                          null,
+                          0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Logout', blue1, logoutIcon(20.0, blue1), () {}, 0),
+                      managerOption(TextLanguage.of(context).logout, blue1,
+                          logoutIcon(20.0, blue1), () {}, 0),
                     ],
                   );
                 }

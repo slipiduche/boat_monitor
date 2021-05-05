@@ -35,6 +35,96 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
+  /// `Manager`
+  String get manager {
+    return Intl.message(
+      'Manager',
+      name: 'manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approval`
+  String get approval {
+    return Intl.message(
+      'Approval',
+      name: 'approval',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `parameters`
+  String get parameters {
+    return Intl.message(
+      'parameters',
+      name: 'parameters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage boat`
+  String get manageBoat {
+    return Intl.message(
+      'Manage boat',
+      name: 'manageBoat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alerts`
+  String get alerts {
+    return Intl.message(
+      'Alerts',
+      name: 'alerts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePassword {
+    return Intl.message(
+      'Change password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Supervisor`
+  String get supervisor {
+    return Intl.message(
+      'Supervisor',
+      name: 'supervisor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting for approval`
+  String get waiting {
+    return Intl.message(
+      'Waiting for approval',
+      name: 'waiting',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Password Recovery`
   String get passwordRecovery {
     return Intl.message(

@@ -1,4 +1,8 @@
+import 'package:boat_monitor/pages/alertsPage.dart';
+import 'package:boat_monitor/pages/approvalPage.dart';
+import 'package:boat_monitor/pages/manageBoatPage.dart';
 import 'package:boat_monitor/pages/managerPage.dart';
+
 import 'package:boat_monitor/pages/supervisorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:boat_monitor/pages/privacyPolicy_page.dart';
@@ -16,6 +20,9 @@ Map<String, WidgetBuilder> getAppRoutes() {
     'changePasswordPage': (BuildContext context) => ChangePasswordPage(),
     'privacyPage': (BuildContext context) => PrivacyPage(),
     'managerPage': (BuildContext context) => ManagerPage(),
+    'alertsPage': (BuildContext context) => AlertPage(),
+    'approvalPage': (BuildContext context) => ApprovalPage(),
+    'manageBoatPage': (BuildContext context) => ManageBoatPage(),
     'supervisorPage': (BuildContext context) => SupervisorPage(),
   };
 }

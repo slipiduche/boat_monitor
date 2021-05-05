@@ -47,7 +47,7 @@ class _ManagerPageState extends State<ManagerPage> {
                   return Column(
                     children: [
                       Text(
-                        'Manager',
+                        TextLanguage.of(context).manager,
                         style: TextStyle(
                             fontSize: correoSize,
                             fontWeight: FontWeight.bold,
@@ -58,38 +58,38 @@ class _ManagerPageState extends State<ManagerPage> {
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption('Manage boat', blue1,
+                      managerOption(TextLanguage.of(context).manageBoat, blue1,
                           boatIconBlue(20.0, blue1), () {}, 0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Approval', blue1, approvalIcon(20.0), () {}, 1),
+                      managerOption(TextLanguage.of(context).approval, blue1,
+                          approvalIcon(20.0), () {}, 1),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Alerts', blue1, alertsIcon(20.0), () {}, 2),
+                      managerOption(TextLanguage.of(context).alerts, blue1,
+                          alertsIcon(20.0, blue1), () {}, 2),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption('Change Password', blue1,
-                          keyIcon(20.0, blue1), () {}, 0),
+                      managerOption(TextLanguage.of(context).changePassword,
+                          blue1, keyIcon(20.0, blue1), () {}, 0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption('Parameters', blue1,
+                      managerOption(TextLanguage.of(context).parameters, blue1,
                           parametersIcon(20.0, blue1), () {}, 0),
                       Divider(
                         height: 1.0,
                         thickness: 1.0,
                       ),
-                      managerOption(
-                          'Logout', blue1, logoutIcon(20.0, blue1), () {}, 0),
+                      managerOption(TextLanguage.of(context).logout, blue1,
+                          logoutIcon(20.0, blue1), () {}, 0),
                     ],
                   );
                 } else if (_prefs.userType == 2) {
