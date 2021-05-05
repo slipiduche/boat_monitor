@@ -37,35 +37,10 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 20.0,
             ),
-            // Container(
-            //   margin: EdgeInsets.only(right: marginExt1),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       Checkbox(
-            //         value: true,
-            //         onChanged: (value) {},
-            //         activeColor: blue1,
-            //       ),
-            //       Text(
-            //         'Selected',
-            //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
-            //       ),
-            //       Text(' (',
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //       Text("3",
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //       Text(')',
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //     ],
-            //   ),
-            // ),
+
             Expanded(
                 child: Column(
-              children: [_homeHeader(context)],
+              children: [_homeSearch(context)],
             )),
             // StreamBuilder(
             //   stream: PendingHomesBloc().pendingHomes,
@@ -81,111 +56,27 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _homeItem(BuildContext context, home) {
+Widget _homeSearch(BuildContext context) {
   return Container(
-    margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
-    child: Column(
+    margin: EdgeInsets.symmetric(horizontal: marginExt1),
+    height: 50.0,
+    decoration: BoxDecoration(
+        border: Border.all(color: blue1, style: BorderStyle.solid),
+        borderRadius: BorderRadius.circular(5.0)),
+    child: Row(
       children: [
-        Row(
-          children: [
-            Checkbox(
-              value: true,
-              activeColor: blue1,
-              onChanged: (value) {},
-            ),
-            Expanded(
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 220) / 3,
-                          child: Text(
-                            'orbittas',
-                            overflow: TextOverflow.ellipsis,
-                          )),
-                      SizedBox(width: 5.0),
-                      SizedBox(width: 5.0),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 80) / 3,
-                          child: Text('04/05/2021 21:00',
-                              overflow: TextOverflow.clip)),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 125) / 3,
-                          child: Text('alejandro@orbittas.com',
-                              overflow: TextOverflow.ellipsis)),
-                      SizedBox(width: 5.0),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+        SizedBox(
+          width: 5.0,
         ),
-        Container(
-          margin: EdgeInsets.only(left: marginExt1 * 2),
-          child: Divider(
-            color: blue1,
-            height: 1.0,
-            thickness: 1.0,
-          ),
+        searchIcon(30.0, blue1),
+        SizedBox(
+          width: 5.0,
         ),
-      ],
-    ),
-  );
-}
-
-Widget _homeHeader(BuildContext context) {
-  return Container(
-    margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 180) / 3,
-                          child: Text(
-                            'Parameter',
-                            style: TextStyle(
-                                color: blue1, fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          )),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 220) / 3,
-                          child: Text("Default",
-                              style: TextStyle(
-                                  color: blue1, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.clip)),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 125) / 3,
-                          child: Text("Value",
-                              style: TextStyle(
-                                  color: blue1, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Container(
-          //margin: EdgeInsets.only(left: marginExt1 * 2),
-          child: Divider(
-            color: blue1,
-            height: 1.0,
-            thickness: 1.0,
-          ),
-        ),
+        Expanded(
+            child: TextField(
+          style: TextStyle(color: blue1),
+          decoration: InputDecoration(border: InputBorder.none,hintText: 'Type any boat name'),
+        ))
       ],
     ),
   );
