@@ -139,7 +139,7 @@ Widget _parametersItem(BuildContext context, parameters) {
 
 Widget _parametersHeader(BuildContext context) {
   return Container(
-    margin: EdgeInsets.only(left: marginExt1 , right: marginExt1),
+    margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
     child: Column(
       children: [
         Row(
