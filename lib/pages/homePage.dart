@@ -4,6 +4,7 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/homeSearchBloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                       return Column(
                         children: [
                           _homeButtons(context),
-                          Container(child: Text(snapshot.data)),
+                          _boatCard(context, Journey(), 'Boat1')
                         ],
                       );
                     } else {
@@ -91,6 +92,140 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: botomBar(1, context),
     ));
   }
+}
+
+Widget _boatCard(BuildContext context, Journey journey, String boatName) {
+  return Container(
+    height: 150,
+    margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
+    decoration: BoxDecoration(
+        border: Border.all(color: blue1, style: BorderStyle.solid,width: 2.0),
+        borderRadius: BorderRadius.circular(5.0)),
+    child: Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(
+              horizontal: marginInt, vertical: marginSupBoatCard),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    boatName,
+                    style: TextStyle(
+                        color: blue1,
+                        fontWeight: FontWeight.bold,
+                        fontSize: messageTitle),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Departure:',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: boatCardContent),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text('04/05/2021 12:38',
+                      style: TextStyle(
+                          color: blueTextBoatCard, fontSize: boatCardContent))
+                ],
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Arrival:',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: boatCardContent),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text('05/05/2021 12:38',
+                      style: TextStyle(
+                          color: blueTextBoatCard, fontSize: boatCardContent))
+                ],
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'final Weight:',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: boatCardContent),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text('100Kg',
+                      style: TextStyle(
+                          color: blueTextBoatCard, fontSize: boatCardContent))
+                ],
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(right: marginInt, top: marginSupBoatCard),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  statusIcon(20.0, 1),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  
+                  Text(
+                    'Status:',
+                    style: TextStyle(
+                        color: blue1,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(
+                    'Arrived',
+                    style: TextStyle(
+                        color: blue1,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0),
+                  ),
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  arrivedIcon(20.0, blue1)
+                ],
+              ),
+            ],
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 Widget _homeButtons(BuildContext context) {

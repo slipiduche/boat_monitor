@@ -56,6 +56,14 @@ Widget approvalsIcon(size, color) {
   );
 }
 
+Widget arrivedIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/arrivedIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+
 Widget searchIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/searchIcon.png'),

@@ -10,7 +10,7 @@ final LinearGradient whiteGradient = LinearGradient(
 final Color blue = Color.fromRGBO(73, 185, 219, 1.0);
 final Color blue1 = Color.fromRGBO(0, 56, 112, 1.0);
 final Color blue0_1 = Color.fromRGBO(73, 185, 219, 0.5);
-
+final Color blueTextBoatCard = Color.fromRGBO(4, 61, 57, 1.0);
 final Color blue1_2 = Color.fromRGBO(0, 56, 112, 0.2);
 final Color blue2 = Color.fromRGBO(61, 169, 216, 0.6);
 final Color blue3 = Color.fromRGBO(0, 56, 112, 1.0);
@@ -39,12 +39,13 @@ final Color gray = Color.fromRGBO(229, 229, 229, 1.0);
 final Color gray1 = Color.fromRGBO(142, 142, 142, 1.0);
 final Color gray2 = Color.fromRGBO(197, 197, 197, 1.0);
 final Color gray3 = Color.fromRGBO(169, 169, 169, 1.0);
-final LinearGradient gradient2 = LinearGradient(
+final LinearGradient grayGradient = LinearGradient(
   colors: [gray1, gray3, gray2, gray],
   stops: [0.0, 0.651, 0.9999, 1.0],
   begin: FractionalOffset.topCenter,
   end: FractionalOffset.bottomCenter,
 );
+
 final Color colorShadow = Color.fromRGBO(0, 0, 0, 0.25);
 final BoxShadow boxShadow1 = BoxShadow(
     color: colorShadow,

@@ -185,3 +185,20 @@ void _onItemTapped(context, index) async {
         .pushReplacementNamed('managerPage', arguments: null);
   }
 }
+
+Widget statusIcon(double size, int status) {
+  LinearGradient _gradiente;
+  if (status == 1) {
+    _gradiente = blueGradient1;
+    print('status1');
+  } else {
+    _gradiente = grayGradient;
+    print('estatus0:$status');
+  }
+  return Container(
+    height: size,
+    width: size,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0), gradient: _gradiente),
+  );
+}
