@@ -33,8 +33,11 @@ class _ApprovalPageState extends State<ApprovalPage> {
     print(_approvals);
     return SafeArea(
         child: Scaffold(
-      appBar: gradientAppBar2(TextLanguage.of(context).approval,
-          approvalsIcon(25.0, Colors.white), () {}),
+      appBar: gradientAppBar2(
+          TextLanguage.of(context).approval, approvalsIcon(25.0, Colors.white),
+          () {
+        Navigator.of(context).pushReplacementNamed('managerPage');
+      }),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +82,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
           ],
         ),
       ),
-      bottomNavigationBar: botomBar(1, context),
+      bottomNavigationBar: botomBar(3, context),
     ));
   }
 }

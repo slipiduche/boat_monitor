@@ -31,84 +31,103 @@ class _ManagerPageState extends State<ManagerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      //appBar: gradientAppBar(TextLanguage.of(context).managerButtonText, () {}),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: marginSupicon2),
-              managerIcon(100.0),
-              SizedBox(height: 17.0),
-              Builder(builder: (context) {
-                if (_prefs.userType == 1) {
-                  return Column(
-                    children: [
-                      Text(
-                        TextLanguage.of(context).manager,
-                        style: TextStyle(
-                            fontSize: correoSize,
-                            fontWeight: FontWeight.bold,
-                            color: blue1),
-                      ),
-                      SizedBox(height: 20.0),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(TextLanguage.of(context).manageBoat, blue1,
-                          boatIconBlue(20.0, blue1), () {}, 0),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(TextLanguage.of(context).approval, blue1,
-                          approvalIcon(20.0), () {}, 1),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(TextLanguage.of(context).alerts, blue1,
-                          alertsIcon(20.0, blue1), () {}, 2),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(TextLanguage.of(context).changePassword,
-                          blue1, keyIcon(20.0, blue1), () {}, 0),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(TextLanguage.of(context).parameters, blue1,
-                          parametersIcon(20.0, blue1), () {}, 0),
-                      Divider(
-                        height: 1.0,
-                        thickness: 1.0,
-                      ),
-                      managerOption(TextLanguage.of(context).logout, blue1,
-                          logoutIcon(20.0, blue1), () {}, 0),
-                    ],
-                  );
-                } else if (_prefs.userType == 2) {
-                  return Container();
-                } else {
-                  return Container();
-                }
-              }),
-              StreamBuilder(
-                stream: PendingAlertsBloc().pendingAlerts,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  return Container();
-                },
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () {},
+      child: SafeArea(
+          child: Scaffold(
+        //appBar: gradientAppBar(TextLanguage.of(context).managerButtonText, () {}),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: marginSupicon2),
+                managerIcon(100.0),
+                SizedBox(height: 17.0),
+                Builder(builder: (context) {
+                  if (_prefs.userType == 1) {
+                    return Column(
+                      children: [
+                        Text(
+                          TextLanguage.of(context).manager,
+                          style: TextStyle(
+                              fontSize: correoSize,
+                              fontWeight: FontWeight.bold,
+                              color: blue1),
+                        ),
+                        SizedBox(height: 20.0),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                        managerOption(TextLanguage.of(context).manageBoat,
+                            blue1, boatIconBlue(20.0, blue1), () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('manageBoatPage');
+                        }, 0),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                        managerOption(TextLanguage.of(context).approval, blue1,
+                            approvalIcon(20.0), () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('approvalPage');
+                        }, 1),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                        managerOption(TextLanguage.of(context).alerts, blue1,
+                            alertsIcon(20.0, blue1), () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('alertsPage');
+                        }, 2),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                        managerOption(TextLanguage.of(context).changePassword,
+                            blue1, keyIcon(20.0, blue1), () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('changePasswordPage');
+                        }, 0),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                        managerOption(TextLanguage.of(context).parameters,
+                            blue1, parametersIcon(20.0, blue1), () {}, 0),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                        managerOption(TextLanguage.of(context).logout, blue1,
+                            logoutIcon(20.0, blue1), () {
+                          _prefs.token = '';
+                          Navigator.of(context)
+                              .pushReplacementNamed('loginPage');
+                        }, 0),
+                      ],
+                    );
+                  } else if (_prefs.userType == 2) {
+                    return Container();
+                  } else {
+                    return Container();
+                  }
+                }),
+                StreamBuilder(
+                  stream: PendingAlertsBloc().pendingAlerts,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return Container();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: botomBar(1, context),
-    ));
+        bottomNavigationBar: botomBar(3, context),
+      )),
+    );
   }
 }

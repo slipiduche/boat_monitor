@@ -308,7 +308,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
           ],
         ),
       ),
-      bottomNavigationBar: botomBar(1, context),
+      bottomNavigationBar: botomBar(0, context),
     ));
   }
 }

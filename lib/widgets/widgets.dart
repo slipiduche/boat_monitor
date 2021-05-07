@@ -155,7 +155,7 @@ BottomNavigationBar botomBar(_itemselected, context) {
           activeIcon: profileIcon(25.0, blue)),
     ],
     type: BottomNavigationBarType.fixed,
-    //currentIndex: _itemselected,
+    currentIndex: _itemselected,
     onTap: (valor) {
       _onItemTapped(context, valor);
     },
@@ -169,7 +169,7 @@ void _onItemTapped(context, index) async {
 
   if (index == 0) {
     await Navigator.of(context)
-        .pushReplacementNamed('managerPage', arguments: null);
+        .pushReplacementNamed('homePage', arguments: null);
   }
 
   if (index == 1) {

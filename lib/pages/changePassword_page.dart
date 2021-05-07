@@ -31,42 +31,47 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar(TextLanguage.of(context).newPassword, () {
-        Navigator.of(context).pushReplacementNamed('loginPage');
-      }),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: marginSupicon),
-              SizedBox(height: 73.0),
-              Text(_prefs.email,
-                  style: TextStyle(
-                      color: blue1,
-                      fontSize: correoSize,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center),
-              SizedBox(height: 30.0),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: marginExt),
-                child: formChange(context),
-              ),
-              SizedBox(height: 20.0),
-              StreamBuilder(
-                stream: AlertsBloc().alert,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  WidgetsBinding.instance
-                      .addPostFrameCallback((_) => onAfterBuild(context));
-                  return Container();
-                },
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('managerPage');
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar(TextLanguage.of(context).newPassword, () {
+          Navigator.of(context).pushReplacementNamed('managerPage');
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: marginSupicon),
+                SizedBox(height: 73.0),
+                Text(_prefs.email,
+                    style: TextStyle(
+                        color: blue1,
+                        fontSize: correoSize,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center),
+                SizedBox(height: 30.0),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt),
+                  child: formChange(context),
+                ),
+                SizedBox(height: 20.0),
+                StreamBuilder(
+                  stream: AlertsBloc().alert,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    WidgetsBinding.instance
+                        .addPostFrameCallback((_) => onAfterBuild(context));
+                    return Container();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

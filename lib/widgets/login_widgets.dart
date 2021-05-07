@@ -2,6 +2,7 @@ import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
+import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +91,7 @@ _login(BuildContext context) {
 }
 
 _login1(BuildContext context) async {
+  UserPreferences _prefs = UserPreferences();
   AlertsBloc().setAlert =
       Alerts(TextLanguage.of(context).loginButtonText, "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
@@ -98,9 +100,13 @@ _login1(BuildContext context) async {
   print(_login);
   if (_login["ok"] == true) {
     // Navigator.of(context).pop();
+    if (_prefs.userType == 1) {
+      Navigator.of(context).pushReplacementNamed('managerPage');
+    } else {
+      Navigator.of(context).pushReplacementNamed('supervisorPage');
+    }
 
-    Navigator.of(context).pushReplacementNamed('managerPage');
-    //Navigator.of(context).pushReplacementNamed('supervisorPage');
+    //
   } else {
     print(_login["message"]);
     AlertsBloc().setAlert = Alerts(_login["message"], "Error");
