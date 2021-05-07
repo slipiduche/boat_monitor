@@ -97,7 +97,10 @@ class _ManagerPageState extends State<ManagerPage> {
                           thickness: 1.0,
                         ),
                         managerOption(TextLanguage.of(context).parameters,
-                            blue1, parametersIcon(20.0, blue1), () {}, 0),
+                            blue1, parametersIcon(20.0, blue1), () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('parametersPage');
+                        }, 0),
                         Divider(
                           height: 1.0,
                           thickness: 1.0,

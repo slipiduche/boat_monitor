@@ -26,58 +26,65 @@ class _ParametersPageState extends State<ParametersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar2(TextLanguage.of(context).parameters,
-          parametersIcon(25.0, Colors.white), () {}),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            // Container(
-            //   margin: EdgeInsets.only(right: marginExt1),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       Checkbox(
-            //         value: true,
-            //         onChanged: (value) {},
-            //         activeColor: blue1,
-            //       ),
-            //       Text(
-            //         'Selected',
-            //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
-            //       ),
-            //       Text(' (',
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //       Text("3",
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //       Text(')',
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //     ],
-            //   ),
-            // ),
-            Expanded(
-                child: Column(
-              children: [_parametersHeader(context)],
-            )),
-            // StreamBuilder(
-            //   stream: PendingParameterssBloc().pendingParameterss,
-            //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //     return Container();
-            //   },
-            // ),
-          ],
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('managerPage');
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar2(TextLanguage.of(context).parameters,
+            parametersIcon(25.0, Colors.white), () {
+          Navigator.of(context).pushReplacementNamed('managerPage');
+        }),
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              // Container(
+              //   margin: EdgeInsets.only(right: marginExt1),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.end,
+              //     children: [
+              //       Checkbox(
+              //         value: true,
+              //         onChanged: (value) {},
+              //         activeColor: blue1,
+              //       ),
+              //       Text(
+              //         'Selected',
+              //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
+              //       ),
+              //       Text(' (',
+              //           style:
+              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
+              //       Text("3",
+              //           style:
+              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
+              //       Text(')',
+              //           style:
+              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
+              //     ],
+              //   ),
+              // ),
+              Expanded(
+                  child: Column(
+                children: [_parametersHeader(context)],
+              )),
+              // StreamBuilder(
+              //   stream: PendingParameterssBloc().pendingParameterss,
+              //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+              //     return Container();
+              //   },
+              // ),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: botomBar(1, context),
-    ));
+        bottomNavigationBar: botomBar(1, context),
+      )),
+    );
   }
 }
 
