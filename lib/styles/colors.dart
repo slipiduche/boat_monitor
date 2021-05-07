@@ -35,6 +35,12 @@ final LinearGradient blueGradient3 = LinearGradient(
   begin: FractionalOffset.topCenter,
   end: FractionalOffset.bottomCenter,
 );
+final LinearGradient redGradient = LinearGradient(
+  colors: [redAlert, blue1],
+  stops: [0.0, 1.0],
+  begin: FractionalOffset.topCenter,
+  end: FractionalOffset.bottomCenter,
+);
 final Color gray = Color.fromRGBO(229, 229, 229, 1.0);
 final Color gray1 = Color.fromRGBO(142, 142, 142, 1.0);
 final Color gray2 = Color.fromRGBO(197, 197, 197, 1.0);
@@ -52,3 +58,9 @@ final BoxShadow boxShadow1 = BoxShadow(
     blurRadius: 4.0,
     spreadRadius: 0.0,
     offset: Offset(0, 4.0));
+final BoxShadow boxShadow2 = BoxShadow(
+  color: colorShadow,
+  blurRadius: 10.0,
+  spreadRadius: 1.0,
+  //offset: Offset(0, 0.0)
+);

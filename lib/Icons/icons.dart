@@ -64,6 +64,21 @@ Widget arrivedIcon(size, color) {
   );
 }
 
+Widget weightIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/weightIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+Widget clockIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/clockIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+
 Widget searchIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/searchIcon.png'),
