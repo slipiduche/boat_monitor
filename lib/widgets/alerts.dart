@@ -363,3 +363,72 @@ void confirmationDialog(BuildContext _context, String contain, String title,
         );
       });
 }
+
+void parametersDialog(
+    BuildContext _context, String message, Function functionDone()) {
+  showDialog(
+      context: _context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Dialog(
+          //scrollable: true,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+
+          insetPadding: EdgeInsets.symmetric(horizontal: 28.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      message,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 20.0, color: blue1),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextField(
+                        keyboardType: TextInputType.number,
+                        //obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.0)),
+                          hintText: 'Type number',
+
+                          //counterText: snapshot.data,
+
+                          // icon: Icon(Icons.lock)
+                        ))
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                height: 50.0,
+                //margin: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: submitButton('Done', () {
+                        functionDone();
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      });
+}

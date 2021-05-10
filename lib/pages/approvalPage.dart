@@ -2,6 +2,7 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
+import 'package:boat_monitor/providers/users_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
@@ -29,6 +30,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider().getUsers();
     _approvals = PendingApprovals.fromJsonList(pendingApprovalsTest);
     print(_approvals);
     return SafeArea(

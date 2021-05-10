@@ -3,6 +3,7 @@ import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -43,35 +44,37 @@ class _ParametersPageState extends State<ParametersPage> {
               SizedBox(
                 height: 20.0,
               ),
-              // Container(
-              //   margin: EdgeInsets.only(right: marginExt1),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.end,
-              //     children: [
-              //       Checkbox(
-              //         value: true,
-              //         onChanged: (value) {},
-              //         activeColor: blue1,
-              //       ),
-              //       Text(
-              //         'Selected',
-              //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
-              //       ),
-              //       Text(' (',
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //       Text("3",
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //       Text(')',
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //     ],
-              //   ),
-              // ),
+              
               Expanded(
                   child: Column(
-                children: [_parametersHeader(context)],
+                children: [
+                  _parametersHeader(context),
+                  _parametersItem(
+                      context, {"name": 'weight', "value": 50, "default": 35},
+                      () {
+                    parametersDialog(context, 'weight', () {
+                      Navigator.of(context).pop();
+                      confirmationDialog(
+                          context,
+                          'Are you sure you want to mark weight',
+                          'Setpoint Confirmation', () {
+                        print('yess');
+                      }, () {
+                        print('no');
+                        Navigator.of(context).pop();
+                      });
+                    });
+                    print('weight');
+                  }),
+                  _parametersItem(context,
+                      {"name": 'temperature', "value": 25, "default": 20}, () {
+                    print('temp');
+                  }),
+                  _parametersItem(context,
+                      {"name": 'unavailable', "value": 6, "default": 7}, () {
+                    print('time');
+                  })
+                ],
               )),
               // StreamBuilder(
               //   stream: PendingParameterssBloc().pendingParameterss,
@@ -88,43 +91,61 @@ class _ParametersPageState extends State<ParametersPage> {
   }
 }
 
-Widget _parametersItem(BuildContext context, parameters) {
+Widget _parametersItem(BuildContext context, parameters, Function onTap()) {
   return Container(
-    margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+    margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
     child: Column(
       children: [
         Row(
           children: [
-            Checkbox(
-              value: true,
-              activeColor: blue1,
-              onChanged: (value) {},
-            ),
             Expanded(
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                          width: (MediaQuery.of(context).size.width - 220) / 3,
+                          width: (MediaQuery.of(context).size.width - 70) / 3,
                           child: Text(
-                            'orbittas',
+                            parameters["name"],
                             overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.start,
                           )),
-                      SizedBox(width: 5.0),
-                      SizedBox(width: 5.0),
                       Container(
-                          width: (MediaQuery.of(context).size.width - 80) / 3,
-                          child: Text('04/05/2021 21:00',
+                          width: (MediaQuery.of(context).size.width - 70) / 3,
+                          child: Text(parameters["default"].toString(),
+                              textAlign: TextAlign.center,
                               overflow: TextOverflow.clip)),
                       Container(
-                          width: (MediaQuery.of(context).size.width - 125) / 3,
-                          child: Text('alejandro@orbittas.com',
-                              overflow: TextOverflow.ellipsis)),
-                      SizedBox(width: 5.0),
+                          width: (MediaQuery.of(context).size.width - 70) / 3,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(parameters["value"].toString(),
+                                  textAlign: TextAlign.end,
+                                  overflow: TextOverflow.ellipsis),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              GestureDetector(
+                                child: editIcon(18.0, blue1),
+                                onTap: () {
+                                  onTap();
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                            ],
+                          )),
                     ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
                   ),
                 ],
               ),
@@ -132,9 +153,9 @@ Widget _parametersItem(BuildContext context, parameters) {
           ],
         ),
         Container(
-          margin: EdgeInsets.only(left: marginExt1 * 2),
+          //margin: EdgeInsets.symmetric(horizontal: marginExt),
           child: Divider(
-            color: blue1,
+            color: gray1,
             height: 1.0,
             thickness: 1.0,
           ),
@@ -197,3 +218,11 @@ Widget _parametersHeader(BuildContext context) {
     ),
   );
 }
+
+/*
+parametersDialog(context, 'hola',(){confirmationDialog(context, 'confirm', 'setpoint', () {
+                  print('yes');
+                }, () {
+                  print('no');
+                });})
+*/

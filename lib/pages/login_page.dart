@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: marginSupicon),
               boatIconBlue(100.0, blue1),
               SizedBox(height: 73.0),
+
               //dialogConfirmation(context, 'Confirm?', 'Confirmation', false),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: marginExt),

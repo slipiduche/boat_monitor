@@ -33,7 +33,7 @@ class AuthProvider {
     print(result);
     print(token.length);
     if (result != null) {
-      _prefs.token = token.substring(0, result - 2);
+      _prefs.token = token;
       print(_prefs.token);
       print(token.substring(result - 1, position));
       _prefs.userId = int.parse(token.substring(result - 1, position));
