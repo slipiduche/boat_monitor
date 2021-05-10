@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 
+import 'alerts.dart';
+
 PreferredSizeWidget gradientAppBar(String title, Function onBackPressed) {
   return PreferredSize(
     preferredSize: Size.fromHeight(50.0),
@@ -203,5 +205,92 @@ Widget statusIcon(double size, int status) {
     width: size,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.0), gradient: _gradiente),
+  );
+}
+
+Widget dialogConfirmation(
+    BuildContext context, String contain, String title, bool function) {
+  return Container(
+    //width: MediaQuery.of(context).size.width - 28,
+    child: Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      insetPadding: EdgeInsets.symmetric(horizontal: 28.0),
+      child: Container(
+        //height: 200.0,
+        //decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              width: double.infinity,
+              //height: 30.0,
+              //color: colorMedico,
+              child: Center(
+                  child: Text(
+                title,
+                style: TextStyle(fontSize: statusSize, color: blue1),
+              )),
+            ),
+            Container(
+              //height: 40.0,
+
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(contain,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20.0)),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 50.0,
+                          child: submitButtonS('Yes', () async {
+                            print('deleting');
+
+                            updating(context, 'Deleting');
+                            //print(upSong.toJson());
+                            bool resp = function;
+                            await Future.delayed(Duration(seconds: 1));
+                            if (resp) {
+                              print('deleted');
+
+                              updated(context, 'Succes', () {});
+                            } else {
+                              print('error');
+
+                              errorPopUp(context, 'Error', () {});
+                            }
+                          }),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 50.0,
+                          child: submitButtonNo('No', () async {
+                            print('deleting');
+                            Navigator.of(context).pop();
+                          }),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
   );
 }
