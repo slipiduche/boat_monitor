@@ -4,6 +4,7 @@ import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/boats_model.dart';
+import 'package:boat_monitor/providers/boats_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -24,7 +25,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   Boats _boats;
-
+  AlertsBloc alerts = AlertsBloc();
   @override
   void initState() {
     // TODO: implement initState
@@ -35,7 +36,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
 
   @override
   Widget build(BuildContext context) {
-    _boats = Boats.fromJsonList(boatsTest);
+    BoatProvider().getBoats();
     print(_boats);
     return WillPopScope(
       onWillPop: () {
@@ -47,49 +48,53 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
             boatIconBlue(25.0, Colors.white), () {
           Navigator.of(context).pushReplacementNamed('managerPage');
         }),
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              // Container(
-              //   margin: EdgeInsets.only(right: marginExt1),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.end,
-              //     children: [
-              //       Checkbox(
-              //         value: true,
-              //         onChanged: (value) {},
-              //         activeColor: blue1,
-              //       ),
-              //       Text(
-              //         'Selected',
-              //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
-              //       ),
-              //       Text(' (',
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //       Text("3",
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //       Text(')',
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //     ],
-              //   ),
-              // ),
-              Expanded(child: makeBoatList(context, _boats.boats)),
-              // StreamBuilder(
-              //   stream: PendingAlertsBloc().pendingAlerts,
-              //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //     return Container();
-              //   },
-              // ),
-            ],
-          ),
-        ),
+        body: StreamBuilder(
+            stream: alerts.alert,
+            builder: (context, snapshot) {
+              return Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(right: marginExt1),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.end,
+                    //     children: [
+                    //       Checkbox(
+                    //         value: true,
+                    //         onChanged: (value) {},
+                    //         activeColor: blue1,
+                    //       ),
+                    //       Text(
+                    //         'Selected',
+                    //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
+                    //       ),
+                    //       Text(' (',
+                    //           style:
+                    //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
+                    //       Text("3",
+                    //           style:
+                    //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
+                    //       Text(')',
+                    //           style:
+                    //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
+                    //     ],
+                    //   ),
+                    // ),
+                    //Expanded(child: makeBoatList(context, null)),
+                    // StreamBuilder(
+                    //   stream: PendingAlertsBloc().pendingAlerts,
+                    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    //     return Container();
+                    //   },
+                    // ),
+                  ],
+                ),
+              );
+            }),
         bottomNavigationBar: botomBar(3, context),
       )),
     );

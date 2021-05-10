@@ -72,7 +72,7 @@ class AuthProvider {
         _token = decodedResp["token"];
         print(_token.substring(_token.length - 2, _token.length - 1));
         naNFinder(_token);
-        _prefs.token = decodedResp["token"];
+        
         _prefs.email = email;
         _prefs.userType = decodedResp["usertype"];
         // print(_prefs.token);

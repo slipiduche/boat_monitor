@@ -107,9 +107,23 @@ class _ManagerPageState extends State<ManagerPage> {
                         ),
                         managerOption(TextLanguage.of(context).logout, blue1,
                             logoutIcon(20.0, blue1), () {
-                          _prefs.token = '';
-                          Navigator.of(context)
-                              .pushReplacementNamed('loginPage');
+                          confirmationDialog(context,
+                              'Are you sure to log out?', 'Confirmation', () {
+                            _prefs.token = '';
+                            _prefs.userType = 0;
+                            Navigator.of(context).pop();
+                            Navigator.of(context)
+                                .pushReplacementNamed('loginPage');
+                          }, () {
+                            Navigator.of(context).pop();
+                            if (_prefs.userType == 1) {
+                              Navigator.of(context)
+                                  .pushReplacementNamed('managerPage');
+                            } else {
+                              Navigator.of(context)
+                                  .pushReplacementNamed('supervisorPage');
+                            }
+                          });
                         }, 0),
                       ],
                     );

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
+import 'dart:convert';
 final boatsTest = [
   {
     "boatName": "Boat1",
@@ -42,3 +42,54 @@ class Boats {
     return boats;
   }
 }
+
+// To parse this JSON data, do
+//
+//     final boatData = boatDataFromJson(jsonString);
+
+
+
+BoatData boatDataFromJson(String str) => BoatData.fromJson(json.decode(str));
+
+String boatDataToJson(BoatData data) => json.encode(data.toJson());
+
+class BoatData {
+    BoatData({
+        this.id,
+        this.mac,
+        this.boatName,
+        this.maxSt,
+        this.st,
+        this.resp,
+        this.obs,
+    });
+
+    int id;
+    String mac;
+    String boatName;
+    double maxSt;
+    int st;
+    int resp;
+    String obs;
+
+    factory BoatData.fromJson(Map<String, dynamic> json) => BoatData(
+        id: json["id"],
+        mac: json["mac"],
+        boatName: json["boat_name"],
+        maxSt: json["max_st"].toDouble(),
+        st: json["st"],
+        resp: json["resp"],
+        obs: json["obs"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "mac": mac,
+        "boat_name": boatName,
+        "max_st": maxSt,
+        "st": st,
+        "resp": resp,
+        "obs": obs,
+    };
+}
+
