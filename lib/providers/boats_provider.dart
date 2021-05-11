@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:http/io_client.dart';
@@ -16,13 +18,24 @@ class BoatProvider {
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      await http.get(Uri.parse(Parameters().boatsUrl), //modificado en archivo fuente de la libreria para enviar body
+      await http.get(
+          Uri.parse(Parameters()
+              .boatsUrl), //modificado en archivo fuente de la libreria para enviar body
           body: {"token": _prefs.token}).then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
-        print(decodedResp);
+        print(decodedResp["BOATS"]);
+        List<dynamic> _boatsJson = decodedResp["BOATS"];
+        List<BoatData> _boats = [];
+        _boatsJson.forEach((element) {
+          BoatData _boat = BoatData.fromJson(element);
+          _boats.add(_boat);
+        });
+        BoatsBloc().setBoats = _boats;
+
+        print(_boats[0].dt);
       });
       return {'ok': true, 'message': 'succes'};
     } catch (e) {

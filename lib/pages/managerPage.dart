@@ -45,7 +45,7 @@ class _ManagerPageState extends State<ManagerPage> {
                 managerIcon(100.0),
                 SizedBox(height: 17.0),
                 Builder(builder: (context) {
-                  if (_prefs.userType == 1) {
+                  if (_prefs.userType >1) {
                     return Column(
                       children: [
                         Text(

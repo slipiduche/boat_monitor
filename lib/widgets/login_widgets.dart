@@ -100,7 +100,7 @@ _login1(BuildContext context) async {
   print(_login);
   if (_login["ok"] == true) {
     // Navigator.of(context).pop();
-    if (_prefs.userType == 1) {
+    if (_prefs.userType > 1) {
       Navigator.of(context).pushReplacementNamed('managerPage');
     } else {
       Navigator.of(context).pushReplacementNamed('supervisorPage');
