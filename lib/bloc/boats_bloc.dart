@@ -18,8 +18,8 @@ class BoatsBloc {
   List<BoatData> get boatsValue => _boatsController.value;
   set setBoats(List<BoatData> event) => _boatsController.add(event);
 
-  final _checkController = new BehaviorSubject<bool>();
-  Stream<bool> get chek => _checkController.stream;
-  bool get checkValue => _checkController.value;
-  set setCheck(bool event) => _checkController.add(event);
+  final _checkController = new BehaviorSubject<int>();
+  Stream<int> get check => _checkController.stream;
+  int get checkValue => _checkController.value;
+  set setCheck(int event) => _checkController.add(event);
 }
