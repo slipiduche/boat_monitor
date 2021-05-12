@@ -1,4 +1,5 @@
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -327,7 +328,7 @@ void confirmationDialog(BuildContext _context, String contain, String title,
                           height: 20.0,
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal:marginInt),
+                          margin: EdgeInsets.symmetric(horizontal: marginInt),
                           child: Text(contain,
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 20.0)),
@@ -439,6 +440,7 @@ void parametersDialog(
 
 void boatNameDialog(
     BuildContext _context, String message, Function functionDone()) {
+  BoatsBloc().setBoatName = null;
   showDialog(
       context: _context,
       barrierDismissible: false,
@@ -470,6 +472,9 @@ void boatNameDialog(
                       height: 10.0,
                     ),
                     TextField(
+                        onChanged: (value) {
+                          BoatsBloc().setBoatName = value;
+                        },
                         keyboardType: TextInputType.name,
                         //obscureText: true,
                         decoration: InputDecoration(

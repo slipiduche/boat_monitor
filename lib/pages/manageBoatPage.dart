@@ -28,6 +28,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
   Boats _boats;
   AlertsBloc alerts = AlertsBloc();
   List<bool> checks = [];
+  List<int> indexs = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -63,41 +64,93 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         height: 20.0,
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: marginExt1),
+                        margin: EdgeInsets.symmetric(horizontal: marginExt1),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(
-                              'Selected',
-                              style: TextStyle(
-                                  color: blue1, fontWeight: FontWeight.bold),
-                            ),
-                            Text(' (',
-                                style: TextStyle(
-                                    color: blue1, fontWeight: FontWeight.bold)),
                             StreamBuilder(
                                 stream: BoatsBloc().check,
                                 builder: (context, snapshot) {
-                                  final _checked =
-                                      snapshot.data != null ? snapshot.data : 0;
-                                  return Text(_checked.toString(),
-                                      style: TextStyle(
-                                          color: blue1,
-                                          fontWeight: FontWeight.bold));
+                                  if (snapshot.hasData) {
+                                    if (snapshot.data > 0) {
+                                      return Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                print(checks);
+                                                print(indexs);
+                                                deleteItems(checks, indexs);
+                                              },
+                                              child: Text(
+                                                'Delete',
+                                                style: TextStyle(
+                                                    decorationThickness: 2.0,
+                                                    decorationColor: blue1,
+                                                    decorationStyle:
+                                                        TextDecorationStyle
+                                                            .solid,
+                                                    decoration:
+                                                        TextDecoration.combine([
+                                                      TextDecoration.underline
+                                                    ]),
+                                                    color: blue1,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ]);
+                                    } else {
+                                      return Container();
+                                    }
+                                  } else {
+                                    return Container();
+                                  }
                                 }),
-                            Text(')',
-                                style: TextStyle(
-                                    color: blue1, fontWeight: FontWeight.bold)),
+                            Expanded(child: Container()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Selected',
+                                  style: TextStyle(
+                                      color: blue1,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(' (',
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.bold)),
+                                StreamBuilder(
+                                    stream: BoatsBloc().check,
+                                    builder: (context, snapshot) {
+                                      final _checked = snapshot.data != null
+                                          ? snapshot.data
+                                          : 0;
+                                      return Text(_checked.toString(),
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontWeight: FontWeight.bold));
+                                    }),
+                                Text(')',
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
                           ],
                         ),
                       ),
                       Expanded(child: makeBoatList(context, snapshot.data)),
-                      // StreamBuilder(
-                      //   stream: PendingAlertsBloc().pendingAlerts,
-                      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      //     return Container();
-                      //   },
-                      // ),
+                      StreamBuilder(
+                        stream: AlertsBloc().alert,
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          WidgetsBinding.instance.addPostFrameCallback(
+                              (_) => onAfterBuild(context));
+                          return Container();
+                        },
+                      ),
                     ],
                   ),
                 );
@@ -164,9 +217,12 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                 activeColor: blue1,
                 onChanged: (value) {
                   checks[index] = value;
+
                   if (value == true) {
+                    indexs.add(boat.id);
                     BoatsBloc().setCheck = BoatsBloc().checkValue + 1;
                   } else {
+                    indexs.remove(boat.id);
                     BoatsBloc().setCheck = BoatsBloc().checkValue - 1;
                   }
                   setState(() {});
@@ -195,8 +251,10 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                               confirmationDialog(
                                   context,
                                   'Are you sure you want to change boat name?',
-                                  'Confirmation',
-                                  () {}, () {
+                                  'Confirmation', () {
+                                changeBoatName(BoatsBloc().boatNameValue,
+                                    boat.id, context);
+                              }, () {
                                 Navigator.of(context).pop();
                               });
                             });
@@ -259,9 +317,11 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         if (value) {
                           for (var i = 0; i < checks.length; i++) {
                             checks[i] = true;
+                            indexs.add(BoatsBloc().boatsValue[i].id);
                           }
                           BoatsBloc().setCheck = checks.length;
                         } else {
+                          indexs = [];
                           for (var i = 0; i < checks.length; i++) {
                             checks[i] = false;
                           }
@@ -319,5 +379,27 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
         ],
       ),
     );
+  }
+}
+
+void deleteItems(List<bool> checks, List<int> indexs) async {}
+void changeBoatName(String name, int boatId, BuildContext context) async {
+  print(name);
+  print(boatId);
+  
+  AlertsBloc().setAlert =
+      Alerts('Updating', "Updating");
+  //updating(context, TextLanguage.of(context).loginButtonText);
+  var _change = await BoatProvider().changeBoatName(name, boatId);
+  print(_change);
+  if (_change["ok"] == true) {
+    // Navigator.of(context).pop();
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Updated");
+
+    //
+  } else {
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Error");
   }
 }

@@ -22,4 +22,10 @@ class BoatsBloc {
   Stream<int> get check => _checkController.stream;
   int get checkValue => _checkController.value;
   set setCheck(int event) => _checkController.add(event);
+
+  
+  final _boatNameController = new BehaviorSubject<String>();
+  Stream<String> get boatName => _boatNameController.stream;
+  String get boatNameValue => _boatNameController.value;
+  set setBoatName(String event) => _boatNameController.add(event);
 }
