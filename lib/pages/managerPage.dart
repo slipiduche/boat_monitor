@@ -116,7 +116,7 @@ class _ManagerPageState extends State<ManagerPage> {
                                 .pushReplacementNamed('loginPage');
                           }, () {
                             Navigator.of(context).pop();
-                            if (_prefs.userType == 1) {
+                            if (_prefs.userType > 1) {
                               Navigator.of(context)
                                   .pushReplacementNamed('managerPage');
                             } else {
