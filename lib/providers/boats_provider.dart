@@ -37,11 +37,10 @@ class BoatProvider {
 
         print(_boats[0].dt);
       });
-      return {'ok': true, 'message': 'succes'};
+      return {'ok': true, 'message': 'success'};
     } catch (e) {
       print('error:');
       print(e.toString());
-
       return {'ok': false, 'message': e.toString()};
     }
   }
@@ -70,7 +69,7 @@ class BoatProvider {
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
       });
-      return {'ok': true, 'message': 'succes'};
+      return {'ok': true, 'message': 'success'};
     } catch (e) {
       print('error:');
       print(e.toString());

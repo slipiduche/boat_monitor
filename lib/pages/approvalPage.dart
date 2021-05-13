@@ -1,5 +1,6 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
 import 'package:boat_monitor/providers/users_provider.dart';
@@ -16,6 +17,8 @@ class ApprovalPage extends StatefulWidget {
 }
 
 class _ApprovalPageState extends State<ApprovalPage> {
+  List<bool> checks = [];
+  List<int> indexs = [];
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   PendingApprovals _approvals;
@@ -26,6 +29,9 @@ class _ApprovalPageState extends State<ApprovalPage> {
     super.initState();
     auth.deleteAll();
     print(_approvals);
+    PendingAlertsBloc().setCheck = 0;
+
+    AuthBloc().setRoute = 'approvalPage';
   }
 
   @override
@@ -87,140 +93,190 @@ class _ApprovalPageState extends State<ApprovalPage> {
       bottomNavigationBar: botomBar(3, context),
     ));
   }
-}
 
-Widget makeApprovalList(BuildContext context, List<PendingApproval> approvals) {
-  return Container(
-    child: ListView.builder(
-      itemCount: approvals.length,
-      itemBuilder: (BuildContext context, int index) {
-        print(approvals[index]);
-        if (index < 1) {
-          return Column(
+  Widget makeApprovalList(
+      BuildContext context, List<PendingApproval> approvals) {
+    return Container(
+      child: ListView.builder(
+        itemCount: approvals.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (checks.length < approvals.length) {
+            checks.add(false);
+          }
+          print(approvals[index]);
+          if (index < 1) {
+            return Column(
+              children: [
+                _approvalHeader(context),
+                _approvalItem(context, approvals[index], index)
+              ],
+            );
+          } else {
+            return _approvalItem(context, approvals[index], index);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _approvalItem(
+      BuildContext context, PendingApproval approval, int index) {
+    return Container(
+      margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+      child: Column(
+        children: [
+          Row(
             children: [
-              _approvalHeader(context),
-              _approvalItem(context, approvals[index])
+              Checkbox(
+                value: checks[index],
+                activeColor: blue1,
+                onChanged: (value) {
+                  checks[index] = value;
+
+                  if (value == true) {
+                    indexs.add(approval.pendingapprovalId);
+                    PendingAlertsBloc().setCheck =
+                        PendingAlertsBloc().checkValue + 1;
+                  } else {
+                    indexs.remove(approval.pendingapprovalId);
+                    PendingAlertsBloc().setCheck =
+                        PendingAlertsBloc().checkValue - 1;
+                  }
+                  setState(() {});
+                },
+              ),
+              Expanded(
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 220) / 3,
+                            child: Text(
+                              'orbittas',
+                              overflow: TextOverflow.ellipsis,
+                            )),
+                        SizedBox(width: 5.0),
+                        SizedBox(width: 5.0),
+                        Container(
+                            width: (MediaQuery.of(context).size.width - 80) / 3,
+                            child: Text('04/05/2021 21:00',
+                                overflow: TextOverflow.clip)),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 125) / 3,
+                            child: Text('alejandro@orbittas.com',
+                                overflow: TextOverflow.ellipsis)),
+                        SizedBox(width: 5.0),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
-          );
-        } else {
-          return _approvalItem(context, approvals[index]);
-        }
-      },
-    ),
-  );
-}
-
-Widget _approvalItem(BuildContext context, PendingApproval approval) {
-  return Container(
-    margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Checkbox(
-              value: true,
-              activeColor: blue1,
-              onChanged: (value) {},
-            ),
-            Expanded(
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 220) / 3,
-                          child: Text(
-                            'orbittas',
-                            overflow: TextOverflow.ellipsis,
-                          )),
-                      SizedBox(width: 5.0),
-                      SizedBox(width: 5.0),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 80) / 3,
-                          child: Text('04/05/2021 21:00',
-                              overflow: TextOverflow.clip)),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 125) / 3,
-                          child: Text('alejandro@orbittas.com',
-                              overflow: TextOverflow.ellipsis)),
-                      SizedBox(width: 5.0),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(left: marginExt1 * 2),
-          child: Divider(
-            color: blue1,
-            height: 1.0,
-            thickness: 1.0,
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _approvalHeader(BuildContext context) {
-  return Container(
-    margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Checkbox(
-              value: true,
-              activeColor: blue1,
-              onChanged: (value) {},
+          Container(
+            margin: EdgeInsets.only(left: marginExt1 * 2),
+            child: Divider(
+              color: blue1,
+              height: 1.0,
+              thickness: 1.0,
             ),
-            Expanded(
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 220) / 3,
-                          child: Text(
-                            'User',
-                            style: TextStyle(
-                                color: blue1, fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          )),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 220) / 3,
-                          child: Text("Date",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _approvalHeader(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              StreamBuilder(
+                stream: PendingAlertsBloc().check,
+                builder: (context, snapshot) {
+                  bool _checked = false;
+                  if (snapshot.hasData) {
+                      if (snapshot.data > 0) {
+                        _checked = true;
+                      }
+                    }
+                  return Checkbox(
+                    value: _checked,
+                    activeColor: blue1,
+                    onChanged: (value) {
+                      if (value) {
+                              for (var i = 0; i < checks.length; i++) {
+                                checks[i] = true;
+                                indexs.add(PendingAlertsBloc().alertAlertsValue[i].pendingalertId);
+                              }
+                              PendingAlertsBloc().setCheck = checks.length;
+                            } else {
+                              indexs = [];
+                              for (var i = 0; i < checks.length; i++) {
+                                checks[i] = false;
+                              }
+
+                              PendingAlertsBloc().setCheck = 0;
+                            }
+                            setState(() {});
+                    },
+                  );
+                }
+              ),
+              Expanded(
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 220) / 3,
+                            child: Text(
+                              'User',
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.clip)),
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 125) / 3,
-                          child: Text("Email",
-                              style: TextStyle(
-                                  color: blue1, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis)),
-                    ],
-                  ),
-                ],
+                              overflow: TextOverflow.ellipsis,
+                            )),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 220) / 3,
+                            child: Text("Date",
+                                style: TextStyle(
+                                    color: blue1, fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.clip)),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 125) / 3,
+                            child: Text("Email",
+                                style: TextStyle(
+                                    color: blue1, fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.ellipsis)),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(left: marginExt1 * 2),
-          child: Divider(
-            color: blue1,
-            height: 1.0,
-            thickness: 1.0,
+            ],
           ),
-        ),
-      ],
-    ),
-  );
+          Container(
+            margin: EdgeInsets.only(left: marginExt1 * 2),
+            child: Divider(
+              color: blue1,
+              height: 1.0,
+              thickness: 1.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
@@ -27,6 +28,8 @@ onAfterBuild(BuildContext context) {
         updated(context, AlertsBloc().alertValue.message, () {
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();
+          print(AuthBloc().routeValue);
+          Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
         });
         AlertsBloc().deleteAlert();
 
@@ -75,56 +78,58 @@ void updating(BuildContext _context, String message) {
       });
 }
 
-void updated(BuildContext _context, String message, Function onTap) {
-  BuildContext dialogContext;
+void updated(BuildContext _context, String message, Function function) {
   showDialog(
       context: _context,
-      barrierDismissible: true,
+      barrierDismissible: false,
       builder: (context) {
-        dialogContext = _context;
         return Dialog(
+          //scrollable: true,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          //scrollable: true,
+
           insetPadding: EdgeInsets.symmetric(horizontal: 28.0),
-          child: Container(
-            // height: 100.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: 10.0,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Icon(
+                      Icons.check,
+                      size: 50.0,
+                      color: blue,
+                    ),
+                    Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ],
                 ),
-                Icon(
-                  Icons.check,
-                  size: 50.0,
-                  color: blue1,
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                height: 50.0,
+                //margin: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: submitButton('OK', () {
+                        function();
+                      }),
+                    ),
+                  ],
                 ),
-                Text(
-                  message,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 50.0,
-                          child: submitButton('OK', onTap),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       });

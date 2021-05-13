@@ -25,7 +25,7 @@ class UserProvider {
         //String token = decodedResp["token"];
         print(decodedResp);
       });
-      return {'ok': true, 'message': 'succes'};
+      return {'ok': true, 'message': 'success'};
     } catch (e) {
       print('error:');
       print(e.toString());

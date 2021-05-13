@@ -13,10 +13,15 @@ class PendingAlertsBloc {
   }
 
   PendingAlertsBloc._internal();
-  final _pendingAlertsController = new BehaviorSubject<List<PendingAlerts>>();
-  Stream<List<PendingAlerts>> get pendingAlerts =>
+  final _pendingAlertsController = new BehaviorSubject<List<PendingAlert>>();
+  Stream<List<PendingAlert>> get pendingAlerts =>
       _pendingAlertsController.stream;
-  List<PendingAlerts> get alertAlertsValue => _pendingAlertsController.value;
-  set setPendingAlerts(List<PendingAlerts> event) =>
+  List<PendingAlert> get alertAlertsValue => _pendingAlertsController.value;
+  set setPendingAlerts(List<PendingAlert> event) =>
       _pendingAlertsController.add(event);
+
+  final _checkController = new BehaviorSubject<int>();
+  Stream<int> get check => _checkController.stream;
+  int get checkValue => _checkController.value;
+  set setCheck(int event) => _checkController.add(event);
 }

@@ -74,6 +74,14 @@ class AuthBloc with Validators {
     _checkController.add(null);
   }
 
+  final _routeController = new BehaviorSubject<String>();
+  Stream<String> get route => _routeController.stream;
+  String get routeValue => _routeController.value;
+  set setRoute(String event) => _routeController.add(event);
+  deleteRoute() {
+    _routeController.add(null);
+  }
+
   deleteAll() {
     deleteEmail();
     deleteName();

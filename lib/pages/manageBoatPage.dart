@@ -36,6 +36,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
     auth.deleteAll();
     BoatsBloc().setCheck = 0;
     print(_boats);
+    AuthBloc().setRoute = 'manageBoatPage';
   }
 
   @override
@@ -252,6 +253,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                                   context,
                                   'Are you sure you want to change boat name?',
                                   'Confirmation', () {
+                                Navigator.of(context).pop();
                                 changeBoatName(BoatsBloc().boatNameValue,
                                     boat.id, context);
                               }, () {
@@ -386,9 +388,8 @@ void deleteItems(List<bool> checks, List<int> indexs) async {}
 void changeBoatName(String name, int boatId, BuildContext context) async {
   print(name);
   print(boatId);
-  
-  AlertsBloc().setAlert =
-      Alerts('Updating', "Updating");
+
+  AlertsBloc().setAlert = Alerts('Updating', "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
   var _change = await BoatProvider().changeBoatName(name, boatId);
   print(_change);
