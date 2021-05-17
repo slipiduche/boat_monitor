@@ -35,6 +35,16 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
+  /// `History`
+  String get history {
+    return Intl.message(
+      'History',
+      name: 'history',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home`
   String get home {
     return Intl.message(

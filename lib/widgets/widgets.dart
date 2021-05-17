@@ -176,7 +176,7 @@ void _onItemTapped(context, index) async {
 
   if (index == 1) {
     await Navigator.of(context)
-        .pushReplacementNamed('managerPage', arguments: null);
+        .pushReplacementNamed('historyPage', arguments: null);
   }
   if (index == 2) {
     await Navigator.of(context)

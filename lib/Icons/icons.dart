@@ -63,6 +63,13 @@ Widget arrivedIcon(size, color) {
     color: color,
   );
 }
+Widget historyIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/historicsIcon.png'),
+    size: size,
+    color: color,
+  );
+}
 
 Widget weightIcon(size, color) {
   return ImageIcon(
