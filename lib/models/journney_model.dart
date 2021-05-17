@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 final journeysTest = [
   {
     "boatId": 1,
@@ -19,34 +21,99 @@ final journeysTest = [
   }
 ];
 
-class Journey {
-  int boatId;
-  String dateArrived;
-  String dateDeparture;
-  String status;
+Journeys journeysFromJson(String str) => Journeys.fromJson(json.decode(str));
 
-  Journey({this.boatId, this.dateArrived, this.dateDeparture, this.status});
-  factory Journey.fromJson(Map<String, dynamic> json) => Journey(
-      boatId: json["boatId"],
-      dateArrived: json["dateArrived"],
-      dateDeparture: json["dateArrived"],
-      status: json["dateArrived"]);
-}
+String journeysToJson(Journeys data) => json.encode(data.toJson());
 
 class Journeys {
-  List<Journey> journeys = [];
-  Journeys();
-  Journeys.fromJsonList(List<dynamic> jsonList) {
-    if (jsonList == null) return;
-    for (var item in jsonList) {
-      Journey journey = Journey.fromJson(item);
+  Journeys({
+    this.journeys,
+    this.status,
+    this.code,
+  });
 
-      journeys.add(journey);
-    }
-  }
-  List<Journey> get getJourneys {
-    Journeys.fromJsonList(journeysTest);
+  List<Journey> journeys;
+  String status;
+  int code;
 
-    return journeys;
-  }
+  factory Journeys.fromJson(Map<String, dynamic> json) => Journeys(
+        journeys: List<Journey>.from(
+            json["JOURNEYS"].map((x) => Journey.fromJson(x))),
+        status: json["status"],
+        code: json["code"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "JOURNEYS": List<dynamic>.from(journeys.map((x) => x.toJson())),
+        "status": status,
+        "code": code,
+      };
+}
+
+class Journey {
+  Journey({
+    this.id,
+    this.ini,
+    this.ed,
+    this.startUser,
+    this.endUser,
+    this.boatId,
+    this.iWeight,
+    this.fWeight,
+    this.sImg,
+    this.totalImg,
+    this.synced,
+    this.alert,
+    this.eta,
+    this.obs,
+  });
+
+  int id;
+  DateTime ini;
+  DateTime ed;
+  int startUser;
+  int endUser;
+  int boatId;
+  double iWeight;
+  double fWeight;
+  int sImg;
+  int totalImg;
+  int synced;
+  int alert;
+  dynamic eta;
+  String obs;
+
+  factory Journey.fromJson(Map<String, dynamic> json) => Journey(
+        id: json["id"],
+        ini: DateTime.parse(json["ini"]),
+        ed: DateTime.parse(json["ed"]),
+        startUser: json["start_user"],
+        endUser: json["end_user"],
+        boatId: json["boat_id"],
+        iWeight: json["i_weight"].toDouble(),
+        fWeight: json["f_weight"].toDouble(),
+        sImg: json["s_img"],
+        totalImg: json["total_img"],
+        synced: json["synced"],
+        alert: json["alert"],
+        eta: json["eta"],
+        obs: json["obs"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "ini": ini.toIso8601String(),
+        "ed": ed.toIso8601String(),
+        "start_user": startUser,
+        "end_user": endUser,
+        "boat_id": boatId,
+        "i_weight": iWeight,
+        "f_weight": fWeight,
+        "s_img": sImg,
+        "total_img": totalImg,
+        "synced": synced,
+        "alert": alert,
+        "eta": eta,
+        "obs": obs,
+      };
 }

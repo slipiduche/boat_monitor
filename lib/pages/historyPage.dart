@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historySearchBloc.dart';
+import 'package:boat_monitor/bloc/journeys_bloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/journney_model.dart';
+import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -28,10 +30,12 @@ class _HistoryPageState extends State<HistoryPage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    AuthBloc().setRoute = 'historyPage';
   }
 
   @override
   Widget build(BuildContext context) {
+    JourneyProvider().getJourneys();
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar3(TextLanguage.of(context).history,
@@ -52,9 +56,21 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
                 StreamBuilder(
                   stream: HistorySearchBloc().historySearch,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      Journeys _journeys = Journeys();
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    List<Journey> _journeys = JourneysBloc().journeysValue;
+                    List<Journey> _journeysFiltered = [];
+                    if (_journeys != null) {
+                      if (snapshot.hasData) {
+                        _journeys.forEach((element) {
+                          if (element.startUser == int.parse(snapshot.data)) {
+                            _journeysFiltered.add(element);
+                          }
+                        });
+                      } else {
+                        _journeysFiltered = _journeys;
+                      }
+
                       return Column(
                         children: [
                           Container(
@@ -147,9 +163,10 @@ class _HistoryPageState extends State<HistoryPage> {
                             ),
                           ),
                           Container(
+                             height: MediaQuery.of(context).size.height-254,
                               margin:
                                   EdgeInsets.symmetric(horizontal: marginExt1),
-                              child: _travelCard(context, Journey(), 'Boat1'))
+                              child: makeTravelList(context, _journeysFiltered))
                         ],
                       );
                     } else {
@@ -186,7 +203,19 @@ class _HistoryPageState extends State<HistoryPage> {
   }
 }
 
-Widget _travelCard(BuildContext context, Journey journey, String boatName) {
+Widget makeTravelList(BuildContext context, List<Journey> journeys) {
+  return Container(
+    child: ListView.builder(
+      itemCount: journeys.length,
+      itemBuilder: (BuildContext context, int index) {
+        print(journeys[index]);
+        return _travelCard(context, journeys[index]);
+      },
+    ),
+  );
+}
+
+Widget _travelCard(BuildContext context, Journey journey) {
   return Container(
       //height: 150,
       //margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
@@ -204,7 +233,7 @@ Widget _travelCard(BuildContext context, Journey journey, String boatName) {
                   Container(
                     width: MediaQuery.of(context).size.width / 5 - 30,
                     child: Text(
-                      'travel ${journey.boatId}',
+                      'travel ${journey.id}',
                       textAlign: TextAlign.start,
                       style: TextStyle(
 
@@ -219,7 +248,7 @@ Widget _travelCard(BuildContext context, Journey journey, String boatName) {
                   Container(
                     width: MediaQuery.of(context).size.width / 5 - 30,
                     child: Text(
-                      '${journey.dateDeparture}',
+                      '${journey.ini}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           //color: blue1,
@@ -233,7 +262,7 @@ Widget _travelCard(BuildContext context, Journey journey, String boatName) {
                   Container(
                     width: MediaQuery.of(context).size.width / 5 - 30,
                     child: Text(
-                      '${journey.dateArrived}',
+                      '${journey.ed}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           //color: blue1,
@@ -247,7 +276,7 @@ Widget _travelCard(BuildContext context, Journey journey, String boatName) {
                   Container(
                     width: MediaQuery.of(context).size.width / 5 - 30,
                     child: Text(
-                      '${journey.dateArrived}',
+                      '${journey.boatId}',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                           //color: blue1,
@@ -261,7 +290,7 @@ Widget _travelCard(BuildContext context, Journey journey, String boatName) {
                   Container(
                     width: MediaQuery.of(context).size.width / 5 - 30,
                     child: Text(
-                      '${journey.dateArrived}',
+                      '${journey.startUser}',
                       textAlign: TextAlign.end,
                       style: TextStyle(
                           //color: blue1,

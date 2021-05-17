@@ -35,10 +35,10 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
-  /// `History`
+  /// `Historial`
   String get history {
     return Intl.message(
-      'History',
+      'Historial',
       name: 'history',
       desc: '',
       args: [],
