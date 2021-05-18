@@ -70,7 +70,19 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Roboto'),
+      theme: //ThemeData.lerp(
+          ThemeData(
+        fontFamily: 'Roboto',
+        primaryColor: blue1,
+        accentColor: blue1,
+        colorScheme: ColorScheme.light(
+          primary: blue1,
+        ),
+        buttonTheme: ButtonThemeData(
+          textTheme: ButtonTextTheme.primary,
+        ),
+      ),
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       localizationsDelegates: [

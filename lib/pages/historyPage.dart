@@ -58,6 +58,48 @@ class _HistoryPageState extends State<HistoryPage> {
                         return Container(
                           child: Column(
                             children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: marginExt1),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
+                                          showDateRangePicker(
+                                            currentDate: DateTime.now(),
+                                              context: context,
+                                              initialEntryMode:
+                                                  DatePickerEntryMode.input,
+                                              firstDate: DateTime(2020),
+                                              lastDate: DateTime(2050),
+                                              
+                                              );
+                                        },
+                                        child: calendarIcon(40.0, blue1)),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    StreamBuilder(
+                                      stream: HistorySearchBloc().historySearch,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        return Container(
+                                          child: Text(
+                                            'All',
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontSize: titleBarSize),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               _historySearch(context),
                               SizedBox(
                                 height: 10.0,
@@ -72,8 +114,9 @@ class _HistoryPageState extends State<HistoryPage> {
                                   if (_journeys != null) {
                                     if (snapshot.hasData) {
                                       _journeys.forEach((element) {
-                                        if (element.startUser ==
-                                            int.parse(snapshot.data)) {
+                                        if (element.ini
+                                            .toString()
+                                            .contains(snapshot.data)) {
                                           _journeysFiltered.add(element);
                                         }
                                       });
