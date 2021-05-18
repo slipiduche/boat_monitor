@@ -40,162 +40,214 @@ class _HistoryPageState extends State<HistoryPage> {
         child: Scaffold(
       appBar: gradientAppBar3(TextLanguage.of(context).history,
           historyIcon(25.0, Colors.white), () {}),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Expanded(
-                child: Column(
-              children: [
-                _historySearch(context),
-                SizedBox(
-                  height: 10.0,
-                ),
-                StreamBuilder(
-                  stream: HistorySearchBloc().historySearch,
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    List<Journey> _journeys = JourneysBloc().journeysValue;
-                    List<Journey> _journeysFiltered = [];
-                    if (_journeys != null) {
-                      if (snapshot.hasData) {
-                        _journeys.forEach((element) {
-                          if (element.startUser == int.parse(snapshot.data)) {
-                            _journeysFiltered.add(element);
-                          }
-                        });
-                      } else {
-                        _journeysFiltered = _journeys;
-                      }
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                  child: Column(
+                children: [
+                  StreamBuilder(
+                      stream: JourneysBloc().journeys,
+                      builder: (context, snapshot) {
+                        return Container(
+                          child: Column(
+                            children: [
+                              _historySearch(context),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              StreamBuilder(
+                                stream: HistorySearchBloc().historySearch,
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<String> snapshot) {
+                                  List<Journey> _journeys =
+                                      JourneysBloc().journeysValue;
+                                  List<Journey> _journeysFiltered = [];
+                                  if (_journeys != null) {
+                                    if (snapshot.hasData) {
+                                      _journeys.forEach((element) {
+                                        if (element.startUser ==
+                                            int.parse(snapshot.data)) {
+                                          _journeysFiltered.add(element);
+                                        }
+                                      });
+                                    } else {
+                                      _journeysFiltered = _journeys;
+                                    }
 
-                      return Column(
-                        children: [
-                          Container(
-                            margin:
-                                EdgeInsets.symmetric(horizontal: marginExt1),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 5 -
-                                      30,
-                                  child: Text(
-                                    'Travel',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: blue1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: privacyPolicySize + 2.0),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  child: Text(
-                                    'Initial date',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: blue1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: privacyPolicySize + 2.0),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  child: Text(
-                                    'Final date',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: blue1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: privacyPolicySize + 2.0),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 5 -
-                                      45,
-                                  child: Text(
-                                    'Boat',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: blue1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: privacyPolicySize + 2.0),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  child: Text(
-                                    'Supervisor',
-                                    textAlign: TextAlign.end,
-                                    style: TextStyle(
-                                        color: blue1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: privacyPolicySize + 2.0),
-                                  ),
-                                ),
-                              ],
-                            ),
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: marginExt1),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        5 -
+                                                    30,
+                                                child: Text(
+                                                  'Travel',
+                                                  textAlign: TextAlign.start,
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          privacyPolicySize +
+                                                              2.0),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Text(
+                                                  'Initial date',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          privacyPolicySize +
+                                                              2.0),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Text(
+                                                  'Final date',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          privacyPolicySize +
+                                                              2.0),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        5 -
+                                                    45,
+                                                child: Text(
+                                                  'Boat',
+                                                  textAlign: TextAlign.start,
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          privacyPolicySize +
+                                                              2.0),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Text(
+                                                  'Supervisor',
+                                                  textAlign: TextAlign.end,
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          privacyPolicySize +
+                                                              2.0),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: marginExt1),
+                                          child: Divider(
+                                            color: gray1,
+                                            thickness: 1.0,
+                                          ),
+                                        ),
+                                        Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height -
+                                                254,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: marginExt1),
+                                            child: makeTravelList(
+                                                context, _journeysFiltered))
+                                      ],
+                                    );
+                                  } else {
+                                    return Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: marginExt1),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 20.0,
+                                          ),
+                                          Text(
+                                            'No data',
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontSize: correoSize),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            thickness: 1.0,
+                                            color: gray1,
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Container(
-                            margin:
-                                EdgeInsets.symmetric(horizontal: marginExt1),
-                            child: Divider(
-                              color: gray1,
-                              thickness: 1.0,
-                            ),
-                          ),
-                          Container(
-                             height: MediaQuery.of(context).size.height-254,
-                              margin:
-                                  EdgeInsets.symmetric(horizontal: marginExt1),
-                              child: makeTravelList(context, _journeysFiltered))
-                        ],
-                      );
-                    } else {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              'No data',
-                              style:
-                                  TextStyle(color: blue1, fontSize: correoSize),
-                              textAlign: TextAlign.center,
-                            ),
-                            Divider(
-                              thickness: 1.0,
-                              color: gray1,
-                            )
-                          ],
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ],
-            )),
-          ],
+                        );
+                      }),
+                ],
+              )),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: botomBar(1, context),
@@ -277,7 +329,7 @@ Widget _travelCard(BuildContext context, Journey journey) {
                     width: MediaQuery.of(context).size.width / 5 - 30,
                     child: Text(
                       '${journey.boatId}',
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           //color: blue1,
                           //fontWeight: FontWeight.bold,

@@ -63,9 +63,18 @@ Widget arrivedIcon(size, color) {
     color: color,
   );
 }
+
 Widget historyIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/historicsIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+
+Widget calendarIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/calendarIcon.png'),
     size: size,
     color: color,
   );
@@ -78,6 +87,7 @@ Widget weightIcon(size, color) {
     color: color,
   );
 }
+
 Widget clockIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/clockIcon.png'),
