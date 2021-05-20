@@ -50,7 +50,7 @@ class _JourneyPageState extends State<JourneyPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               Expanded(
                   child: Column(
@@ -122,7 +122,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                   'LOCATION', Text('image')),
                               journeyCard(context, temperatureIcon(50.0, blue1),
                                   'TEMPERTURE', Text('image')),
-                              journeyCard(context, weightIcon(50.0, blue1),
+                              journeyCard(context, picturesIcon(50.0, blue1),
                                   'PICTURES', Text('image')),
                             ],
                           ),
@@ -145,7 +145,7 @@ Widget journeyCard(
     children: [
       Container(
         margin: EdgeInsets.symmetric(horizontal: marginExt1),
-        height: 120.0,
+        height: 135.0,
         width: MediaQuery.of(context).size.width,
         child: Image(
           fit: BoxFit.fill,
@@ -154,7 +154,7 @@ Widget journeyCard(
       ),
       Container(
           margin: EdgeInsets.symmetric(horizontal: marginExt1),
-          height: 120.0,
+          height: 135.0,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -183,7 +183,7 @@ Widget journeyCard(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Container(
                         color: blue,
-                        height: 95,
+                        height: 110,
                         width: MediaQuery.of(context).size.width -
                             (2 * marginExt1) -
                             160,
