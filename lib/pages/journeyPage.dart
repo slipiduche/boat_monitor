@@ -67,11 +67,16 @@ class _JourneyPageState extends State<JourneyPage> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    
                                     Expanded(child: Container()),
-                                    Text('TRAVEL ${_journey.id}',style: TextStyle(color:blue1,fontSize:statusSize,fontWeight: FontWeight.bold),),
-                                    Expanded(child: 
-                                    Row(
+                                    Text(
+                                      'TRAVEL ${_journey.id}',
+                                      style: TextStyle(
+                                          color: blue1,
+                                          fontSize: statusSize,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Expanded(
+                                        child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         GestureDetector(
@@ -87,9 +92,38 @@ class _JourneyPageState extends State<JourneyPage> {
                               SizedBox(
                                 height: 10.0,
                               ),
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: marginExt1),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Sail: ${_journey.startUserNames}',
+                                      style: TextStyle(
+                                          color: blue1,
+                                          fontSize: journeySailSize),
+                                    ),
+                                    Expanded(child: Container()),
+                                    Text(
+                                      'Arrived: ${_journey.endUserNames}',
+                                      style: TextStyle(
+                                          color: blue1,
+                                          fontSize: journeySailSize),
+                                    )
+                                  ],
+                                ),
+                              ),
                               SizedBox(
                                 height: 10.0,
                               ),
+                              journeyCard(context, weightIcon(50.0, blue1),
+                                  'WEIGHT', Text('image')),
+                              journeyCard(context, locationIcon(50.0, blue1),
+                                  'LOCATION', Text('image')),
+                              journeyCard(context, temperatureIcon(50.0, blue1),
+                                  'TEMPERTURE', Text('image')),
+                              journeyCard(context, weightIcon(50.0, blue1),
+                                  'PICTURES', Text('image')),
                             ],
                           ),
                         );
@@ -105,129 +139,63 @@ class _JourneyPageState extends State<JourneyPage> {
   }
 }
 
-Widget makeTravelList(BuildContext context, List<Journey> journeys) {
-  return Container(
-    child: ListView.builder(
-      itemCount: journeys.length,
-      itemBuilder: (BuildContext context, int index) {
-        print(journeys[index]);
-        return _travelCard(context, journeys[index]);
-      },
-    ),
-  );
-}
-
-Widget _travelCard(BuildContext context, Journey journey) {
-  return Container(
-      //height: 150,
-      //margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: gray1)),
-        //borderRadius: BorderRadius.circular(5.0)
+Widget journeyCard(
+    BuildContext context, Widget icon, String text, Widget child) {
+  return Stack(
+    children: [
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: marginExt1),
+        height: 120.0,
+        width: MediaQuery.of(context).size.width,
+        child: Image(
+          fit: BoxFit.fill,
+          image: AssetImage('assets/cardBorderShadow.png'),
+        ),
       ),
-      child: Stack(children: [
-        Container(
-          child: Column(
+      Container(
+          margin: EdgeInsets.symmetric(horizontal: marginExt1),
+          height: 120.0,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              SizedBox(
+                width: 20.0,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      '${journey.id}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
+                  icon,
+                  Text(text, style: TextStyle(color: blue1, fontSize: 20.0))
+                ],
+              ),
+              Expanded(
+                child: SizedBox(
+                  width: 10.0,
+                ),
+              ),
+              Column(
+                children: [
                   SizedBox(
-                    width: 10.0,
+                    height: 10.0,
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 20,
-                    child: Text(
-                      '${journey.ini}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 20,
-                    child: Text(
-                      '${journey.ed}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 1.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      '${journey.boatName}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 1.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 10,
-                    child: Text(
-                      '${journey.startUserNames}',
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Container(
+                        color: blue,
+                        height: 95,
+                        width: MediaQuery.of(context).size.width -
+                            (2 * marginExt1) -
+                            160,
+                        child: Center(child: child)),
                   ),
                 ],
               ),
               SizedBox(
-                height: 10.0,
+                width: 10.0,
               ),
             ],
-          ),
-        ),
-      ]));
-}
-
-Widget _filterButton(Function onTap, String text) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-        height: 20.0,
-        width: 80.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              style: TextStyle(color: gray1),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        decoration: BoxDecoration(
-            color: gray, borderRadius: BorderRadius.circular(50.0))),
+          )),
+    ],
   );
 }

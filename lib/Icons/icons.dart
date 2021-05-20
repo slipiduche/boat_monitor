@@ -15,6 +15,7 @@ Widget signUpIcon(size, color) {
     height: size,
   );
 }
+
 Widget downloadIcon(size, color) {
   return Image(
     image: AssetImage('assets/downloadIcon.png'),
@@ -103,6 +104,28 @@ Widget clockIcon(size, color) {
   );
 }
 
+Widget locationIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/locationIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+
+Widget temperatureIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/temperatureIcon.png'),
+    size: size,
+    color: color,
+  );
+}
+Widget picturesIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/picturesIcon.png'),
+    size: size,
+    color: color,
+  );
+}
 Widget searchIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/searchIcon.png'),
