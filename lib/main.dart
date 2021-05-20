@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
     return MaterialApp(
       theme: //ThemeData.lerp(
           ThemeData(
+        backgroundColor: Colors.white,
         fontFamily: 'Roboto',
         primaryColor: blue1,
         accentColor: blue1,

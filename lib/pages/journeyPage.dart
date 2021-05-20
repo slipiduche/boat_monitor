@@ -4,9 +4,12 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
+import 'package:boat_monitor/charts/line_chart.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/journney_model.dart';
+import 'package:boat_monitor/pages/currentBoat_page.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
@@ -45,6 +48,7 @@ class _JourneyPageState extends State<JourneyPage> {
       }),
       body: SingleChildScrollView(
         child: Container(
+          
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -117,9 +121,9 @@ class _JourneyPageState extends State<JourneyPage> {
                                 height: 10.0,
                               ),
                               journeyCard(context, weightIcon(50.0, blue1),
-                                  'WEIGHT', Text('image')),
+                                  'WEIGHT', LineChartBasic()),
                               journeyCard(context, locationIcon(50.0, blue1),
-                                  'LOCATION', Text('image')),
+                                  'LOCATION', createFlutterMap(context)),
                               journeyCard(context, temperatureIcon(50.0, blue1),
                                   'TEMPERTURE', Text('image')),
                               journeyCard(context, picturesIcon(50.0, blue1),
@@ -182,7 +186,7 @@ Widget journeyCard(
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Container(
-                        color: blue,
+                        //color: blue,
                         height: 110,
                         width: MediaQuery.of(context).size.width -
                             (2 * marginExt1) -
