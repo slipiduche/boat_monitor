@@ -66,6 +66,9 @@ class Journey {
     this.alert,
     this.eta,
     this.obs,
+    this.boatName,
+    this.startUserNames,
+    this.endUserNames,
   });
 
   int id;
@@ -82,6 +85,9 @@ class Journey {
   int alert;
   dynamic eta;
   String obs;
+  String boatName;
+  String startUserNames;
+  String endUserNames;
 
   factory Journey.fromJson(Map<String, dynamic> json) => Journey(
         id: json["id"],
@@ -98,6 +104,9 @@ class Journey {
         alert: json["alert"],
         eta: json["eta"],
         obs: json["obs"],
+        startUserNames: json["start_user_names"],
+        endUserNames: json["end_user_names"],
+        boatName: json["boat_name"],
       );
 
   Map<String, dynamic> toJson() => {

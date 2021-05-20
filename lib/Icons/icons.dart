@@ -15,6 +15,13 @@ Widget signUpIcon(size, color) {
     height: size,
   );
 }
+Widget downloadIcon(size, color) {
+  return Image(
+    image: AssetImage('assets/downloadIcon.png'),
+    //color: color,
+    height: size,
+  );
+}
 
 Widget nameIcon(size) {
   return Image(

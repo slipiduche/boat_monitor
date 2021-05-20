@@ -38,8 +38,11 @@ class _HistoryPageState extends State<HistoryPage> {
     JourneyProvider().getJourneys();
     return SafeArea(
         child: Scaffold(
-      appBar: gradientAppBar3(TextLanguage.of(context).history,
-          historyIcon(25.0, Colors.white), () {}),
+      appBar: gradientAppBar2(
+          TextLanguage.of(context).history, historyIcon(25.0, Colors.white),
+          () {
+        Navigator.of(context).pushReplacementNamed('homePage');
+      }),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -68,13 +71,12 @@ class _HistoryPageState extends State<HistoryPage> {
                                         onTap: () {
                                           showDateRangePicker(
                                             currentDate: DateTime.now(),
-                                              context: context,
-                                              initialEntryMode:
-                                                  DatePickerEntryMode.input,
-                                              firstDate: DateTime(2020),
-                                              lastDate: DateTime(2050),
-                                              
-                                              );
+                                            context: context,
+                                            initialEntryMode:
+                                                DatePickerEntryMode.input,
+                                            firstDate: DateTime(2020),
+                                            lastDate: DateTime(2050),
+                                          );
                                         },
                                         child: calendarIcon(40.0, blue1)),
                                     SizedBox(
@@ -94,6 +96,12 @@ class _HistoryPageState extends State<HistoryPage> {
                                         );
                                       },
                                     ),
+                                    Expanded(child: Container()),
+                                    GestureDetector(
+                                      child: Container(
+                                        child: downloadIcon(40.0, blue1),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -311,97 +319,103 @@ Widget makeTravelList(BuildContext context, List<Journey> journeys) {
 }
 
 Widget _travelCard(BuildContext context, Journey journey) {
-  return Container(
-      //height: 150,
-      //margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: gray1)),
-        //borderRadius: BorderRadius.circular(5.0)
-      ),
-      child: Stack(children: [
-        Container(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      'travel ${journey.id}',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      '${journey.ini}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      '${journey.ed}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      '${journey.boatId}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 5 - 30,
-                    child: Text(
-                      '${journey.startUser}',
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          //color: blue1,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: privacyPolicySize + 2.0),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-            ],
-          ),
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushReplacementNamed(context, 'journeyPage',
+          arguments: journey);
+    },
+    child: Container(
+        //height: 150,
+        //margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: gray1)),
+          //borderRadius: BorderRadius.circular(5.0)
         ),
-      ]));
+        child: Stack(children: [
+          Container(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 5 - 30,
+                      child: Text(
+                        '${journey.id}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+
+                            //color: blue1,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: privacyPolicySize + 2.0),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 5 - 20,
+                      child: Text(
+                        '${journey.ini}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            //color: blue1,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: privacyPolicySize + 2.0),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 30.0,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 5 - 20,
+                      child: Text(
+                        '${journey.ed}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            //color: blue1,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: privacyPolicySize + 2.0),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.0,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 5 - 30,
+                      child: Text(
+                        '${journey.boatName}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            //color: blue1,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: privacyPolicySize + 2.0),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.0,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 5 - 10,
+                      child: Text(
+                        '${journey.startUserNames}',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                            //color: blue1,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: privacyPolicySize + 2.0),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+              ],
+            ),
+          ),
+        ])),
+  );
 }
 
 Widget _filterButton(Function onTap, String text) {
