@@ -119,6 +119,7 @@ Widget temperatureIcon(size, color) {
     color: color,
   );
 }
+
 Widget picturesIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/picturesIcon.png'),
@@ -126,13 +127,14 @@ Widget picturesIcon(size, color) {
     color: color,
   );
 }
+
 Widget durationIcon(size, color) {
-  return ImageIcon(
-    AssetImage('assets/durationIcon.png'),
-    size: size,
-    color: color,
+  return Image(
+    image: AssetImage('assets/durationIcon.png'),
+    height: size,
   );
 }
+
 Widget searchIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/searchIcon.png'),
