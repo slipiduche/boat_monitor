@@ -5,11 +5,13 @@ import 'package:boat_monitor/bloc/authentication_bloc.dart';
 
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/charts/line_chart.dart';
+import 'package:boat_monitor/charts/line_chart_temp.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pages/currentBoat_page.dart';
+import 'package:boat_monitor/pictures/pictures.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
@@ -48,7 +50,6 @@ class _JourneyPageState extends State<JourneyPage> {
       }),
       body: SingleChildScrollView(
         child: Container(
-          
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -125,9 +126,16 @@ class _JourneyPageState extends State<JourneyPage> {
                               journeyCard(context, locationIcon(50.0, blue1),
                                   'LOCATION', createFlutterMap(context)),
                               journeyCard(context, temperatureIcon(50.0, blue1),
-                                  'TEMPERTURE', Text('image')),
-                              journeyCard(context, picturesIcon(50.0, blue1),
-                                  'PICTURES', Text('image')),
+                                  'TEMPERTURE', LineChartTemp()),
+                              journeyCard(
+                                  context,
+                                  picturesIcon(50.0, blue1),
+                                  'PICTURES',
+                                  picturesPreview(context, [
+                                    'https://picsum.photos/id/1011/200/300',
+                                    'https://picsum.photos/id/1011/200/300',
+                                    'https://picsum.photos/id/1011/200/300'
+                                  ])),
                             ],
                           ),
                         );
