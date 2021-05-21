@@ -1,16 +1,12 @@
 import 'dart:ui';
-
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
-
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/charts/line_chart.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
-
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/journney_model.dart';
-import 'package:boat_monitor/pages/currentBoat_page.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
@@ -18,7 +14,6 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
 import '../styles/colors.dart';
 
 class JourneyPage extends StatefulWidget {
@@ -121,12 +116,32 @@ class _JourneyPageState extends State<JourneyPage> {
                               SizedBox(
                                 height: 10.0,
                               ),
-                              journeyCard(context, weightIcon(50.0, blue1),
-                                  'WEIGHT', LineChartBasic()),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      'weightPage',
+                                      arguments: _journey);
+                                },
+                                child: journeyCard(
+                                    context,
+                                    weightIcon(50.0, blue1),
+                                    'WEIGHT',
+                                    LineChartBasic()),
+                              ),
                               journeyCard(context, locationIcon(50.0, blue1),
                                   'LOCATION', createFlutterMap(context)),
-                              journeyCard(context, temperatureIcon(50.0, blue1),
-                                  'TEMPERTURE', LineChartTemp()),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      'temperaturePage',
+                                      arguments: _journey);
+                                },
+                                child: journeyCard(
+                                    context,
+                                    temperatureIcon(50.0, blue1),
+                                    'TEMPERTURE',
+                                    LineChartTemp()),
+                              ),
                               journeyCard(
                                   context,
                                   picturesIcon(50.0, blue1),

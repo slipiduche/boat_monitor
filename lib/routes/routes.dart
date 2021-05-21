@@ -9,6 +9,8 @@ import 'package:boat_monitor/pages/managerPage.dart';
 import 'package:boat_monitor/pages/parametersPage.dart';
 
 import 'package:boat_monitor/pages/supervisorPage.dart';
+import 'package:boat_monitor/pages/temperature_page.dart';
+import 'package:boat_monitor/pages/weight_page.dart';
 import 'package:flutter/material.dart';
 import 'package:boat_monitor/pages/privacyPolicy_page.dart';
 import 'package:boat_monitor/pages/resetPassword_page.dart';
@@ -31,6 +33,8 @@ Map<String, WidgetBuilder> getAppRoutes() {
     'homePage': (BuildContext context) => HomePage(),
     'historyPage': (BuildContext context) => HistoryPage(),
     'journeyPage': (BuildContext context) => JourneyPage(),
+    'weightPage': (BuildContext context) => WeightPage(),
+    'temperaturePage': (BuildContext context) => TemperaturePage(),
     'manageBoatPage': (BuildContext context) => ManageBoatPage(),
     'supervisorPage': (BuildContext context) => SupervisorPage(),
     'currentBoatPage': (BuildContext context) => CurrentBoatPage(),

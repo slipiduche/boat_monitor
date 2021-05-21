@@ -5,7 +5,7 @@ Widget picture(BuildContext context, String imageUrl) {
       borderRadius: BorderRadius.circular(20.0),
       child: FadeInImage(
         image: NetworkImage(imageUrl),
-        placeholder: AssetImage('assets/img/no-image.jpg'),
+        placeholder: AssetImage('assets/no-image.jpg'),
         fit: BoxFit.cover,
       ));
 }
