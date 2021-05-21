@@ -152,15 +152,22 @@ class _JourneyPageState extends State<JourneyPage> {
                                     'TEMPERTURE',
                                     LineChartTemp()),
                               ),
-                              journeyCard(
-                                  context,
-                                  picturesIcon(50.0, blue1),
-                                  'PICTURES',
-                                  picturesPreview(context, [
-                                    'https://picsum.photos/id/1011/200/300',
-                                    'https://picsum.photos/id/1011/200/300',
-                                    'https://picsum.photos/id/1011/200/300'
-                                  ])),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      'picturesPage',
+                                      arguments: _journey);
+                                },
+                                child: journeyCard(
+                                    context,
+                                    picturesIcon(50.0, blue1),
+                                    'PICTURES',
+                                    picturesPreview(context, [
+                                      'https://picsum.photos/id/1011/200/300',
+                                      'https://picsum.photos/id/1011/200/300',
+                                      'https://picsum.photos/id/1011/200/300'
+                                    ])),
+                              ),
                             ],
                           ),
                         );
