@@ -12,10 +12,13 @@ Widget picture(BuildContext context, String imageUrl) {
 
 Widget picturesPreview(BuildContext context, List<String> urls) {
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    mainAxisSize: MainAxisSize.min,
     children: [
       picture(context, urls[0]),
+      SizedBox(width: 10.0,),
       picture(context, urls[1]),
-      picture(context, urls[2]),
+      //picture(context, urls[2]),
     ],
   );
 }
