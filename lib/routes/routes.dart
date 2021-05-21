@@ -4,6 +4,7 @@ import 'package:boat_monitor/pages/currentBoat_page.dart';
 import 'package:boat_monitor/pages/historyPage.dart';
 import 'package:boat_monitor/pages/homePage.dart';
 import 'package:boat_monitor/pages/journeyPage.dart';
+import 'package:boat_monitor/pages/location_page.dart';
 import 'package:boat_monitor/pages/manageBoatPage.dart';
 import 'package:boat_monitor/pages/managerPage.dart';
 import 'package:boat_monitor/pages/parametersPage.dart';
@@ -34,6 +35,7 @@ Map<String, WidgetBuilder> getAppRoutes() {
     'historyPage': (BuildContext context) => HistoryPage(),
     'journeyPage': (BuildContext context) => JourneyPage(),
     'weightPage': (BuildContext context) => WeightPage(),
+    'locationPage': (BuildContext context) => LocationPage(),
     'temperaturePage': (BuildContext context) => TemperaturePage(),
     'manageBoatPage': (BuildContext context) => ManageBoatPage(),
     'supervisorPage': (BuildContext context) => SupervisorPage(),

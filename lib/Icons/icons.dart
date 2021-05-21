@@ -126,6 +126,13 @@ Widget picturesIcon(size, color) {
     color: color,
   );
 }
+Widget durationIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/durationIcon.png'),
+    size: size,
+    color: color,
+  );
+}
 Widget searchIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/searchIcon.png'),

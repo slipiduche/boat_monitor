@@ -128,8 +128,18 @@ class _JourneyPageState extends State<JourneyPage> {
                                     'WEIGHT',
                                     LineChartBasic()),
                               ),
-                              journeyCard(context, locationIcon(50.0, blue1),
-                                  'LOCATION', createFlutterMap(context)),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      'locationPage',
+                                      arguments: _journey);
+                                },
+                                child: journeyCard(
+                                    context,
+                                    locationIcon(50.0, blue1),
+                                    'LOCATION',
+                                    createFlutterMap(context)),
+                              ),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.of(context).pushReplacementNamed(

@@ -105,7 +105,7 @@ class _LocationPageState extends State<LocationPage> {
                           children: [
                             boatIconBlue(20.0, blue1),
                             Text(
-                              'Departure: ${_location.id} º',
+                              'Departure: ${_location.id}',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -120,7 +120,22 @@ class _LocationPageState extends State<LocationPage> {
                           children: [
                             arrivedIcon(20.0, blue1),
                             Text(
-                              'Average location: ${_location.id} º',
+                              'Arrival: ${_location.id}',
+                              style: TextStyle(
+                                  color: blue1,
+                                  fontSize: titleBarSize,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          children: [
+                            durationIcon(20.0, blue1),
+                            Text(
+                              'Duration: ${_location.id}',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -142,19 +157,94 @@ class _LocationPageState extends State<LocationPage> {
                             ),
                           ],
                         ),
-                        Container(child: LineChartTemp()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Hours',
-                              style: TextStyle(
-                                  color: gray,
-                                  fontSize: titleBarSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        Container(
+                            margin: EdgeInsets.symmetric(horizontal: marginExt),
+                            height: 291.0,
+                            padding: EdgeInsets.all(0.0),
+                            child: createFlutterMap(context)),
+                        SizedBox(
+                          height: 20.0,
                         ),
+                        Stack(
+                          children: [
+                            Container(
+                              margin:
+                                  EdgeInsets.symmetric(horizontal: marginExt),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 2.0,
+                                  ),
+                                  Divider(
+                                    color: blue1,
+                                    thickness: 2.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin:
+                                  EdgeInsets.symmetric(horizontal: marginExt),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      statusIcon(20.0, 1),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '33.809:-117.91',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      statusIcon(20.0, 3),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '33.809:-117.91',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      statusIcon(20.0, 1),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '33.809:-117.91',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      statusIcon(20.0, 1),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '33.809:-117.91',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ),
