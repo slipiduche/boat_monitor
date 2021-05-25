@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpMessage" : MessageLookupByLibrary.simpleMessage("Sign up and start working with us"),
     "signupHere" : MessageLookupByLibrary.simpleMessage("Sign up here"),
     "simpleText" : MessageLookupByLibrary.simpleMessage("Hello world"),
+    "storage" : MessageLookupByLibrary.simpleMessage("Storage"),
     "supervisor" : MessageLookupByLibrary.simpleMessage("Supervisor"),
     "textWithPlaceholder" : m0,
     "textWithPlaceholders" : m1,

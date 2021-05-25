@@ -180,7 +180,7 @@ void _onItemTapped(context, index) async {
   }
   if (index == 2) {
     await Navigator.of(context)
-        .pushReplacementNamed('managerPage', arguments: null);
+        .pushReplacementNamed('storagePage', arguments: null);
   }
   if (index == 3) {
     await Navigator.of(context)
@@ -207,4 +207,3 @@ Widget statusIcon(double size, int status) {
         borderRadius: BorderRadius.circular(100.0), gradient: _gradiente),
   );
 }
-

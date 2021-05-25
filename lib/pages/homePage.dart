@@ -100,7 +100,7 @@ Widget _boatCard(BuildContext context, Journey journey, String boatName) {
     margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
     decoration: BoxDecoration(
         border: Border.all(color: blue1, style: BorderStyle.solid,width: 2.0),
-        borderRadius: BorderRadius.circular(5.0)),
+        borderRadius: BorderRadius.circular(10.0)),
     child: Stack(
       children: [
         Container(

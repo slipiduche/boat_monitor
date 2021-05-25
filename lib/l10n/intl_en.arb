@@ -1,4 +1,6 @@
-{   "history":"Historial",
+{
+    "storage": "Storage",
+    "history": "Historial",
     "home": "Home",
     "manager": "Manager",
     "approval": "Approval",
