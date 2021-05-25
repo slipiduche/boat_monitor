@@ -20,22 +20,26 @@ class PicturesPage extends StatefulWidget {
   _PicturesPageState createState() => _PicturesPageState();
 }
 
-class _PicturesPageState extends State<PicturesPage> {
+class _PicturesPageState extends State<PicturesPage>
+    with SingleTickerProviderStateMixin {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-
+  bool _gridView = true;
+  //TickerProvider _tickerProvider=TickerProvider();
+  TabController _tabController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
     AuthBloc().setRoute = 'picturesPage';
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     Journey _pictures = ModalRoute.of(context).settings.arguments;
-
+    //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
@@ -98,9 +102,139 @@ class _PicturesPageState extends State<PicturesPage> {
                       SizedBox(
                         height: 10.0,
                       ),
+                      Container(
+                        // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 30.0,
+                              width: MediaQuery.of(context).size.width -
+                                  (marginExt1 * 2),
+                              child: Builder(builder: (context) {
+                                return TabBar(
+                                    controller: _tabController,
+                                    indicatorColor: blue1,
+                                    onTap: (index) {
+                                      setState(() {});
+                                    },
+                                    tabs: [
+                                      Builder(builder: (context) {
+                                        FontWeight _fontWeight =
+                                            FontWeight.normal;
+                                        print(
+                                            '_tabController.index=${_tabController.index}');
+                                        if (_tabController.index == 0) {
+                                          _fontWeight = FontWeight.bold;
+                                        }
+                                        return Text(
+                                          'CAMERA 1',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontSize: 16.0,
+                                              fontWeight: _fontWeight),
+                                        );
+                                      }),
+                                      Builder(builder: (context) {
+                                        FontWeight _fontWeight =
+                                            FontWeight.normal;
+                                        print(
+                                            '_tabController.index=${_tabController.index}');
+                                        if (_tabController.index == 1) {
+                                          _fontWeight = FontWeight.bold;
+                                        }
+                                        return Text(
+                                          'CAMERA 2',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontSize: 16.0,
+                                              fontWeight: _fontWeight),
+                                        );
+                                      }),
+                                      Builder(builder: (context) {
+                                        FontWeight _fontWeight =
+                                            FontWeight.normal;
+                                        print(
+                                            '_tabController.index=${_tabController.index}');
+                                        if (_tabController.index == 2) {
+                                          _fontWeight = FontWeight.bold;
+                                        }
+                                        return Text(
+                                          'CAMERA 3',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontSize: 16.0,
+                                              fontWeight: _fontWeight),
+                                        );
+                                      }),
+                                    ]);
+                              }),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            picturesIcon(20.0, blue1),
+                            SizedBox(width: 3.0),
+                            Text(
+                              '16 Pictures',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: blue1,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Expanded(child: Container()),
+                            GestureDetector(
+                              child: gridListIcon(60.0, blue1),
+                              onTap: () {
+                                _gridView = !_gridView;
+                                setState(() {});
+                              },
+                            )
+                          ],
+                        ),
+                      ),
                       SizedBox(
                         height: 20.0,
                       ),
+                      Builder(builder: (context) {
+                        if (_gridView) {
+                          return Container(
+                              height: MediaQuery.of(context).size.height - 338,
+                              width: MediaQuery.of(context).size.width -
+                                  (marginExt1 * 2),
+                              child: GridView.count(
+                                crossAxisCount: 3,
+                                children: List.generate(16, (index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(1.0),
+                                    child: picture(context,
+                                        'https://picsum.photos/id/1011/40/40'),
+                                  );
+                                }),
+                              ));
+                        } else
+                          return Container(
+                            height: MediaQuery.of(context).size.height - 338,
+                            width: MediaQuery.of(context).size.width -
+                                (marginExt1 * 2),
+                            child: ListView(
+                              children: List.generate(16, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(1.0),
+                                  child: picture(context,
+                                      'https://picsum.photos/id/1011/100/100'),
+                                );
+                              }),
+                            ),
+                          );
+                      })
                     ],
                   ),
                 ),

@@ -142,6 +142,13 @@ Widget searchIcon(size, color) {
     color: color,
   );
 }
+Widget gridListIcon(size, color) {
+  return ImageIcon(
+    AssetImage('assets/gridListIcon.png'),
+    size: size,
+    color: color,
+  );
+}
 
 Widget keyIcon(size, color) {
   return ImageIcon(
