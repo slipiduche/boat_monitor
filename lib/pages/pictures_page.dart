@@ -214,7 +214,7 @@ class _PicturesPageState extends State<PicturesPage>
                                 children: List.generate(16, (index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(1.0),
-                                    child: picture(context,
+                                    child: picture2(context,
                                         'https://picsum.photos/id/1011/40/40'),
                                   );
                                 }),
@@ -228,7 +228,7 @@ class _PicturesPageState extends State<PicturesPage>
                               children: List.generate(16, (index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(1.0),
-                                  child: picture(context,
+                                  child: picture2(context,
                                       'https://picsum.photos/id/1011/100/100'),
                                 );
                               }),
