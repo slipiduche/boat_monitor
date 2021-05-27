@@ -37,6 +37,13 @@ class _PicturesPageState extends State<PicturesPage>
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _tabController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Journey _pictures = ModalRoute.of(context).settings.arguments;
     //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
