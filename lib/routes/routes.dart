@@ -15,6 +15,7 @@ import 'package:boat_monitor/pages/storagePage.dart';
 import 'package:boat_monitor/pages/supervisorPage.dart';
 import 'package:boat_monitor/pages/temperature_page.dart';
 import 'package:boat_monitor/pages/weight_page.dart';
+import 'package:boat_monitor/pictures/photoview.dart';
 import 'package:flutter/material.dart';
 import 'package:boat_monitor/pages/privacyPolicy_page.dart';
 import 'package:boat_monitor/pages/resetPassword_page.dart';
@@ -42,6 +43,7 @@ Map<String, WidgetBuilder> getAppRoutes() {
     'weightPage': (BuildContext context) => WeightPage(),
     'locationPage': (BuildContext context) => LocationPage(),
     'picturesPage': (BuildContext context) => PicturesPage(),
+    'pictureView': (BuildContext context) => PictureView(),
     'temperaturePage': (BuildContext context) => TemperaturePage(),
     'manageBoatPage': (BuildContext context) => ManageBoatPage(),
     'supervisorPage': (BuildContext context) => SupervisorPage(),
