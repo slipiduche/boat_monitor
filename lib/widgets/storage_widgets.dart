@@ -25,13 +25,20 @@ class _DiskSpaceState extends State<DiskSpace>
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _colorController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width -
           (marginExt1 * 2) -
           (marginInt * 2) -
           4,
-      height: 27.0,
+      height: 19.0,
       child: diskSpace(context, 20.0, 100.0),
     );
   }
@@ -69,17 +76,6 @@ class _DiskSpaceState extends State<DiskSpace>
             minHeight: 10.0,
             //value: 10.0,
             //semanticsValue: used.toString(),
-          ),
-          SizedBox(height: 5.0,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                '${_value * 100} %',
-                style: TextStyle(
-                    color: blue1, fontWeight: FontWeight.bold, fontSize: 10.0),
-              ),
-            ],
           ),
         ],
       ),

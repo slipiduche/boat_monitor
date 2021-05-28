@@ -57,7 +57,10 @@ class _StoragePageState extends State<StoragePage> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       return Column(
-                        children: [_boatDiskCard(context, Journey(), 'Boat1')],
+                        children: [
+                          _boatDiskCard(
+                              context, Journey(boatName: 'Boat1'), 'Boat1')
+                        ],
                       );
                     } else {
                       return Container(
@@ -96,8 +99,7 @@ class _StoragePageState extends State<StoragePage> {
 Widget _boatDiskCard(BuildContext context, Journey journey, String boatName) {
   return GestureDetector(
     onTap: () {
-      Navigator.of(context)
-          .pushReplacementNamed('boatStoragePage', arguments: journey);
+      Navigator.of(context).pushNamed('boatStoragePage', arguments: journey);
     },
     child: Container(
       height: 100.0,
@@ -130,6 +132,18 @@ Widget _boatDiskCard(BuildContext context, Journey journey, String boatName) {
                 ),
                 Row(
                   children: [DiskSpace()],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${0.2 * 100} %',
+                      style: TextStyle(
+                          color: blue1,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10.0),
+                    ),
+                  ],
                 ),
               ],
             ),
