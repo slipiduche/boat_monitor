@@ -26,6 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    AuthBloc().setRoute = 'signUpPage';
   }
 
   @override

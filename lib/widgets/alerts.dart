@@ -19,6 +19,9 @@ onAfterBuild(BuildContext context) {
         errorPopUp(context, AlertsBloc().alertValue.message, () {
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();
+          if (AuthBloc().routeValue == 'signUpPage') {
+            Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
+          }
         });
         AlertsBloc().deleteAlert();
 
@@ -29,7 +32,11 @@ onAfterBuild(BuildContext context) {
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();
           print(AuthBloc().routeValue);
-          Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
+          if (AuthBloc().routeValue == 'signUpPage') {
+            Navigator.pushReplacementNamed(context, 'loginPage');
+          } else {
+            Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
+          }
         });
         AlertsBloc().deleteAlert();
 
