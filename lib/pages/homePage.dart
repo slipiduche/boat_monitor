@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/bloc/homeFilterBloc.dart';
 import 'package:boat_monitor/bloc/homeSearchBloc.dart';
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    HomeFilterBloc().sethomeFilter = '';
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar3(
@@ -58,62 +60,105 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  StreamBuilder(
-                    stream: BoatsBloc().boats,
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        return Column(
-                          children: [
-                            _homeButtons(context),
-                            StreamBuilder(
-                                stream: HomeSearchBloc().homeSearch,
-                                builder:
-                                    (context, AsyncSnapshot<String> snapshot) {
-                                  List<BoatData> _boats =
-                                      BoatsBloc().boatsValue;
-                                  List<BoatData> _boatsFiltered = [];
-                                  if (snapshot.hasData) {
-                                    _boats.forEach((element) {
-                                      if (element.boatName
-                                          .toLowerCase()
-                                          .contains(
-                                              snapshot.data.toLowerCase())) {
-                                        print(element.boatName);
-                                        print(snapshot.data.toLowerCase());
-                                        _boatsFiltered.add(element);
-                                      }
-                                    });
-                                  } else {
-                                    _boatsFiltered = _boats;
-                                  }
-                                  return makeBoatList(context, _boatsFiltered);
-                                })
-                          ],
-                        );
-                      } else {
-                        return Container(
-                          //margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                          child: Column(
-                            children: [
-                              _homeButtons(context),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              Text(
-                                'No data',
-                                style: TextStyle(
-                                    color: blue1, fontSize: correoSize),
-                                textAlign: TextAlign.center,
-                              ),
-                              Divider(
-                                thickness: 1.0,
-                                color: gray1,
-                              )
-                            ],
-                          ),
-                        );
-                      }
-                    },
+                  StreamBuilder<Object>(
+                    stream: HomeFilterBloc().homeFilter,
+                    builder: (context, snapshot) {
+                      return Container(
+                        child: StreamBuilder(
+                          stream: BoatsBloc().boats,
+                          builder: (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData) {
+                              return Column(
+                                children: [
+                                  _homeButtons(context),
+                                  StreamBuilder(
+                                      stream: HomeSearchBloc().homeSearch,
+                                      builder: (context,
+                                          AsyncSnapshot<String> snapshot) {
+                                        List<BoatData> _boats =
+                                            BoatsBloc().boatsValue;
+                                        List<BoatData> _boatsFiltered = [];
+                                        List<BoatData> _boatsFiltered2 = [];
+                                        if (snapshot.hasData) {
+                                          _boats.forEach((element) {
+                                            if (element.boatName
+                                                .toLowerCase()
+                                                .contains(
+                                                    snapshot.data.toLowerCase())) {
+                                              print(element.boatName);
+                                              print(snapshot.data.toLowerCase());
+                                              _boatsFiltered.add(element);
+                                            }
+                                          });
+                                        } else {
+                                          _boatsFiltered = _boats;
+                                        }
+                                        if (HomeFilterBloc().homeFilterValue !=
+                                                null &&
+                                            HomeFilterBloc().homeFilterValue !=
+                                                '') {
+                                          String _filter =
+                                              HomeFilterBloc().homeFilterValue;
+                                          _boatsFiltered.forEach((element) {
+                                            switch (_filter) {
+                                              case 'Salling':
+                                                if (element.onJourney == 1) {
+                                                  _boatsFiltered2.add(element);
+                                                }
+                                                break;
+                                              case 'Arrived':
+                                                if (element.onJourney == 0) {
+                                                  _boatsFiltered2.add(element);
+                                                }
+                                                break;
+                                              case 'unavailable':
+                                                if (element.st == 0) {
+                                                  _boatsFiltered2.add(element);
+                                                }
+                                                break;
+                                              case 'available':
+                                                if (element.st == 1) {
+                                                  _boatsFiltered2.add(element);
+                                                }
+                                                break;
+                                              default:
+                                            }
+                                          });
+                                        } else {
+                                          _boatsFiltered2 = _boatsFiltered;
+                                        }
+                                        return makeBoatList(
+                                            context, _boatsFiltered2);
+                                      })
+                                ],
+                              );
+                            } else {
+                              return Container(
+                                //margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                                child: Column(
+                                  children: [
+                                    _homeButtons(context),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    Text(
+                                      'No data',
+                                      style: TextStyle(
+                                          color: blue1, fontSize: correoSize),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Divider(
+                                      thickness: 1.0,
+                                      color: gray1,
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      );
+                    }
                   ),
                 ],
               )),
@@ -258,7 +303,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                       Row(
                         children: [
                           Text(
-                            'final Weight:',
+                            'Final Weight:',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -267,7 +312,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                           SizedBox(
                             width: 5.0,
                           ),
-                          Text(_journey.fWeight.toString(),
+                          Text(_journey.fWeight.toString() + ' KG',
                               style: TextStyle(
                                   color: blueTextBoatCard,
                                   fontSize: boatCardContent))
@@ -392,34 +437,65 @@ Widget _homeButtons(BuildContext context) {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _filterButton(() {}, 'Salling'),
-        _filterButton(() {}, 'Arrived'),
-        _filterButton(() {}, 'unavailable'),
-        _filterButton(() {}, 'available')
+        _filterButton(() {
+          print('salling filter');
+          HomeFilterBloc().sethomeFilter = 'Salling';
+        }, 'Salling'),
+        _filterButton(() {
+          HomeFilterBloc().sethomeFilter = 'Arrived';
+        }, 'Arrived'),
+        _filterButton(() {
+          HomeFilterBloc().sethomeFilter = 'unavailable';
+        }, 'unavailable'),
+        _filterButton(() {
+          HomeFilterBloc().sethomeFilter = 'available';
+        }, 'available')
       ],
     ),
   );
 }
 
 Widget _filterButton(Function onTap, String text) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-        height: 20.0,
-        width: 80.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              style: TextStyle(color: gray1),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        decoration: BoxDecoration(
-            color: gray, borderRadius: BorderRadius.circular(50.0))),
-  );
+  Color _color = gray;
+  Color _textColor = gray1;
+  return StreamBuilder(
+      stream: HomeFilterBloc().homeFilter,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data);
+          print(text);
+          if (snapshot.data == text) {
+            _color = blue1;
+            _textColor = Colors.white;
+          } else {
+            _color = gray;
+            _textColor = gray1;
+          }
+        } else {
+          _color = gray;
+          _textColor = gray1;
+        }
+        return GestureDetector(
+          onTap: () {
+            onTap();
+          },
+          child: Container(
+              height: 20.0,
+              width: 80.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    text,
+                    style: TextStyle(color: _textColor),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                  color: _color, borderRadius: BorderRadius.circular(50.0))),
+        );
+      });
 }
 
 Widget _homeSearch(BuildContext context) {
