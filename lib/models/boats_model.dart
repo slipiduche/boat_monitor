@@ -57,17 +57,18 @@ BoatData boatDataFromJson(String str) => BoatData.fromJson(json.decode(str));
 String boatDataToJson(BoatData data) => json.encode(data.toJson());
 
 class BoatData {
-  BoatData({
-    this.id,
-    this.mac,
-    this.boatName,
-    this.maxSt,
-    this.st,
-    this.resp,
-    this.respName,
-    this.obs,
-    this.dt,
-  });
+  BoatData(
+      {this.id,
+      this.mac,
+      this.boatName,
+      this.maxSt,
+      this.st,
+      this.resp,
+      this.respName,
+      this.obs,
+      this.dt,
+      this.lj,
+      this.onJourney});
 
   int id;
   String mac;
@@ -75,6 +76,8 @@ class BoatData {
   double maxSt;
   int st;
   int resp;
+  int lj;
+  int onJourney;
   String respName;
   String obs;
   DateTime dt;
@@ -86,6 +89,8 @@ class BoatData {
         maxSt: json["max_st"].toDouble(),
         st: json["st"],
         resp: json["resp"],
+        lj: json["lj"],
+        onJourney: json["on_journey"],
         respName: json["resp_name"],
         obs: json["obs"],
         dt: DateTime.parse(json["dt"]),
@@ -101,5 +106,6 @@ class BoatData {
         "resp_name": respName,
         "obs": obs,
         "dt": dt,
+        "lj": lj
       };
 }

@@ -99,6 +99,10 @@ class _StoragePageState extends State<StoragePage> {
 Widget _boatDiskCard(BuildContext context, Journey journey, String boatName) {
   return GestureDetector(
     onTap: () {
+      final FocusScopeNode focus = FocusScope.of(context);
+      if (!focus.hasPrimaryFocus && focus.hasFocus) {
+        FocusManager.instance.primaryFocus.unfocus();
+      }
       Navigator.of(context).pushNamed('boatStoragePage', arguments: journey);
     },
     child: Container(

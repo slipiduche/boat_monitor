@@ -2,9 +2,14 @@ import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/homeSearchBloc.dart';
+import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
+import 'package:boat_monitor/providers/boats_provider.dart';
+import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -27,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    BoatProvider().getBoats();
   }
 
   @override
@@ -35,58 +41,84 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
       appBar: gradientAppBar3(
           TextLanguage.of(context).home, homeIcon(25.0, Colors.white), () {}),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Expanded(
-                child: Column(
-              children: [
-                _homeSearch(context),
-                SizedBox(
-                  height: 10.0,
-                ),
-                StreamBuilder(
-                  stream: HomeSearchBloc().homeSearch,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      return Column(
-                        children: [
-                          _homeButtons(context),
-                          _boatCard(context, Journey(), 'Boat1')
-                        ],
-                      );
-                    } else {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                        child: Column(
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          margin: EdgeInsets.symmetric(horizontal: marginExt1),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                  child: Column(
+                children: [
+                  _homeSearch(context),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  StreamBuilder(
+                    stream: BoatsBloc().boats,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return Column(
                           children: [
                             _homeButtons(context),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              'No data',
-                              style:
-                                  TextStyle(color: blue1, fontSize: correoSize),
-                              textAlign: TextAlign.center,
-                            ),
-                            Divider(
-                              thickness: 1.0,
-                              color: gray1,
-                            )
+                            StreamBuilder(
+                                stream: HomeSearchBloc().homeSearch,
+                                builder:
+                                    (context, AsyncSnapshot<String> snapshot) {
+                                  List<BoatData> _boats =
+                                      BoatsBloc().boatsValue;
+                                  List<BoatData> _boatsFiltered = [];
+                                  if (snapshot.hasData) {
+                                    _boats.forEach((element) {
+                                      if (element.boatName
+                                          .toLowerCase()
+                                          .contains(
+                                              snapshot.data.toLowerCase())) {
+                                        print(element.boatName);
+                                        print(snapshot.data.toLowerCase());
+                                        _boatsFiltered.add(element);
+                                      }
+                                    });
+                                  } else {
+                                    _boatsFiltered = _boats;
+                                  }
+                                  return makeBoatList(context, _boatsFiltered);
+                                })
                           ],
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ],
-            )),
-          ],
+                        );
+                      } else {
+                        return Container(
+                          //margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                          child: Column(
+                            children: [
+                              _homeButtons(context),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                'No data',
+                                style: TextStyle(
+                                    color: blue1, fontSize: correoSize),
+                                textAlign: TextAlign.center,
+                              ),
+                              Divider(
+                                thickness: 1.0,
+                                color: gray1,
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              )),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: botomBar(0, context),
@@ -94,143 +126,270 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _boatCard(BuildContext context, Journey journey, String boatName) {
+Widget makeBoatList(BuildContext context, List<BoatData> boats) {
+  if (boats.length == 0) {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20.0,
+          ),
+          Text(
+            'No data',
+            style: TextStyle(color: blue1, fontSize: correoSize),
+            textAlign: TextAlign.center,
+          ),
+          Divider(
+            thickness: 1.0,
+            color: gray1,
+          )
+        ],
+      ),
+    );
+  } else {
+    return Container(
+      height: MediaQuery.of(context).size.height - 206,
+      child: ListView.builder(
+          itemCount: boats.length,
+          itemBuilder: (context, index) {
+            return _boatCard(context, boats[index]);
+          }),
+    );
+  }
   return Container(
-    height: 150,
-    margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
-    decoration: BoxDecoration(
-        border: Border.all(color: blue1, style: BorderStyle.solid,width: 2.0),
-        borderRadius: BorderRadius.circular(10.0)),
-    child: Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: marginInt, vertical: marginSupBoatCard),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    boatName,
-                    style: TextStyle(
-                        color: blue1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: messageTitle),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Departure:',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: boatCardContent),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Text('04/05/2021 12:38',
-                      style: TextStyle(
-                          color: blueTextBoatCard, fontSize: boatCardContent))
-                ],
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Arrival:',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: boatCardContent),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Text('05/05/2021 12:38',
-                      style: TextStyle(
-                          color: blueTextBoatCard, fontSize: boatCardContent))
-                ],
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'final Weight:',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: boatCardContent),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Text('100Kg',
-                      style: TextStyle(
-                          color: blueTextBoatCard, fontSize: boatCardContent))
-                ],
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(right: marginInt, top: marginSupBoatCard),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  statusIcon(20.0, 1),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  
-                  Text(
-                    'Status:',
-                    style: TextStyle(
-                        color: blue1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  Text(
-                    'Arrived',
-                    style: TextStyle(
-                        color: blue1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0),
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  arrivedIcon(20.0, blue1)
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
-    ),
+    height: MediaQuery.of(context).size.height - 206,
+    child: ListView.builder(
+        itemCount: boats.length,
+        itemBuilder: (context, index) {
+          return _boatCard(context, boats[index]);
+        }),
   );
+}
+
+Widget _boatCard(BuildContext context, BoatData boat) {
+  if (JourneysBloc().journeysValue == null) {
+    JourneyProvider().getJourneys();
+  }
+  return StreamBuilder(
+      stream: JourneysBloc().journeys,
+      builder: (context, AsyncSnapshot<List<Journey>> snapshot) {
+        Journey _journey;
+        if (snapshot.hasData) {
+          snapshot.data.forEach((element) {
+            if (element.id == boat.lj) {
+              _journey = element;
+            }
+          });
+          if (_journey == null) {
+            _journey =
+                Journey(fWeight: 0.0, ed: DateTime.now(), ini: DateTime.now());
+          }
+          return Container(
+            height: 150,
+            margin: EdgeInsets.symmetric(vertical: 10.0),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: blue1, style: BorderStyle.solid, width: 2.0),
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: marginInt, vertical: marginSupBoatCard),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            boat.boatName,
+                            style: TextStyle(
+                                color: blue1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: messageTitle),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Departure:',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: boatCardContent),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(_journey.ini.toString(),
+                              style: TextStyle(
+                                  color: blueTextBoatCard,
+                                  fontSize: boatCardContent))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Arrival:',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: boatCardContent),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(_journey.ed.toString(),
+                              style: TextStyle(
+                                  color: blueTextBoatCard,
+                                  fontSize: boatCardContent))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'final Weight:',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: boatCardContent),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(_journey.fWeight.toString(),
+                              style: TextStyle(
+                                  color: blueTextBoatCard,
+                                  fontSize: boatCardContent))
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(right: marginInt, top: marginSupBoatCard),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Builder(builder: (context) {
+                            if (boat.st == 1) {
+                              return statusIcon(20.0, 1);
+                            } else {
+                              return statusIcon(20.0, 0);
+                            }
+                          }),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            'Status:',
+                            style: TextStyle(
+                                color: blue1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.0),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Builder(builder: (context) {
+                            if (boat.onJourney == 0) {
+                              return Text(
+                                'Arrived',
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0),
+                              );
+                            } else {
+                              return Text(
+                                'Salling',
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0),
+                              );
+                            }
+                          }),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          arrivedIcon(20.0, blue1)
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        } else {
+          return Container(
+            height: 150,
+            margin: EdgeInsets.symmetric(vertical: 10.0),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: blue1, style: BorderStyle.solid, width: 2.0),
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: marginInt, vertical: marginSupBoatCard),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            boat.boatName,
+                            style: TextStyle(
+                                color: blue1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: messageTitle),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(blue1),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      });
 }
 
 Widget _homeButtons(BuildContext context) {
   return Container(
+    width: MediaQuery.of(context).size.width - (marginExt1 * 2),
     child: Row(
+      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _filterButton(() {}, 'Salling'),
@@ -265,7 +424,7 @@ Widget _filterButton(Function onTap, String text) {
 
 Widget _homeSearch(BuildContext context) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: marginExt1),
+    // margin: EdgeInsets.symmetric(horizontal: marginExt1),
     height: 50.0,
     decoration: BoxDecoration(
         border: Border.all(color: blue1, style: BorderStyle.solid),
