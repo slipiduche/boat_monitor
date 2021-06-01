@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 
+import 'journney_model.dart';
+
 final boatsTest = [
   {
     "boatName": "Boat1",
@@ -108,4 +110,11 @@ class BoatData {
         "dt": dt,
         "lj": lj
       };
+}
+
+class BoatCardArguments {
+  Journey journey;
+  BoatData boat;
+
+  BoatCardArguments({this.boat, this.journey});
 }

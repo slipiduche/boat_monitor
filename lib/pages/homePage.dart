@@ -61,105 +61,112 @@ class _HomePageState extends State<HomePage> {
                     height: 10.0,
                   ),
                   StreamBuilder<Object>(
-                    stream: HomeFilterBloc().homeFilter,
-                    builder: (context, snapshot) {
-                      return Container(
-                        child: StreamBuilder(
-                          stream: BoatsBloc().boats,
-                          builder: (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              return Column(
-                                children: [
-                                  _homeButtons(context),
-                                  StreamBuilder(
-                                      stream: HomeSearchBloc().homeSearch,
-                                      builder: (context,
-                                          AsyncSnapshot<String> snapshot) {
-                                        List<BoatData> _boats =
-                                            BoatsBloc().boatsValue;
-                                        List<BoatData> _boatsFiltered = [];
-                                        List<BoatData> _boatsFiltered2 = [];
-                                        if (snapshot.hasData) {
-                                          _boats.forEach((element) {
-                                            if (element.boatName
-                                                .toLowerCase()
-                                                .contains(
-                                                    snapshot.data.toLowerCase())) {
-                                              print(element.boatName);
-                                              print(snapshot.data.toLowerCase());
-                                              _boatsFiltered.add(element);
-                                            }
-                                          });
-                                        } else {
-                                          _boatsFiltered = _boats;
-                                        }
-                                        if (HomeFilterBloc().homeFilterValue !=
-                                                null &&
-                                            HomeFilterBloc().homeFilterValue !=
-                                                '') {
-                                          String _filter =
-                                              HomeFilterBloc().homeFilterValue;
-                                          _boatsFiltered.forEach((element) {
-                                            switch (_filter) {
-                                              case 'Salling':
-                                                if (element.onJourney == 1) {
-                                                  _boatsFiltered2.add(element);
-                                                }
-                                                break;
-                                              case 'Arrived':
-                                                if (element.onJourney == 0) {
-                                                  _boatsFiltered2.add(element);
-                                                }
-                                                break;
-                                              case 'unavailable':
-                                                if (element.st == 0) {
-                                                  _boatsFiltered2.add(element);
-                                                }
-                                                break;
-                                              case 'available':
-                                                if (element.st == 1) {
-                                                  _boatsFiltered2.add(element);
-                                                }
-                                                break;
-                                              default:
-                                            }
-                                          });
-                                        } else {
-                                          _boatsFiltered2 = _boatsFiltered;
-                                        }
-                                        return makeBoatList(
-                                            context, _boatsFiltered2);
-                                      })
-                                ],
-                              );
-                            } else {
-                              return Container(
-                                //margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                                child: Column(
+                      stream: HomeFilterBloc().homeFilter,
+                      builder: (context, snapshot) {
+                        return Container(
+                          child: StreamBuilder(
+                            stream: BoatsBloc().boats,
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.hasData) {
+                                return Column(
                                   children: [
                                     _homeButtons(context),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Text(
-                                      'No data',
-                                      style: TextStyle(
-                                          color: blue1, fontSize: correoSize),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Divider(
-                                      thickness: 1.0,
-                                      color: gray1,
-                                    )
+                                    StreamBuilder(
+                                        stream: HomeSearchBloc().homeSearch,
+                                        builder: (context,
+                                            AsyncSnapshot<String> snapshot) {
+                                          List<BoatData> _boats =
+                                              BoatsBloc().boatsValue;
+                                          List<BoatData> _boatsFiltered = [];
+                                          List<BoatData> _boatsFiltered2 = [];
+                                          if (snapshot.hasData) {
+                                            _boats.forEach((element) {
+                                              if (element.boatName
+                                                  .toLowerCase()
+                                                  .contains(snapshot.data
+                                                      .toLowerCase())) {
+                                                print(element.boatName);
+                                                print(snapshot.data
+                                                    .toLowerCase());
+                                                _boatsFiltered.add(element);
+                                              }
+                                            });
+                                          } else {
+                                            _boatsFiltered = _boats;
+                                          }
+                                          if (HomeFilterBloc()
+                                                      .homeFilterValue !=
+                                                  null &&
+                                              HomeFilterBloc()
+                                                      .homeFilterValue !=
+                                                  '') {
+                                            String _filter = HomeFilterBloc()
+                                                .homeFilterValue;
+                                            _boatsFiltered.forEach((element) {
+                                              switch (_filter) {
+                                                case 'Salling':
+                                                  if (element.onJourney == 1) {
+                                                    _boatsFiltered2
+                                                        .add(element);
+                                                  }
+                                                  break;
+                                                case 'Arrived':
+                                                  if (element.onJourney == 0) {
+                                                    _boatsFiltered2
+                                                        .add(element);
+                                                  }
+                                                  break;
+                                                case 'unavailable':
+                                                  if (element.st == 0) {
+                                                    _boatsFiltered2
+                                                        .add(element);
+                                                  }
+                                                  break;
+                                                case 'available':
+                                                  if (element.st == 1) {
+                                                    _boatsFiltered2
+                                                        .add(element);
+                                                  }
+                                                  break;
+                                                default:
+                                              }
+                                            });
+                                          } else {
+                                            _boatsFiltered2 = _boatsFiltered;
+                                          }
+                                          return makeBoatList(
+                                              context, _boatsFiltered2);
+                                        })
                                   ],
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      );
-                    }
-                  ),
+                                );
+                              } else {
+                                return Container(
+                                  //margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                                  child: Column(
+                                    children: [
+                                      _homeButtons(context),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      Text(
+                                        'No data',
+                                        style: TextStyle(
+                                            color: blue1, fontSize: correoSize),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Divider(
+                                        thickness: 1.0,
+                                        color: gray1,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        );
+                      }),
                 ],
               )),
             ],
@@ -211,6 +218,8 @@ Widget makeBoatList(BuildContext context, List<BoatData> boats) {
   );
 }
 
+
+
 Widget _boatCard(BuildContext context, BoatData boat) {
   if (JourneysBloc().journeysValue == null) {
     JourneyProvider().getJourneys();
@@ -229,157 +238,165 @@ Widget _boatCard(BuildContext context, BoatData boat) {
             _journey =
                 Journey(fWeight: 0.0, ed: DateTime.now(), ini: DateTime.now());
           }
-          return Container(
-            height: 150,
-            margin: EdgeInsets.symmetric(vertical: 10.0),
-            decoration: BoxDecoration(
-                border: Border.all(
-                    color: blue1, style: BorderStyle.solid, width: 2.0),
-                borderRadius: BorderRadius.circular(10.0)),
-            child: Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: marginInt, vertical: marginSupBoatCard),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            boat.boatName,
-                            style: TextStyle(
-                                color: blue1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: messageTitle),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Departure:',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: boatCardContent),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(_journey.ini.toString(),
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                'currentBoatPage',
+                arguments: BoatCardArguments(journey: _journey, boat: boat),
+              );
+            },
+            child: Container(
+              height: 150,
+              margin: EdgeInsets.symmetric(vertical: 10.0),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: blue1, style: BorderStyle.solid, width: 2.0),
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: marginInt, vertical: marginSupBoatCard),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              boat.boatName,
                               style: TextStyle(
-                                  color: blueTextBoatCard,
-                                  fontSize: boatCardContent))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Arrival:',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: boatCardContent),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(_journey.ed.toString(),
+                                  color: blue1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: messageTitle),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Departure:',
                               style: TextStyle(
-                                  color: blueTextBoatCard,
-                                  fontSize: boatCardContent))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Final Weight:',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: boatCardContent),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(_journey.fWeight.toString() + ' KG',
-                              style: TextStyle(
-                                  color: blueTextBoatCard,
-                                  fontSize: boatCardContent))
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin:
-                      EdgeInsets.only(right: marginInt, top: marginSupBoatCard),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Builder(builder: (context) {
-                            if (boat.st == 1) {
-                              return statusIcon(20.0, 1);
-                            } else {
-                              return statusIcon(20.0, 0);
-                            }
-                          }),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(
-                            'Status:',
-                            style: TextStyle(
-                                color: blue1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Builder(builder: (context) {
-                            if (boat.onJourney == 0) {
-                              return Text(
-                                'Arrived',
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: boatCardContent),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Text(_journey.ini.toString(),
                                 style: TextStyle(
-                                    color: blue1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14.0),
-                              );
-                            } else {
-                              return Text(
-                                'Salling',
+                                    color: blueTextBoatCard,
+                                    fontSize: boatCardContent))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Arrival:',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: boatCardContent),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Text(_journey.ed.toString(),
                                 style: TextStyle(
-                                    color: blue1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14.0),
-                              );
-                            }
-                          }),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          arrivedIcon(20.0, blue1)
-                        ],
-                      ),
-                    ],
+                                    color: blueTextBoatCard,
+                                    fontSize: boatCardContent))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Final Weight:',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: boatCardContent),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Text(_journey.fWeight.toString() + ' KG',
+                                style: TextStyle(
+                                    color: blueTextBoatCard,
+                                    fontSize: boatCardContent))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                )
-              ],
+                  Container(
+                    margin: EdgeInsets.only(
+                        right: marginInt, top: marginSupBoatCard),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Builder(builder: (context) {
+                              if (boat.st == 1) {
+                                return statusIcon(20.0, 1);
+                              } else {
+                                return statusIcon(20.0, 0);
+                              }
+                            }),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Text(
+                              'Status:',
+                              style: TextStyle(
+                                  color: blue1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Builder(builder: (context) {
+                              if (boat.onJourney == 0) {
+                                return Text(
+                                  'Arrived',
+                                  style: TextStyle(
+                                      color: blue1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14.0),
+                                );
+                              } else {
+                                return Text(
+                                  'Salling',
+                                  style: TextStyle(
+                                      color: blue1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14.0),
+                                );
+                              }
+                            }),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            arrivedIcon(20.0, blue1)
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         } else {

@@ -1,6 +1,7 @@
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/bloc/currenBoatBloc.dart';
 import 'package:boat_monitor/styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -34,8 +35,10 @@ onAfterBuild(BuildContext context) {
           print(AuthBloc().routeValue);
           if (AuthBloc().routeValue == 'signUpPage') {
             Navigator.pushReplacementNamed(context, 'loginPage');
+          } else if (AuthBloc().routeValue == 'currentBoatPage') {
+            Navigator.of(context).pushReplacementNamed('homePage');
           } else {
-            Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
+            Navigator.of(context).pushReplacementNamed(AuthBloc().routeValue);
           }
         });
         AlertsBloc().deleteAlert();
