@@ -14,7 +14,7 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
+import 'package:latlong/latlong.dart';
 import '../styles/colors.dart';
 
 class LocationPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-
+  LatLng _position;
   @override
   void initState() {
     // TODO: implement initState
@@ -196,7 +196,7 @@ class _LocationPageState extends State<LocationPage> {
                           //margin: EdgeInsets.symmetric(horizontal: marginExt),
                           height: 291.0,
                           padding: EdgeInsets.all(0.0),
-                          child: createFlutterMap(context)),
+                          child: createFlutterMap(context,_position)),
                       SizedBox(
                         height: 20.0,
                       ),

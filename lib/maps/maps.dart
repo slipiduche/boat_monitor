@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
-Widget createFlutterMap(BuildContext context) {
+Widget createFlutterMap(BuildContext context, LatLng position) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(5.0),
     child: Container(

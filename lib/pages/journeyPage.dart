@@ -15,7 +15,7 @@ import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import '../styles/colors.dart';
-
+import 'package:latlong/latlong.dart';
 class JourneyPage extends StatefulWidget {
   @override
   _JourneyPageState createState() => _JourneyPageState();
@@ -24,7 +24,7 @@ class JourneyPage extends StatefulWidget {
 class _JourneyPageState extends State<JourneyPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-
+  LatLng _position;
   @override
   void initState() {
     // TODO: implement initState
@@ -138,7 +138,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                     context,
                                     locationIcon(50.0, blue1),
                                     'LOCATION',
-                                    createFlutterMap(context)),
+                                    createFlutterMap(context, _position)),
                               ),
                               GestureDetector(
                                 onTap: () {

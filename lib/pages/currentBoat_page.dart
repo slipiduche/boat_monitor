@@ -32,6 +32,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
+  LatLng _position;
 
   @override
   void initState() {
@@ -273,7 +274,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                     //         style: BorderStyle.solid,
                     //         width: 2),
                     //     borderRadius: BorderRadius.circular(5.0)),
-                    child: createFlutterMap(context)),
+                    child: createFlutterMap(context, _position)),
                 SizedBox(
                   height: 20.0,
                 ),
