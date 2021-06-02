@@ -25,7 +25,7 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-  LatLng _position;
+  String _position;
   @override
   void initState() {
     // TODO: implement initState

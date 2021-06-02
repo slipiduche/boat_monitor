@@ -24,7 +24,7 @@ class JourneyPage extends StatefulWidget {
 class _JourneyPageState extends State<JourneyPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-  LatLng _position;
+  String _position;
   @override
   void initState() {
     // TODO: implement initState
@@ -138,7 +138,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                     context,
                                     locationIcon(50.0, blue1),
                                     'LOCATION',
-                                    createFlutterMap(context, _position)),
+                                    createFlutterMap(context, _position.toString())),
                               ),
                               GestureDetector(
                                 onTap: () {

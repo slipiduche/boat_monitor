@@ -34,9 +34,10 @@ class HistoricsProvider {
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
-        print(decodedResp["HISTORICS"]);
+        //print(decodedResp["HISTORICS"]);
         List<dynamic> _historicsJson = decodedResp["HISTORICS"];
-        List<Historics> _historics = [];
+        Historics _historics;
+        
         _historics = historicsFromJson(response.body);
         HistoricsBloc().setHistorics = _historics;
       });

@@ -14,8 +14,8 @@ class HistoricsBloc {
   }
 
   HistoricsBloc._internal();
-  final _historicsController = new BehaviorSubject<List<Historics>>();
-  Stream<List<Historics>> get historics => _historicsController.stream;
-  List<Historics> get historicsValue => _historicsController.value;
-  set setHistorics(List<Historics> event) => _historicsController.add(event);
+  final _historicsController = new BehaviorSubject<Historics>();
+  Stream<Historics> get historics => _historicsController.stream;
+  Historics get historicsValue => _historicsController.value;
+  set setHistorics(Historics event) => _historicsController.add(event);
 }

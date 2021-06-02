@@ -4,9 +4,11 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
+import 'package:boat_monitor/bloc/historics_bloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
+import 'package:boat_monitor/models/historics_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/providers/historics_provider.dart';
@@ -278,17 +280,39 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: marginExt),
-                    height: 291.0,
-                    padding: EdgeInsets.all(0.0),
-                    // decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //         color: blue,
-                    //         style: BorderStyle.solid,
-                    //         width: 2),
-                    //     borderRadius: BorderRadius.circular(5.0)),
-                    child: createFlutterMap(context, _position)),
+                StreamBuilder(
+                    stream: HistoricsBloc().historics,
+                    builder: (context, AsyncSnapshot<Historics> snapshot) {
+                      if (snapshot.hasData) {
+                        Historics _historics = snapshot.data;
+                        return Container(
+                            margin: EdgeInsets.symmetric(horizontal: marginExt),
+                            height: 291.0,
+                            padding: EdgeInsets.all(0.0),
+                            // decoration: BoxDecoration(
+                            //     border: Border.all(
+                            //         color: blue,
+                            //         style: BorderStyle.solid,
+                            //         width: 2),
+                            //     borderRadius: BorderRadius.circular(5.0)),
+                            child: createFlutterMap(
+                                context, _historics.historics[0].bLocation));
+                      } else {
+                        return Container(
+                            margin: EdgeInsets.symmetric(horizontal: marginExt),
+                            height: 291.0,
+                            padding: EdgeInsets.all(0.0),
+                            // decoration: BoxDecoration(
+                            //     border: Border.all(
+                            //         color: blue,
+                            //         style: BorderStyle.solid,
+                            //         width: 2),
+                            //     borderRadius: BorderRadius.circular(5.0)),
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(blue1),
+                            ));
+                      }
+                    }),
                 SizedBox(
                   height: 20.0,
                 ),

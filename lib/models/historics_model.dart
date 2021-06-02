@@ -4,52 +4,78 @@
 
 import 'dart:convert';
 
-List<Historics> historicsFromJson(String str) =>
-    List<Historics>.from(json.decode(str).map((x) => Historics.fromJson(x)));
+Historics historicsFromJson(String str) => Historics.fromJson(json.decode(str));
 
-String historicsToJson(List<Historics> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String historicsToJson(Historics data) => json.encode(data.toJson());
 
 class Historics {
-  Historics({
-    this.id,
-    this.boatId,
-    this.journeyId,
-    this.contStatus,
-    this.openTime,
-    this.contWeight,
-    this.bat,
-    this.dsk,
-    this.temp,
-    this.bLocation,
-    this.tiP,
-    this.flName,
-    this.dt,
-    this.reg,
-  });
+    Historics({
+        this.historics,
+        this.message,
+        this.status,
+        this.code,
+    });
 
-  int id;
-  int boatId;
-  int journeyId;
-  int contStatus;
-  int openTime;
-  int contWeight;
-  double bat;
-  double dsk;
-  double temp;
-  String bLocation;
-  int tiP;
-  String flName;
-  DateTime dt;
-  DateTime reg;
+    List<Historic> historics;
+    String message;
+    String status;
+    int code;
 
-  factory Historics.fromJson(Map<String, dynamic> json) => Historics(
+    factory Historics.fromJson(Map<String, dynamic> json) => Historics(
+        historics: List<Historic>.from(json["HISTORICS"].map((x) => Historic.fromJson(x))),
+        message: json["message"],
+        status: json["status"],
+        code: json["code"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "HISTORICS": List<dynamic>.from(historics.map((x) => x.toJson())),
+        "message": message,
+        "status": status,
+        "code": code,
+    };
+}
+
+class Historic {
+    Historic({
+        this.id,
+        this.boatId,
+        this.journeyId,
+        this.contStatus,
+        this.contWeight,
+        this.openTime,
+        this.bat,
+        this.dsk,
+        this.temp,
+        this.bLocation,
+        this.tiP,
+        this.flName,
+        this.dt,
+        this.reg,
+    });
+
+    int id;
+    int boatId;
+    int journeyId;
+    int contStatus;
+    double contWeight;
+    int openTime;
+    double bat;
+    double dsk;
+    double temp;
+    String bLocation;
+    int tiP;
+    String flName;
+    DateTime dt;
+    DateTime reg;
+
+    factory Historic.fromJson(Map<String, dynamic> json) => Historic(
         id: json["id"],
         boatId: json["boat_id"],
         journeyId: json["journey_id"],
         contStatus: json["cont_status"],
+        contWeight: json["cont_weight"].toDouble(),
         openTime: json["open_time"],
-        contWeight: json["cont_weight"],
         bat: json["bat"].toDouble(),
         dsk: json["dsk"].toDouble(),
         temp: json["temp"].toDouble(),
@@ -58,15 +84,15 @@ class Historics {
         flName: json["fl_name"],
         dt: DateTime.parse(json["dt"]),
         reg: DateTime.parse(json["reg"]),
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "id": id,
         "boat_id": boatId,
         "journey_id": journeyId,
         "cont_status": contStatus,
-        "open_time": openTime,
         "cont_weight": contWeight,
+        "open_time": openTime,
         "bat": bat,
         "dsk": dsk,
         "temp": temp,
@@ -75,7 +101,7 @@ class Historics {
         "fl_name": flName,
         "dt": dt.toIso8601String(),
         "reg": reg.toIso8601String(),
-      };
+    };
 }
 
 final historicsTest = [
