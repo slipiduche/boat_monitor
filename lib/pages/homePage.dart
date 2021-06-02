@@ -218,8 +218,6 @@ Widget makeBoatList(BuildContext context, List<BoatData> boats) {
   );
 }
 
-
-
 Widget _boatCard(BuildContext context, BoatData boat) {
   if (JourneysBloc().journeysValue == null) {
     JourneyProvider().getJourneys();
@@ -240,6 +238,11 @@ Widget _boatCard(BuildContext context, BoatData boat) {
           }
           return GestureDetector(
             onTap: () {
+              final FocusScopeNode focus = FocusScope.of(context);
+              if (!focus.hasPrimaryFocus && focus.hasFocus) {
+                FocusManager.instance.primaryFocus.unfocus();
+              }
+
               Navigator.of(context).pushNamed(
                 'currentBoatPage',
                 arguments: BoatCardArguments(journey: _journey, boat: boat),
