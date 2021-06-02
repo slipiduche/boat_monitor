@@ -12,9 +12,15 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class HistoricsProvider {
-  Future<Map<String, dynamic>> getHistorics() async {
+  Future<Map<String, dynamic>> getHistorics({int journeyId}) async {
     Map<String, dynamic> decodedResp;
-
+    Object bodyRequest = {"token": _prefs.token};
+    if (journeyId != null) {
+      bodyRequest = {
+        "token": _prefs.token,
+        "journey_id": [journeyId]
+      };
+    }
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =

@@ -9,6 +9,7 @@ import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/models/boats_model.dart';
+import 'package:boat_monitor/providers/historics_provider.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
@@ -49,6 +50,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     Journey _journey = arguments.journey;
     BoatData _boat = arguments.boat;
     bool confirm = _boat.onJourney == 1;
+    HistoricsProvider().getHistorics(journeyId: _journey.id);
     return SafeArea(
         child: Scaffold(
       key: _scaffoldKey,
@@ -145,7 +147,13 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                     children: [
                       Column(
                         children: [
-                          arrivedIcon(25.0, blue1),
+                          Builder(builder: (context) {
+                            if (_boat.onJourney == 0) {
+                              return arrivedIcon(25.0, blue1);
+                            } else {
+                              return Container();
+                            }
+                          }),
                           SizedBox(
                             height: 5.0,
                           ),
@@ -169,13 +177,19 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                           SizedBox(
                             height: 5.0,
                           ),
-                          Text(
-                            'Arrived',
-                            style: TextStyle(
-                                color: blue1,
-                                fontWeight: FontWeight.w800,
-                                fontSize: messageTitle),
-                          ),
+                          Builder(builder: (context) {
+                            if (_boat.onJourney == 0) {
+                              return Text(
+                                'Arrived',
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: messageTitle),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          }),
                           SizedBox(
                             height: 10.0,
                           ),
