@@ -36,13 +36,20 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   LatLng _position;
-
+  List<bool> _visible = [false, false, false, false];
+  List<LatLng> lastLocation = [
+    LatLng(0.144455, 0.144455),
+    LatLng(0.444155, 0.4444155),
+    LatLng(0.444155, 0.444155),
+    LatLng(0.444155, 0.444155)
+  ];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
     AuthBloc().setRoute = 'currentBoatPage';
+    CurrentBoatBloc().setViewPosition = [true, false, false, false];
   }
 
   @override
@@ -53,7 +60,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     BoatData _boat = arguments.boat;
     bool confirm = _boat.onJourney == 1;
     HistoricsProvider().getHistorics(journeyId: _journey.id);
-    List<LatLng> lastLocation = [];
+
     return SafeArea(
         child: Scaffold(
       key: _scaffoldKey,
@@ -294,13 +301,32 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             if (i == _historics.historics.length - 1) {
                               LatLng _latlong = latLongFromString(
                                   _historics.historics[i].bLocation);
-                              lastLocation.add(_latlong);
+                              lastLocation[_fourPositions] = _latlong;
                               _fourPositions++;
                             } else if (_historics.historics[i].tiP > 60) {
                               LatLng _latlong = latLongFromString(
                                   _historics.historics[i].bLocation);
-                              lastLocation.add(_latlong);
+                              lastLocation[_fourPositions] = _latlong;
                               _fourPositions++;
+                            }
+                            switch (_fourPositions) {
+                              case 1:
+                                _visible = [true, false, false, false];
+
+                                break;
+                              case 2:
+                                _visible = [true, true, false, false];
+
+                                break;
+                              case 3:
+                                _visible = [true, true, true, false];
+
+                                break;
+                              case 4:
+                                _visible = [true, true, true, true];
+
+                                break;
+                              default:
                             }
                             if (_fourPositions > 3) {
                               break;
@@ -311,12 +337,6 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             margin: EdgeInsets.symmetric(horizontal: marginExt),
                             height: 291.0,
                             padding: EdgeInsets.all(0.0),
-                            // decoration: BoxDecoration(
-                            //     border: Border.all(
-                            //         color: blue,
-                            //         style: BorderStyle.solid,
-                            //         width: 2),
-                            //     borderRadius: BorderRadius.circular(5.0)),
                             child: createFlutterMap(
                                 context, _historics.historics[0].bLocation));
                       } else {
@@ -324,12 +344,6 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             margin: EdgeInsets.symmetric(horizontal: marginExt),
                             height: 291.0,
                             padding: EdgeInsets.all(0.0),
-                            // decoration: BoxDecoration(
-                            //     border: Border.all(
-                            //         color: blue,
-                            //         style: BorderStyle.solid,
-                            //         width: 2),
-                            //     borderRadius: BorderRadius.circular(5.0)),
                             child: Container(
                               height: 50.0,
                               width: 50.0,
@@ -358,79 +372,113 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: marginExt),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Visibility(
-                            visible: true,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                    StreamBuilder(
+                        stream: CurrentBoatBloc().viewPosition,
+                        builder: (context, AsyncSnapshot<List<bool>> snapshot) {
+                          for (var i = 0; i < 4; i++) {
+                            if (_visible[i] == false) {
+                              lastLocation[i] =
+                                  LatLng(0.1151545454, 0.1454545454);
+                            }
+                          }
+                          return Container(
+                            margin: EdgeInsets.symmetric(horizontal: marginExt),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                statusIcon(20.0, 1),
-                                Container(
-                                  width: 70.0,
-                                  child: Text(
-                                    //'${HistoricsBloc().historicsValue.historics[0].bLocation}',
-                                    '${latLongFromString(HistoricsBloc().historicsValue.historics[0].bLocation)}',
-                                    overflow: TextOverflow.clip,
-                                    style:
-                                        TextStyle(color: blue1, fontSize: 10),
+                                Visibility(
+                                  visible: _visible[0],
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Builder(builder: (context) {
+                                        if (!snapshot.data[0]) {
+                                          return statusIcon(20.0, 1);
+                                        } else {
+                                          return statusIcon(20.0, 3);
+                                        }
+                                      }),
+                                      Container(
+                                        width: 70.0,
+                                        child: Text(
+                                          '${lastLocation[0].latitude.toString().substring(0, 5)}:${lastLocation[0].longitude.toString().substring(0, 5)}',
+                                          overflow: TextOverflow.clip,
+                                          style: TextStyle(
+                                              color: blue1, fontSize: 10),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
+                                ),
+                                Visibility(
+                                  visible: _visible[1],
+                                  child: Column(
+                                    children: [
+                                      Builder(builder: (context) {
+                                        if (!snapshot.data[1]) {
+                                          return statusIcon(20.0, 1);
+                                        } else {
+                                          return statusIcon(20.0, 3);
+                                        }
+                                      }),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '${lastLocation[1].latitude.toString().substring(0, 5)}:${lastLocation[1].longitude.toString().substring(0, 5)}',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: _visible[2],
+                                  child: Column(
+                                    children: [
+                                      Builder(builder: (context) {
+                                        if (!snapshot.data[2]) {
+                                          return statusIcon(20.0, 1);
+                                        } else {
+                                          return statusIcon(20.0, 3);
+                                        }
+                                      }),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '${lastLocation[2].latitude.toString()}:${lastLocation[2].longitude.toString()}',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: _visible[3],
+                                  child: Column(
+                                    children: [
+                                      Builder(builder: (context) {
+                                        if (!snapshot.data[3]) {
+                                          return statusIcon(20.0, 1);
+                                        } else {
+                                          return statusIcon(20.0, 3);
+                                        }
+                                      }),
+                                      Container(
+                                        width: 50.0,
+                                        child: Text(
+                                          '${lastLocation[3].latitude.toString()}:${lastLocation[3].longitude.toString()}',
+                                          style: TextStyle(color: blue1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Column(
-                              children: [
-                                statusIcon(20.0, 3),
-                                Container(
-                                  width: 50.0,
-                                  child: Text(
-                                    '33.809:-117.91',
-                                    style: TextStyle(color: blue1),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Column(
-                              children: [
-                                statusIcon(20.0, 1),
-                                Container(
-                                  width: 50.0,
-                                  child: Text(
-                                    '33.809:-117.91',
-                                    style: TextStyle(color: blue1),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Column(
-                              children: [
-                                statusIcon(20.0, 1),
-                                Container(
-                                  width: 50.0,
-                                  child: Text(
-                                    '33.809:-117.91',
-                                    style: TextStyle(color: blue1),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                          );
+                        })
                   ],
                 ),
                 StreamBuilder(

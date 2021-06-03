@@ -18,4 +18,9 @@ class CurrentBoatBloc {
   BoatCardArguments get currentBoatValue => _currentBoatController.value;
   set setCurrentBoat(BoatCardArguments event) =>
       _currentBoatController.add(event);
+
+  final _viewPositionController = new BehaviorSubject<List<bool>>();
+  Stream<List<bool>> get viewPosition => _viewPositionController.stream;
+  List<bool> get viewPositionValue => _viewPositionController.value;
+  set setViewPosition(List<bool> event) => _viewPositionController.add(event);
 }
