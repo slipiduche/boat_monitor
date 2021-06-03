@@ -53,6 +53,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     BoatData _boat = arguments.boat;
     bool confirm = _boat.onJourney == 1;
     HistoricsProvider().getHistorics(journeyId: _journey.id);
+    List<LatLng> lastLocation = [];
     return SafeArea(
         child: Scaffold(
       key: _scaffoldKey,
@@ -285,6 +286,27 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                     builder: (context, AsyncSnapshot<Historics> snapshot) {
                       if (snapshot.hasData) {
                         Historics _historics = snapshot.data;
+                        if (_historics.historics.length > 0) {
+                          var _fourPositions = 0;
+                          for (var i = _historics.historics.length - 1;
+                              i >= 0;
+                              i--) {
+                            if (i == _historics.historics.length - 1) {
+                              LatLng _latlong = latLongFromString(
+                                  _historics.historics[i].bLocation);
+                              lastLocation.add(_latlong);
+                              _fourPositions++;
+                            } else if (_historics.historics[i].tiP > 60) {
+                              LatLng _latlong = latLongFromString(
+                                  _historics.historics[i].bLocation);
+                              lastLocation.add(_latlong);
+                              _fourPositions++;
+                            }
+                            if (_fourPositions > 3) {
+                              break;
+                            }
+                          }
+                        }
                         return Container(
                             margin: EdgeInsets.symmetric(horizontal: marginExt),
                             height: 291.0,
@@ -308,8 +330,12 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             //         style: BorderStyle.solid,
                             //         width: 2),
                             //     borderRadius: BorderRadius.circular(5.0)),
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(blue1),
+                            child: Container(
+                              height: 50.0,
+                              width: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation(blue1),
+                              ),
                             ));
                       }
                     }),
@@ -337,55 +363,70 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              statusIcon(20.0, 1),
-                              Container(
-                                width: 50.0,
-                                child: Text(
-                                  '33.809:-117.91',
-                                  style: TextStyle(color: blue1),
-                                ),
-                              )
-                            ],
+                          Visibility(
+                            visible: true,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                statusIcon(20.0, 1),
+                                Container(
+                                  width: 70.0,
+                                  child: Text(
+                                    //'${HistoricsBloc().historicsValue.historics[0].bLocation}',
+                                    '${latLongFromString(HistoricsBloc().historicsValue.historics[0].bLocation)}',
+                                    overflow: TextOverflow.clip,
+                                    style:
+                                        TextStyle(color: blue1, fontSize: 10),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              statusIcon(20.0, 3),
-                              Container(
-                                width: 50.0,
-                                child: Text(
-                                  '33.809:-117.91',
-                                  style: TextStyle(color: blue1),
-                                ),
-                              )
-                            ],
+                          Visibility(
+                            visible: false,
+                            child: Column(
+                              children: [
+                                statusIcon(20.0, 3),
+                                Container(
+                                  width: 50.0,
+                                  child: Text(
+                                    '33.809:-117.91',
+                                    style: TextStyle(color: blue1),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              statusIcon(20.0, 1),
-                              Container(
-                                width: 50.0,
-                                child: Text(
-                                  '33.809:-117.91',
-                                  style: TextStyle(color: blue1),
-                                ),
-                              )
-                            ],
+                          Visibility(
+                            visible: false,
+                            child: Column(
+                              children: [
+                                statusIcon(20.0, 1),
+                                Container(
+                                  width: 50.0,
+                                  child: Text(
+                                    '33.809:-117.91',
+                                    style: TextStyle(color: blue1),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              statusIcon(20.0, 1),
-                              Container(
-                                width: 50.0,
-                                child: Text(
-                                  '33.809:-117.91',
-                                  style: TextStyle(color: blue1),
-                                ),
-                              )
-                            ],
+                          Visibility(
+                            visible: false,
+                            child: Column(
+                              children: [
+                                statusIcon(20.0, 1),
+                                Container(
+                                  width: 50.0,
+                                  child: Text(
+                                    '33.809:-117.91',
+                                    style: TextStyle(color: blue1),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
