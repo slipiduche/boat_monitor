@@ -36,6 +36,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   LatLng _position;
+  MapController controller = MapController();
+
   List<bool> _visible = [false, false, false, false];
   List<LatLng> lastLocation = [
     LatLng(0.144455, 0.144455),
@@ -50,6 +52,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     auth.deleteAll();
     AuthBloc().setRoute = 'currentBoatPage';
     CurrentBoatBloc().setViewPosition = [true, false, false, false];
+    CurrentBoatBloc().setVisibility = _visible;
   }
 
   @override
@@ -303,7 +306,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                   _historics.historics[i].bLocation);
                               lastLocation[_fourPositions] = _latlong;
                               _fourPositions++;
-                            } else if (_historics.historics[i].tiP > 60) {
+                            } else if (_historics.historics[i].tiP > 49) {
                               LatLng _latlong = latLongFromString(
                                   _historics.historics[i].bLocation);
                               lastLocation[_fourPositions] = _latlong;
@@ -312,19 +315,19 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             switch (_fourPositions) {
                               case 1:
                                 _visible = [true, false, false, false];
-
+                                CurrentBoatBloc().setVisibility = _visible;
                                 break;
                               case 2:
                                 _visible = [true, true, false, false];
-
+                                CurrentBoatBloc().setVisibility = _visible;
                                 break;
                               case 3:
                                 _visible = [true, true, true, false];
-
+                                CurrentBoatBloc().setVisibility = _visible;
                                 break;
                               case 4:
                                 _visible = [true, true, true, true];
-
+                                CurrentBoatBloc().setVisibility = _visible;
                                 break;
                               default:
                             }
@@ -333,12 +336,40 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             }
                           }
                         }
-                        return Container(
-                            margin: EdgeInsets.symmetric(horizontal: marginExt),
-                            height: 291.0,
-                            padding: EdgeInsets.all(0.0),
-                            child: createFlutterMap(
-                                context, _historics.historics[0].bLocation));
+                        return StreamBuilder(
+                            stream: CurrentBoatBloc().viewPosition,
+                            builder:
+                                (context, AsyncSnapshot<List<bool>> snapshot) {
+                              LatLng _currenMapView;
+                              if (snapshot.hasData) {
+                                for (var i = 0; i < snapshot.data.length; i++) {
+                                  if (snapshot.data[i]) {
+                                    _currenMapView = lastLocation[i];
+                                  }
+                                }
+                                return Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: marginExt),
+                                    height: 291.0,
+                                    padding: EdgeInsets.all(0.0),
+                                    child: createFlutterMap(
+                                        context, _currenMapView, controller));
+                              } else {
+                                return Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: marginExt),
+                                    height: 291.0,
+                                    padding: EdgeInsets.all(0.0),
+                                    child: Container(
+                                      height: 50.0,
+                                      width: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation(blue1),
+                                      ),
+                                    ));
+                              }
+                            });
                       } else {
                         return Container(
                             margin: EdgeInsets.symmetric(horizontal: marginExt),
@@ -372,152 +403,180 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                         ],
                       ),
                     ),
-                    StreamBuilder(
-                        stream: CurrentBoatBloc().viewPosition,
-                        builder: (context, AsyncSnapshot<List<bool>> snapshot) {
-                          for (var i = 0; i < 4; i++) {
-                            if (_visible[i] == false) {
-                              lastLocation[i] =
-                                  LatLng(0.1151545454, 0.1454545454);
-                            }
-                          }
+                    StreamBuilder<Object>(
+                        stream: CurrentBoatBloc().visibility,
+                        builder: (context, snapshot) {
                           return Container(
-                            margin: EdgeInsets.symmetric(horizontal: marginExt),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Visibility(
-                                  visible: _visible[0],
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      CurrentBoatBloc().setViewPosition = [
-                                        true,
-                                        false,
-                                        false,
-                                        false
-                                      ];
-                                    },
-                                    child: Column(
+                            child: StreamBuilder(
+                                stream: CurrentBoatBloc().viewPosition,
+                                builder: (context,
+                                    AsyncSnapshot<List<bool>> snapshot) {
+                                  for (var i = 0; i < 4; i++) {
+                                    if (_visible[i] == false) {
+                                      lastLocation[i] =
+                                          LatLng(0.1151545454, 0.1454545454);
+                                    }
+                                  }
+                                  return Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: marginExt),
+                                    child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Builder(builder: (context) {
-                                          if (!snapshot.data[0]) {
-                                            return statusIcon(20.0, 1);
-                                          } else {
-                                            return statusIcon(20.0, 3);
-                                          }
-                                        }),
-                                        Container(
-                                          width: 70.0,
-                                          child: Text(
-                                            '${lastLocation[0].latitude.toString().substring(0, 5)}:${lastLocation[0].longitude.toString().substring(0, 5)}',
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: blue1, fontSize: 10),
+                                        Visibility(
+                                          visible: _visible[0],
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              CurrentBoatBloc()
+                                                  .setViewPosition = [
+                                                true,
+                                                false,
+                                                false,
+                                                false
+                                              ];
+                                              controller.move(
+                                                  lastLocation[0], 13.0);
+                                            },
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Builder(builder: (context) {
+                                                  if (!snapshot.data[0]) {
+                                                    return statusIcon(20.0, 1);
+                                                  } else {
+                                                    return statusIcon(20.0, 3);
+                                                  }
+                                                }),
+                                                Container(
+                                                  width: 70.0,
+                                                  child: Text(
+                                                    '${lastLocation[0].latitude.toString().substring(0, 5)}:${lastLocation[0].longitude.toString().substring(0, 5)}',
+                                                    overflow: TextOverflow.clip,
+                                                    style: TextStyle(
+                                                        color: blue1,
+                                                        fontSize: 12),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                        )
+                                        ),
+                                        Visibility(
+                                          visible: _visible[1],
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              CurrentBoatBloc()
+                                                  .setViewPosition = [
+                                                false,
+                                                true,
+                                                false,
+                                                false
+                                              ];
+                                              controller.move(
+                                                  lastLocation[1], 13.0);
+                                            },
+                                            child: Column(
+                                              children: [
+                                                Builder(builder: (context) {
+                                                  if (!snapshot.data[1]) {
+                                                    return statusIcon(20.0, 1);
+                                                  } else {
+                                                    return statusIcon(20.0, 3);
+                                                  }
+                                                }),
+                                                Container(
+                                                  width: 70.0,
+                                                  child: Text(
+                                                    '${lastLocation[1].latitude.toString().substring(0, 5)}:${lastLocation[1].longitude.toString().substring(0, 5)}',
+                                                    style: TextStyle(
+                                                        color: blue1,
+                                                        fontSize: 12),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Visibility(
+                                          visible: _visible[2],
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              CurrentBoatBloc()
+                                                  .setViewPosition = [
+                                                false,
+                                                false,
+                                                true,
+                                                false
+                                              ];
+                                              controller.move(
+                                                  lastLocation[2], 13.0);
+                                            },
+                                            child: Column(
+                                              children: [
+                                                Builder(builder: (context) {
+                                                  if (!snapshot.data[2]) {
+                                                    return statusIcon(20.0, 1);
+                                                  } else {
+                                                    return statusIcon(20.0, 3);
+                                                  }
+                                                }),
+                                                Container(
+                                                  width: 70.0,
+                                                  child: Text(
+                                                    '${lastLocation[2].latitude.toString().substring(0, 5)}:${lastLocation[2].longitude.toString().substring(0, 5)}',
+                                                    style: TextStyle(
+                                                        color: blue1,
+                                                        fontSize: 12),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Visibility(
+                                          visible: _visible[3],
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              CurrentBoatBloc()
+                                                  .setViewPosition = [
+                                                false,
+                                                false,
+                                                false,
+                                                true
+                                              ];
+                                              controller.move(
+                                                  lastLocation[3], 13.0);
+                                            },
+                                            child: Column(
+                                              children: [
+                                                Builder(builder: (context) {
+                                                  if (!snapshot.data[3]) {
+                                                    return statusIcon(20.0, 1);
+                                                  } else {
+                                                    return statusIcon(20.0, 3);
+                                                  }
+                                                }),
+                                                Container(
+                                                  width: 70.0,
+                                                  child: Text(
+                                                    '${lastLocation[3].latitude.toString().substring(0, 5)}:${lastLocation[3].longitude.toString().substring(0, 5)}',
+                                                    style: TextStyle(
+                                                        color: blue1,
+                                                        fontSize: 12),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: _visible[1],
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      CurrentBoatBloc().setViewPosition = [
-                                        false,
-                                        true,
-                                        false,
-                                        false
-                                      ];
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Builder(builder: (context) {
-                                          if (!snapshot.data[1]) {
-                                            return statusIcon(20.0, 1);
-                                          } else {
-                                            return statusIcon(20.0, 3);
-                                          }
-                                        }),
-                                        Container(
-                                          width: 50.0,
-                                          child: Text(
-                                            '${lastLocation[1].latitude.toString().substring(0, 5)}:${lastLocation[1].longitude.toString().substring(0, 5)}',
-                                            style: TextStyle(color: blue1),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: _visible[2],
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      CurrentBoatBloc().setViewPosition = [
-                                        false,
-                                        false,
-                                        true,
-                                        false
-                                      ];
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Builder(builder: (context) {
-                                          if (!snapshot.data[2]) {
-                                            return statusIcon(20.0, 1);
-                                          } else {
-                                            return statusIcon(20.0, 3);
-                                          }
-                                        }),
-                                        Container(
-                                          width: 50.0,
-                                          child: Text(
-                                            '${lastLocation[2].latitude.toString()}:${lastLocation[2].longitude.toString()}',
-                                            style: TextStyle(color: blue1),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: _visible[3],
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      CurrentBoatBloc().setViewPosition = [
-                                        false,
-                                        false,
-                                        false,
-                                        true
-                                      ];
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Builder(builder: (context) {
-                                          if (!snapshot.data[3]) {
-                                            return statusIcon(20.0, 1);
-                                          } else {
-                                            return statusIcon(20.0, 3);
-                                          }
-                                        }),
-                                        Container(
-                                          width: 50.0,
-                                          child: Text(
-                                            '${lastLocation[3].latitude.toString()}:${lastLocation[3].longitude.toString()}',
-                                            style: TextStyle(color: blue1),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                                  );
+                                }),
                           );
                         })
                   ],

@@ -50,9 +50,10 @@ LatLng latLongFromString(String location) {
   return LatLng(latitude, longitude);
 }
 
-Widget createFlutterMap(BuildContext context, String position) {
+Widget createFlutterMap(
+    BuildContext context, LatLng position, MapController controller) {
   print(position);
-  LatLng location = latLongFromString(position);
+  // LatLng location = latLongFromString(position);
   return ClipRRect(
     borderRadius: BorderRadius.circular(5.0),
     child: Container(
@@ -61,8 +62,9 @@ Widget createFlutterMap(BuildContext context, String position) {
       //     border: Border.all(color: blue, style: BorderStyle.solid, width: 2.0),
       //     borderRadius: BorderRadius.circular(5.0)),
       child: FlutterMap(
+        mapController: controller,
         options: MapOptions(
-          center: location,
+          center: position,
           zoom: 13.0,
         ),
         layers: [
@@ -71,7 +73,7 @@ Widget createFlutterMap(BuildContext context, String position) {
               Marker(
                 width: 20.0,
                 height: 20.0,
-                point: location,
+                point: position,
                 builder: (ctx) => Container(
                   child: Icon(
                     Icons.location_on,
@@ -90,16 +92,7 @@ Widget createFlutterMap(BuildContext context, String position) {
                   subdomains: ['a', 'b', 'c'])),
           MarkerLayerWidget(
               options: MarkerLayerOptions(
-            markers: [
-              // Marker(
-              //   width: 80.0,
-              //   height: 80.0,
-              //   point: LatLng(10.85505081830189, -68.29910433238481),
-              //   builder: (ctx) => Container(
-              //     child: FlutterLogo(),
-              //   ),
-              // ),
-            ],
+            markers: [],
           )),
         ],
       ),

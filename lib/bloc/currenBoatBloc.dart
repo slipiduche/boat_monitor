@@ -26,4 +26,12 @@ class CurrentBoatBloc {
     print(event);
     _viewPositionController.add(event);
   }
+
+  final _visibilityController = new BehaviorSubject<List<bool>>();
+  Stream<List<bool>> get visibility => _visibilityController.stream;
+  List<bool> get visibilityValue => _visibilityController.value;
+  set setVisibility(List<bool> event) {
+    print(event);
+    _visibilityController.add(event);
+  }
 }
