@@ -97,7 +97,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                   height: 20.0,
                 ),
                 StreamBuilder<Object>(
-                    stream: null,
+                    stream: CurrentBoatBloc().viewPosition,
                     builder: (context, snapshot) {
                       print(_boat.onJourney);
                       print(confirm.toString() + 'valor');
@@ -388,91 +388,132 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               children: [
                                 Visibility(
                                   visible: _visible[0],
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Builder(builder: (context) {
-                                        if (!snapshot.data[0]) {
-                                          return statusIcon(20.0, 1);
-                                        } else {
-                                          return statusIcon(20.0, 3);
-                                        }
-                                      }),
-                                      Container(
-                                        width: 70.0,
-                                        child: Text(
-                                          '${lastLocation[0].latitude.toString().substring(0, 5)}:${lastLocation[0].longitude.toString().substring(0, 5)}',
-                                          overflow: TextOverflow.clip,
-                                          style: TextStyle(
-                                              color: blue1, fontSize: 10),
-                                        ),
-                                      )
-                                    ],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      CurrentBoatBloc().setViewPosition = [
+                                        true,
+                                        false,
+                                        false,
+                                        false
+                                      ];
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Builder(builder: (context) {
+                                          if (!snapshot.data[0]) {
+                                            return statusIcon(20.0, 1);
+                                          } else {
+                                            return statusIcon(20.0, 3);
+                                          }
+                                        }),
+                                        Container(
+                                          width: 70.0,
+                                          child: Text(
+                                            '${lastLocation[0].latitude.toString().substring(0, 5)}:${lastLocation[0].longitude.toString().substring(0, 5)}',
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                                color: blue1, fontSize: 10),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Visibility(
                                   visible: _visible[1],
-                                  child: Column(
-                                    children: [
-                                      Builder(builder: (context) {
-                                        if (!snapshot.data[1]) {
-                                          return statusIcon(20.0, 1);
-                                        } else {
-                                          return statusIcon(20.0, 3);
-                                        }
-                                      }),
-                                      Container(
-                                        width: 50.0,
-                                        child: Text(
-                                          '${lastLocation[1].latitude.toString().substring(0, 5)}:${lastLocation[1].longitude.toString().substring(0, 5)}',
-                                          style: TextStyle(color: blue1),
-                                        ),
-                                      )
-                                    ],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      CurrentBoatBloc().setViewPosition = [
+                                        false,
+                                        true,
+                                        false,
+                                        false
+                                      ];
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Builder(builder: (context) {
+                                          if (!snapshot.data[1]) {
+                                            return statusIcon(20.0, 1);
+                                          } else {
+                                            return statusIcon(20.0, 3);
+                                          }
+                                        }),
+                                        Container(
+                                          width: 50.0,
+                                          child: Text(
+                                            '${lastLocation[1].latitude.toString().substring(0, 5)}:${lastLocation[1].longitude.toString().substring(0, 5)}',
+                                            style: TextStyle(color: blue1),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Visibility(
                                   visible: _visible[2],
-                                  child: Column(
-                                    children: [
-                                      Builder(builder: (context) {
-                                        if (!snapshot.data[2]) {
-                                          return statusIcon(20.0, 1);
-                                        } else {
-                                          return statusIcon(20.0, 3);
-                                        }
-                                      }),
-                                      Container(
-                                        width: 50.0,
-                                        child: Text(
-                                          '${lastLocation[2].latitude.toString()}:${lastLocation[2].longitude.toString()}',
-                                          style: TextStyle(color: blue1),
-                                        ),
-                                      )
-                                    ],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      CurrentBoatBloc().setViewPosition = [
+                                        false,
+                                        false,
+                                        true,
+                                        false
+                                      ];
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Builder(builder: (context) {
+                                          if (!snapshot.data[2]) {
+                                            return statusIcon(20.0, 1);
+                                          } else {
+                                            return statusIcon(20.0, 3);
+                                          }
+                                        }),
+                                        Container(
+                                          width: 50.0,
+                                          child: Text(
+                                            '${lastLocation[2].latitude.toString()}:${lastLocation[2].longitude.toString()}',
+                                            style: TextStyle(color: blue1),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Visibility(
                                   visible: _visible[3],
-                                  child: Column(
-                                    children: [
-                                      Builder(builder: (context) {
-                                        if (!snapshot.data[3]) {
-                                          return statusIcon(20.0, 1);
-                                        } else {
-                                          return statusIcon(20.0, 3);
-                                        }
-                                      }),
-                                      Container(
-                                        width: 50.0,
-                                        child: Text(
-                                          '${lastLocation[3].latitude.toString()}:${lastLocation[3].longitude.toString()}',
-                                          style: TextStyle(color: blue1),
-                                        ),
-                                      )
-                                    ],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      CurrentBoatBloc().setViewPosition = [
+                                        false,
+                                        false,
+                                        false,
+                                        true
+                                      ];
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Builder(builder: (context) {
+                                          if (!snapshot.data[3]) {
+                                            return statusIcon(20.0, 1);
+                                          } else {
+                                            return statusIcon(20.0, 3);
+                                          }
+                                        }),
+                                        Container(
+                                          width: 50.0,
+                                          child: Text(
+                                            '${lastLocation[3].latitude.toString()}:${lastLocation[3].longitude.toString()}',
+                                            style: TextStyle(color: blue1),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
