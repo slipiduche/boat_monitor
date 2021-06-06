@@ -1,3 +1,4 @@
+import 'package:boat_monitor/providers/mqtt_provider.dart';
 import 'package:boat_monitor/routes/routes.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = new UserPreferences();
   await prefs.initPrefs();
+  
   runApp(MyApp());
 }
 

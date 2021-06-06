@@ -13,6 +13,7 @@ import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/providers/historics_provider.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
+import 'package:boat_monitor/providers/mqtt_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -37,6 +38,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
   AuthBloc auth = AuthBloc();
   LatLng _position;
   MapController controller = MapController();
+  MQTTClientWrapper mqtt;
 
   List<bool> _visible = [false, false, false, false];
   List<LatLng> lastLocation = [
@@ -53,6 +55,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     AuthBloc().setRoute = 'currentBoatPage';
     CurrentBoatBloc().setViewPosition = [true, false, false, false];
     CurrentBoatBloc().setVisibility = _visible;
+    mqtt = MQTTClientWrapper(() {}, (hola, hello) {});
+    mqtt.prepareMqttClient();
   }
 
   @override
@@ -130,6 +134,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                       'Departure Confirmation', () {
                                     //Navigator.of(context).pop();
                                     setOnJourney(_boat.id, context);
+                                    mqtt.journeyStart(_boat.id);
                                   }, () {
                                     Navigator.of(context).pushReplacementNamed(
                                         AuthBloc().routeValue,

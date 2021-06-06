@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
 
 import 'package:boat_monitor/models/journney_model.dart';
+import 'package:boat_monitor/providers/mqtt_provider.dart';
 import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:http/io_client.dart';

@@ -2,6 +2,7 @@ import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/providers/auth_provider.dart';
+import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/alerts.dart';
@@ -94,6 +95,8 @@ _login1(BuildContext context) async {
   UserPreferences _prefs = UserPreferences();
   AlertsBloc().setAlert =
       Alerts(TextLanguage.of(context).loginButtonText, "Updating");
+  Parameters().user = AuthBloc().emailValue;
+  Parameters().password = AuthBloc().passwordValue;
   //updating(context, TextLanguage.of(context).loginButtonText);
   var _login = await AuthProvider()
       .login(AuthBloc().emailValue, AuthBloc().passwordValue);

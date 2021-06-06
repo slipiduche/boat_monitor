@@ -38,7 +38,7 @@ dependencies:
   fl_chart: ^0.36.1
   mqtt_client: ^9.3.1
   photo_view: ^0.11.1
-  
+  get_mac: ^0.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

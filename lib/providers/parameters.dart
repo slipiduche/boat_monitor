@@ -1,6 +1,33 @@
 class Parameters {
+  static final Parameters _singleton = new Parameters._internal();
+
+  factory Parameters() {
+    return _singleton;
+  }
+
+  Parameters._internal();
+
+  String userName, mqttPassword;
+  set user(_user) {
+    userName = _user;
+  }
+
+  String get user {
+    return userName;
+  }
+
+  set password(_user) {
+    mqttPassword = _user;
+  }
+
+  String get password {
+    return mqttPassword;
+  }
+
   //final domain = 'https://www.orbittas.com/'; //server domain
   final domain = 'https://192.168.0.103:9443/'; //server domain
+  final domainMqtt = '192.168.0.103';
+  final portMqtt = 3000;
   final login = 'login'; //endpoints
   final recovery = 'recovery';
   final historics = 'historics';
@@ -13,7 +40,6 @@ class Parameters {
   final modify = 'modify';
   final status = 'status';
 
-  Parameters();
   String get loginUrl {
     return domain + login;
   }
