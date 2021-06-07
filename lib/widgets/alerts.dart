@@ -12,6 +12,7 @@ onAfterBuild(BuildContext context) {
     switch (AlertsBloc().alertValue.type) {
       case "Updating":
         AlertsBloc().setAlertClosed = false;
+        Navigator.of(context).pop();
         updating(context, AlertsBloc().alertValue.message);
         AlertsBloc().deleteAlert();
         break;
@@ -22,6 +23,10 @@ onAfterBuild(BuildContext context) {
           Navigator.of(context).pop();
           if (AuthBloc().routeValue == 'signUpPage') {
             Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
+          } else if (AuthBloc().routeValue == 'currentBoatPage') {
+            Navigator.of(context).pushReplacementNamed('homePage');
+          } else {
+            Navigator.of(context).pushReplacementNamed(AuthBloc().routeValue);
           }
         });
         AlertsBloc().deleteAlert();

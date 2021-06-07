@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/models/mqtt_models.dart';
 import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
@@ -120,6 +121,13 @@ class MQTTClientWrapper {
   }
 
   void _preData(serverDataJson, topicName) async {
+    if (serverDataJson["status"] == "succses") {
+      print(serverDataJson["message"]);
+      AlertsBloc().setAlert = Alerts(serverDataJson["message"], "Updated");
+    } else {
+      print(serverDataJson["message"]);
+      AlertsBloc().setAlert = Alerts(serverDataJson["message"], "Error");
+    }
     if (serverDataJson["TOKEN"] != null) {
       final decodedData = 'hola';
       if (decodedData != null)
@@ -128,12 +136,12 @@ class MQTTClientWrapper {
     }
   }
 
-  void _publishMessage(String message, String topicO) {
+  void _publishMessage(String message, String topico) {
     final MqttClientPayloadBuilder builder = MqttClientPayloadBuilder();
     builder.addString(message);
 
-    print('MQTTClientWrapper::Publishing message $message to topic $topicO');
-    client.publishMessage(topicO, MqttQos.exactlyOnce, builder.payload);
+    print('MQTTClientWrapper::Publishing message $message to topic $topico');
+    client.publishMessage(topico, MqttQos.exactlyOnce, builder.payload);
   }
 
   void _onSubscribed(String topic) {
@@ -154,15 +162,22 @@ class MQTTClientWrapper {
     // await Future.delayed(Duration(seconds: 2));
   }
 
-  void _onConnected() {
+  void _onConnected() async {
+    String _id = await GetMac.macAddress;
     connectionState = MqttCurrentConnectionState.CONNECTED;
     print(
         'MQTTClientWrapper::OnConnected client callback - Client connection was sucessful');
     onConnectedCallback();
+    subscribeToTopic('APP/$_id');
   }
 
   void journeyStart(int boatId) {
     final _request = {"token": _prefs.token, "id": boatId.toString()};
     publishData(jsonEncode(_request), 'APP/START');
+  }
+
+  void journeyStop(int boatId) {
+    final _request = {"token": _prefs.token, "id": boatId.toString()};
+    publishData(jsonEncode(_request), 'APP/STOP');
   }
 }

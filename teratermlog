@@ -1,0 +1,4871 @@
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-05T21:04:46.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:30:13.064 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+192.168.0.103:9443/login
+
+Request: {}
+
+
+{ id: 1,
+  secret:
+   '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+  usertype: 4 }
+
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#
+
+
+
+
+
+Server Response: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  usertype: 4,
+  message: 'Login Successful',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:13.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/journeys
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+
+192.168.0.103:9443/journeys
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:13.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT JOURNEYS.*,U1.names start_user_names,U2.names end_user_names,B1.boat_name FROM JOURNEYS 
+INNER JOIN USERS AS U1 ON JOURNEYS.start_user = U1.id 
+INNER JOIN USERS AS U2 ON JOURNEYS.end_user = U2.id 
+INNER JOIN BOATS AS B1 ON JOURNEYS.boat_id = B1.id 
+;
+Params: []
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:13.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT JOURNEYS.*,U1.names start_user_names,U2.names end_user_names,B1.boat_name FROM JOURNEYS 
+INNER JOIN USERS AS U1 ON JOURNEYS.start_user = U1.id 
+INNER JOIN USERS AS U2 ON JOURNEYS.end_user = U2.id 
+INNER JOIN BOATS AS B1 ON JOURNEYS.boat_id = B1.id 
+;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    ini: '2021-04-27T19:35:00.000Z',
+    ed: '2021-04-27T19:35:00.000Z',
+    start_user: 1,
+    end_user: 1,
+    boat_id: 1,
+    i_weight: 30.7,
+    f_weight: 417.15,
+    s_img: 14,
+    total_img: 14,
+    synced: 1,
+    in_boat: 1,
+    alert: 1,
+    ug: null,
+    um: null,
+    eta: null,
+    obs: 'TEST DATA',
+    start_user_names: 'Orbittas',
+    end_user_names: 'Orbittas',
+    boat_name: 'CAT' } ]
+
+
+
+
+Server Response: { JOURNEYS:
+   [ { id: 1,
+       ini: '2021-04-27T19:35:00.000Z',
+       ed: '2021-04-27T19:35:00.000Z',
+       start_user: 1,
+       end_user: 1,
+       boat_id: 1,
+       i_weight: 30.7,
+       f_weight: 417.15,
+       s_img: 14,
+       total_img: 14,
+       synced: 1,
+       in_boat: 1,
+       alert: 1,
+       ug: null,
+       um: null,
+       eta: null,
+       obs: 'TEST DATA',
+       start_user_names: 'Orbittas',
+       end_user_names: 'Orbittas',
+       boat_name: 'CAT' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { id: 1,
+    ini: '2021-04-27T19:35:00.000Z',
+    ed: '2021-04-27T19:35:00.000Z',
+    start_user: 1,
+    end_user: 1,
+    boat_id: 1,
+    i_weight: 30.7,
+    f_weight: 417.15,
+    s_img: 14,
+    total_img: 14,
+    synced: 1,
+    in_boat: 1,
+    alert: 1,
+    ug: null,
+    um: null,
+    eta: null,
+    obs: 'TEST DATA',
+    start_user_names: 'Orbittas',
+    end_user_names: 'Orbittas',
+    boat_name: 'CAT' } ]
+
+
+
+
+Server Response: { JOURNEYS:
+   [ { id: 1,
+       ini: '2021-04-27T19:35:00.000Z',
+       ed: '2021-04-27T19:35:00.000Z',
+       start_user: 1,
+       end_user: 1,
+       boat_id: 1,
+       i_weight: 30.7,
+       f_weight: 417.15,
+       s_img: 14,
+       total_img: 14,
+       synced: 1,
+       in_boat: 1,
+       alert: 1,
+       ug: null,
+       um: null,
+       eta: null,
+       obs: 'TEST DATA',
+       start_user_names: 'Orbittas',
+       end_user_names: 'Orbittas',
+       boat_name: 'CAT' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 25 but received 0
+Warning: got packets out of order. Expected 25 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:13.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:13.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:30:21.815 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:22.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:22.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:22.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:30:22.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:33:12.157 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:33:12.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:33:12.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:33:12.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:33:12.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:34:32.683 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:34:33.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 24 but received 0
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:34:33.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:34:39.008 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:34:39.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:34:39.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:34:39.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:34:39.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:38:23.311 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:38:23.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:57:35.492 ' ]
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:57:35.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:57:35.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:57:35.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:57:35.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 18:59:21.407 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T18:59:21.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:08:46.867 ' ]
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:08:47.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:08:47.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:08:47.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:08:47.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:17:00.200 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Client:  BM-APP_02:15:B2:00:00:00
+Topic:  APP/START
+Message:  { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#',
+  id: '1' }
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:17:00.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+SELECT
+SELECT * FROM BOATS WHERE id IN ( ?);
+Params: [ '1' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    mac: 'b8:27:eb:4f:15:95',
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    connected: 0,
+    lj: 1,
+    queued: 0,
+    pending: 0,
+    on_journey: 0,
+    st: 1,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' } ]
+
+
+
+
+Topic: APP/02:15:B2:00:00:00
+
+Server Message: { id: 1,
+  boat_name: 'CAT',
+  message: 'Boat 1, CAT not connected',
+  status: 'failure',
+  code: 14 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 19 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:17:00.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT id,boat_name,max_st,resp,resp_name,st,on_journey,lj,pending,dt,obs FROM BOATS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_name: 'CAT',
+    max_st: 491.7,
+    resp: 1,
+    resp_name: 'Orbittas',
+    st: 1,
+    on_journey: 0,
+    lj: 1,
+    pending: 0,
+    dt: '2021-04-29T09:37:00.000Z',
+    obs: 'TEST DATA' },
+  { id: 2,
+    boat_name: 'Boat1',
+    max_st: 500,
+    resp: null,
+    resp_name: null,
+    st: 0,
+    on_journey: 0,
+    lj: null,
+    pending: 0,
+    dt: '2021-06-04T21:09:34.000Z',
+    obs: null } ]
+
+
+
+
+Server Response: { BOATS:
+   [ { id: 1,
+       boat_name: 'CAT',
+       max_st: 491.7,
+       resp: 1,
+       resp_name: 'Orbittas',
+       st: 1,
+       on_journey: 0,
+       lj: 1,
+       pending: 0,
+       dt: '2021-04-29T09:37:00.000Z',
+       obs: 'TEST DATA' },
+     { id: 2,
+       boat_name: 'Boat1',
+       max_st: 500,
+       resp: null,
+       resp_name: null,
+       st: 0,
+       on_journey: 0,
+       lj: null,
+       pending: 0,
+       dt: '2021-06-04T21:09:34.000Z',
+       obs: null } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 17 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:17:00.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:17:00.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:20:09.759 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:20:10.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:20:10.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:21:19.867 ' ]
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+

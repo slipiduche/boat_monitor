@@ -133,13 +133,17 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                       'Are you sure you want to mark this boat with at ${DateTime.now().toString().substring(0, 16)} ?',
                                       'Departure Confirmation', () {
                                     //Navigator.of(context).pop();
-                                    setOnJourney(_boat.id, context);
+                                    //setOnJourney(_boat.id, context);
+                                    AlertsBloc().setAlert =
+                                        Alerts('Updating', "Updating");
                                     mqtt.journeyStart(_boat.id);
+                                    return;
                                   }, () {
                                     Navigator.of(context).pushReplacementNamed(
                                         AuthBloc().routeValue,
                                         arguments:
                                             CurrentBoatBloc().currentBoatValue);
+                                    return;
                                   });
                                 } else if (_boat.onJourney == 1 &&
                                     state == false) {
@@ -148,7 +152,10 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                       'Are you sure you want to mark this boat with at ${DateTime.now().toString().substring(0, 16)} ?',
                                       'Arrival Confirmation', () {
                                     //Navigator.of(context).pop();
-                                    setOnJourney(_boat.id, context);
+                                    //setOnJourney(_boat.id, context);
+                                    AlertsBloc().setAlert =
+                                        Alerts('Updating', "Updating");
+                                    mqtt.journeyStop(_boat.id);
                                   }, () {
                                     Navigator.of(context).pop();
                                   });
