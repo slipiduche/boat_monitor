@@ -132,7 +132,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                       context,
                                       'Are you sure you want to mark this boat with at ${DateTime.now().toString().substring(0, 16)} ?',
                                       'Departure Confirmation', () {
-                                    //Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
                                     //setOnJourney(_boat.id, context);
                                     AlertsBloc().setAlert =
                                         Alerts('Updating', "Updating");
@@ -151,7 +151,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                       context,
                                       'Are you sure you want to mark this boat with at ${DateTime.now().toString().substring(0, 16)} ?',
                                       'Arrival Confirmation', () {
-                                    //Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
                                     //setOnJourney(_boat.id, context);
                                     AlertsBloc().setAlert =
                                         Alerts('Updating', "Updating");

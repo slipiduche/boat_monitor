@@ -24,13 +24,14 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-
+  DateTimeRange range;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
     AuthBloc().setRoute = 'historyPage';
+    HistorySearchBloc().setHistorySearch = HistorySearch(content: '');
   }
 
   @override
@@ -68,8 +69,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     GestureDetector(
-                                        onTap: () {
-                                          showDateRangePicker(
+                                        onTap: () async {
+                                          range = await showDateRangePicker(
                                             currentDate: DateTime.now(),
                                             context: context,
                                             initialEntryMode:
@@ -77,6 +78,12 @@ class _HistoryPageState extends State<HistoryPage> {
                                             firstDate: DateTime(2020),
                                             lastDate: DateTime(2050),
                                           );
+
+                                          HistorySearchBloc().setHistorySearch =
+                                              HistorySearch(
+                                                  range: range, content: '');
+
+                                          print(range);
                                         },
                                         child: calendarIcon(40.0, blue1)),
                                     SizedBox(
@@ -85,15 +92,28 @@ class _HistoryPageState extends State<HistoryPage> {
                                     StreamBuilder(
                                       stream: HistorySearchBloc().historySearch,
                                       builder: (BuildContext context,
-                                          AsyncSnapshot snapshot) {
-                                        return Container(
-                                          child: Text(
-                                            'All',
-                                            style: TextStyle(
-                                                color: blue1,
-                                                fontSize: titleBarSize),
-                                          ),
-                                        );
+                                          AsyncSnapshot<HistorySearch>
+                                              snapshot) {
+                                        if (snapshot.hasData &&
+                                            snapshot.data.range != null) {
+                                          return Container(
+                                            child: Text(
+                                              '${snapshot.data.range.start.toString().substring(0, 11)} - ${snapshot.data.range.end.toString().substring(0, 11)}',
+                                              style: TextStyle(
+                                                  color: blue1,
+                                                  fontSize: titleBarSize),
+                                            ),
+                                          );
+                                        } else {
+                                          return Container(
+                                            child: Text(
+                                              'All',
+                                              style: TextStyle(
+                                                  color: blue1,
+                                                  fontSize: titleBarSize),
+                                            ),
+                                          );
+                                        }
                                       },
                                     ),
                                     Expanded(child: Container()),
@@ -115,19 +135,52 @@ class _HistoryPageState extends State<HistoryPage> {
                               StreamBuilder(
                                 stream: HistorySearchBloc().historySearch,
                                 builder: (BuildContext context,
-                                    AsyncSnapshot<String> snapshot) {
+                                    AsyncSnapshot<HistorySearch> snapshot) {
                                   List<Journey> _journeys =
                                       JourneysBloc().journeysValue;
                                   List<Journey> _journeysFiltered = [];
                                   if (_journeys != null) {
                                     if (snapshot.hasData) {
-                                      _journeys.forEach((element) {
-                                        if (element.ini
-                                            .toString()
-                                            .contains(snapshot.data)) {
-                                          _journeysFiltered.add(element);
-                                        }
-                                      });
+                                      if (snapshot.data.range != null) {
+                                        _journeys.forEach((element) {
+                                          if (element.ini.isAfter(
+                                                  snapshot.data.range.start) &&
+                                              element.ini.isBefore(
+                                                  snapshot.data.range.end)) {
+                                            _journeysFiltered.add(element);
+                                          }
+                                        });
+                                      } else {
+                                        _journeys.forEach((element) {
+                                          if (element.boatName
+                                                  .toString()
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                      snapshot.data.content) ||
+                                              element.endUserNames
+                                                  .toString()
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                      snapshot.data.content) ||
+                                              element.ini
+                                                  .toString()
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                      snapshot.data.content) ||
+                                              element.ed
+                                                  .toString()
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                      snapshot.data.content) ||
+                                              element.id
+                                                  .toString()
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                      snapshot.data.content)) {
+                                            _journeysFiltered.add(element);
+                                          }
+                                        });
+                                      }
                                     } else {
                                       _journeysFiltered = _journeys;
                                     }
@@ -462,7 +515,8 @@ Widget _historySearch(BuildContext context) {
               border: InputBorder.none,
               hintText: 'Type any boat name, data travel, supervisor'),
           onChanged: (value) {
-            HistorySearchBloc().setHistorySearch = value;
+            HistorySearchBloc().setHistorySearch =
+                HistorySearch(content: value);
           },
         ))
       ],

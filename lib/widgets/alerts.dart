@@ -12,7 +12,7 @@ onAfterBuild(BuildContext context) {
     switch (AlertsBloc().alertValue.type) {
       case "Updating":
         AlertsBloc().setAlertClosed = false;
-        Navigator.of(context).pop();
+        //Navigator.of(context).pop();
         updating(context, AlertsBloc().alertValue.message);
         AlertsBloc().deleteAlert();
         break;

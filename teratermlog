@@ -4869,3 +4869,1772 @@ BM-APP_02:15:B2:00:00:00  login attempt succeeded
 
 Client  BM-APP_02:15:B2:00:00:00  disconnected
 
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:21:20.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+Warning: got packets out of order. Expected 24 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:21:20.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+check: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+Parameters: {}
+SELECT
+SELECT * FROM HISTORICS;
+Params: []
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { id: 1,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '41°24\'12.2"N 2°10\'26.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 1,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 2,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '42°25\'12.4"N 2°11\'30.5"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 2,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 3,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '43°25\'15.4"N 3°12\'31.8"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 3,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' },
+  { id: 4,
+    boat_id: 1,
+    journey_id: 1,
+    cont_status: 1,
+    cont_weight: 417.15,
+    open_time: 900,
+    bat: 85.5,
+    dsk: 27.1,
+    temp: 10.1,
+    b_location: '50°35\'20.4"N 3°15\'40.0"E',
+    TiP: 50,
+    fl_path: 'B1_042220211937415959.txt',
+    fl_id: 1,
+    ln: 4,
+    dt: '2021-04-27T19:35:00.000Z',
+    reg: '2021-04-27T19:35:00.000Z' } ]
+
+
+
+
+Server Response: { HISTORICS:
+   [ { id: 1,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '41°24\'12.2"N 2°10\'26.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 1,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 2,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '42°25\'12.4"N 2°11\'30.5"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 2,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 3,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '43°25\'15.4"N 3°12\'31.8"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 3,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' },
+     { id: 4,
+       boat_id: 1,
+       journey_id: 1,
+       cont_status: 1,
+       cont_weight: 417.15,
+       open_time: 900,
+       bat: 85.5,
+       dsk: 27.1,
+       temp: 10.1,
+       b_location: '50°35\'20.4"N 3°15\'40.0"E',
+       TiP: 50,
+       fl_path: 'B1_042220211937415959.txt',
+       fl_id: 1,
+       ln: 4,
+       dt: '2021-04-27T19:35:00.000Z',
+       reg: '2021-04-27T19:35:00.000Z' } ],
+  message: 'List successfully retrieved',
+  status: 'success',
+  code: 1 }
+Status Code: 200
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:21:20.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:26:09.015 ' ]
+Warning: got packets out of order. Expected 24 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:26:09.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:26:09.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:30:27.627 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:28.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:30:39.494 ' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:28.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:39.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:39.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:30:57.419 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/journeys
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:32:46.379 ' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:30:57.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:32:46.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:32:46.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:32:46.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:36:05.912 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:36:06.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:37:10.299 ' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:36:06.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:37:10.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:37:10.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:37:23.729 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/historics
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+Validating Client....
+02:15:B2:00:00:00
+Client validated!
+
+
+SELECT
+SELECT * FROM USERS WHERE username IN ( ?);
+Params: [ 'orbittas@orbittas.com' ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:37:24.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:37:24.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+1. User Exists
+
+2. User Enabled
+
+3. Database Integrity OK
+
+4. User ID:1
+
+UPDATE
+UPDATE USERS SET ldt = ? WHERE id = 1;
+Params: [ '2021-06-07 19:45:50.323 ' ]
+Warning: got packets out of order. Expected 18 but received 0
+Warning: got packets out of order. Expected 18 but received 0
+[ { fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1 },
+  null ]
+Hash: $2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy
+Input: #B04tTr4ck3r++
+Warning: got packets out of order. Expected 2 but received 0
+5. Validation Complete. Result: true
+
+
+BM-APP_02:15:B2:00:00:00  login attempt succeeded
+
+
+
+Client  BM-APP_02:15:B2:00:00:00  disconnected
+
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
+
+192.168.0.103:9443/boats
+
+Request: { token:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JiaXR0YXNAb3JiaXR0YXMuY29tIiwiaWQiOjEsImlhdCI6MTYyMzA5MDYxMywiZXhwIjoxNjIzMDk0MjEzfQ.yZ0ePG4ZiolVYxofBtjUkyfZveM1PiVN2NoM6EBP6Us+1#' }
+
+token
+SELECT
+SELECT * FROM USERS WHERE id IN ( ?);
+Params: [ 1 ]
+[ { id: 1,
+    username: 'orbittas@orbittas.com',
+    pswrd:
+     '$2b$10$wLj4ndTj2fr5tSjcU4tUYu728JpxjlngTBFrFI5UeZDFeccUk6BPy',
+    names: 'Orbittas',
+    mail: 'ricardo@orbittas.com',
+    usertype: 4,
+    latt: 0,
+    ldt: '2021-06-07T19:45:50.000Z',
+    blocked: 0,
+    st: 1,
+    approval: 1,
+    lva: null,
+    dt: '2021-04-27T19:35:00.000Z' } ]
+{ TokenExpiredError: jwt expired
+    at /var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:152:21
+    at getSecret (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/var/www/Boat_Monitor-master/Cloud_Server/node_modules/jsonwebtoken/verify.js:94:10)
+    at verify (/var/www/Boat_Monitor-master/Cloud_Server/app.js:386:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+  name: 'TokenExpiredError',
+  message: 'jwt expired',
+  expiredAt: 2021-06-07T19:30:13.000Z }
+
+
+
+
+Server Response: { message: 'Token expired', status: 'unauthorized', code: 12 }
+Status Code: 401
+
+Warning: got packets out of order. Expected 18 but received 0
