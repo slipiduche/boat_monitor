@@ -16743,3 +16743,5 @@ Status Code: 200
 
 Warning: got packets out of order. Expected 25 but received 0
 Warning: got packets out of order. Expected 25 but received 0
+^C
+orbittas@speakerorbittas:/var/www/Boat_Monitor-master/Cloud_Server$ 
