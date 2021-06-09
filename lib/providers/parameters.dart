@@ -25,8 +25,8 @@ class Parameters {
   }
 
   //final domain = 'https://www.orbittas.com/'; //server domain
-  final domain = 'https://192.168.0.103:9443/'; //server domain
-  final domainMqtt = '192.168.0.103';
+  final domain = 'https://192.168.42.65:9443/'; //server domain
+  final domainMqtt = '192.168.42.65';
   final portMqtt = 3000;
   final login = 'login'; //endpoints
   final recovery = 'recovery';

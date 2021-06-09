@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historySearchBloc.dart';
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,7 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   DateTimeRange range;
@@ -39,6 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
     JourneyProvider().getJourneys();
     return SafeArea(
         child: Scaffold(
+      key: _scaffoldKey,
       appBar: gradientAppBar2(
           TextLanguage.of(context).history, historyIcon(25.0, Colors.white),
           () {
@@ -118,6 +122,11 @@ class _HistoryPageState extends State<HistoryPage> {
                                     ),
                                     Expanded(child: Container()),
                                     GestureDetector(
+                                      onTap: () {
+                                        AlertsBloc().setAlert =
+                                            Alerts('Downloading', "Updating");
+                                        //JourneyProvider().
+                                      },
                                       child: Container(
                                         child: downloadIcon(40.0, blue1),
                                       ),
@@ -350,6 +359,14 @@ class _HistoryPageState extends State<HistoryPage> {
                       }),
                 ],
               )),
+              StreamBuilder(
+                stream: AlertsBloc().alert,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  WidgetsBinding.instance.addPostFrameCallback(
+                      (_) => onAfterBuild(_scaffoldKey.currentContext));
+                  return Container();
+                },
+              ),
             ],
           ),
         ),
