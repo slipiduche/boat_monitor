@@ -48,6 +48,41 @@ class JourneyProvider {
     }
   }
 
+  Future<Map<String, dynamic>> getJourneysBy() async {
+    Map<String, dynamic> decodedResp;
+
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http.get(
+          Uri.parse(Parameters()
+              .journeysUrl), //modificado en archivo fuente de la libreria para enviar body
+          body: {"token": _prefs.token}).then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+        print(decodedResp["JOURNEYS"]);
+        List<dynamic> _journeysJson = decodedResp["JOURNEYS"];
+        List<Journey> _journeys = [];
+        _journeysJson.forEach((element) {
+          Journey _journey = Journey.fromJson(element);
+          _journeys.add(_journey);
+        });
+        JourneysBloc().setJourneys = _journeys;
+
+        print(_journeys[0].ini);
+      });
+      return {'ok': true, 'message': 'success'};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
+
   Future<Map<String, dynamic>> changeJourneyName(
       String journeyName, int journeyId) async {
     Map<String, dynamic> decodedResp;
