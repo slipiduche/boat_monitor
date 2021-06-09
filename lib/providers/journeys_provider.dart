@@ -47,7 +47,7 @@ class JourneyProvider {
       return {'ok': false, 'message': e.toString()};
     }
   }
-
+  
   Future<Map<String, dynamic>> getJourneysBy() async {
     Map<String, dynamic> decodedResp;
 
