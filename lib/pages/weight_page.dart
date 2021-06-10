@@ -6,6 +6,7 @@ import 'package:boat_monitor/charts/line_chart.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
+import 'package:boat_monitor/models/historics_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
 
@@ -36,12 +37,12 @@ class _WeightPageState extends State<WeightPage> {
 
   @override
   Widget build(BuildContext context) {
-    Journey _weight = ModalRoute.of(context).settings.arguments;
+    JourneyCardArgument _weight = ModalRoute.of(context).settings.arguments;
 
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
-          _weight.boatName, boatIconBlue(25.0, Colors.white), () {
+          _weight.journey.boatName, boatIconBlue(25.0, Colors.white), () {
         Navigator.of(context)
             .pushReplacementNamed('journeyPage', arguments: _weight);
       }),
@@ -68,7 +69,7 @@ class _WeightPageState extends State<WeightPage> {
                             children: [
                               Expanded(child: Container()),
                               Text(
-                                'TRAVEL ${_weight.id}',
+                                'TRAVEL ${_weight.journey.id}',
                                 style: TextStyle(
                                     color: blue1,
                                     fontSize: statusSize,
@@ -104,7 +105,7 @@ class _WeightPageState extends State<WeightPage> {
                         Row(
                           children: [
                             Text(
-                              'Ice weight: ${_weight.id} Kgs',
+                              'Ice weight: ${_weight.journey.id} Kgs',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -118,7 +119,7 @@ class _WeightPageState extends State<WeightPage> {
                         Row(
                           children: [
                             Text(
-                              'Final weight: ${_weight.id} Kg',
+                              'Final weight: ${_weight.journey.id} Kg',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -140,7 +141,7 @@ class _WeightPageState extends State<WeightPage> {
                             ),
                           ],
                         ),
-                        Container(child: LineChartBasic()),
+                        Container(child: LineChartBasic(_weight.historics)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

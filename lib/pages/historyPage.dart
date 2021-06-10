@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/bloc/historySearchBloc.dart';
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
 
@@ -401,7 +402,8 @@ Widget _travelCard(BuildContext context, Journey journey) {
   return GestureDetector(
     onTap: () {
       Navigator.pushReplacementNamed(context, 'journeyPage',
-          arguments: journey);
+          arguments: JourneyCardArgument(
+              historics: HistoricsBloc().historicsValue, journey: journey));
     },
     child: Container(
         //height: 150,

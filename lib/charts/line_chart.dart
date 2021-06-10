@@ -1,12 +1,17 @@
+import 'package:boat_monitor/models/historics_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineChartBasic extends StatefulWidget {
+  Historics historics;
+  LineChartBasic(this.historics);
   @override
-  _LineChartBasicState createState() => _LineChartBasicState();
+  _LineChartBasicState createState() => _LineChartBasicState(historics);
 }
 
 class _LineChartBasicState extends State<LineChartBasic> {
+  Historics historics;
+  _LineChartBasicState(this.historics);
   List<Color> gradientColors = [
     Colors.blueAccent,
     Colors.blue,
@@ -108,7 +113,7 @@ class _LineChartBasicState extends State<LineChartBasic> {
                 return '500';
               case 5:
                 return '800';
-                case 7:
+              case 7:
                 return '1000';
             }
             return '';
@@ -118,7 +123,8 @@ class _LineChartBasicState extends State<LineChartBasic> {
         ),
       ),
       borderData: FlBorderData(
-          show: false, border: Border.all(color: Colors.blueAccent, width: 1.0)),
+          show: false,
+          border: Border.all(color: Colors.blueAccent, width: 1.0)),
       minX: 0,
       maxX: 9,
       minY: 0,

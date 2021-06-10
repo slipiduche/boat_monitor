@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:boat_monitor/models/historics_model.dart';
+
 final journeysTest = [
   {
     "boatId": 1,
@@ -125,4 +127,11 @@ class Journey {
         "eta": eta,
         "obs": obs,
       };
+}
+
+class JourneyCardArgument {
+  Journey journey;
+  Historics historics;
+
+  JourneyCardArgument({this.historics, this.journey});
 }
