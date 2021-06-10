@@ -10,17 +10,43 @@ class LineChartBasic extends StatefulWidget {
 }
 
 class _LineChartBasicState extends State<LineChartBasic> {
+  int samples = 1;
   Historics historics;
   _LineChartBasicState(this.historics);
   List<Color> gradientColors = [
     Colors.blueAccent,
     Colors.blue,
   ];
-
+  List<double> xData, yData;
+  List<FlSpot> spots;
   bool showAvg = false;
 
   @override
   Widget build(BuildContext context) {
+    xData = [];
+    yData = [];
+    spots = [];
+    /*
+    FlSpot(0, 3.44),
+            FlSpot(2.6, 3.44),
+            FlSpot(4.9, 3.44),
+            FlSpot(6.8, 3.44),
+            FlSpot(8, 3.44),
+            FlSpot(9.5, 3.44),
+            FlSpot(11, 3.44),
+     */
+    if (historics != null) {
+      samples = historics.historics.length;
+      historics.historics.forEach((element) {
+        xData.add(element.dt.hour.toDouble());
+        yData.add(element.contWeight.toDouble());
+        //spots.add(FlSpot(, y));
+      });
+      for (var i = 0; i < samples; i++) {
+        spots.add(FlSpot((i).toDouble(), yData[i]));
+      }
+    }
+
     return Stack(
       children: <Widget>[
         AspectRatio(
@@ -64,10 +90,18 @@ class _LineChartBasicState extends State<LineChartBasic> {
         show: true,
         drawVerticalLine: false,
         getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: Colors.blueAccent,
-            strokeWidth: 1,
-          );
+          if (value == 100.0 ||
+              value == 500.0 ||
+              value == 300.0 ||
+              value == 700.0 ||
+              value == 900.0) {
+            return FlLine(
+              color: Colors.blueAccent,
+              strokeWidth: 1,
+            );
+          } else {
+            return FlLine(strokeWidth: 0.0);
+          }
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
@@ -107,14 +141,16 @@ class _LineChartBasicState extends State<LineChartBasic> {
           ),
           getTitles: (value) {
             switch (value.toInt()) {
-              case 1:
-                return '200';
-              case 3:
+              case 100:
+                return '100';
+              case 300:
+                return '300';
+              case 500:
                 return '500';
-              case 5:
-                return '800';
-              case 7:
-                return '1000';
+              case 700:
+                return '700';
+              case 900:
+                return '900';
             }
             return '';
           },
@@ -126,20 +162,12 @@ class _LineChartBasicState extends State<LineChartBasic> {
           show: false,
           border: Border.all(color: Colors.blueAccent, width: 1.0)),
       minX: 0,
-      maxX: 9,
+      maxX: samples.toDouble() - 1,
       minY: 0,
-      maxY: 8,
+      maxY: 1000,
       lineBarsData: [
         LineChartBarData(
-          spots: [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 6.1),
-            FlSpot(8, 6.0),
-            FlSpot(8.5, 6.2),
-            FlSpot(9, 7),
-          ],
+          spots: spots,
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -228,15 +256,7 @@ class _LineChartBasicState extends State<LineChartBasic> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: [
-            FlSpot(0, 3.44),
-            FlSpot(2.6, 3.44),
-            FlSpot(4.9, 3.44),
-            FlSpot(6.8, 3.44),
-            FlSpot(8, 3.44),
-            FlSpot(9.5, 3.44),
-            FlSpot(11, 3.44),
-          ],
+          spots: spots,
           isCurved: true,
           colors: [
             ColorTween(begin: gradientColors[0], end: gradientColors[1])

@@ -40,13 +40,13 @@ class _JourneyPageState extends State<JourneyPage> {
 
   @override
   Widget build(BuildContext context) {
-    Journey _journey = ModalRoute.of(context).settings.arguments;
+    JourneyCardArgument _journey = ModalRoute.of(context).settings.arguments;
     //JourneyProvider().getJourneys();
-    HistoricsProvider().getHistorics(journeyId: _journey.id);
+    HistoricsProvider().getHistorics(journeyId: _journey.journey.id);
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
-          _journey.boatName, boatIconBlue(25.0, Colors.white), () {
+          _journey.journey.boatName, boatIconBlue(25.0, Colors.white), () {
         Navigator.of(context).pushReplacementNamed('historyPage');
       }),
       body: SingleChildScrollView(
@@ -76,7 +76,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                     children: [
                                       Expanded(child: Container()),
                                       Text(
-                                        'TRAVEL ${_journey.id}',
+                                        'TRAVEL ${_journey.journey.id}',
                                         style: TextStyle(
                                             color: blue1,
                                             fontSize: statusSize,
@@ -106,14 +106,14 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        'Sail: ${_journey.startUserNames}',
+                                        'Sail: ${_journey.journey.startUserNames}',
                                         style: TextStyle(
                                             color: blue1,
                                             fontSize: journeySailSize),
                                       ),
                                       Expanded(child: Container()),
                                       Text(
-                                        'Arrived: ${_journey.endUserNames}',
+                                        'Arrived: ${_journey.journey.endUserNames}',
                                         style: TextStyle(
                                             color: blue1,
                                             fontSize: journeySailSize),
