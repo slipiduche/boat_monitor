@@ -21,15 +21,19 @@ class HistoricsProvider {
         "journey_id": [journeyId]
       };
     }
+    final _req = jsonEncode({"token": _prefs.token});
+    final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      await http.get(
-          Uri.parse(Parameters()
-              .historicsUrl), //modificado en archivo fuente de la libreria para enviar body
-          body: {"token": _prefs.token}).then((response) {
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .historicsUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
@@ -37,7 +41,7 @@ class HistoricsProvider {
         //print(decodedResp["HISTORICS"]);
         List<dynamic> _historicsJson = decodedResp["HISTORICS"];
         Historics _historics;
-        
+
         _historics = historicsFromJson(response.body);
         HistoricsBloc().setHistorics = _historics;
       });

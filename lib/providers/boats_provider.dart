@@ -12,16 +12,20 @@ final _prefs = new UserPreferences();
 class BoatProvider {
   Future<Map<String, dynamic>> getBoats() async {
     Map<String, dynamic> decodedResp;
+    final _resp = jsonEncode({"token": _prefs.token});
+    final _resp2 = {"body": _resp};
 
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      await http.get(
-          Uri.parse(Parameters()
-              .boatsUrl), //modificado en archivo fuente de la libreria para enviar body
-          body: {"token": _prefs.token}).then((response) {
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .boatsUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _resp2)
+          .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
@@ -48,22 +52,25 @@ class BoatProvider {
   Future<Map<String, dynamic>> changeBoatName(
       String boatName, int boatId) async {
     Map<String, dynamic> decodedResp;
-    final _request=<String, dynamic> {
-            "token": _prefs.token,
-            "boat_name": boatName,
-            "tab":"BOATS",
-            "id": boatId.toString()
-          };
-          print(_request);
+    final _request = <String, dynamic>{
+      "token": _prefs.token,
+      "boat_name": boatName,
+      "tab": "BOATS",
+      "id": boatId.toString()
+    };
+    final _req2 = {"body": jsonEncode(_request)};
+    print(_request);
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      await http.post(
-          Uri.parse(Parameters()
-              .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
-          body:_request).then((response) {
+      await http
+          .post(
+              Uri.parse(Parameters()
+                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
