@@ -63,7 +63,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = new UserPreferences();
   await prefs.initPrefs();
-  
+
   runApp(MyApp());
 }
 
@@ -106,3 +106,4 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
     );
   }
 }
+//desde lap
