@@ -28,6 +28,7 @@ class _HistoryPageState extends State<HistoryPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   DateTimeRange range;
+  List<Journey> _journeysFiltered = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -122,10 +123,18 @@ class _HistoryPageState extends State<HistoryPage> {
                                     ),
                                     Expanded(child: Container()),
                                     GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
                                         AlertsBloc().setAlert =
                                             Alerts('Downloading', "Updating");
-                                        //JourneyProvider().
+                                        final _resp = await JourneyProvider()
+                                            .getJourneysBy(_journeysFiltered);
+                                        if (_resp['ok']) {
+                                          AlertsBloc().setAlert = Alerts(
+                                              _resp['message'], 'Updated');
+                                        } else {
+                                          AlertsBloc().setAlert =
+                                              Alerts(_resp['message'], 'Error');
+                                        }
                                       },
                                       child: Container(
                                         child: downloadIcon(40.0, blue1),
@@ -147,7 +156,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                     AsyncSnapshot<HistorySearch> snapshot) {
                                   List<Journey> _journeys =
                                       JourneysBloc().journeysValue;
-                                  List<Journey> _journeysFiltered = [];
+                                  _journeysFiltered = [];
                                   if (_journeys != null) {
                                     if (snapshot.hasData) {
                                       if (snapshot.data.range != null) {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
@@ -15,16 +16,19 @@ final _prefs = new UserPreferences();
 class JourneyProvider {
   Future<Map<String, dynamic>> getJourneys() async {
     Map<String, dynamic> decodedResp;
-
+    final _req = jsonEncode({"token": _prefs.token});
+    final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      await http.get(
-          Uri.parse(Parameters()
-              .journeysUrl), //modificado en archivo fuente de la libreria para enviar body
-          body: {"token": _prefs.token}).then((response) {
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .journeysUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
@@ -47,35 +51,40 @@ class JourneyProvider {
       return {'ok': false, 'message': e.toString()};
     }
   }
-  
-  Future<Map<String, dynamic>> getJourneysBy() async {
-    Map<String, dynamic> decodedResp;
 
+  Future<Map<String, dynamic>> getJourneysBy(List<Journey> journeys) async {
+    Map<String, dynamic> decodedResp;
+    List<int> idsRequest = [];
+    Map<String, dynamic> _request;
+    if (journeys.length > 0) {
+      journeys.forEach((element) {
+        idsRequest.add(element.id);
+      });
+      _request = {"token": _prefs.token, "id": idsRequest, "csv": true};
+    } else {
+      _request = {"token": _prefs.token, "csv": true};
+    }
+    print(jsonEncode(_request));
+    final req = jsonEncode(_request);
+    print(req);
+    final req2 = {"body": req};
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      await http.get(
-          Uri.parse(Parameters()
-              .journeysUrl), //modificado en archivo fuente de la libreria para enviar body
-          body: {"token": _prefs.token}).then((response) {
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .journeysUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: req2)
+          .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
-        print(decodedResp["JOURNEYS"]);
-        List<dynamic> _journeysJson = decodedResp["JOURNEYS"];
-        List<Journey> _journeys = [];
-        _journeysJson.forEach((element) {
-          Journey _journey = Journey.fromJson(element);
-          _journeys.add(_journey);
-        });
-        JourneysBloc().setJourneys = _journeys;
-
-        print(_journeys[0].ini);
       });
-      return {'ok': true, 'message': 'success'};
+      return {'ok': true, 'message': decodedResp["message"]};
     } catch (e) {
       print('error:');
       print(e.toString());
