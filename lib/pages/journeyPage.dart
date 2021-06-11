@@ -160,7 +160,8 @@ class _JourneyPageState extends State<JourneyPage> {
                                       context,
                                       temperatureIcon(50.0, blue1),
                                       'TEMPERTURE',
-                                      LineChartTemp()),
+                                      LineChartTemp(
+                                          HistoricsBloc().historicsValue)),
                                 ),
                                 GestureDetector(
                                   onTap: () {

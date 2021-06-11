@@ -1,12 +1,20 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:boat_monitor/models/historics_model.dart';
 
 class LineChartTemp extends StatefulWidget {
+  Historics historics;
+  LineChartTemp(this.historics);
   @override
-  _LineChartTempState createState() => _LineChartTempState();
+  _LineChartTempState createState() => _LineChartTempState(historics);
 }
 
 class _LineChartTempState extends State<LineChartTemp> {
+  int samples = 1;
+  Historics historics;
+  List<double> xData, yData;
+  List<FlSpot> spots;
+  _LineChartTempState(this.historics);
   List<Color> gradientColors = [
     Colors.blueAccent,
     Colors.blue,
@@ -16,6 +24,20 @@ class _LineChartTempState extends State<LineChartTemp> {
 
   @override
   Widget build(BuildContext context) {
+    xData = [];
+    yData = [];
+    spots = [];
+    if (historics != null) {
+      samples = historics.historics.length;
+      historics.historics.forEach((element) {
+        xData.add(element.dt.hour.toDouble());
+        yData.add(element.temp.toDouble());
+        //spots.add(FlSpot(, y));
+      });
+      for (var i = 0; i < samples; i++) {
+        spots.add(FlSpot((i).toDouble(), yData[i]));
+      }
+    }
     return Stack(
       children: <Widget>[
         AspectRatio(
@@ -102,13 +124,13 @@ class _LineChartTempState extends State<LineChartTemp> {
           ),
           getTitles: (value) {
             switch (value.toInt()) {
-              case 1:
+              case -20:
                 return '-10';
-              case 3:
+              case 0:
                 return '0';
-              case 5:
+              case 20:
                 return '10';
-              case 7:
+              case 40:
                 return '20';
             }
             return '';
@@ -121,20 +143,12 @@ class _LineChartTempState extends State<LineChartTemp> {
           show: false,
           border: Border.all(color: Colors.blueAccent, width: 1.0)),
       minX: 0,
-      maxX: 9,
-      minY: 0,
-      maxY: 8,
+      maxX: samples.toDouble(),
+      minY: -20,
+      maxY: 40,
       lineBarsData: [
         LineChartBarData(
-          spots: [
-            FlSpot(0, 8),
-            FlSpot(2.6, 7),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3),
-            FlSpot(8, 2),
-            FlSpot(8.5, 4),
-            FlSpot(9, 6),
-          ],
+          spots: spots,
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/historics_bloc.dart';
 
 import 'package:boat_monitor/charts/line_chart.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
@@ -140,7 +141,9 @@ class _TemperaturePageState extends State<TemperaturePage> {
                             ),
                           ],
                         ),
-                        Container(child: LineChartTemp()),
+                        Container(
+                            child:
+                                LineChartTemp(HistoricsBloc().historicsValue)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
