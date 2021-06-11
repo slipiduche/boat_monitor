@@ -81,10 +81,17 @@ class _LineChartTempState extends State<LineChartTemp> {
         show: true,
         drawVerticalLine: false,
         getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: Colors.blueAccent,
-            strokeWidth: 1,
-          );
+          if (value == 40.0 ||
+              value == 20.0 ||
+              value == 0.0 ||
+              value == -20.0) {
+            return FlLine(
+              color: Colors.blueAccent,
+              strokeWidth: 1,
+            );
+          } else {
+            return FlLine(strokeWidth: 0.0);
+          }
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
@@ -125,13 +132,13 @@ class _LineChartTempState extends State<LineChartTemp> {
           getTitles: (value) {
             switch (value.toInt()) {
               case -20:
-                return '-10';
+                return '-20';
               case 0:
                 return '0';
               case 20:
-                return '10';
-              case 40:
                 return '20';
+              case 40:
+                return '40';
             }
             return '';
           },
@@ -143,9 +150,9 @@ class _LineChartTempState extends State<LineChartTemp> {
           show: false,
           border: Border.all(color: Colors.blueAccent, width: 1.0)),
       minX: 0,
-      maxX: samples.toDouble(),
-      minY: -20,
-      maxY: 40,
+      maxX: samples.toDouble() - 1,
+      minY: -30,
+      maxY: 50,
       lineBarsData: [
         LineChartBarData(
           spots: spots,
@@ -179,10 +186,17 @@ class _LineChartTempState extends State<LineChartTemp> {
           );
         },
         getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: Colors.blueAccent,
-            strokeWidth: 1,
-          );
+          if (value == 40.0 ||
+              value == 20.0 ||
+              value == 0.0 ||
+              value == -20.0) {
+            return FlLine(
+              color: Colors.blueAccent,
+              strokeWidth: 1,
+            );
+          } else {
+            return FlLine(strokeWidth: 0.0);
+          }
         },
       ),
       titlesData: FlTitlesData(
