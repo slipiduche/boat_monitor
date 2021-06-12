@@ -7,7 +7,7 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
-onAfterBuild(BuildContext context) {
+onAfterBuild(BuildContext context, dynamic argument) {
   if (AlertsBloc().alertValue != null) {
     switch (AlertsBloc().alertValue.type) {
       case "Updating":
@@ -26,7 +26,8 @@ onAfterBuild(BuildContext context) {
           } else if (AuthBloc().routeValue == 'currentBoatPage') {
             Navigator.of(context).pushReplacementNamed('homePage');
           } else {
-            Navigator.of(context).pushReplacementNamed(AuthBloc().routeValue);
+            Navigator.of(context).pushReplacementNamed(AuthBloc().routeValue,
+                arguments: argument);
           }
         });
         AlertsBloc().deleteAlert();
@@ -43,7 +44,8 @@ onAfterBuild(BuildContext context) {
           } else if (AuthBloc().routeValue == 'currentBoatPage') {
             Navigator.of(context).pushReplacementNamed('homePage');
           } else {
-            Navigator.of(context).pushReplacementNamed(AuthBloc().routeValue);
+            Navigator.of(context).pushReplacementNamed(AuthBloc().routeValue,
+                arguments: argument);
           }
         });
         AlertsBloc().deleteAlert();

@@ -1,13 +1,16 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/journney_model.dart';
+import 'package:boat_monitor/providers/historics_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import '../styles/colors.dart';
@@ -18,6 +21,7 @@ class TemperaturePage extends StatefulWidget {
 }
 
 class _TemperaturePageState extends State<TemperaturePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
 
@@ -36,6 +40,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
     return SafeArea(
         child: Scaffold(
+      key: _scaffoldKey,
       appBar: gradientAppBar2(
           _temperature.journey.boatName, boatIconBlue(25.0, Colors.white), () {
         Navigator.of(context)
@@ -75,6 +80,22 @@ class _TemperaturePageState extends State<TemperaturePage> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   GestureDetector(
+                                    onTap: () async {
+                                      AlertsBloc().setAlert =
+                                          Alerts('Downloading', "Updating");
+                                      final _resp = await HistoricsProvider()
+                                          .getHistorics(
+                                              journeyId:
+                                                  _temperature.journey.id,
+                                              download: true);
+                                      if (_resp['ok']) {
+                                        AlertsBloc().setAlert =
+                                            Alerts(_resp['message'], 'Updated');
+                                      } else {
+                                        AlertsBloc().setAlert =
+                                            Alerts(_resp['message'], 'Error');
+                                      }
+                                    },
                                     child: Container(
                                       child: downloadIcon(40.0, blue1),
                                     ),
@@ -156,6 +177,18 @@ class _TemperaturePageState extends State<TemperaturePage> {
                   ),
                 ],
               )),
+              StreamBuilder(
+                stream: AlertsBloc().alert,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) =>
+                      onAfterBuild(
+                          _scaffoldKey.currentContext,
+                          JourneyCardArgument(
+                              journey: _temperature.journey,
+                              historics: HistoricsBloc().historicsValue)));
+                  return Container();
+                },
+              )
             ],
           ),
         ),

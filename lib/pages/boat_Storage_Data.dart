@@ -134,8 +134,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
                   StreamBuilder(
                     stream: AlertsBloc().alert,
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      WidgetsBinding.instance
-                          .addPostFrameCallback((_) => onAfterBuild(context));
+                      WidgetsBinding.instance.addPostFrameCallback(
+                          (_) => onAfterBuild(context, 1));
                       return Container();
                     },
                   ),

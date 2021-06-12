@@ -12,7 +12,8 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class HistoricsProvider {
-  Future<Map<String, dynamic>> getHistorics({int journeyId}) async {
+  Future<Map<String, dynamic>> getHistorics(
+      {int journeyId, bool download = false}) async {
     Map<String, dynamic> decodedResp;
     Object bodyRequest = {"token": _prefs.token};
     if (journeyId != null) {
@@ -21,7 +22,14 @@ class HistoricsProvider {
         "journey_id": [journeyId]
       };
     }
-    final _req = jsonEncode({"token": _prefs.token});
+    if (download) {
+      bodyRequest = {
+        "token": _prefs.token,
+        "journey_id": [journeyId],
+        "csv": true
+      };
+    }
+    final _req = jsonEncode(bodyRequest);
     final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
@@ -39,13 +47,15 @@ class HistoricsProvider {
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
         //print(decodedResp["HISTORICS"]);
-        List<dynamic> _historicsJson = decodedResp["HISTORICS"];
-        Historics _historics;
+        if (!download) {
+          List<dynamic> _historicsJson = decodedResp["HISTORICS"];
+          Historics _historics;
 
-        _historics = historicsFromJson(response.body);
-        HistoricsBloc().setHistorics = _historics;
+          _historics = historicsFromJson(response.body);
+          HistoricsBloc().setHistorics = _historics;
+        }
       });
-      return {'ok': true, 'message': 'success'};
+      return {'ok': true, 'message': decodedResp['message']};
     } catch (e) {
       print('error:');
       print(e.toString());

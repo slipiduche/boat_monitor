@@ -64,7 +64,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 stream: AlertsBloc().alert,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   WidgetsBinding.instance
-                      .addPostFrameCallback((_) => onAfterBuild(context));
+                      .addPostFrameCallback((_) => onAfterBuild(context, 1));
                   return Container();
                 },
               ),

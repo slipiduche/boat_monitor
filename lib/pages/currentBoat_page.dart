@@ -596,8 +596,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                 StreamBuilder(
                   stream: AlertsBloc().alert,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    WidgetsBinding.instance.addPostFrameCallback(
-                        (_) => onAfterBuild(_scaffoldKey.currentContext));
+                    WidgetsBinding.instance.addPostFrameCallback((_) =>
+                        onAfterBuild(_scaffoldKey.currentContext, arguments));
                     return Container();
                   },
                 ),

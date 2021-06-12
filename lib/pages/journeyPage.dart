@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/charts/line_chart.dart';
@@ -9,9 +10,11 @@ import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
 import 'package:boat_monitor/providers/historics_provider.dart';
+import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -24,6 +27,7 @@ class JourneyPage extends StatefulWidget {
 }
 
 class _JourneyPageState extends State<JourneyPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   LatLng _position;
@@ -43,6 +47,7 @@ class _JourneyPageState extends State<JourneyPage> {
     HistoricsProvider().getHistorics(journeyId: _journey.journey.id);
     return SafeArea(
         child: Scaffold(
+      key: _scaffoldKey,
       appBar: gradientAppBar2(
           _journey.journey.boatName, boatIconBlue(25.0, Colors.white), () {
         Navigator.of(context).pushReplacementNamed('historyPage');
@@ -93,6 +98,24 @@ class _JourneyPageState extends State<JourneyPage> {
                                             MainAxisAlignment.end,
                                         children: [
                                           GestureDetector(
+                                            onTap: () async {
+                                              AlertsBloc().setAlert = Alerts(
+                                                  'Downloading', "Updating");
+                                              final _resp =
+                                                  await HistoricsProvider()
+                                                      .getHistorics(
+                                                          journeyId: _journey
+                                                              .journey.id,
+                                                          download: true);
+                                              if (_resp['ok']) {
+                                                AlertsBloc().setAlert = Alerts(
+                                                    _resp['message'],
+                                                    'Updated');
+                                              } else {
+                                                AlertsBloc().setAlert = Alerts(
+                                                    _resp['message'], 'Error');
+                                              }
+                                            },
                                             child: Container(
                                               child: downloadIcon(40.0, blue1),
                                             ),
@@ -202,6 +225,18 @@ class _JourneyPageState extends State<JourneyPage> {
                       }),
                 ],
               )),
+              StreamBuilder(
+                stream: AlertsBloc().alert,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) =>
+                      onAfterBuild(
+                          _scaffoldKey.currentContext,
+                          JourneyCardArgument(
+                              journey: _journey.journey,
+                              historics: HistoricsBloc().historicsValue)));
+                  return Container();
+                },
+              ),
             ],
           ),
         ),
