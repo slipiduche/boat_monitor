@@ -35,6 +35,7 @@ class Parameters {
   final boats = 'boats';
   final journeys = 'journeys';
   final files = 'files';
+  final filesZip = 'files/zip';
   final create = 'create';
   final signUp = 'signup';
   final modify = 'modify';
@@ -66,6 +67,10 @@ class Parameters {
 
   String get filesUrl {
     return domain + files;
+  }
+
+  String get filesZipUrl {
+    return domain + filesZip;
   }
 
   String get createUrl {

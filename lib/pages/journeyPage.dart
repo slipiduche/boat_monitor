@@ -102,11 +102,10 @@ class _JourneyPageState extends State<JourneyPage> {
                                               AlertsBloc().setAlert = Alerts(
                                                   'Downloading', "Updating");
                                               final _resp =
-                                                  await HistoricsProvider()
-                                                      .getHistorics(
+                                                  await JourneyProvider()
+                                                      .getFilesZip(
                                                           journeyId: _journey
-                                                              .journey.id,
-                                                          download: true);
+                                                              .journey.id);
                                               if (_resp['ok']) {
                                                 AlertsBloc().setAlert = Alerts(
                                                     _resp['message'],
