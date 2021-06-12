@@ -3,14 +3,17 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
+import 'package:boat_monitor/bloc/pictures_bloc.dart';
 import 'package:boat_monitor/charts/line_chart.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
+import 'package:boat_monitor/models/files_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
 import 'package:boat_monitor/providers/historics_provider.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
+import 'package:boat_monitor/providers/pictures_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -43,8 +46,8 @@ class _JourneyPageState extends State<JourneyPage> {
   @override
   Widget build(BuildContext context) {
     JourneyCardArgument _journey = ModalRoute.of(context).settings.arguments;
-    //JourneyProvider().getJourneys();
     HistoricsProvider().getHistorics(journeyId: _journey.journey.id);
+    PicturesProvider().getPictures(journeyId: _journey.journey.id);
     return SafeArea(
         child: Scaffold(
       key: _scaffoldKey,
@@ -209,11 +212,15 @@ class _JourneyPageState extends State<JourneyPage> {
                                       context,
                                       picturesIcon(50.0, blue1),
                                       'PICTURES',
-                                      picturesPreview(context, [
-                                        'https://picsum.photos/id/1011/200/300',
-                                        'https://picsum.photos/id/1011/200/300',
-                                        'https://picsum.photos/id/1011/200/300'
-                                      ])),
+                                      StreamBuilder(
+                                          stream: PicturesBloc().pictures,
+                                          builder: (context,
+                                              AsyncSnapshot<Files> snapshot) {
+                                            final picturesPreviewList =
+                                                snapshot.data;
+                                            return picturesPreview(
+                                                context, picturesPreviewList);
+                                          })),
                                 ),
                               ],
                             ),

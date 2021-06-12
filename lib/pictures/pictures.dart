@@ -1,3 +1,5 @@
+import 'package:boat_monitor/models/files_model.dart';
+import 'package:boat_monitor/providers/parameters.dart';
 import 'package:flutter/material.dart';
 
 Widget picture(BuildContext context, String imageUrl) {
@@ -25,16 +27,17 @@ Widget picture2(BuildContext context, String imageUrl) {
   );
 }
 
-Widget picturesPreview(BuildContext context, List<String> urls) {
+Widget picturesPreview(BuildContext context, Files pictures) {
+  print(Parameters().domain + pictures.files[0].flUrl);
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     mainAxisSize: MainAxisSize.min,
     children: [
-      picture(context, urls[0]),
+      picture(context, Parameters().domain + pictures.files[0].flUrl),
       SizedBox(
         width: 10.0,
       ),
-      picture(context, urls[1]),
+      picture(context, Parameters().domain + pictures.files[1].flUrl),
       //picture(context, urls[2]),
     ],
   );
