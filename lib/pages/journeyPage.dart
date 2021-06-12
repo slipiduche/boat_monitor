@@ -63,6 +63,13 @@ class _JourneyPageState extends State<JourneyPage> {
                       stream: HistoricsBloc().historics,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          // controller.move(
+                          //     latLongFromString(HistoricsBloc()
+                          //         .historicsValue
+                          //         .historics
+                          //         .last
+                          //         .bLocation),
+                          //     13.0);
                           return Container(
                             child: Column(
                               children: [
@@ -139,14 +146,23 @@ class _JourneyPageState extends State<JourneyPage> {
                                   onTap: () {
                                     Navigator.of(context).pushReplacementNamed(
                                         'locationPage',
-                                        arguments: _journey);
+                                        arguments: JourneyCardArgument(
+                                            journey: _journey.journey,
+                                            historics: HistoricsBloc()
+                                                .historicsValue));
                                   },
                                   child: journeyCard(
                                       context,
                                       locationIcon(50.0, blue1),
                                       'LOCATION',
                                       createFlutterMap(
-                                          context, _position, controller)),
+                                          context,
+                                          latLongFromString(HistoricsBloc()
+                                              .historicsValue
+                                              .historics
+                                              .last
+                                              .bLocation),
+                                          controller)),
                                 ),
                                 GestureDetector(
                                   onTap: () {
