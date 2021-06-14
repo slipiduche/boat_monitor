@@ -3,14 +3,16 @@ import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
 class DiskSpace extends StatefulWidget {
-  DiskSpace({Key key}) : super(key: key);
-
+  DiskSpace(this.usedStorage, {Key key}) : super(key: key);
+  double usedStorage;
   @override
-  _DiskSpaceState createState() => _DiskSpaceState();
+  _DiskSpaceState createState() => _DiskSpaceState(this.usedStorage);
 }
 
 class _DiskSpaceState extends State<DiskSpace>
     with SingleTickerProviderStateMixin {
+  double used;
+  _DiskSpaceState(this.used);
   AnimationController _colorController;
   @override
   void initState() {
@@ -39,7 +41,7 @@ class _DiskSpaceState extends State<DiskSpace>
           (marginInt * 2) -
           4,
       height: 19.0,
-      child: diskSpace(context, 20.0, 100.0),
+      child: diskSpace(context, used, 100.0),
     );
   }
 

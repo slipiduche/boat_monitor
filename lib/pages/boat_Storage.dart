@@ -25,7 +25,7 @@ class BoatStoragePage extends StatefulWidget {
 class _BoatStoragePageState extends State<BoatStoragePage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-
+  double _usedStorage = 20.0;
   @override
   void initState() {
     // TODO: implement initState
@@ -36,7 +36,9 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
 
   @override
   Widget build(BuildContext context) {
-    BoatData _boat = ModalRoute.of(context).settings.arguments;
+    StorageArgument _storage = ModalRoute.of(context).settings.arguments;
+    BoatData _boat = _storage.boat;
+    _usedStorage = _storage.usedStorage;
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
@@ -103,7 +105,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                       ),
                     ],
                   ),
-                  DiskSpace(),
+                  DiskSpace(_usedStorage),
                   SizedBox(
                     height: 10.0,
                   ),

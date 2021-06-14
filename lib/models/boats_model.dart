@@ -118,3 +118,9 @@ class BoatCardArguments {
 
   BoatCardArguments({this.boat, this.journey});
 }
+
+class StorageArgument {
+  BoatData boat;
+  double usedStorage;
+  StorageArgument({this.boat, this.usedStorage});
+}

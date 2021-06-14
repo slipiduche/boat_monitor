@@ -184,7 +184,8 @@ Widget _boatDiskCard(BuildContext context, BoatData boat, double storage) {
       if (!focus.hasPrimaryFocus && focus.hasFocus) {
         FocusManager.instance.primaryFocus.unfocus();
       }
-      Navigator.of(context).pushNamed('boatStoragePage', arguments: boat);
+      Navigator.of(context).pushNamed('boatStoragePage',
+          arguments: StorageArgument(boat: boat, usedStorage: storage));
     },
     child: Container(
       height: 100.0,
@@ -216,7 +217,7 @@ Widget _boatDiskCard(BuildContext context, BoatData boat, double storage) {
                   height: 10.0,
                 ),
                 Row(
-                  children: [DiskSpace()],
+                  children: [DiskSpace(storage)],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
