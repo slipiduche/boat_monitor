@@ -91,7 +91,7 @@ class _WeightPageState extends State<WeightPage> {
                                           Alerts('Downloading', "Updating");
                                       final _resp = await HistoricsProvider()
                                           .getHistorics(
-                                              journeyId: _weight.journey.id,
+                                              journeyId: [_weight.journey.id],
                                               download: true);
                                       if (_resp['ok']) {
                                         AlertsBloc().setAlert =

@@ -13,20 +13,22 @@ final _prefs = new UserPreferences();
 
 class HistoricsProvider {
   Future<Map<String, dynamic>> getHistorics(
-      {int journeyId, bool download = false}) async {
+      {List<int> journeyId, bool download = false, bool last = false}) async {
     Map<String, dynamic> decodedResp;
     Object bodyRequest = {"token": _prefs.token};
     if (journeyId != null) {
       bodyRequest = {
         "token": _prefs.token,
-        "journey_id": [journeyId]
+        "journey_id": [journeyId],
+        "last": last
       };
     }
     if (download) {
       bodyRequest = {
         "token": _prefs.token,
         "journey_id": [journeyId],
-        "csv": true
+        "csv": true,
+        "last": last
       };
     }
     final _req = jsonEncode(bodyRequest);

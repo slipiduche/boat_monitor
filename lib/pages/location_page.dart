@@ -102,7 +102,7 @@ class _LocationPageState extends State<LocationPage> {
                                         Alerts('Downloading', "Updating");
                                     final _resp = await HistoricsProvider()
                                         .getHistorics(
-                                            journeyId: _location.journey.id,
+                                            journeyId: [_location.journey.id],
                                             download: true);
                                     if (_resp['ok']) {
                                       AlertsBloc().setAlert =

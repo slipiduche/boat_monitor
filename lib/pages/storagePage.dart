@@ -3,12 +3,14 @@ import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/bloc/storageSearchBloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/providers/boats_provider.dart';
+import 'package:boat_monitor/providers/historics_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -26,15 +28,30 @@ class StoragePage extends StatefulWidget {
 class _StoragePageState extends State<StoragePage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
+  List<double> listStorage = [];
 
   @override
-  void initState() {
+  void initState() async {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
-    BoatProvider().getBoats();
+    await BoatProvider().getBoats();
     AuthBloc().setRoute = 'storagePage';
     StorageSearchBloc().setStorageSearch = '';
+    final _boats = BoatsBloc().boatsValue;
+    List<int> _listId;
+    await HistoricsProvider().getHistorics(journeyId: _listId, last: true);
+    final historicsStorage = HistoricsBloc().historicsValue;
+    _boats.forEach((element) {
+      historicsStorage.historics.lastWhere((historic) {
+        if (historic.boatId == element.id) {
+          listStorage.add(historic.dsk);
+          return true;
+        } else {
+          return false;
+        }
+      });
+    });
   }
 
   @override
@@ -124,49 +141,43 @@ class _StoragePageState extends State<StoragePage> {
       bottomNavigationBar: botomBar(2, context),
     ));
   }
-}
 
-Widget makeBoatStorageList(BuildContext context, List<BoatData> boats) {
-  if (boats.length == 0) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20.0,
-          ),
-          Text(
-            'No data',
-            style: TextStyle(color: blue1, fontSize: correoSize),
-            textAlign: TextAlign.center,
-          ),
-          Divider(
-            thickness: 1.0,
-            color: gray1,
-          )
-        ],
-      ),
-    );
-  } else {
-    return Container(
-      height: MediaQuery.of(context).size.height - 210,
-      child: ListView.builder(
-          itemCount: boats.length,
-          itemBuilder: (context, index) {
-            return _boatDiskCard(context, boats[index]);
-          }),
-    );
+  Widget makeBoatStorageList(BuildContext context, List<BoatData> boats) {
+    if (boats.length == 0) {
+      return Container(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'No data',
+              style: TextStyle(color: blue1, fontSize: correoSize),
+              textAlign: TextAlign.center,
+            ),
+            Divider(
+              thickness: 1.0,
+              color: gray1,
+            )
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        height: MediaQuery.of(context).size.height - 210,
+        child: ListView.builder(
+            itemCount: boats.length,
+            itemBuilder: (context, index) {
+              return _boatDiskCard(context, boats[index], listStorage[index]);
+            }),
+      );
+    }
   }
-  return Container(
-    height: MediaQuery.of(context).size.height - 206,
-    child: ListView.builder(
-        itemCount: boats.length,
-        itemBuilder: (context, index) {
-          return _boatDiskCard(context, boats[index]);
-        }),
-  );
 }
 
-Widget _boatDiskCard(BuildContext context, BoatData boat) {
+Widget _boatDiskCard(BuildContext context, BoatData boat, double storage) {
+  final _maxStorage = boat.maxSt;
+  final _usedStorage = storage * _maxStorage / 100;
   return GestureDetector(
     onTap: () {
       final FocusScopeNode focus = FocusScope.of(context);
@@ -211,7 +222,7 @@ Widget _boatDiskCard(BuildContext context, BoatData boat) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '${0.2 * 100} %',
+                      '$storage %',
                       style: TextStyle(
                           color: blue1,
                           fontWeight: FontWeight.bold,
@@ -232,7 +243,7 @@ Widget _boatDiskCard(BuildContext context, BoatData boat) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '20GB/240GB',
+                      '$_usedStorage/$_maxStorage',
                       style: TextStyle(
                           color: blue1,
                           fontWeight: FontWeight.bold,
