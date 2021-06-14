@@ -2,10 +2,13 @@ import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/storageSearchBloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
+import 'package:boat_monitor/providers/boats_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -29,7 +32,9 @@ class _StoragePageState extends State<StoragePage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    BoatProvider().getBoats();
     AuthBloc().setRoute = 'storagePage';
+    StorageSearchBloc().setStorageSearch = '';
   }
 
   @override
@@ -38,57 +43,82 @@ class _StoragePageState extends State<StoragePage> {
         child: Scaffold(
       appBar: gradientAppBar3(TextLanguage.of(context).storage,
           storageIcon(25.0, Colors.white), () {}),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Expanded(
-                child: Column(
-              children: [
-                _storageSearch(context),
-                SizedBox(
-                  height: 10.0,
-                ),
-                StreamBuilder(
-                  stream: StorageSearchBloc().storageSearch,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      return Column(
-                        children: [
-                          _boatDiskCard(
-                              context, Journey(boatName: 'Boat1'), 'Boat1')
-                        ],
-                      );
-                    } else {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20.0,
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                  child: Column(
+                children: [
+                  _storageSearch(context),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  StreamBuilder(
+                      stream: BoatsBloc().boats,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Container(
+                            child: StreamBuilder(
+                              stream: StorageSearchBloc().storageSearch,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                List<BoatData> _boats = BoatsBloc().boatsValue;
+                                List<BoatData> _boatsFiltered = [];
+                                List<BoatData> _boatsFiltered2 = [];
+                                if (snapshot.hasData) {
+                                  _boats.forEach((element) {
+                                    if (element.boatName.toLowerCase().contains(
+                                        snapshot.data.toLowerCase())) {
+                                      print(element.boatName);
+                                      print(snapshot.data.toLowerCase());
+                                      _boatsFiltered.add(element);
+                                    }
+                                  });
+                                } else {
+                                  _boatsFiltered = _boats;
+                                }
+                                return Column(
+                                  children: [
+                                    makeBoatStorageList(context, _boats)
+                                  ],
+                                );
+                              },
                             ),
-                            Text(
-                              'No data',
-                              style:
-                                  TextStyle(color: blue1, fontSize: correoSize),
-                              textAlign: TextAlign.center,
+                          );
+                        } else {
+                          return Container(
+                            margin:
+                                EdgeInsets.symmetric(horizontal: marginExt1),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  'No data',
+                                  style: TextStyle(
+                                      color: blue1, fontSize: correoSize),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Divider(
+                                  thickness: 1.0,
+                                  color: gray1,
+                                )
+                              ],
                             ),
-                            Divider(
-                              thickness: 1.0,
-                              color: gray1,
-                            )
-                          ],
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ],
-            )),
-          ],
+                          );
+                        }
+                      }),
+                ],
+              )),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: botomBar(2, context),
@@ -96,14 +126,54 @@ class _StoragePageState extends State<StoragePage> {
   }
 }
 
-Widget _boatDiskCard(BuildContext context, Journey journey, String boatName) {
+Widget makeBoatStorageList(BuildContext context, List<BoatData> boats) {
+  if (boats.length == 0) {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20.0,
+          ),
+          Text(
+            'No data',
+            style: TextStyle(color: blue1, fontSize: correoSize),
+            textAlign: TextAlign.center,
+          ),
+          Divider(
+            thickness: 1.0,
+            color: gray1,
+          )
+        ],
+      ),
+    );
+  } else {
+    return Container(
+      height: MediaQuery.of(context).size.height - 210,
+      child: ListView.builder(
+          itemCount: boats.length,
+          itemBuilder: (context, index) {
+            return _boatDiskCard(context, boats[index]);
+          }),
+    );
+  }
+  return Container(
+    height: MediaQuery.of(context).size.height - 206,
+    child: ListView.builder(
+        itemCount: boats.length,
+        itemBuilder: (context, index) {
+          return _boatDiskCard(context, boats[index]);
+        }),
+  );
+}
+
+Widget _boatDiskCard(BuildContext context, BoatData boat) {
   return GestureDetector(
     onTap: () {
       final FocusScopeNode focus = FocusScope.of(context);
       if (!focus.hasPrimaryFocus && focus.hasFocus) {
         FocusManager.instance.primaryFocus.unfocus();
       }
-      Navigator.of(context).pushNamed('boatStoragePage', arguments: journey);
+      Navigator.of(context).pushNamed('boatStoragePage', arguments: boat);
     },
     child: Container(
       height: 100.0,
@@ -123,7 +193,7 @@ Widget _boatDiskCard(BuildContext context, Journey journey, String boatName) {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      boatName,
+                      boat.boatName,
                       style: TextStyle(
                           color: blue1,
                           fontWeight: FontWeight.bold,
