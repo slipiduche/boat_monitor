@@ -4,6 +4,7 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pages/boat_Storage_Data.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
@@ -35,7 +36,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
 
   @override
   Widget build(BuildContext context) {
-    Journey _boat = ModalRoute.of(context).settings.arguments;
+    BoatData _boat = ModalRoute.of(context).settings.arguments;
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
