@@ -31,10 +31,16 @@ class _StoragePageState extends State<StoragePage> {
   List<double> listStorage = [];
 
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    HistoricsBloc().setHistorics = null;
+
+    _predata();
+  }
+
+  void _predata() async {
     await BoatProvider().getBoats();
     AuthBloc().setRoute = 'storagePage';
     StorageSearchBloc().setStorageSearch = '';
@@ -80,34 +86,67 @@ class _StoragePageState extends State<StoragePage> {
                       stream: BoatsBloc().boats,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Container(
-                            child: StreamBuilder(
-                              stream: StorageSearchBloc().storageSearch,
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                List<BoatData> _boats = BoatsBloc().boatsValue;
-                                List<BoatData> _boatsFiltered = [];
-                                List<BoatData> _boatsFiltered2 = [];
+                          return StreamBuilder<Object>(
+                              stream: HistoricsBloc().historics,
+                              builder: (context, snapshot) {
                                 if (snapshot.hasData) {
-                                  _boats.forEach((element) {
-                                    if (element.boatName.toLowerCase().contains(
-                                        snapshot.data.toLowerCase())) {
-                                      print(element.boatName);
-                                      print(snapshot.data.toLowerCase());
-                                      _boatsFiltered.add(element);
-                                    }
-                                  });
+                                  return Container(
+                                    child: StreamBuilder(
+                                      stream: StorageSearchBloc().storageSearch,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        List<BoatData> _boats =
+                                            BoatsBloc().boatsValue;
+                                        List<BoatData> _boatsFiltered = [];
+                                        List<BoatData> _boatsFiltered2 = [];
+                                        if (snapshot.hasData) {
+                                          _boats.forEach((element) {
+                                            if (element.boatName
+                                                .toLowerCase()
+                                                .contains(snapshot.data
+                                                    .toLowerCase())) {
+                                              print(element.boatName);
+                                              print(
+                                                  snapshot.data.toLowerCase());
+                                              _boatsFiltered.add(element);
+                                            }
+                                          });
+                                        } else {
+                                          _boatsFiltered = _boats;
+                                        }
+                                        return Column(
+                                          children: [
+                                            makeBoatStorageList(context, _boats)
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  );
                                 } else {
-                                  _boatsFiltered = _boats;
+                                  return Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: marginExt1),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        Text(
+                                          'No data',
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontSize: correoSize),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Divider(
+                                          thickness: 1.0,
+                                          color: gray1,
+                                        )
+                                      ],
+                                    ),
+                                  );
                                 }
-                                return Column(
-                                  children: [
-                                    makeBoatStorageList(context, _boats)
-                                  ],
-                                );
-                              },
-                            ),
-                          );
+                              });
                         } else {
                           return Container(
                             margin:
@@ -244,7 +283,7 @@ Widget _boatDiskCard(BuildContext context, BoatData boat, double storage) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '$_usedStorage/$_maxStorage',
+                      '$_usedStorage GB/$_maxStorage GB',
                       style: TextStyle(
                           color: blue1,
                           fontWeight: FontWeight.bold,

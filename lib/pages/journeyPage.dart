@@ -218,8 +218,12 @@ class _JourneyPageState extends State<JourneyPage> {
                                               AsyncSnapshot<Files> snapshot) {
                                             final picturesPreviewList =
                                                 snapshot.data;
-                                            return picturesPreview(
-                                                context, picturesPreviewList);
+                                            if (snapshot.hasData) {
+                                              return picturesPreview(
+                                                  context, picturesPreviewList);
+                                            } else {
+                                              return Container();
+                                            }
                                           })),
                                 ),
                               ],
