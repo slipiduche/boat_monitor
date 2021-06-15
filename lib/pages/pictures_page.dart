@@ -50,7 +50,14 @@ class _PicturesPageState extends State<PicturesPage>
   Widget build(BuildContext context) {
     PicturePageArgument _pictures = ModalRoute.of(context).settings.arguments;
     _picturesUrl = _pictures.pictures.files;
-
+    final listFiltered = _picturesUrl.where((element) {
+      if (element.cam == (_tabController.index + 1)) {
+        return true;
+      } else {
+        return false;
+      }
+    }).toList();
+    print(listFiltered);
     //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
     return SafeArea(
         child: Scaffold(
@@ -194,7 +201,7 @@ class _PicturesPageState extends State<PicturesPage>
                             picturesIcon(20.0, blue1),
                             SizedBox(width: 3.0),
                             Text(
-                              '${_picturesUrl.length} Pictures',
+                              '${listFiltered.length} Pictures',
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: blue1,
@@ -216,7 +223,7 @@ class _PicturesPageState extends State<PicturesPage>
                         height: 20.0,
                       ),
                       Builder(builder: (context) {
-                        if (_gridView) {
+                        if (_gridView && (listFiltered.length > 0)) {
                           return Container(
                               height: MediaQuery.of(context).size.height - 338,
                               width: MediaQuery.of(context).size.width -
@@ -230,12 +237,12 @@ class _PicturesPageState extends State<PicturesPage>
                                     child: picture2(
                                         context,
                                         Parameters().domain +
-                                            _picturesUrl[index].flUrl,
+                                            listFiltered[index].flUrl,
                                         false),
                                   );
                                 }),
                               ));
-                        } else
+                        } else if (listFiltered.length > 0) {
                           return Container(
                             height: MediaQuery.of(context).size.height - 338,
                             width: MediaQuery.of(context).size.width -
@@ -248,12 +255,19 @@ class _PicturesPageState extends State<PicturesPage>
                                   child: picture2(
                                       context,
                                       Parameters().domain +
-                                          _picturesUrl[index].flUrl,
+                                          listFiltered[index].flUrl,
                                       false),
                                 );
                               }),
                             ),
                           );
+                        } else {
+                          return Container(
+                            height: MediaQuery.of(context).size.height - 338,
+                            width: MediaQuery.of(context).size.width -
+                                (marginExt1 * 2),
+                          );
+                        }
                       })
                     ],
                   ),
