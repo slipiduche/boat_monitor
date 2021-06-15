@@ -206,7 +206,10 @@ class _JourneyPageState extends State<JourneyPage> {
                                   onTap: () {
                                     Navigator.of(context).pushReplacementNamed(
                                         'picturesPage',
-                                        arguments: _journey);
+                                        arguments: PicturePageArgument(
+                                            journeyCardArgument: _journey,
+                                            pictures:
+                                                PicturesBloc().picturesValue));
                                   },
                                   child: journeyCard(
                                       context,

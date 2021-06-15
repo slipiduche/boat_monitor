@@ -3,9 +3,11 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/files_model.dart';
 
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
+import 'package:boat_monitor/providers/parameters.dart';
 
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
@@ -27,6 +29,7 @@ class _PicturesPageState extends State<PicturesPage>
   bool _gridView = true;
   //TickerProvider _tickerProvider=TickerProvider();
   TabController _tabController;
+  List<FileElement> _picturesUrl = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -45,12 +48,14 @@ class _PicturesPageState extends State<PicturesPage>
 
   @override
   Widget build(BuildContext context) {
-    Journey _pictures = ModalRoute.of(context).settings.arguments;
+    PicturePageArgument _pictures = ModalRoute.of(context).settings.arguments;
+    _picturesUrl = _pictures.pictures.files;
+
     //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
     return SafeArea(
         child: Scaffold(
-      appBar: gradientAppBar2(
-          _pictures.boatName, boatIconBlue(25.0, Colors.white), () {
+      appBar: gradientAppBar2(_pictures.journeyCardArgument.journey.boatName,
+          boatIconBlue(25.0, Colors.white), () {
         Navigator.of(context)
             .pushReplacementNamed('journeyPage', arguments: _pictures);
       }),
@@ -76,7 +81,7 @@ class _PicturesPageState extends State<PicturesPage>
                           children: [
                             Expanded(child: Container()),
                             Text(
-                              'TRAVEL ${_pictures.id}',
+                              'TRAVEL ${_pictures.journeyCardArgument.journey.id}',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: statusSize,
@@ -218,11 +223,15 @@ class _PicturesPageState extends State<PicturesPage>
                                   (marginExt1 * 2),
                               child: GridView.count(
                                 crossAxisCount: 3,
-                                children: List.generate(16, (index) {
+                                children:
+                                    List.generate(_picturesUrl.length, (index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(1.0),
-                                    child: picture2(context,
-                                        'https://picsum.photos/id/1011/40/40'),
+                                    child: picture(
+                                        context,
+                                        Parameters().domain +
+                                            _picturesUrl[index].flUrl,
+                                        false),
                                   );
                                 }),
                               ));
@@ -232,11 +241,15 @@ class _PicturesPageState extends State<PicturesPage>
                             width: MediaQuery.of(context).size.width -
                                 (marginExt1 * 2),
                             child: ListView(
-                              children: List.generate(16, (index) {
+                              children:
+                                  List.generate(_picturesUrl.length, (index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(1.0),
-                                  child: picture2(context,
-                                      'https://picsum.photos/id/1011/100/100'),
+                                  child: picture(
+                                      context,
+                                      Parameters().domain +
+                                          _picturesUrl[index].flUrl,
+                                      false),
                                 );
                               }),
                             ),

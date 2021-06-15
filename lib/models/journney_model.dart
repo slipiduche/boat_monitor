@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:boat_monitor/models/files_model.dart';
 import 'package:boat_monitor/models/historics_model.dart';
 
 final journeysTest = [
@@ -134,4 +135,11 @@ class JourneyCardArgument {
   Historics historics;
 
   JourneyCardArgument({this.historics, this.journey});
+}
+
+class PicturePageArgument {
+  JourneyCardArgument journeyCardArgument;
+  Files pictures;
+
+  PicturePageArgument({this.journeyCardArgument, this.pictures});
 }
