@@ -27,7 +27,15 @@ Widget picture(BuildContext context, String imageUrl, bool compress) {
       ));
 }
 
-Widget picture2(BuildContext context, String imageUrl) {
+Widget picture2(BuildContext context, String imageUrl, bool compress) {
+  Object bodyRequest = {
+    "token": _prefs.token,
+  };
+  if (compress) {
+    bodyRequest = {"token": _prefs.token, "compress": compress};
+  }
+  final _req = jsonEncode(bodyRequest);
+  final _req2 = {"body": _req};
   return GestureDetector(
     onTap: () {
       Navigator.pushNamed(context, 'pictureView', arguments: imageUrl);
@@ -35,7 +43,10 @@ Widget picture2(BuildContext context, String imageUrl) {
     child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: FadeInImage(
-          image: NetworkImage(imageUrl),
+          image: NetworkImage(
+            imageUrl,
+            headers: _req2,
+          ),
           placeholder: AssetImage('assets/no-image.jpg'),
           fit: BoxFit.cover,
         )),

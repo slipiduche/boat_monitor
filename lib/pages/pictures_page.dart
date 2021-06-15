@@ -194,7 +194,7 @@ class _PicturesPageState extends State<PicturesPage>
                             picturesIcon(20.0, blue1),
                             SizedBox(width: 3.0),
                             Text(
-                              '16 Pictures',
+                              '${_picturesUrl.length} Pictures',
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: blue1,
@@ -227,7 +227,7 @@ class _PicturesPageState extends State<PicturesPage>
                                     List.generate(_picturesUrl.length, (index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(1.0),
-                                    child: picture(
+                                    child: picture2(
                                         context,
                                         Parameters().domain +
                                             _picturesUrl[index].flUrl,
@@ -245,7 +245,7 @@ class _PicturesPageState extends State<PicturesPage>
                                   List.generate(_picturesUrl.length, (index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(1.0),
-                                  child: picture(
+                                  child: picture2(
                                       context,
                                       Parameters().domain +
                                           _picturesUrl[index].flUrl,
