@@ -63,8 +63,8 @@ class _PicturesPageState extends State<PicturesPage>
         child: Scaffold(
       appBar: gradientAppBar2(_pictures.journeyCardArgument.journey.boatName,
           boatIconBlue(25.0, Colors.white), () {
-        Navigator.of(context)
-            .pushReplacementNamed('journeyPage', arguments: _pictures);
+        Navigator.of(context).pushReplacementNamed('journeyPage',
+            arguments: _pictures.journeyCardArgument);
       }),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: marginExt1),
