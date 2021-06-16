@@ -2,10 +2,13 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/bloc/journeys_bloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/boats_model.dart';
+import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/providers/boats_provider.dart';
+import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -18,11 +21,15 @@ import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 
 class BoatDataPage extends StatefulWidget {
+  int boatId;
+  BoatDataPage(this.boatId);
   @override
-  _BoatDataPageState createState() => _BoatDataPageState();
+  _BoatDataPageState createState() => _BoatDataPageState(boatId);
 }
 
 class _BoatDataPageState extends State<BoatDataPage> {
+  int boatId;
+  _BoatDataPageState(this.boatId);
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   Boats _boats;
@@ -37,14 +44,15 @@ class _BoatDataPageState extends State<BoatDataPage> {
     BoatsBloc().setCheck = 0;
     print(_boats);
     AuthBloc().setRoute = 'boatDataPage';
+    JourneysBloc().setJourneys = null;
   }
 
   @override
   Widget build(BuildContext context) {
-    BoatProvider().getBoats();
+    JourneyProvider().getJourneys(journeyIds: [boatId]);
     print(_boats);
     return StreamBuilder(
-        stream: BoatsBloc().boats,
+        stream: JourneysBloc().journeys,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container(
@@ -166,7 +174,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
         });
   }
 
-  Widget makeBoatList(BuildContext context, List<BoatData> boats) {
+  Widget makeBoatList(BuildContext context, List<Journey> boats) {
     return Container(
       child: ListView.builder(
         itemCount: boats.length,
@@ -190,7 +198,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
     );
   }
 
-  Widget _boatItem(BuildContext context, BoatData boat, int index) {
+  Widget _boatItem(BuildContext context, Journey boat, int index) {
     return Container(
       width: (MediaQuery.of(context).size.width - (marginExt1 * 2)),
       //margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
@@ -226,26 +234,31 @@ class _BoatDataPageState extends State<BoatDataPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 180) / 4,
                             child: Text(
-                              'Travel 1',
+                              'Travel ' + boat.id.toString(),
                               overflow: TextOverflow.ellipsis,
                             )),
                         SizedBox(width: 5.0),
                         Container(
                             width: (MediaQuery.of(context).size.width - 80) / 4,
-                            child: Text(boat.dt.toString(),
+                            child: Text(boat.ini.toString(),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 4,
-                            child: Text('100',
+                            child: Text(boat.fWeight.toString(),
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis)),
                         SizedBox(width: 5.0),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 4,
-                            child:
-                                Text('10hs', overflow: TextOverflow.ellipsis)),
+                            child: Text(
+                                boat.ed
+                                        .difference(boat.ini)
+                                        .inHours
+                                        .toString() +
+                                    ' HS',
+                                overflow: TextOverflow.ellipsis)),
                         SizedBox(width: 5.0),
                       ],
                     ),

@@ -38,7 +38,9 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
   Widget build(BuildContext context) {
     StorageArgument _storage = ModalRoute.of(context).settings.arguments;
     BoatData _boat = _storage.boat;
-    _usedStorage = _storage.usedStorage;
+    final _maxStorage = _boat.maxSt;
+    _usedStorage = _storage.usedStorage * _maxStorage / 100;
+
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
@@ -82,7 +84,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '20GB / 240GB',
+                        '${_usedStorage}GB/${_maxStorage}GB',
                         style: TextStyle(
                             color: blue1,
                             fontSize: messageTitle,
@@ -95,7 +97,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            '${0.2 * 100} %',
+                            '${_storage.usedStorage} %',
                             style: TextStyle(
                                 color: blue1,
                                 fontWeight: FontWeight.bold,
@@ -105,7 +107,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                       ),
                     ],
                   ),
-                  DiskSpace(_usedStorage),
+                  DiskSpace(_storage.usedStorage),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -124,7 +126,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                   _boatStorageSearch(context),
                   Container(
                       height: MediaQuery.of(context).size.height - 400,
-                      child: BoatDataPage()),
+                      child: BoatDataPage(_boat.id)),
                 ],
               ),
             )),

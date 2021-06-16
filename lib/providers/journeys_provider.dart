@@ -14,9 +14,13 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class JourneyProvider {
-  Future<Map<String, dynamic>> getJourneys() async {
+  Future<Map<String, dynamic>> getJourneys({List<int> journeyIds}) async {
     Map<String, dynamic> decodedResp;
-    final _req = jsonEncode({"token": _prefs.token});
+    var _req = jsonEncode({"token": _prefs.token});
+    if (journeyIds != null) {
+      _req = jsonEncode({"token": _prefs.token, "id": journeyIds});
+    }
+
     final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
