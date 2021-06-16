@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
@@ -7,11 +8,13 @@ import 'package:boat_monitor/models/files_model.dart';
 
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
+import 'package:boat_monitor/providers/journeys_provider.dart';
 import 'package:boat_monitor/providers/parameters.dart';
 
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +27,7 @@ class PicturesPage extends StatefulWidget {
 
 class _PicturesPageState extends State<PicturesPage>
     with SingleTickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   bool _gridView = true;
@@ -61,6 +65,7 @@ class _PicturesPageState extends State<PicturesPage>
     //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
     return SafeArea(
         child: Scaffold(
+      key: _scaffoldKey,
       appBar: gradientAppBar2(_pictures.journeyCardArgument.journey.boatName,
           boatIconBlue(25.0, Colors.white), () {
         Navigator.of(context).pushReplacementNamed('journeyPage',
@@ -99,6 +104,23 @@ class _PicturesPageState extends State<PicturesPage>
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 GestureDetector(
+                                  onTap: () async {
+                                    AlertsBloc().setAlert =
+                                        Alerts('Downloading', "Updating");
+                                    final _resp = await JourneyProvider()
+                                        .getFilesZip(
+                                            journeyId: _pictures
+                                                .journeyCardArgument
+                                                .journey
+                                                .id);
+                                    if (_resp['ok']) {
+                                      AlertsBloc().setAlert =
+                                          Alerts(_resp['message'], 'Updated');
+                                    } else {
+                                      AlertsBloc().setAlert =
+                                          Alerts(_resp['message'], 'Error');
+                                    }
+                                  },
                                   child: Container(
                                     child: downloadIcon(40.0, blue1),
                                   ),
@@ -274,6 +296,14 @@ class _PicturesPageState extends State<PicturesPage>
                 ),
               ],
             )),
+            StreamBuilder(
+              stream: AlertsBloc().alert,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                WidgetsBinding.instance.addPostFrameCallback((_) =>
+                    onAfterBuild(_scaffoldKey.currentContext, _pictures));
+                return Container();
+              },
+            )
           ],
         ),
       ),
