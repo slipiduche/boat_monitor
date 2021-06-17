@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
@@ -179,12 +180,11 @@ class _TemperaturePageState extends State<TemperaturePage> {
               StreamBuilder(
                 stream: AlertsBloc().alert,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) =>
-                      onAfterBuild(
-                          _scaffoldKey.currentContext,
-                          JourneyCardArgument(
-                              journey: _temperature.journey,
-                              historics: HistoricsBloc().historicsValue)));
+                  ArgumentBloc().setArgument = JourneyCardArgument(
+                      journey: _temperature.journey,
+                      historics: HistoricsBloc().historicsValue);
+                  WidgetsBinding.instance.addPostFrameCallback(
+                      (_) => onAfterBuild(_scaffoldKey.currentContext));
                   return Container();
                 },
               )

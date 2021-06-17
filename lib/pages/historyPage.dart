@@ -373,7 +373,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 stream: AlertsBloc().alert,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   WidgetsBinding.instance.addPostFrameCallback(
-                      (_) => onAfterBuild(_scaffoldKey.currentContext, 1));
+                      (_) => onAfterBuild(_scaffoldKey.currentContext));
                   return Container();
                 },
               ),

@@ -148,7 +148,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
                           WidgetsBinding.instance.addPostFrameCallback(
-                              (_) => onAfterBuild(context, 1));
+                              (_) => onAfterBuild(context));
                           return Container();
                         },
                       ),

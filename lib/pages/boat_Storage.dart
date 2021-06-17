@@ -32,7 +32,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
-    AuthBloc().setRoute = 'boatstoragePage';
+    AuthBloc().setRoute = 'boatStoragePage';
   }
 
   @override
@@ -129,7 +129,10 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                     _boatStorageSearch(context),
                     Container(
                         height: MediaQuery.of(context).size.height - 350,
-                        child: BoatDataPage(_boat.id)),
+                        child: BoatDataPage(
+                          boatId: _boat.id,
+                          argument: _storage,
+                        )),
                   ],
                 ),
               )),

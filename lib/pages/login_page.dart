@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                                       AsyncSnapshot snapshot) {
                                     WidgetsBinding.instance
                                         .addPostFrameCallback(
-                                            (_) => onAfterBuild(context, 1));
+                                            (_) => onAfterBuild(context));
                                     return Container();
                                   },
                                 ),

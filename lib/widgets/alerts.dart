@@ -1,4 +1,5 @@
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
@@ -7,7 +8,8 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
-onAfterBuild(BuildContext context, dynamic argument) {
+onAfterBuild(BuildContext context) {
+  dynamic argument = ArgumentBloc().argumentValue;
   if (AlertsBloc().alertValue != null) {
     switch (AlertsBloc().alertValue.type) {
       case "Updating":
@@ -19,6 +21,7 @@ onAfterBuild(BuildContext context, dynamic argument) {
       case "Error":
         Navigator.of(context).pop();
         errorPopUp(context, AlertsBloc().alertValue.message, () {
+          print(argument);
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();
           if (AuthBloc().routeValue == 'signUpPage') {

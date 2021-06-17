@@ -1,5 +1,6 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boatStorageSearchBloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
@@ -25,14 +26,16 @@ import '../styles/colors.dart';
 
 class BoatDataPage extends StatefulWidget {
   int boatId;
-  BoatDataPage(this.boatId);
+  StorageArgument argument;
+  BoatDataPage({this.boatId, this.argument});
   @override
-  _BoatDataPageState createState() => _BoatDataPageState(boatId);
+  _BoatDataPageState createState() => _BoatDataPageState(boatId, argument);
 }
 
 class _BoatDataPageState extends State<BoatDataPage> {
   int boatId;
-  _BoatDataPageState(this.boatId);
+  StorageArgument argument;
+  _BoatDataPageState(this.boatId, this.argument);
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
   Boats _boats;
@@ -49,7 +52,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
     auth.deleteAll();
     BoatsBloc().setCheck = 0;
     print(_boats);
-    AuthBloc().setRoute = 'boatDataPage';
+    //AuthBloc().setRoute = 'boatDataPage';
     JourneysBloc().setJourneys = null;
     BoatStorageSearchBloc().setBoatStorageSearch = '';
     mqtt = MQTTClientWrapper(() {}, (hola, hello) {});
@@ -185,8 +188,10 @@ class _BoatDataPageState extends State<BoatDataPage> {
                                 stream: AlertsBloc().alert,
                                 builder: (BuildContext context,
                                     AsyncSnapshot snapshot) {
+                                  print(argument);
+                                  ArgumentBloc().setArgument = argument;
                                   WidgetsBinding.instance.addPostFrameCallback(
-                                      (_) => onAfterBuild(context, 1));
+                                      (_) => onAfterBuild(context));
                                   return Container();
                                 },
                               ),

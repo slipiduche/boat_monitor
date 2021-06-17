@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/Argument_bloc.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
@@ -596,8 +597,9 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                 StreamBuilder(
                   stream: AlertsBloc().alert,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) =>
-                        onAfterBuild(_scaffoldKey.currentContext, arguments));
+                    ArgumentBloc().setArgument = arguments;
+                    WidgetsBinding.instance.addPostFrameCallback(
+                        (_) => onAfterBuild(_scaffoldKey.currentContext));
                     return Container();
                   },
                 ),

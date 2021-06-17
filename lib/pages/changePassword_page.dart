@@ -63,7 +63,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   stream: AlertsBloc().alert,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     WidgetsBinding.instance
-                        .addPostFrameCallback((_) => onAfterBuild(context, 1));
+                        .addPostFrameCallback((_) => onAfterBuild(context));
                     return Container();
                   },
                 ),
