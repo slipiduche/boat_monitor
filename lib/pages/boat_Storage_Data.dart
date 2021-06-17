@@ -1,8 +1,10 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/boatStorageSearchBloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
+import 'package:boat_monitor/bloc/storageSearchBloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/boats_model.dart';
@@ -36,6 +38,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
   AlertsBloc alerts = AlertsBloc();
   List<bool> checks = [];
   List<int> indexs = [];
+  List<Journey> unfiltered = [];
+  List<Journey> filtered = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -45,137 +49,197 @@ class _BoatDataPageState extends State<BoatDataPage> {
     print(_boats);
     AuthBloc().setRoute = 'boatDataPage';
     JourneysBloc().setJourneys = null;
+    BoatStorageSearchBloc().setBoatStorageSearch = '';
   }
 
   @override
   Widget build(BuildContext context) {
     JourneyProvider().getJourneys(journeyIds: [boatId]);
     print(_boats);
-    return StreamBuilder(
-        stream: JourneysBloc().journeys,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    // margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                    child: Row(
-                      children: [
-                        StreamBuilder(
-                            stream: BoatsBloc().check,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                if (snapshot.data > 0) {
-                                  return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+    return Container(
+      height: MediaQuery.of(context).size.height - 400,
+      child: StreamBuilder(
+          stream: JourneysBloc().journeys,
+          builder: (context, AsyncSnapshot<List<Journey>> snapshot) {
+            if (snapshot.hasData) {
+              unfiltered = snapshot.data;
+              return Container(
+                child: StreamBuilder(
+                    stream: BoatStorageSearchBloc().boatStorageSearch,
+                    builder: (context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) {
+                        filtered = [];
+                        unfiltered.forEach((element) {
+                          if (element.id.toString().startsWith(snapshot.data)) {
+                            filtered.add(element);
+                          }
+                        });
+                      } else {
+                        filtered = unfiltered;
+                      }
+                      if (snapshot.hasData && filtered.length > 0) {
+                        return Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Container(
+                                // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                                child: Row(
+                                  children: [
+                                    StreamBuilder(
+                                        stream: BoatsBloc().check,
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            if (snapshot.data > 0) {
+                                              return Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        print(checks);
+                                                        print(indexs);
+                                                        deleteItems(
+                                                            checks, indexs);
+                                                      },
+                                                      child: Text(
+                                                        'Delete from SSD',
+                                                        style: TextStyle(
+                                                            decorationThickness:
+                                                                2.0,
+                                                            decorationColor:
+                                                                blue1,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .combine([
+                                                              TextDecoration
+                                                                  .underline
+                                                            ]),
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                  ]);
+                                            } else {
+                                              return Container();
+                                            }
+                                          } else {
+                                            return Container();
+                                          }
+                                        }),
+                                    Expanded(child: Container()),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            print(checks);
-                                            print(indexs);
-                                            deleteItems(checks, indexs);
-                                          },
-                                          child: Text(
-                                            'Delete from SSD',
-                                            style: TextStyle(
-                                                decorationThickness: 2.0,
-                                                decorationColor: blue1,
-                                                decorationStyle:
-                                                    TextDecorationStyle.solid,
-                                                decoration:
-                                                    TextDecoration.combine([
-                                                  TextDecoration.underline
-                                                ]),
-                                                color: blue1,
-                                                fontWeight: FontWeight.bold),
-                                          ),
+                                        Text(
+                                          'Selected',
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                      ]);
-                                } else {
+                                        Text(' (',
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontWeight: FontWeight.bold)),
+                                        StreamBuilder(
+                                            stream: BoatsBloc().check,
+                                            builder: (context, snapshot) {
+                                              final _checked =
+                                                  snapshot.data != null
+                                                      ? snapshot.data
+                                                      : 0;
+                                              return Text(_checked.toString(),
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold));
+                                            }),
+                                        Text(')',
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Expanded(child: makeBoatList(context, filtered)),
+                              StreamBuilder(
+                                stream: AlertsBloc().alert,
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  WidgetsBinding.instance.addPostFrameCallback(
+                                      (_) => onAfterBuild(context, 1));
                                   return Container();
-                                }
-                              } else {
-                                return Container();
-                              }
-                            }),
-                        Expanded(child: Container()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Selected',
-                              style: TextStyle(
-                                  color: blue1, fontWeight: FontWeight.bold),
-                            ),
-                            Text(' (',
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        return Container(
+                          //margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                'No data',
                                 style: TextStyle(
-                                    color: blue1, fontWeight: FontWeight.bold)),
-                            StreamBuilder(
-                                stream: BoatsBloc().check,
-                                builder: (context, snapshot) {
-                                  final _checked =
-                                      snapshot.data != null ? snapshot.data : 0;
-                                  return Text(_checked.toString(),
-                                      style: TextStyle(
-                                          color: blue1,
-                                          fontWeight: FontWeight.bold));
-                                }),
-                            Text(')',
-                                style: TextStyle(
-                                    color: blue1, fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                      ],
+                                    color: blue1, fontSize: correoSize),
+                                textAlign: TextAlign.center,
+                              ),
+                              Divider(
+                                thickness: 1.0,
+                                color: gray1,
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                    }),
+              );
+            } else {
+              return Container(
+                //margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20.0,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Expanded(child: makeBoatList(context, snapshot.data)),
-                  StreamBuilder(
-                    stream: AlertsBloc().alert,
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      WidgetsBinding.instance.addPostFrameCallback(
-                          (_) => onAfterBuild(context, 1));
-                      return Container();
-                    },
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container(
-              //margin: EdgeInsets.symmetric(horizontal: marginExt1),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    'No data',
-                    style: TextStyle(color: blue1, fontSize: correoSize),
-                    textAlign: TextAlign.center,
-                  ),
-                  Divider(
-                    thickness: 1.0,
-                    color: gray1,
-                  )
-                ],
-              ),
-            );
-          }
-        });
+                    Text(
+                      'No data',
+                      style: TextStyle(color: blue1, fontSize: correoSize),
+                      textAlign: TextAlign.center,
+                    ),
+                    Divider(
+                      thickness: 1.0,
+                      color: gray1,
+                    )
+                  ],
+                ),
+              );
+            }
+          }),
+    );
   }
 
   Widget makeBoatList(BuildContext context, List<Journey> boats) {
     return Container(
+      // height: MediaQuery.of(context).size.height - 450,
       child: ListView.builder(
         itemCount: boats.length,
         itemBuilder: (BuildContext context, int index) {

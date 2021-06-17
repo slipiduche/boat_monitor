@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/boatStorageSearchBloc.dart';
 
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/boats_model.dart';
@@ -48,89 +49,92 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
           () {
         Navigator.of(context).pop();
       }),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Expanded(
-                child: Container(
-              margin: EdgeInsets.symmetric(horizontal: marginExt1),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        _boat.boatName,
-                        style: TextStyle(color: blue1, fontSize: correoSize),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Disk space: ',
-                        style: TextStyle(
-                            color: blue1,
-                            fontSize: messageTitle,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${_usedStorage}GB/${_maxStorage}GB',
-                        style: TextStyle(
-                            color: blue1,
-                            fontSize: messageTitle,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            '${_storage.usedStorage} %',
-                            style: TextStyle(
-                                color: blue1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: messageTitle),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  DiskSpace(_storage.usedStorage),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Sailling days',
-                        style: TextStyle(color: blue1, fontSize: correoSize),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  _boatStorageSearch(context),
-                  Container(
-                      height: MediaQuery.of(context).size.height - 400,
-                      child: BoatDataPage(_boat.id)),
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height - 50,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.0,
               ),
-            )),
-          ],
+              Expanded(
+                  child: Container(
+                margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          _boat.boatName,
+                          style: TextStyle(color: blue1, fontSize: correoSize),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Disk space: ',
+                          style: TextStyle(
+                              color: blue1,
+                              fontSize: messageTitle,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${_usedStorage}GB/${_maxStorage}GB',
+                          style: TextStyle(
+                              color: blue1,
+                              fontSize: messageTitle,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              '${_storage.usedStorage} %',
+                              style: TextStyle(
+                                  color: blue1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: messageTitle),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    DiskSpace(_storage.usedStorage),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Sailling days',
+                          style: TextStyle(color: blue1, fontSize: correoSize),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    _boatStorageSearch(context),
+                    Container(
+                        height: MediaQuery.of(context).size.height - 350,
+                        child: BoatDataPage(_boat.id)),
+                  ],
+                ),
+              )),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: botomBar(2, context),
@@ -160,7 +164,7 @@ Widget _boatStorageSearch(BuildContext context) {
           decoration: InputDecoration(
               border: InputBorder.none, hintText: 'Type any travel'),
           onChanged: (value) {
-            // BoatStorageSearchBloc().setBoatStorageSearch = value;
+            BoatStorageSearchBloc().setBoatStorageSearch = value;
           },
         ))
       ],
