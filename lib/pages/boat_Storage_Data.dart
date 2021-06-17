@@ -11,6 +11,7 @@ import 'package:boat_monitor/models/boats_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/providers/boats_provider.dart';
 import 'package:boat_monitor/providers/journeys_provider.dart';
+import 'package:boat_monitor/providers/mqtt_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -40,6 +41,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
   List<int> indexs = [];
   List<Journey> unfiltered = [];
   List<Journey> filtered = [];
+  MQTTClientWrapper mqtt;
   @override
   void initState() {
     // TODO: implement initState
@@ -50,6 +52,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
     AuthBloc().setRoute = 'boatDataPage';
     JourneysBloc().setJourneys = null;
     BoatStorageSearchBloc().setBoatStorageSearch = '';
+    mqtt = MQTTClientWrapper(() {}, (hola, hello) {});
+    mqtt.prepareMqttClient();
   }
 
   @override
@@ -103,7 +107,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
                                                       onTap: () {
                                                         print(checks);
                                                         print(indexs);
-                                                        deleteItems(
+
+                                                        deleteItems(context,
                                                             checks, indexs);
                                                       },
                                                       child: Text(
@@ -368,7 +373,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
                         if (value) {
                           for (var i = 0; i < checks.length; i++) {
                             checks[i] = true;
-                            indexs.add(BoatsBloc().boatsValue[i].id);
+                            indexs.add(filtered[i].id);
                           }
                           BoatsBloc().setCheck = checks.length;
                         } else {
@@ -439,9 +444,28 @@ class _BoatDataPageState extends State<BoatDataPage> {
       ),
     );
   }
+
+  void deleteItems(
+      BuildContext context, List<bool> checks, List<int> indexs) async {
+    confirmationDialog(
+        context,
+        'Are you sure you want to delete this Journey data?',
+        'Delete Confirmation', () {
+      Navigator.of(context).pop();
+      //setOnJourney(_boat.id, context);
+      AlertsBloc().setAlert = Alerts('Deleting', "Updating");
+      //mqtt.journeyStop(_boat.id);
+      for (var i = 0; i < checks.length; i++) {
+        if (checks[i]) {
+          mqtt.journeyDelete(journeyId: indexs[i]);
+        }
+      }
+    }, () {
+      Navigator.of(context).pop();
+    });
+  }
 }
 
-void deleteItems(List<bool> checks, List<int> indexs) async {}
 void changeBoatName(String name, int boatId, BuildContext context) async {
   print(name);
   print(boatId);
