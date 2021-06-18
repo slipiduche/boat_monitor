@@ -13,13 +13,20 @@ onAfterBuild(BuildContext context) {
   if (AlertsBloc().alertValue != null) {
     switch (AlertsBloc().alertValue.type) {
       case "Updating":
+        if (!AlertsBloc().alertClosedValue) {
+          Navigator.of(context).pop();
+        }
+
         AlertsBloc().setAlertClosed = false;
         //Navigator.of(context).pop();
         updating(context, AlertsBloc().alertValue.message);
         AlertsBloc().deleteAlert();
         break;
       case "Error":
-        Navigator.of(context).pop();
+        if (!AlertsBloc().alertClosedValue) {
+          Navigator.of(context).pop();
+        }
+
         errorPopUp(context, AlertsBloc().alertValue.message, () {
           print(argument);
           AlertsBloc().setAlertClosed = true;
@@ -37,7 +44,10 @@ onAfterBuild(BuildContext context) {
 
         break;
       case "Updated":
-        Navigator.of(context).pop();
+        if (!AlertsBloc().alertClosedValue) {
+          Navigator.of(context).pop();
+        }
+
         updated(context, AlertsBloc().alertValue.message, () {
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();

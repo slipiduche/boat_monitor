@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
@@ -16,7 +15,6 @@ import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
 import '../styles/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     auth.deleteAll();
     BoatProvider().getBoats();
-    HomeSearchBloc().setHomeSearch='';
+    HomeSearchBloc().setHomeSearch = '';
   }
 
   @override

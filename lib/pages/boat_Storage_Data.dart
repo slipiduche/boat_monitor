@@ -110,7 +110,6 @@ class _BoatDataPageState extends State<BoatDataPage> {
                                                       onTap: () {
                                                         print(checks);
                                                         print(indexs);
-
                                                         deleteItems(context,
                                                             checks, indexs);
                                                       },
