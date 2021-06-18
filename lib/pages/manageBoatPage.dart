@@ -207,6 +207,10 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
   }
 
   Widget _boatItem(BuildContext context, BoatData boat, int index) {
+    String _respName = 'none';
+    if (boat.respName != null) {
+      _respName = boat.respName;
+    }
     return Container(
       margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
       child: Column(
@@ -270,7 +274,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 3,
-                            child: Text(boat.respName,
+                            child: Text(_respName,
                                 overflow: TextOverflow.ellipsis)),
                         SizedBox(width: 5.0),
                         GestureDetector(
