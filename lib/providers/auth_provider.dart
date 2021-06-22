@@ -72,7 +72,7 @@ class AuthProvider {
         _token = decodedResp["token"];
         print(_token.substring(_token.length - 2, _token.length - 1));
         naNFinder(_token);
-        
+
         _prefs.email = email;
         _prefs.userType = decodedResp["usertype"];
         // print(_prefs.token);
@@ -96,6 +96,7 @@ class AuthProvider {
     String basicAuth = 'Basic ' +
         base64Encode(
             utf8.encode('SUD@orbittas.com:p<RhA7#X_LWBB(O_0&<a,D/,f#2")7B+'));
+
     final request = {
       'tab': 'USERS',
       'username': email,
@@ -103,13 +104,15 @@ class AuthProvider {
       'names': name,
       'mail': email
     };
+    var _req = jsonEncode(request);
+    final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       final response = await http.post(Uri.parse(Parameters().signUpUrl),
-          body: request, headers: <String, String>{'authorization': basicAuth});
+          body: _req2, headers: <String, String>{'authorization': basicAuth});
       print(response.statusCode);
       print(response.body);
 
@@ -123,14 +126,15 @@ class AuthProvider {
 
   Future<Map<String, dynamic>> recovery(String email) async {
     final request = {'mail': email};
-
+    var _req = jsonEncode(request);
+    final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       final response =
-          await http.post(Uri.parse(Parameters().modifyUrl), body: request);
+          await http.post(Uri.parse(Parameters().modifyUrl), body: _req2);
 
       return _result(response);
     } catch (e) {
@@ -149,6 +153,8 @@ class AuthProvider {
       //'usertype': _prefs.userType,
     };
     print(request);
+    var _req = jsonEncode(request);
+    final _req2 = {"body": _req};
 
     try {
       final ioc = new HttpClient();
@@ -157,7 +163,7 @@ class AuthProvider {
       final http = new IOClient(ioc);
       print('antes');
       final response =
-          await http.post(Uri.parse(Parameters().modifyUrl), body: request);
+          await http.post(Uri.parse(Parameters().modifyUrl), body: _req2);
       print('despues');
       print(response.statusCode);
       print(response.body);
@@ -174,14 +180,15 @@ class AuthProvider {
   Future<Map<String, dynamic>> authorizeUsers(
       String token, String email, List<String> users) async {
     final request = {"token": token, "email": email, "listUsers": users};
-
+    var _req = jsonEncode(request);
+    final _req2 = {"body": _req};
     try {
       final ioc = new HttpClient();
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       final response =
-          await http.post(Uri.parse(Parameters().modifyUrl), body: request);
+          await http.post(Uri.parse(Parameters().modifyUrl), body: _req2);
       print(response.statusCode);
       print(response.body);
 

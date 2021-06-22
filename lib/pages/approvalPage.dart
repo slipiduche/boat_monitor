@@ -1,8 +1,10 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
+import 'package:boat_monitor/bloc/users_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
+import 'package:boat_monitor/models/users_model.dart';
 import 'package:boat_monitor/providers/users_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -32,13 +34,11 @@ class _ApprovalPageState extends State<ApprovalPage> {
     PendingAlertsBloc().setCheck = 0;
 
     AuthBloc().setRoute = 'approvalPage';
+    UserProvider().getUsers();
   }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider().getUsers();
-    _approvals = PendingApprovals.fromJsonList(pendingApprovalsTest);
-    print(_approvals);
     return SafeArea(
         child: Scaffold(
       appBar: gradientAppBar2(
@@ -80,7 +80,15 @@ class _ApprovalPageState extends State<ApprovalPage> {
             //   ),
             // ),
             Expanded(
-                child: makeApprovalList(context, _approvals.pendingapprovals)),
+                child: StreamBuilder(
+                    stream: UsersBloc().users,
+                    builder: (context, AsyncSnapshot<Users> snapshot) {
+                      if (snapshot.hasData) {
+                        return makeApprovalList(context, snapshot.data);
+                      } else {
+                        return Container();
+                      }
+                    })),
             // StreamBuilder(
             //   stream: PendingApprovalsBloc().pendingApprovals,
             //   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -94,25 +102,35 @@ class _ApprovalPageState extends State<ApprovalPage> {
     ));
   }
 
-  Widget makeApprovalList(
-      BuildContext context, List<PendingApproval> approvals) {
+  Widget makeApprovalList(BuildContext context, Users users) {
+    PendingApprovals approvals = PendingApprovals();
+    users.users.forEach((element) {
+      if (element.approval == 0) {
+        approvals.pendingapprovals.add(PendingApproval(
+            pendingapprovalId: element.id,
+            dt: element.dt,
+            userName: element.username,
+            names: element.names));
+      }
+    });
     return Container(
       child: ListView.builder(
-        itemCount: approvals.length,
+        itemCount: approvals.pendingapprovals.length,
         itemBuilder: (BuildContext context, int index) {
-          if (checks.length < approvals.length) {
+          if (checks.length < approvals.pendingapprovals.length) {
             checks.add(false);
           }
-          print(approvals[index]);
+          print(approvals.pendingapprovals[index]);
           if (index < 1) {
             return Column(
               children: [
                 _approvalHeader(context),
-                _approvalItem(context, approvals[index], index)
+                _approvalItem(context, approvals.pendingapprovals[index], index)
               ],
             );
           } else {
-            return _approvalItem(context, approvals[index], index);
+            return _approvalItem(
+                context, approvals.pendingapprovals[index], index);
           }
         },
       ),
@@ -154,22 +172,21 @@ class _ApprovalPageState extends State<ApprovalPage> {
                       children: [
                         Container(
                             width:
-                                (MediaQuery.of(context).size.width - 220) / 3,
+                                (MediaQuery.of(context).size.width - 200) / 3,
                             child: Text(
-                              'orbittas',
-                              overflow: TextOverflow.ellipsis,
+                              approval.names,
+                              overflow: TextOverflow.clip,
                             )),
-                        SizedBox(width: 5.0),
                         SizedBox(width: 5.0),
                         Container(
                             width: (MediaQuery.of(context).size.width - 80) / 3,
-                            child: Text('04/05/2021 21:00',
+                            child: Text(approval.dt.toIso8601String(),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 3,
-                            child: Text('alejandro@orbittas.com',
-                                overflow: TextOverflow.ellipsis)),
+                            child: Text(approval.userName,
+                                overflow: TextOverflow.clip)),
                         SizedBox(width: 5.0),
                       ],
                     ),
@@ -199,37 +216,38 @@ class _ApprovalPageState extends State<ApprovalPage> {
           Row(
             children: [
               StreamBuilder(
-                stream: PendingAlertsBloc().check,
-                builder: (context, snapshot) {
-                  bool _checked = false;
-                  if (snapshot.hasData) {
+                  stream: PendingAlertsBloc().check,
+                  builder: (context, snapshot) {
+                    bool _checked = false;
+                    if (snapshot.hasData) {
                       if (snapshot.data > 0) {
                         _checked = true;
                       }
                     }
-                  return Checkbox(
-                    value: _checked,
-                    activeColor: blue1,
-                    onChanged: (value) {
-                      if (value) {
-                              for (var i = 0; i < checks.length; i++) {
-                                checks[i] = true;
-                                indexs.add(PendingAlertsBloc().alertAlertsValue[i].pendingalertId);
-                              }
-                              PendingAlertsBloc().setCheck = checks.length;
-                            } else {
-                              indexs = [];
-                              for (var i = 0; i < checks.length; i++) {
-                                checks[i] = false;
-                              }
+                    return Checkbox(
+                      value: _checked,
+                      activeColor: blue1,
+                      onChanged: (value) {
+                        if (value) {
+                          for (var i = 0; i < checks.length; i++) {
+                            checks[i] = true;
+                            indexs.add(PendingAlertsBloc()
+                                .alertAlertsValue[i]
+                                .pendingalertId);
+                          }
+                          PendingAlertsBloc().setCheck = checks.length;
+                        } else {
+                          indexs = [];
+                          for (var i = 0; i < checks.length; i++) {
+                            checks[i] = false;
+                          }
 
-                              PendingAlertsBloc().setCheck = 0;
-                            }
-                            setState(() {});
-                    },
-                  );
-                }
-              ),
+                          PendingAlertsBloc().setCheck = 0;
+                        }
+                        setState(() {});
+                      },
+                    );
+                  }),
               Expanded(
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.center,

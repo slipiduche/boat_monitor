@@ -1,8 +1,40 @@
 // To parse this JSON data, do
 //
-//     final user = userFromJson(jsonString);
+//     final users = usersFromJson(jsonString);
 
 import 'dart:convert';
+
+Users usersFromJson(String str) => Users.fromJson(json.decode(str));
+
+String usersToJson(Users data) => json.encode(data.toJson());
+
+class Users {
+  Users({
+    this.users,
+    this.message,
+    this.status,
+    this.code,
+  });
+
+  List<User> users;
+  String message;
+  String status;
+  int code;
+
+  factory Users.fromJson(Map<String, dynamic> json) => Users(
+        users: List<User>.from(json["USERS"].map((x) => User.fromJson(x))),
+        message: json["message"],
+        status: json["status"],
+        code: json["code"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "USERS": List<dynamic>.from(users.map((x) => x.toJson())),
+        "message": message,
+        "status": status,
+        "code": code,
+      };
+}
 
 class User {
   User({
