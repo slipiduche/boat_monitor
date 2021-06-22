@@ -57,4 +57,40 @@ class UserProvider {
       return {'ok': false, 'message': e.toString()};
     }
   }
+
+  Future<Map<String, dynamic>> approveUsers(List<int> usersId) async {
+    Map<String, dynamic> decodedResp;
+    var _req = jsonEncode({
+      "token": _prefs.token,
+      "tab": "USERS",
+      "id": usersId, //id of the user to modify
+      "approval": 1,
+    });
+
+    final _req2 = {"body": _req};
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .usersUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+        //print(decodedResp);
+      });
+      return {'ok': true, 'message': decodedResp["message"]};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
 }
