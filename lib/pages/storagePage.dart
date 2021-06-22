@@ -205,7 +205,7 @@ class _StoragePageState extends State<StoragePage> {
       return Container(
         height: MediaQuery.of(context).size.height - 210,
         child: ListView.builder(
-            itemCount: boats.length,
+            itemCount: listStorage.length,
             itemBuilder: (context, index) {
               return _boatDiskCard(context, boats[index], listStorage[index]);
             }),

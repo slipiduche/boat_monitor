@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 
+import 'bloc/alerts_bloc.dart';
 import 'pages/login_page.dart';
 import 'styles/colors.dart';
 
@@ -63,6 +64,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = new UserPreferences();
   await prefs.initPrefs();
+
+  AlertsBloc().setAlertClosed = true;
 
   runApp(MyApp());
 }
