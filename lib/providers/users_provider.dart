@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/users_bloc.dart';
+import 'package:boat_monitor/models/pendingApprovals_model.dart';
 import 'package:boat_monitor/models/users_model.dart';
 import 'package:boat_monitor/providers/parameters.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
@@ -33,6 +35,19 @@ class UserProvider {
         //print(decodedResp);
 
         UsersBloc().setUsers = Users.fromJson(decodedResp);
+        PendingApprovals approvals = PendingApprovals();
+        UsersBloc().usersValue.users.forEach((element) {
+          if (element.approval == 0) {
+            approvals.pendingapprovals.add(PendingApproval(
+                pendingapprovalId: element.id,
+                dt: element.dt,
+                userName: element.username,
+                names: element.names));
+          }
+        });
+        if (approvals.pendingapprovals.length >= 0) {
+          PendingApprovalsBloc().setPendingApprovals = approvals;
+        }
       });
       return {'ok': true, 'message': decodedResp["message"]};
     } catch (e) {

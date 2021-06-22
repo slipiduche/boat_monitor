@@ -2,7 +2,10 @@ import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
+import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/pendingApprovals_model.dart';
+import 'package:boat_monitor/providers/users_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -27,6 +30,8 @@ class _ManagerPageState extends State<ManagerPage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    AuthBloc().setRoute = 'managerPage';
+    UserProvider().getUsers();
   }
 
   @override
@@ -45,7 +50,7 @@ class _ManagerPageState extends State<ManagerPage> {
                 managerIcon(100.0),
                 SizedBox(height: 17.0),
                 Builder(builder: (context) {
-                  if (_prefs.userType >1) {
+                  if (_prefs.userType > 1) {
                     return Column(
                       children: [
                         Text(
@@ -69,11 +74,28 @@ class _ManagerPageState extends State<ManagerPage> {
                           height: 1.0,
                           thickness: 1.0,
                         ),
-                        managerOption(TextLanguage.of(context).approval, blue1,
-                            approvalIcon(20.0), () {
-                          Navigator.of(context)
-                              .pushReplacementNamed('approvalPage');
-                        }, 1),
+                        StreamBuilder(
+                            stream: PendingApprovalsBloc().pendingApprovals,
+                            builder: (context,
+                                AsyncSnapshot<PendingApprovals> snapshot) {
+                              if (snapshot.hasData) {
+                                return managerOption(
+                                    TextLanguage.of(context).approval,
+                                    blue1,
+                                    approvalIcon(20.0), () {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('approvalPage');
+                                }, snapshot.data.pendingapprovals.length);
+                              } else {
+                                return managerOption(
+                                    TextLanguage.of(context).approval,
+                                    blue1,
+                                    approvalIcon(20.0), () {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('approvalPage');
+                                }, 0);
+                              }
+                            }),
                         Divider(
                           height: 1.0,
                           thickness: 1.0,
