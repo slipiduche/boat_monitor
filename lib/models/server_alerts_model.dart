@@ -12,63 +12,79 @@ String serverAlertsToJson(ServerAlerts data) => json.encode(data.toJson());
 class ServerAlerts {
   ServerAlerts({
     this.alerts,
+    this.message,
+    this.status,
+    this.code,
   });
 
   List<Alert> alerts;
+  String message;
+  String status;
+  int code;
 
   factory ServerAlerts.fromJson(Map<String, dynamic> json) => ServerAlerts(
         alerts: List<Alert>.from(json["ALERTS"].map((x) => Alert.fromJson(x))),
+        message: json["message"],
+        status: json["status"],
+        code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
         "ALERTS": List<dynamic>.from(alerts.map((x) => x.toJson())),
+        "message": message,
+        "status": status,
+        "code": code,
       };
 }
 
 class Alert {
   Alert({
-    this.token,
-    this.ini,
-    this.end,
     this.id,
     this.histId,
-    this.journeyId,
     this.boatId,
-    this.last,
-    this.csv,
+    this.journeyId,
+    this.ta,
+    this.wa,
+    this.ua,
+    this.sus,
+    this.dt,
+    this.descr,
   });
 
-  String token;
-  DateTime ini;
-  DateTime end;
-  List<int> id;
-  List<int> histId;
-  List<int> journeyId;
-  List<int> boatId;
-  bool last;
-  bool csv;
+  int id;
+  int histId;
+  int boatId;
+  int journeyId;
+  int ta;
+  int wa;
+  int ua;
+  int sus;
+  DateTime dt;
+  String descr;
 
   factory Alert.fromJson(Map<String, dynamic> json) => Alert(
-        token: json["token"],
-        ini: DateTime.parse(json["ini"]),
-        end: DateTime.parse(json["end"]),
-        id: List<int>.from(json["id"].map((x) => x)),
-        histId: List<int>.from(json["hist_id"].map((x) => x)),
-        journeyId: List<int>.from(json["journey_id"].map((x) => x)),
-        boatId: List<int>.from(json["boat_id"].map((x) => x)),
-        last: json["last"],
-        csv: json["csv"],
+        id: json["id"],
+        histId: json["hist_id"],
+        boatId: json["boat_id"],
+        journeyId: json["journey_id"],
+        ta: json["ta"],
+        wa: json["wa"],
+        ua: json["ua"],
+        sus: json["sus"],
+        dt: DateTime.parse(json["dt"]),
+        descr: json["descr"],
       );
 
   Map<String, dynamic> toJson() => {
-        "token": token,
-        "ini": ini.toIso8601String(),
-        "end": end.toIso8601String(),
-        "id": List<dynamic>.from(id.map((x) => x)),
-        "hist_id": List<dynamic>.from(histId.map((x) => x)),
-        "journey_id": List<dynamic>.from(journeyId.map((x) => x)),
-        "boat_id": List<dynamic>.from(boatId.map((x) => x)),
-        "last": last,
-        "csv": csv,
+        "id": id,
+        "hist_id": histId,
+        "boat_id": boatId,
+        "journey_id": journeyId,
+        "ta": ta,
+        "wa": wa,
+        "ua": ua,
+        "sus": sus,
+        "dt": dt.toIso8601String(),
+        "descr": descr,
       };
 }

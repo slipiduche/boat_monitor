@@ -16,7 +16,7 @@ class PendingAlertsBloc {
   final _pendingAlertsController = new BehaviorSubject<List<PendingAlert>>();
   Stream<List<PendingAlert>> get pendingAlerts =>
       _pendingAlertsController.stream;
-  List<PendingAlert> get alertAlertsValue => _pendingAlertsController.value;
+  List<PendingAlert> get pendingAlertsValue => _pendingAlertsController.value;
   set setPendingAlerts(List<PendingAlert> event) =>
       _pendingAlertsController.add(event);
 

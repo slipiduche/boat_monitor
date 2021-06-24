@@ -3,8 +3,11 @@ import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
+import 'package:boat_monitor/bloc/server_alerts_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
+import 'package:boat_monitor/models/server_alerts_model.dart';
+import 'package:boat_monitor/providers/server_alerts_provider.dart';
 import 'package:boat_monitor/providers/users_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
@@ -32,6 +35,7 @@ class _ManagerPageState extends State<ManagerPage> {
     auth.deleteAll();
     AuthBloc().setRoute = 'managerPage';
     UserProvider().getUsers();
+    AlertsProvider().getAlerts();
   }
 
   @override
@@ -100,11 +104,27 @@ class _ManagerPageState extends State<ManagerPage> {
                           height: 1.0,
                           thickness: 1.0,
                         ),
-                        managerOption(TextLanguage.of(context).alerts, blue1,
-                            alertsIcon(20.0, blue1), () {
-                          Navigator.of(context)
-                              .pushReplacementNamed('alertsPage');
-                        }, 2),
+                        StreamBuilder(
+                            stream: ServerAlertsBloc().alerts,
+                            builder: (context,
+                                AsyncSnapshot<ServerAlerts> snapshot) {
+                              if (snapshot.hasData) {
+                                return managerOption(
+                                    TextLanguage.of(context).alerts,
+                                    blue1,
+                                    alertsIcon(20.0, blue1), () {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('alertsPage');
+                                }, snapshot.data.alerts.length);
+                              }
+                              return managerOption(
+                                  TextLanguage.of(context).alerts,
+                                  blue1,
+                                  alertsIcon(20.0, blue1), () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('alertsPage');
+                              }, 0);
+                            }),
                         Divider(
                           height: 1.0,
                           thickness: 1.0,

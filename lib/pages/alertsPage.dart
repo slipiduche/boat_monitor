@@ -1,8 +1,11 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
+import 'package:boat_monitor/bloc/server_alerts_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/pendingAlerts_model.dart';
+import 'package:boat_monitor/models/server_alerts_model.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
@@ -18,20 +21,19 @@ class AlertPage extends StatefulWidget {
 class _AlertPageState extends State<AlertPage> {
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
-  PendingAlerts _alerts;
 
+  List<bool> checks = [];
+  List<int> indexs = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
-    print(_alerts);
+    PendingAlertsBloc().setCheck = 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    _alerts = PendingAlerts.fromJsonList(pendingAlertsTest);
-    print(_alerts);
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).pushReplacementNamed('managerPage');
@@ -50,39 +52,29 @@ class _AlertPageState extends State<AlertPage> {
               SizedBox(
                 height: 20.0,
               ),
-              // Container(
-              //   margin: EdgeInsets.only(right: marginExt1),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.end,
-              //     children: [
-              //       Checkbox(
-              //         value: true,
-              //         onChanged: (value) {},
-              //         activeColor: blue1,
-              //       ),
-              //       Text(
-              //         'Selected',
-              //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
-              //       ),
-              //       Text(' (',
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //       Text("3",
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //       Text(')',
-              //           style:
-              //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-              //     ],
-              //   ),
-              // ),
-              Expanded(child: makeAlertList(context, _alerts.pendingalerts)),
-              // StreamBuilder(
-              //   stream: PendingAlertsBloc().pendingAlerts,
-              //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //     return Container();
-              //   },
-              // ),
+              Expanded(
+                  child: StreamBuilder(
+                      stream: ServerAlertsBloc().alerts,
+                      builder: (context, AsyncSnapshot<ServerAlerts> snapshot) {
+                        List<PendingAlert> _alerts = [];
+                        if (snapshot.hasData) {
+                          snapshot.data.alerts.forEach((element) {
+                            _alerts.add(PendingAlert(
+                                boatId: element.boatId,
+                                message: element.descr,
+                                pendingalertId: element.id,
+                                travelId: element.journeyId));
+                          });
+                          PendingAlertsBloc().setPendingAlerts = _alerts;
+                          return StreamBuilder<int>(
+                              stream: PendingAlertsBloc().check,
+                              builder: (context, snapshot) {
+                                return makeAlertList(context, _alerts);
+                              });
+                        } else {
+                          return Container();
+                        }
+                      })),
             ],
           ),
         ),
@@ -90,129 +82,144 @@ class _AlertPageState extends State<AlertPage> {
       )),
     );
   }
-}
 
-Widget makeAlertList(BuildContext context, List<PendingAlert> alerts) {
-  return Container(
-    child: ListView.builder(
-      itemCount: alerts.length,
-      itemBuilder: (BuildContext context, int index) {
-        print(alerts[index]);
-        if (index < 1) {
-          return Column(
+  Widget makeAlertList(BuildContext context, List<PendingAlert> alerts) {
+    return Container(
+      child: ListView.builder(
+        itemCount: alerts.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (checks.length < alerts.length) {
+            checks.add(false);
+          }
+          print(checks);
+          print(alerts[index]);
+          if (index < 1) {
+            return Column(
+              children: [
+                _alertHeader(context),
+                _alertItem(context, alerts[index], index)
+              ],
+            );
+          } else {
+            return _alertItem(context, alerts[index], index);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _alertItem(BuildContext context, PendingAlert alert, int index) {
+    return Container(
+      margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+      child: Column(
+        children: [
+          Row(
             children: [
-              _alertHeader(context),
-              _alertItem(context, alerts[index])
-            ],
-          );
-        } else {
-          return _alertItem(context, alerts[index]);
-        }
-      },
-    ),
-  );
-}
+              Checkbox(
+                value: checks[index],
+                activeColor: blue1,
+                onChanged: (value) {
+                  checks[index] = value;
 
-Widget _alertItem(BuildContext context, PendingAlert alert) {
-  return Container(
-    margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Checkbox(
-              value: true,
-              activeColor: blue1,
-              onChanged: (value) {},
-            ),
-            Expanded(
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                          width: (MediaQuery.of(context).size.width - 90),
-                          child: Text(alert.message,
-                              maxLines: 2,
-                              textAlign: TextAlign.justify,
-                              overflow: TextOverflow.ellipsis)),
-                    ],
-                  ),
-                ],
+                  if (value == true) {
+                    indexs.add(alert.pendingalertId);
+                    PendingAlertsBloc().setCheck =
+                        PendingAlertsBloc().checkValue + 1;
+                  } else {
+                    indexs.remove(alert.pendingalertId);
+                    PendingAlertsBloc().setCheck =
+                        PendingAlertsBloc().checkValue - 1;
+                  }
+                  setState(() {});
+                },
               ),
-            ),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(left: marginExt1 * 2),
-          child: Divider(
-            color: blue1,
-            height: 1.0,
-            thickness: 1.0,
+              Expanded(
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            width: (MediaQuery.of(context).size.width - 90),
+                            child: Text(alert.message,
+                                maxLines: 2,
+                                textAlign: TextAlign.justify,
+                                overflow: TextOverflow.ellipsis)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
-    ),
-  );
-}
+          Container(
+            margin: EdgeInsets.only(left: marginExt1 * 2),
+            child: Divider(
+              color: blue1,
+              height: 1.0,
+              thickness: 1.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-Widget _alertHeader(BuildContext context) {
-  return Container(
-    margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Checkbox(
-              value: true,
-              activeColor: blue1,
-              onChanged: (value) {},
-            ),
-            // Expanded(
-            //   child: Column(
-            //     //mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //         children: [
-            //           Container(
-            //               width: (MediaQuery.of(context).size.width - 220) / 3,
-            //               child: Text(
-            //                 'Alert',
-            //                 style: TextStyle(
-            //                     color: blue1, fontWeight: FontWeight.bold),
-            //                 overflow: TextOverflow.ellipsis,
-            //               )),
-            //           Container(
-            //               width: (MediaQuery.of(context).size.width - 80) / 3,
-            //               child: Text("Date created",
-            //                   style: TextStyle(
-            //                       color: blue1, fontWeight: FontWeight.bold),
-            //                   overflow: TextOverflow.clip)),
-            //           Container(
-            //               width: (MediaQuery.of(context).size.width - 125) / 3,
-            //               child: Text("Manager",
-            //                   style: TextStyle(
-            //                       color: blue1, fontWeight: FontWeight.bold),
-            //                   overflow: TextOverflow.ellipsis)),
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(left: marginExt1 * 2),
-          child: Divider(
-            color: blue1,
-            height: 1.0,
-            thickness: 1.0,
+  Widget _alertHeader(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              StreamBuilder(
+                  stream: PendingAlertsBloc().check,
+                  builder: (context, snapshot) {
+                    bool _checked = false;
+                    if (snapshot.hasData) {
+                      if (snapshot.data > 0) {
+                        _checked = true;
+                      }
+                    }
+                    return Checkbox(
+                      value: _checked,
+                      activeColor: blue1,
+                      onChanged: (value) {
+                        if (value) {
+                          print('chcaks');
+                          print(checks);
+                          for (var i = 0; i < checks.length; i++) {
+                            checks[i] = true;
+                            indexs.add(PendingAlertsBloc()
+                                .pendingAlertsValue[i]
+                                .pendingalertId);
+                          }
+                          PendingAlertsBloc().setCheck = checks.length;
+                        } else {
+                          indexs = [];
+                          for (var i = 0; i < checks.length; i++) {
+                            checks[i] = false;
+                          }
+
+                          PendingAlertsBloc().setCheck = 0;
+                        }
+                        setState(() {});
+                      },
+                    );
+                  }),
+            ],
           ),
-        ),
-      ],
-    ),
-  );
+          Container(
+            margin: EdgeInsets.only(left: marginExt1 * 2),
+            child: Divider(
+              color: blue1,
+              height: 1.0,
+              thickness: 1.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

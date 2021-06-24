@@ -34,11 +34,9 @@ class AlertsProvider {
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
-        //print(decodedResp);
-
-        ServerAlertsBloc().setAlerts = ServerAlerts.fromJson(decodedResp);
-
-        // ServerAlertsBloc().alertsValue.forEach((element) {});
+        print(decodedResp);
+        ServerAlerts _alerts = ServerAlerts.fromJson(decodedResp);
+        ServerAlertsBloc().setAlerts = _alerts;
       });
       return {'ok': true, 'message': decodedResp["message"]};
     } catch (e) {
@@ -110,8 +108,6 @@ class AlertsProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
-        //String token = decodedResp["token"];
-        //print(decodedResp);
       });
       AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
       return {'ok': true, 'message': decodedResp["message"]};
