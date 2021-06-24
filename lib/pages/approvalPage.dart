@@ -1,4 +1,5 @@
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/users_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:boat_monitor/models/users_model.dart';
 import 'package:boat_monitor/providers/users_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
+import 'package:boat_monitor/widgets/alerts.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -104,8 +106,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                       print('approve');
                                                       print(checks);
                                                       print(indexs);
-                                                      // deleteItems(context,
-                                                      //     checks, indexs);
+                                                      approveItems(
+                                                          context, indexs);
                                                     },
                                                     child: Text(
                                                       'Approve',
@@ -136,8 +138,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                       print('decline');
                                                       print(checks);
                                                       print(indexs);
-                                                      // deleteItems(context,
-                                                      //     checks, indexs);
+                                                      declineItems(
+                                                          context, indexs);
                                                     },
                                                     child: Text(
                                                       'Approve',
@@ -422,5 +424,29 @@ class _ApprovalPageState extends State<ApprovalPage> {
         ],
       ),
     );
+  }
+
+  void approveItems(BuildContext context, List<int> ids) async {
+    confirmationDialog(context, 'Are you sure you want to approve this users?',
+        'Approve Confirmation', () {
+      Navigator.of(context).pop();
+      //setOnJourney(_boat.id, context);
+      AlertsBloc().setAlert = Alerts('Aprove', "Updating");
+      UserProvider().approveUsers(ids);
+    }, () {
+      Navigator.of(context).pop();
+    });
+  }
+
+  void declineItems(BuildContext context, List<int> ids) async {
+    confirmationDialog(context, 'Are you sure you want to dec;ine this users?',
+        'Decline Confirmation', () {
+      Navigator.of(context).pop();
+      //setOnJourney(_boat.id, context);
+      AlertsBloc().setAlert = Alerts('Decline', "Updating");
+      UserProvider().declineUsers(ids);
+    }, () {
+      Navigator.of(context).pop();
+    });
   }
 }
