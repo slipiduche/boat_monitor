@@ -281,7 +281,8 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                           child: editIcon(18.0, blue1),
                           onTap: () {
                             Navigator.of(context).pushReplacementNamed(
-                                'manageBoatResponsiblePage');
+                                'manageBoatResponsiblePage',
+                                arguments: boat);
                           },
                         )
                       ],

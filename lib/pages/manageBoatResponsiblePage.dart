@@ -45,6 +45,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
 
   @override
   Widget build(BuildContext context) {
+    BoatData _boat = ModalRoute.of(context).settings.arguments;
     UserProvider().getUsers();
     print(_boats);
     return WillPopScope(
@@ -90,7 +91,8 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
                       SizedBox(
                         height: 40.0,
                       ),
-                      Expanded(child: makeBoatList(context, snapshot.data)),
+                      Expanded(
+                          child: makeBoatList(context, snapshot.data, _boat)),
                       StreamBuilder(
                         stream: AlertsBloc().alert,
                         builder:
@@ -130,7 +132,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
     );
   }
 
-  Widget makeBoatList(BuildContext context, Users users) {
+  Widget makeBoatList(BuildContext context, Users users, BoatData _boat) {
     List<User> approved = [];
     users.users.forEach((element) {
       if (element.approval == 1) {
@@ -147,59 +149,77 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
           print(approved[index]);
           if (index < 1) {
             return Column(
-              children: [_userItem(context, approved[index], index)],
+              children: [_userItem(context, approved[index], index, _boat)],
             );
           } else {
-            return _userItem(context, approved[index], index);
+            return _userItem(context, approved[index], index, _boat);
           }
         },
       ),
     );
   }
 
-  Widget _userItem(BuildContext context, User user, int index) {
-    return Container(
-      height: 50.0,
-      margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            width: (MediaQuery.of(context).size.width) / 2 - 50,
-                            child: Text(
-                              user.names,
-                              overflow: TextOverflow.ellipsis,
-                            )),
-                        SizedBox(width: 5.0),
-                        Container(
-                            width: (MediaQuery.of(context).size.width) / 2,
-                            child: Text(user.username,
-                                overflow: TextOverflow.clip)),
-                        SizedBox(width: 5.0),
-                      ],
-                    ),
-                    Container(
-                      //margin: EdgeInsets.only(left: marginExt1 * 2),
-                      child: Divider(
-                        height: 1.0,
-                        thickness: 1.0,
+  void changeResponsible(BuildContext context, User user, BoatData boat) async {
+    confirmationDialog(
+        context,
+        'Are you sure you want to change ${boat.boatName} responsible to ${user.username}?',
+        'Change Confirmation', () {
+      AlertsBloc().setAlert = Alerts('Change', "Updating");
+      BoatProvider().changeBoatResponsible(user, boat.id);
+    }, () {
+      Navigator.of(context).pop();
+    });
+  }
+
+  Widget _userItem(BuildContext context, User user, int index, BoatData boat) {
+    return GestureDetector(
+      onTap: () {
+        changeResponsible(context, user, boat);
+      },
+      child: Container(
+        height: 50.0,
+        margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              width:
+                                  (MediaQuery.of(context).size.width) / 2 - 50,
+                              child: Text(
+                                user.names,
+                                overflow: TextOverflow.ellipsis,
+                              )),
+                          SizedBox(width: 5.0),
+                          Container(
+                              width: (MediaQuery.of(context).size.width) / 2,
+                              child: Text(user.username,
+                                  overflow: TextOverflow.clip)),
+                          SizedBox(width: 5.0),
+                        ],
                       ),
-                    ),
-                  ],
+                      Container(
+                        //margin: EdgeInsets.only(left: marginExt1 * 2),
+                        child: Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
