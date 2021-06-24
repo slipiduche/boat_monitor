@@ -7,6 +7,7 @@ import 'package:boat_monitor/pages/homePage.dart';
 import 'package:boat_monitor/pages/journeyPage.dart';
 import 'package:boat_monitor/pages/location_page.dart';
 import 'package:boat_monitor/pages/manageBoatPage.dart';
+import 'package:boat_monitor/pages/manageBoatResponsiblePage.dart';
 import 'package:boat_monitor/pages/managerPage.dart';
 import 'package:boat_monitor/pages/parametersPage.dart';
 import 'package:boat_monitor/pages/pictures_page.dart';
@@ -46,6 +47,8 @@ Map<String, WidgetBuilder> getAppRoutes() {
     'pictureView': (BuildContext context) => PictureView(),
     'temperaturePage': (BuildContext context) => TemperaturePage(),
     'manageBoatPage': (BuildContext context) => ManageBoatPage(),
+    'manageBoatResponsiblePage': (BuildContext context) =>
+        ManageBoatResponsiblePage(),
     'supervisorPage': (BuildContext context) => SupervisorPage(),
     'currentBoatPage': (BuildContext context) => CurrentBoatPage(),
   };
