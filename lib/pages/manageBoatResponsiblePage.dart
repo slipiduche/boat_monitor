@@ -196,7 +196,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
                                   (MediaQuery.of(context).size.width) / 2 - 50,
                               child: Text(
                                 user.names,
-                                overflow: TextOverflow.ellipsis,
+                                overflow: TextOverflow.clip,
                               )),
                           SizedBox(width: 5.0),
                           Container(
@@ -291,7 +291,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
                             child: Text("Manager",
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.ellipsis)),
+                                overflow: TextOverflow.clip)),
                       ],
                     ),
                   ],

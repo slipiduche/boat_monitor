@@ -40,9 +40,14 @@ class Parameters {
   final signUp = 'signup';
   final modify = 'modify';
   final status = 'status';
+  final alerts = 'alerts';
 
   String get loginUrl {
     return domain + login;
+  }
+
+  String get alertsUrl {
+    return domain + alerts;
   }
 
   String get recoveryUrl {

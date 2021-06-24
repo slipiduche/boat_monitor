@@ -274,8 +274,8 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 3,
-                            child: Text(_respName,
-                                overflow: TextOverflow.ellipsis)),
+                            child:
+                                Text(_respName, overflow: TextOverflow.clip)),
                         SizedBox(width: 5.0),
                         GestureDetector(
                           child: editIcon(18.0, blue1),
