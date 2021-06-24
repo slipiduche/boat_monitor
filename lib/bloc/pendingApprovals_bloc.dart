@@ -20,4 +20,8 @@ class PendingApprovalsBloc {
   PendingApprovals get alertApprovalsValue => _pendingApprovalsController.value;
   set setPendingApprovals(PendingApprovals event) =>
       _pendingApprovalsController.add(event);
+  final _checkController = new BehaviorSubject<int>();
+  Stream<int> get check => _checkController.stream;
+  int get checkValue => _checkController.value;
+  set setCheck(int event) => _checkController.add(event);
 }

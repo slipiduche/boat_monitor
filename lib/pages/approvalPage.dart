@@ -1,6 +1,6 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
-import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
+import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/users_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
@@ -31,7 +31,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
     super.initState();
     auth.deleteAll();
     print(_approvals);
-    PendingAlertsBloc().setCheck = 0;
+    PendingApprovalsBloc().setCheck = 0;
 
     AuthBloc().setRoute = 'approvalPage';
     UserProvider().getUsers();
@@ -84,7 +84,132 @@ class _ApprovalPageState extends State<ApprovalPage> {
                     stream: UsersBloc().users,
                     builder: (context, AsyncSnapshot<Users> snapshot) {
                       if (snapshot.hasData) {
-                        return makeApprovalList(context, snapshot.data);
+                        return Column(
+                          children: [
+                            Container(
+                              // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                              child: Row(
+                                children: [
+                                  StreamBuilder(
+                                      stream: PendingApprovalsBloc().check,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          if (snapshot.data > 0) {
+                                            return Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      print('approve');
+                                                      print(checks);
+                                                      print(indexs);
+                                                      // deleteItems(context,
+                                                      //     checks, indexs);
+                                                    },
+                                                    child: Text(
+                                                      'Approve',
+                                                      style: TextStyle(
+                                                          decorationThickness:
+                                                              2.0,
+                                                          decorationColor:
+                                                              blue1,
+                                                          decorationStyle:
+                                                              TextDecorationStyle
+                                                                  .solid,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .combine([
+                                                            TextDecoration
+                                                                .underline
+                                                          ]),
+                                                          color: blue1,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5.0,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      print('decline');
+                                                      print(checks);
+                                                      print(indexs);
+                                                      // deleteItems(context,
+                                                      //     checks, indexs);
+                                                    },
+                                                    child: Text(
+                                                      'Approve',
+                                                      style: TextStyle(
+                                                          decorationThickness:
+                                                              2.0,
+                                                          decorationColor:
+                                                              blue1,
+                                                          decorationStyle:
+                                                              TextDecorationStyle
+                                                                  .solid,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .combine([
+                                                            TextDecoration
+                                                                .underline
+                                                          ]),
+                                                          color: blue1,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]);
+                                          } else {
+                                            return Container();
+                                          }
+                                        } else {
+                                          return Container();
+                                        }
+                                      }),
+                                  Expanded(child: Container()),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        'Selected',
+                                        style: TextStyle(
+                                            color: blue1,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(' (',
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontWeight: FontWeight.bold)),
+                                      StreamBuilder(
+                                          stream: PendingApprovalsBloc().check,
+                                          builder: (context, snapshot) {
+                                            final _checked =
+                                                snapshot.data != null
+                                                    ? snapshot.data
+                                                    : 0;
+                                            return Text(_checked.toString(),
+                                                style: TextStyle(
+                                                    color: blue1,
+                                                    fontWeight:
+                                                        FontWeight.bold));
+                                          }),
+                                      Text(')',
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            makeApprovalList(context, snapshot.data),
+                          ],
+                        );
                       } else {
                         return Container();
                       }
@@ -153,12 +278,12 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
                   if (value == true) {
                     indexs.add(approval.pendingapprovalId);
-                    PendingAlertsBloc().setCheck =
-                        PendingAlertsBloc().checkValue + 1;
+                    PendingApprovalsBloc().setCheck =
+                        PendingApprovalsBloc().checkValue + 1;
                   } else {
                     indexs.remove(approval.pendingapprovalId);
-                    PendingAlertsBloc().setCheck =
-                        PendingAlertsBloc().checkValue - 1;
+                    PendingApprovalsBloc().setCheck =
+                        PendingApprovalsBloc().checkValue - 1;
                   }
                   setState(() {});
                 },
@@ -216,7 +341,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
           Row(
             children: [
               StreamBuilder(
-                  stream: PendingAlertsBloc().check,
+                  stream: PendingApprovalsBloc().check,
                   builder: (context, snapshot) {
                     bool _checked = false;
                     if (snapshot.hasData) {
@@ -231,18 +356,19 @@ class _ApprovalPageState extends State<ApprovalPage> {
                         if (value) {
                           for (var i = 0; i < checks.length; i++) {
                             checks[i] = true;
-                            indexs.add(PendingAlertsBloc()
-                                .alertAlertsValue[i]
-                                .pendingalertId);
+                            indexs.add(PendingApprovalsBloc()
+                                .alertApprovalsValue
+                                .pendingapprovals[i]
+                                .pendingapprovalId);
                           }
-                          PendingAlertsBloc().setCheck = checks.length;
+                          PendingApprovalsBloc().setCheck = checks.length;
                         } else {
                           indexs = [];
                           for (var i = 0; i < checks.length; i++) {
                             checks[i] = false;
                           }
 
-                          PendingAlertsBloc().setCheck = 0;
+                          PendingApprovalsBloc().setCheck = 0;
                         }
                         setState(() {});
                       },
