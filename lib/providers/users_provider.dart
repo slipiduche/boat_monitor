@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/users_bloc.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
@@ -74,9 +75,9 @@ class UserProvider {
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       await http
-          .get(
+          .post(
               Uri.parse(Parameters()
-                  .usersUrl), //modificado en archivo fuente de la libreria para enviar body
+                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
               body: _req2)
           .then((response) {
         print("Reponse status : ${response.statusCode}");
@@ -85,11 +86,12 @@ class UserProvider {
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
+      AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
       return {'ok': true, 'message': decodedResp["message"]};
     } catch (e) {
       print('error:');
       print(e.toString());
-
+      AlertsBloc().setAlert = Alerts(decodedResp["message"], "Error");
       return {'ok': false, 'message': e.toString()};
     }
   }
@@ -110,9 +112,9 @@ class UserProvider {
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
       await http
-          .get(
+          .post(
               Uri.parse(Parameters()
-                  .usersUrl), //modificado en archivo fuente de la libreria para enviar body
+                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
               body: _req2)
           .then((response) {
         print("Reponse status : ${response.statusCode}");
@@ -121,11 +123,12 @@ class UserProvider {
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
+      AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
       return {'ok': true, 'message': decodedResp["message"]};
     } catch (e) {
       print('error:');
       print(e.toString());
-
+      AlertsBloc().setAlert = Alerts(decodedResp["message"], "Error");
       return {'ok': false, 'message': e.toString()};
     }
   }

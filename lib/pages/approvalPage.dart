@@ -49,38 +49,14 @@ class _ApprovalPageState extends State<ApprovalPage> {
         Navigator.of(context).pushReplacementNamed('managerPage');
       }),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 20.0,
             ),
-            // Container(
-            //   margin: EdgeInsets.only(right: marginExt1),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       Checkbox(
-            //         value: true,
-            //         onChanged: (value) {},
-            //         activeColor: blue1,
-            //       ),
-            //       Text(
-            //         'Selected',
-            //         style: TextStyle(color: blue1, fontWeight: FontWeight.bold),
-            //       ),
-            //       Text(' (',
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //       Text("3",
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //       Text(')',
-            //           style:
-            //               TextStyle(color: blue1, fontWeight: FontWeight.bold)),
-            //     ],
-            //   ),
-            // ),
+
             Expanded(
                 child: StreamBuilder(
                     stream: UsersBloc().users,
@@ -89,7 +65,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
                         return Column(
                           children: [
                             Container(
-                              // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                              margin:
+                                  EdgeInsets.symmetric(horizontal: marginExt1),
                               child: Row(
                                 children: [
                                   StreamBuilder(
@@ -103,14 +80,14 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () {
-                                                      print('approve');
+                                                      print('acept');
                                                       print(checks);
                                                       print(indexs);
                                                       approveItems(
                                                           context, indexs);
                                                     },
                                                     child: Text(
-                                                      'Approve',
+                                                      'Acept',
                                                       style: TextStyle(
                                                           decorationThickness:
                                                               2.0,
@@ -131,18 +108,18 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    width: 5.0,
+                                                    width: 20.0,
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      print('decline');
+                                                      print('Decline');
                                                       print(checks);
                                                       print(indexs);
                                                       declineItems(
                                                           context, indexs);
                                                     },
                                                     child: Text(
-                                                      'Approve',
+                                                      'Decline',
                                                       style: TextStyle(
                                                           decorationThickness:
                                                               2.0,
@@ -209,7 +186,11 @@ class _ApprovalPageState extends State<ApprovalPage> {
                             SizedBox(
                               height: 10.0,
                             ),
-                            makeApprovalList(context, snapshot.data),
+                            Container(
+                                height:
+                                    MediaQuery.of(context).size.height - 180,
+                                child:
+                                    makeApprovalList(context, snapshot.data)),
                           ],
                         );
                       } else {
@@ -427,9 +408,9 @@ class _ApprovalPageState extends State<ApprovalPage> {
   }
 
   void approveItems(BuildContext context, List<int> ids) async {
-    confirmationDialog(context, 'Are you sure you want to approve this users?',
-        'Approve Confirmation', () {
-      Navigator.of(context).pop();
+    confirmationDialog(context, 'Are you sure you want to acept this users?',
+        'Acept Confirmation', () {
+      //Navigator.of(context).pop();
       //setOnJourney(_boat.id, context);
       AlertsBloc().setAlert = Alerts('Aprove', "Updating");
       UserProvider().approveUsers(ids);
@@ -439,9 +420,9 @@ class _ApprovalPageState extends State<ApprovalPage> {
   }
 
   void declineItems(BuildContext context, List<int> ids) async {
-    confirmationDialog(context, 'Are you sure you want to dec;ine this users?',
+    confirmationDialog(context, 'Are you sure you want to decline this users?',
         'Decline Confirmation', () {
-      Navigator.of(context).pop();
+      //Navigator.of(context).pop();
       //setOnJourney(_boat.id, context);
       AlertsBloc().setAlert = Alerts('Decline', "Updating");
       UserProvider().declineUsers(ids);
