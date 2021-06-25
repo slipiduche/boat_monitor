@@ -78,6 +78,7 @@ class BoatProvider {
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
       });
+      AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
       return {'ok': true, 'message': 'success'};
     } catch (e) {
       print('error:');
@@ -116,6 +117,78 @@ class BoatProvider {
         //String token = decodedResp["token"];
       });
       AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
+      return {'ok': true, 'message': 'success'};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteBoats(List<int> boatIds) async {
+    Map<String, dynamic> decodedResp;
+    final _request = <String, dynamic>{
+      "token": _prefs.token,
+      "tab": "BOATS",
+      "id": boatIds,
+      "st": false
+    };
+    final _req2 = {"body": jsonEncode(_request)};
+    print(_request);
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http
+          .post(
+              Uri.parse(Parameters()
+                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+      });
+      //AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
+      return {'ok': true, 'message': 'success'};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
+
+  Future<Map<String, dynamic>> restoreBoats(List<int> boatIds) async {
+    Map<String, dynamic> decodedResp;
+    final _request = <String, dynamic>{
+      "token": _prefs.token,
+      "tab": "BOATS",
+      "id": boatIds,
+      "st": true
+    };
+    final _req2 = {"body": jsonEncode(_request)};
+    print(_request);
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http
+          .post(
+              Uri.parse(Parameters()
+                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+      });
+      //AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
       return {'ok': true, 'message': 'success'};
     } catch (e) {
       print('error:');

@@ -29,6 +29,13 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
   AlertsBloc alerts = AlertsBloc();
   List<bool> checks = [];
   List<int> indexs = [];
+  List<BoatData> deletedBoats = [];
+  List<BoatData> availableBoats = [];
+  List<BoatData> showBoats = [];
+  bool showDeleted = false;
+  String activeInactiveText;
+  String deleteRestoreText;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -53,10 +60,31 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
             boatIconBlue(25.0, Colors.white), () {
           Navigator.of(context).pushReplacementNamed('managerPage');
         }),
-        body: StreamBuilder(
+        body: StreamBuilder<List<BoatData>>(
             stream: BoatsBloc().boats,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                deletedBoats = [];
+                availableBoats = [];
+                snapshot.data.forEach((element) {
+                  if (element.st == 1) {
+                    availableBoats.add(element);
+                  } else {
+                    deletedBoats.add(element);
+                  }
+                });
+                if (showDeleted) {
+                  showBoats = deletedBoats;
+                  activeInactiveText =
+                      'Active boats (${availableBoats.length})';
+                  deleteRestoreText = 'Restore';
+                } else {
+                  showBoats = availableBoats;
+                  activeInactiveText =
+                      'Inactive boats (${deletedBoats.length})';
+                  deleteRestoreText = 'Delete';
+                }
+
                 return Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,10 +109,14 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                                               onTap: () {
                                                 print(checks);
                                                 print(indexs);
-                                                deleteItems(checks, indexs);
+                                                if (showDeleted) {
+                                                  restoreItems(checks, indexs);
+                                                } else {
+                                                  deleteItems(checks, indexs);
+                                                }
                                               },
                                               child: Text(
-                                                'Delete',
+                                                deleteRestoreText,
                                                 style: TextStyle(
                                                     decorationThickness: 2.0,
                                                     decorationColor: blue1,
@@ -112,6 +144,39 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    if (deletedBoats.length > 0 &&
+                                        showDeleted == false) {
+                                      showDeleted = true;
+                                      checks = [];
+                                      indexs = [];
+                                      BoatsBloc().setCheck = 0;
+                                      setState(() {});
+                                    } else if (showDeleted == true) {
+                                      showDeleted = false;
+                                      checks = [];
+                                      indexs = [];
+                                      BoatsBloc().setCheck = 0;
+                                      setState(() {});
+                                    }
+                                  },
+                                  child: Text(
+                                    activeInactiveText,
+                                    style: TextStyle(
+                                        decorationThickness: 2.0,
+                                        decorationColor: blue1,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        decoration: TextDecoration.combine(
+                                            [TextDecoration.underline]),
+                                        color: blue1,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
                                 Text(
                                   'Selected',
                                   style: TextStyle(
@@ -142,7 +207,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                           ],
                         ),
                       ),
-                      Expanded(child: makeBoatList(context, snapshot.data)),
+                      Expanded(child: makeBoatList(context, showBoats)),
                       StreamBuilder(
                         stream: AlertsBloc().alert,
                         builder:
@@ -327,7 +392,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         if (value) {
                           for (var i = 0; i < checks.length; i++) {
                             checks[i] = true;
-                            indexs.add(BoatsBloc().boatsValue[i].id);
+                            indexs.add(showBoats[i].id);
                           }
                           BoatsBloc().setCheck = checks.length;
                         } else {
@@ -392,7 +457,36 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
   }
 }
 
-void deleteItems(List<bool> checks, List<int> indexs) async {}
+void deleteItems(List<bool> checks, List<int> indexs) async {
+  AlertsBloc().setAlert = Alerts('Deleting', "Updating");
+  var _change = await BoatProvider().deleteBoats(indexs);
+  if (_change["ok"] == true) {
+    // Navigator.of(context).pop();
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Updated");
+
+    //
+  } else {
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Error");
+  }
+}
+
+void restoreItems(List<bool> checks, List<int> indexs) async {
+  AlertsBloc().setAlert = Alerts('Restoring', "Updating");
+  var _change = await BoatProvider().restoreBoats(indexs);
+  if (_change["ok"] == true) {
+    // Navigator.of(context).pop();
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Updated");
+
+    //
+  } else {
+    print(_change["message"]);
+    AlertsBloc().setAlert = Alerts(_change["message"], "Error");
+  }
+}
+
 void changeBoatName(String name, int boatId, BuildContext context) async {
   print(name);
   print(boatId);

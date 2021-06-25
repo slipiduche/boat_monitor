@@ -63,7 +63,8 @@ class _AlertPageState extends State<AlertPage> {
                                 boatId: element.boatId,
                                 message: element.descr,
                                 pendingalertId: element.id,
-                                travelId: element.journeyId));
+                                travelId: element.journeyId,
+                                date: element.dt));
                           });
                           PendingAlertsBloc().setPendingAlerts = _alerts;
                           return StreamBuilder<int>(
@@ -96,7 +97,15 @@ class _AlertPageState extends State<AlertPage> {
           if (index < 1) {
             return Column(
               children: [
-                _alertHeader(context),
+                // _alertHeader(context),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                  child: Divider(
+                    color: blue1,
+                    height: 1.0,
+                    thickness: 1.0,
+                  ),
+                ),
                 _alertItem(context, alerts[index], index)
               ],
             );
@@ -110,51 +119,56 @@ class _AlertPageState extends State<AlertPage> {
 
   Widget _alertItem(BuildContext context, PendingAlert alert, int index) {
     return Container(
-      margin: EdgeInsets.only(left: marginExt1 / 2, right: marginExt1),
+      height: 50.0,
+      margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Checkbox(
-                value: checks[index],
-                activeColor: blue1,
-                onChanged: (value) {
-                  checks[index] = value;
+          Expanded(
+            child: Row(
+              children: [
+                // Checkbox(
+                //   value: checks[index],
+                //   activeColor: blue1,
+                //   onChanged: (value) {
+                //     checks[index] = value;
 
-                  if (value == true) {
-                    indexs.add(alert.pendingalertId);
-                    PendingAlertsBloc().setCheck =
-                        PendingAlertsBloc().checkValue + 1;
-                  } else {
-                    indexs.remove(alert.pendingalertId);
-                    PendingAlertsBloc().setCheck =
-                        PendingAlertsBloc().checkValue - 1;
-                  }
-                  setState(() {});
-                },
-              ),
-              Expanded(
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            width: (MediaQuery.of(context).size.width - 90),
-                            child: Text(alert.message,
-                                maxLines: 2,
-                                textAlign: TextAlign.justify,
-                                overflow: TextOverflow.ellipsis)),
-                      ],
-                    ),
-                  ],
+                //     if (value == true) {
+                //       indexs.add(alert.pendingalertId);
+                //       PendingAlertsBloc().setCheck =
+                //           PendingAlertsBloc().checkValue + 1;
+                //     } else {
+                //       indexs.remove(alert.pendingalertId);
+                //       PendingAlertsBloc().setCheck =
+                //           PendingAlertsBloc().checkValue - 1;
+                //     }
+                //     setState(() {});
+                //   },
+                // ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                              //width: (MediaQuery.of(context).size.width - 90),
+                              child: Text(
+                                  '${alert.message} in boat ${alert.boatId} at ${alert.date}',
+                                  maxLines: 2,
+                                  textAlign: TextAlign.start,
+                                  overflow: TextOverflow.ellipsis)),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Container(
-            margin: EdgeInsets.only(left: marginExt1 * 2),
+            //margin: EdgeInsets.only(left: marginExt1 * 2),
             child: Divider(
               color: blue1,
               height: 1.0,
