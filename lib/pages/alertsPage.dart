@@ -106,7 +106,7 @@ class _AlertPageState extends State<AlertPage> {
                     thickness: 1.0,
                   ),
                 ),
-                _alertItem(context, alerts[index], index)
+                _alertItem(context, alerts[alerts.length - 1 - index], index)
               ],
             );
           } else {
@@ -153,12 +153,13 @@ class _AlertPageState extends State<AlertPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                              //width: (MediaQuery.of(context).size.width - 90),
+                              width: (MediaQuery.of(context).size.width -
+                                  (marginExt1 * 2)),
                               child: Text(
                                   '${alert.message} in boat ${alert.boatId} at ${alert.date}',
                                   maxLines: 2,
                                   textAlign: TextAlign.start,
-                                  overflow: TextOverflow.ellipsis)),
+                                  overflow: TextOverflow.clip)),
                         ],
                       ),
                     ],
