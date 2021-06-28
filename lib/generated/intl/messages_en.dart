@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "manageBoat" : MessageLookupByLibrary.simpleMessage("Manage boat"),
     "manager" : MessageLookupByLibrary.simpleMessage("Manager"),
+    "mustBeEqual" : MessageLookupByLibrary.simpleMessage("Passwords must be equal"),
     "mustHave" : MessageLookupByLibrary.simpleMessage("Passwords must be at least 6 characters long"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "newPassword" : MessageLookupByLibrary.simpleMessage("New Password"),

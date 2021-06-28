@@ -24,4 +24,9 @@ class PendingAlertsBloc {
   Stream<int> get check => _checkController.stream;
   int get checkValue => _checkController.value;
   set setCheck(int event) => _checkController.add(event);
+
+  final _lastAlertViewedController = new BehaviorSubject<int>();
+  Stream<int> get lastAlertViewed => _lastAlertViewedController.stream;
+  int get lastAlertViewedValue => _lastAlertViewedController.value;
+  set setLastAlertViewed(int event) => _lastAlertViewedController.add(event);
 }

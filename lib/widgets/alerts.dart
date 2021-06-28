@@ -35,6 +35,8 @@ onAfterBuild(BuildContext context) {
             Navigator.pushReplacementNamed(context, AuthBloc().routeValue);
           } else if (AuthBloc().routeValue == 'currentBoatPage') {
             Navigator.of(context).pushReplacementNamed('homePage');
+          } else if (AuthBloc().routeValue == 'changePasswordPage') {
+            Navigator.of(context).pushReplacementNamed('loginPage');
           } else if (AuthBloc().routeValue == 'manageBoatResponsiblePage') {
             Navigator.of(context)
                 .pushReplacementNamed('manageBoatPage', arguments: argument);
@@ -59,6 +61,8 @@ onAfterBuild(BuildContext context) {
             Navigator.pushReplacementNamed(context, 'loginPage');
           } else if (AuthBloc().routeValue == 'currentBoatPage') {
             Navigator.of(context).pushReplacementNamed('homePage');
+          } else if (AuthBloc().routeValue == 'changePasswordPage') {
+            Navigator.of(context).pushReplacementNamed('loginPage');
           } else if (AuthBloc().routeValue == 'manageBoatResponsiblePage') {
             Navigator.of(context)
                 .pushReplacementNamed('manageBoatPage', arguments: argument);

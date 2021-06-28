@@ -35,6 +35,8 @@ class _ManagerPageState extends State<ManagerPage> {
     auth.deleteAll();
     AuthBloc().setRoute = 'managerPage';
     UserProvider().getUsers();
+
+    UserProvider().getUserById(_prefs.userId);
     AlertsProvider().getAlerts();
   }
 
@@ -109,13 +111,34 @@ class _ManagerPageState extends State<ManagerPage> {
                             builder: (context,
                                 AsyncSnapshot<ServerAlerts> snapshot) {
                               if (snapshot.hasData) {
+                                final _lastAlertViewedId =
+                                    PendingAlertsBloc().lastAlertViewedValue;
+                                int pendingAlerts = 0;
+                                if (_lastAlertViewedId != null) {
+                                  pendingAlerts = snapshot.data.alerts.last.id -
+                                      _lastAlertViewedId;
+                                } else {
+                                  pendingAlerts = snapshot.data.alerts.length;
+                                }
+                                if (pendingAlerts <= 0) {
+                                  return managerOption(
+                                      TextLanguage.of(context).alerts,
+                                      blue1,
+                                      alertsIcon(20.0, blue1), () {
+                                    Navigator.of(context)
+                                        .pushReplacementNamed('alertsPagea');
+                                  }, 0);
+                                }
                                 return managerOption(
                                     TextLanguage.of(context).alerts,
                                     blue1,
-                                    alertsIcon(20.0, blue1), () {
+                                    alertsIcon(20.0, blue1), () async {
+                                  await UserProvider().alertViewed(
+                                      _prefs.userId,
+                                      snapshot.data.alerts.last.id);
                                   Navigator.of(context)
                                       .pushReplacementNamed('alertsPage');
-                                }, snapshot.data.alerts.length);
+                                }, pendingAlerts);
                               }
                               return managerOption(
                                   TextLanguage.of(context).alerts,

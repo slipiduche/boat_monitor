@@ -27,6 +27,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    AlertsBloc().setAlertClosed = true;
+    AuthBloc().setRoute = 'changePasswordPage';
   }
 
   @override

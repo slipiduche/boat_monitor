@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/users_bloc.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
@@ -55,6 +56,82 @@ class UserProvider {
       print('error:');
       print(e.toString());
 
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserById(int userId) async {
+    Map<String, dynamic> decodedResp;
+    var _req = jsonEncode({
+      "token": _prefs.token,
+      "tab": "USERS",
+      "id": [userId], //id of the user to modify
+    });
+
+    final _req2 = {"body": _req};
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .usersUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+        //print(decodedResp);
+
+        PendingAlertsBloc().setLastAlertViewed = decodedResp["USERS"][0]["lva"];
+        print(PendingAlertsBloc().lastAlertViewedValue);
+      });
+      return {'ok': true, 'message': decodedResp["message"]};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
+
+  Future<Map<String, dynamic>> alertViewed(int userId, int lastAlertId) async {
+    print("sending last viewed");
+    Map<String, dynamic> decodedResp;
+    var _req = jsonEncode({
+      "token": _prefs.token,
+      "tab": "USERS",
+      "id": [userId], //id of the user to modify
+      "lva": lastAlertId,
+    });
+
+    final _req2 = {"body": _req};
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http
+          .post(
+              Uri.parse(Parameters()
+                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        //String token = decodedResp["token"];
+        //print(decodedResp);
+      });
+      //AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
+      return {'ok': true, 'message': decodedResp["message"]};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      //AlertsBloc().setAlert = Alerts(decodedResp["message"], "Error");
       return {'ok': false, 'message': e.toString()};
     }
   }

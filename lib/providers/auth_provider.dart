@@ -148,6 +148,7 @@ class AuthProvider {
     final request = {
       'token': _prefs.token,
       'tab': 'USERS',
+      'id': _prefs.userId,
       'pswrd': newPassword,
       'mail': _prefs.email,
       //'usertype': _prefs.userType,

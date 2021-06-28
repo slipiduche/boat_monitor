@@ -355,6 +355,16 @@ class TextLanguage {
     );
   }
 
+  /// `Passwords must be equal`
+  String get mustBeEqual {
+    return Intl.message(
+      'Passwords must be equal',
+      name: 'mustBeEqual',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hello world`
   String get simpleText {
     return Intl.message(
