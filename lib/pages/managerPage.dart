@@ -126,7 +126,7 @@ class _ManagerPageState extends State<ManagerPage> {
                                       blue1,
                                       alertsIcon(20.0, blue1), () {
                                     Navigator.of(context)
-                                        .pushReplacementNamed('alertsPagea');
+                                        .pushReplacementNamed('alertsPage');
                                   }, 0);
                                 }
                                 return managerOption(
