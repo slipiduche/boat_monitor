@@ -1,6 +1,8 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/parameters_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/providers/parameters_provider.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/alerts.dart';
@@ -23,6 +25,7 @@ class _ParametersPageState extends State<ParametersPage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
+    ParametersProvider().getParameters();
   }
 
   @override
@@ -44,7 +47,7 @@ class _ParametersPageState extends State<ParametersPage> {
               SizedBox(
                 height: 20.0,
               ),
-              
+
               Expanded(
                   child: Column(
                 children: [
@@ -92,8 +95,21 @@ class _ParametersPageState extends State<ParametersPage> {
 }
 
 Widget _parametersItem(BuildContext context, parameters, Function onTap()) {
+  double _value;
+  switch (parameters["name"]) {
+    case "weight":
+      _value = ParametersBloc().parametersValue.params[0].dweight;
+      break;
+    case "temperature":
+      _value = ParametersBloc().parametersValue.params[0].dtemp;
+      break;
+    case "timeout":
+      _value = ParametersBloc().parametersValue.params[0].timeOut;
+      break;
+    default:
+  }
   return Container(
-    margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
+    margin: EdgeInsets.only(left: marginExt1, right: margiPnExt1),
     child: Column(
       children: [
         Row(

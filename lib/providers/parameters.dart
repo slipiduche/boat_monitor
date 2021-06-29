@@ -41,9 +41,14 @@ class Parameters {
   final modify = 'modify';
   final status = 'status';
   final alerts = 'alerts';
+  final parameters = 'params';
 
   String get loginUrl {
     return domain + login;
+  }
+
+  String get parametersUrl {
+    return domain + parameters;
   }
 
   String get alertsUrl {
