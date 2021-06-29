@@ -125,6 +125,9 @@ class AuthProvider {
   }
 
   Future<Map<String, dynamic>> recovery(String email) async {
+    String basicAuth = 'Basic ' +
+        base64Encode(
+            utf8.encode('SUD@orbittas.com:p<RhA7#X_LWBB(O_0&<a,D/,f#2")7B+'));
     final request = {'mail': email};
     var _req = jsonEncode(request);
     final _req2 = {"body": _req};
@@ -133,8 +136,8 @@ class AuthProvider {
       ioc.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       final http = new IOClient(ioc);
-      final response =
-          await http.post(Uri.parse(Parameters().modifyUrl), body: _req2);
+      final response = await http.get(Uri.parse(Parameters().recoveryUrl),
+          body: _req2, headers: <String, String>{'authorization': basicAuth});
 
       return _result(response);
     } catch (e) {
@@ -206,7 +209,7 @@ class AuthProvider {
     Map<String, dynamic> decodedResp = json.decode(response.body);
     if (decodedResp['status'] == 'success') {
       _errorBloc.errorStreamSink(decodedResp);
-      return {'ok': true, 'message': 'success'};
+      return {'ok': true, 'message': decodedResp['message']};
     } else {
       _errorBloc.errorStreamSink(decodedResp);
       return {'ok': false, 'message': decodedResp['message']};
