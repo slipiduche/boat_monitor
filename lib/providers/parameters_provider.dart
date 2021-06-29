@@ -86,15 +86,37 @@ class ParametersProvider {
     }
   }
 
-  Future<Map<String, dynamic>> setParameters(List<int> parametersId) async {
+  Future<Map<String, dynamic>> setParameters(parametersId,
+      {double weight, double temperature, double timeout}) async {
     Map<String, dynamic> decodedResp;
-    var _req = jsonEncode({
-      "token": _prefs.token,
-      "tab": "PARAMETERS",
-      "id": parametersId, //id of the parameter to modify
-
-      "approval": 1,
-    });
+    var _req;
+    if (temperature != null) {
+      _req = jsonEncode({
+        "token": _prefs.token,
+        "tab": "PARAMS",
+        "dtemp": temperature,
+        "time_out": timeout,
+        "dweight": weight
+      });
+    }
+    if (timeout != null) {
+      _req = jsonEncode({
+        "token": _prefs.token,
+        "tab": "PARAMS",
+        "time_out": timeout,
+        "dweight": weight,
+        "dtemp": temperature
+      });
+    }
+    if (weight != null) {
+      _req = jsonEncode({
+        "token": _prefs.token,
+        "tab": "PARAMS",
+        "dweight": weight,
+        "dtemp": temperature,
+        "time_out": timeout
+      });
+    }
 
     final _req2 = {"body": _req};
     try {
@@ -105,7 +127,7 @@ class ParametersProvider {
       await http
           .post(
               Uri.parse(Parameters()
-                  .modifyUrl), //modificado en archivo fuente de la libreria para enviar body
+                  .createUrl), //modificado en archivo fuente de la libreria para enviar body
               body: _req2)
           .then((response) {
         print("Reponse status : ${response.statusCode}");

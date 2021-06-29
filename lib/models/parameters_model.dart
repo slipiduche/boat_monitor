@@ -40,9 +40,9 @@ class Param {
 
   factory Param.fromJson(Map<String, dynamic> json) => Param(
         id: json["id"],
-        dweight: json["dweight"],
-        dtemp: json["dtemp"],
-        timeOut: json["time_out"],
+        dweight: json["dweight"].toDouble(),
+        dtemp: json["dtemp"].toDouble(),
+        timeOut: json["time_out"].toDouble(),
         userId: json["user_id"],
         dt: DateTime.parse(json["dt"]),
       );

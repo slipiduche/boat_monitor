@@ -18,4 +18,8 @@ class ParametersBloc {
   Stream<UserParameters> get parameters => _parametersController.stream;
   UserParameters get parametersValue => _parametersController.value;
   set setParameters(UserParameters event) => _parametersController.add(event);
+  final _parametersFieldController = new BehaviorSubject<String>();
+  Stream<String> get parametersField => _parametersFieldController.stream;
+  String get parametersFieldValue => _parametersFieldController.value;
+  set setParametersField(String event) => _parametersFieldController.add(event);
 }

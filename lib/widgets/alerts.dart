@@ -3,6 +3,7 @@ import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
+import 'package:boat_monitor/bloc/parameters_bloc.dart';
 import 'package:boat_monitor/styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -334,7 +335,7 @@ void errorPopUp(BuildContext _context, String message, Function function) {
 }
 
 void confirmationDialog(BuildContext _context, String contain, String title,
-    Function functionYes(), Function functionNo()) {
+    Function functionYes(), void functionNo()) {
   showDialog(
       context: _context,
       barrierDismissible: false,
@@ -415,7 +416,7 @@ void confirmationDialog(BuildContext _context, String contain, String title,
 }
 
 void parametersDialog(
-    BuildContext _context, String message, Function functionDone()) {
+    BuildContext _context, String message, void functionDone()) {
   showDialog(
       context: _context,
       barrierDismissible: false,
@@ -447,6 +448,9 @@ void parametersDialog(
                       height: 10.0,
                     ),
                     TextField(
+                        onChanged: (value) {
+                          ParametersBloc().setParametersField = value;
+                        },
                         keyboardType: TextInputType.number,
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -484,7 +488,7 @@ void parametersDialog(
 }
 
 void boatNameDialog(
-    BuildContext _context, String message, Function functionDone()) {
+    BuildContext _context, String message, void functionDone()) {
   BoatsBloc().setBoatName = null;
   showDialog(
       context: _context,

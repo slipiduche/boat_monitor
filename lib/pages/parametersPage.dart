@@ -1,4 +1,5 @@
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/parameters_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
@@ -26,6 +27,7 @@ class _ParametersPageState extends State<ParametersPage> {
     super.initState();
     auth.deleteAll();
     ParametersProvider().getParameters();
+    AuthBloc().setRoute = 'parametersPage';
   }
 
   @override
@@ -40,54 +42,154 @@ class _ParametersPageState extends State<ParametersPage> {
             parametersIcon(25.0, Colors.white), () {
           Navigator.of(context).pushReplacementNamed('managerPage');
         }),
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-
-              Expanded(
+        body: StreamBuilder<Object>(
+            stream: ParametersBloc().parameters,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Container(
                   child: Column(
-                children: [
-                  _parametersHeader(context),
-                  _parametersItem(
-                      context, {"name": 'weight', "value": 50, "default": 35},
-                      () {
-                    parametersDialog(context, 'weight', () {
-                      Navigator.of(context).pop();
-                      confirmationDialog(
-                          context,
-                          'Are you sure you want to mark weight',
-                          'Setpoint Confirmation', () {
-                        print('yess');
-                      }, () {
-                        print('no');
-                        Navigator.of(context).pop();
-                      });
-                    });
-                    print('weight');
-                  }),
-                  _parametersItem(context,
-                      {"name": 'temperature', "value": 25, "default": 20}, () {
-                    print('temp');
-                  }),
-                  _parametersItem(context,
-                      {"name": 'unavailable', "value": 6, "default": 7}, () {
-                    print('time');
-                  })
-                ],
-              )),
-              // StreamBuilder(
-              //   stream: PendingParameterssBloc().pendingParameterss,
-              //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //     return Container();
-              //   },
-              // ),
-            ],
-          ),
-        ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Expanded(
+                          child: Column(
+                        children: [
+                          _parametersHeader(context),
+                          _parametersItem(context, {
+                            "name": 'weight',
+                            "value": 50,
+                            "default": 35.0
+                            // ignore: missing_return
+                          }, () {
+                            parametersDialog(context, 'weight', () {
+                              Navigator.of(context).pop();
+                              confirmationDialog(
+                                  context,
+                                  'Are you sure you want to mark weight',
+                                  // ignore: missing_return
+                                  'Setpoint Confirmation', () {
+                                AlertsBloc().setAlertClosed = false;
+                                print('yess');
+                                AlertsBloc().setAlert =
+                                    Alerts('Updating', "Updating");
+                                ParametersProvider().setParameters(
+                                    ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .id,
+                                    weight: double.parse(
+                                        ParametersBloc().parametersFieldValue),
+                                    temperature: ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .dtemp,
+                                    timeout: ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .timeOut);
+                              }, () {
+                                print('no');
+                                Navigator.of(context).pop();
+                              });
+                            });
+                            print('weight');
+                          }),
+                          _parametersItem(context, {
+                            "name": 'temperature',
+                            "value": 25,
+                            "default": 20.0
+                            // ignore: missing_return
+                          }, () {
+                            parametersDialog(context, 'temperature', () {
+                              Navigator.of(context).pop();
+                              confirmationDialog(
+                                  context,
+                                  'Are you sure you want to mark temperature',
+                                  // ignore: missing_return
+                                  'Setpoint Confirmation', () {
+                                print('yess');
+                                AlertsBloc().setAlertClosed = false;
+                                AlertsBloc().setAlert =
+                                    Alerts('Updating', "Updating");
+                                ParametersProvider().setParameters(
+                                    ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .id,
+                                    temperature: double.parse(
+                                        ParametersBloc().parametersFieldValue),
+                                    weight: ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .dweight,
+                                    timeout: ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .timeOut);
+                              }, () {
+                                print('no');
+                                Navigator.of(context).pop();
+                              });
+                            });
+                            print('temp');
+                          }),
+                          _parametersItem(context, {
+                            "name": 'unavailable',
+                            "value": 6,
+                            "default": 7.0
+                            // ignore: missing_return
+                          }, () {
+                            parametersDialog(context, 'timeout', () {
+                              Navigator.of(context).pop();
+                              confirmationDialog(
+                                  context,
+                                  'Are you sure you want to mark timeout',
+                                  // ignore: missing_return
+                                  'Setpoint Confirmation', () {
+                                AlertsBloc().setAlertClosed = false;
+                                print('yess');
+                                AlertsBloc().setAlert =
+                                    Alerts('Updating', "Updating");
+                                ParametersProvider().setParameters(
+                                    ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .id,
+                                    timeout: double.parse(
+                                        ParametersBloc().parametersFieldValue),
+                                    temperature: ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .dtemp,
+                                    weight: ParametersBloc()
+                                        .parametersValue
+                                        .params[0]
+                                        .dweight);
+                              }, () {
+                                print('no');
+                                Navigator.of(context).pop();
+                              });
+                            });
+                            print('time');
+                          })
+                        ],
+                      )),
+                    ],
+                  ),
+                );
+              } else {
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    circularProgressCustom(),
+                  ],
+                );
+              }
+            }),
         bottomNavigationBar: botomBar(1, context),
       )),
     );
@@ -103,13 +205,13 @@ Widget _parametersItem(BuildContext context, parameters, Function onTap()) {
     case "temperature":
       _value = ParametersBloc().parametersValue.params[0].dtemp;
       break;
-    case "timeout":
+    case "unavailable":
       _value = ParametersBloc().parametersValue.params[0].timeOut;
       break;
     default:
   }
   return Container(
-    margin: EdgeInsets.only(left: marginExt1, right: margiPnExt1),
+    margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
     child: Column(
       children: [
         Row(
@@ -141,7 +243,7 @@ Widget _parametersItem(BuildContext context, parameters, Function onTap()) {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(parameters["value"].toString(),
+                              Text(_value.toString(),
                                   textAlign: TextAlign.end,
                                   overflow: TextOverflow.ellipsis),
                               SizedBox(
@@ -234,11 +336,3 @@ Widget _parametersHeader(BuildContext context) {
     ),
   );
 }
-
-/*
-parametersDialog(context, 'hola',(){confirmationDialog(context, 'confirm', 'setpoint', () {
-                  print('yes');
-                }, () {
-                  print('no');
-                });})
-*/
