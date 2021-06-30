@@ -104,7 +104,8 @@ _login1(BuildContext context) async {
   if (_login["ok"] == true) {
     // Navigator.of(context).pop();
     print('usertype:${_prefs.userType}');
-    if (_prefs.userType > 1 && _prefs.userType < 4) {
+    AlertsBloc().setAlertClosed = true;
+    if (_prefs.userType > 1) {
       Navigator.of(context).pushReplacementNamed('managerPage');
     } else {
       Navigator.of(context).pushReplacementNamed('supervisorPage');
@@ -171,11 +172,9 @@ Widget createPassword(BuildContext context) {
           _errorText = null;
         }
         return Container(
-          //padding: EdgeInsets.only(left: 18.0, right: 18.0),
+          /
           child: TextField(
-            //autofocus: true,
-            //textCapitalization: TextCapitalization.sentences,
-            //keyboardType: TextInputType.emailAddress,
+            
             obscureText: true,
             decoration: InputDecoration(
               border:
