@@ -143,6 +143,7 @@ class UserProvider {
       "tab": "USERS",
       "id": usersId, //id of the user to modify
       "approval": 1,
+      "st": 1
     });
 
     final _req2 = {"body": _req};

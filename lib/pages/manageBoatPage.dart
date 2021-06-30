@@ -52,13 +52,21 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
     print(_boats);
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushReplacementNamed('managerPage');
+        if (_prefs.userType > 1 && _prefs.userType < 4) {
+          Navigator.of(context).pushReplacementNamed('managerPage');
+        } else {
+          Navigator.of(context).pushReplacementNamed('supervisorPage');
+        }
       },
       child: SafeArea(
           child: Scaffold(
         appBar: gradientAppBar2(TextLanguage.of(context).manageBoat,
             boatIconBlue(25.0, Colors.white), () {
-          Navigator.of(context).pushReplacementNamed('managerPage');
+          if (_prefs.userType > 1 && _prefs.userType < 4) {
+            Navigator.of(context).pushReplacementNamed('managerPage');
+          } else {
+            Navigator.of(context).pushReplacementNamed('supervisorPage');
+          }
         }),
         body: StreamBuilder<List<BoatData>>(
             stream: BoatsBloc().boats,

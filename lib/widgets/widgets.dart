@@ -1,4 +1,5 @@
 import 'package:boat_monitor/Icons/icons.dart';
+import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
@@ -165,6 +166,7 @@ BottomNavigationBar botomBar(_itemselected, context) {
 }
 
 void _onItemTapped(context, index) async {
+  UserPreferences _prefs = UserPreferences();
   //_itemselected = index;
   print('presionaste:');
   print(index);
@@ -183,8 +185,11 @@ void _onItemTapped(context, index) async {
         .pushReplacementNamed('storagePage', arguments: null);
   }
   if (index == 3) {
-    await Navigator.of(context)
-        .pushReplacementNamed('managerPage', arguments: null);
+    if (_prefs.userType > 1 && _prefs.userType < 4) {
+      await Navigator.of(context).pushReplacementNamed('managerPage');
+    } else {
+      await Navigator.of(context).pushReplacementNamed('supervisorPage');
+    }
   }
 }
 

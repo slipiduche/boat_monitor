@@ -43,7 +43,11 @@ class _AlertPageState extends State<AlertPage> {
         appBar: gradientAppBar2(
             TextLanguage.of(context).alerts, alertsIcon(25.0, Colors.white),
             () {
-          Navigator.of(context).pushReplacementNamed('managerPage');
+          if (_prefs.userType > 1 && _prefs.userType < 4) {
+            Navigator.of(context).pushReplacementNamed('managerPage');
+          } else {
+            Navigator.of(context).pushReplacementNamed('supervisorPage');
+          }
         }),
         body: Container(
           child: Column(
