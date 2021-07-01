@@ -45,6 +45,36 @@ class TextLanguage {
     );
   }
 
+  /// `Done`
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type boat name`
+  String get typeBoatName {
+    return Intl.message(
+      'Type boat name',
+      name: 'typeBoatName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Timeout`
   String get timeout {
     return Intl.message(

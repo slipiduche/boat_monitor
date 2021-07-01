@@ -1,5 +1,8 @@
 {
     "boat": "Boat",
+    "done": "Done",
+    "ok": "Ok",
+    "typeBoatName": "Type boat name",
     "timeout": "Timeout",
     "unavailable": "Unavailable",
     "changeBoatNameMessage": "Are you sure you want to change boat name?",

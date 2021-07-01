@@ -4,6 +4,7 @@ import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
 import 'package:boat_monitor/bloc/parameters_bloc.dart';
+import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/styles/colors.dart';
 import 'package:boat_monitor/styles/fontSizes.dart';
 import 'package:boat_monitor/styles/margins.dart';
@@ -163,7 +164,8 @@ void updated(BuildContext _context, String message, Function function) {
                 child: Row(
                   children: [
                     Expanded(
-                      child: submitButton('OK', () {
+                      child: submitButton(
+                          TextLanguage.of(context).ok.toUpperCase(), () {
                         function();
                       }),
                     ),
@@ -321,7 +323,8 @@ void errorPopUp(BuildContext _context, String message, Function function) {
                 child: Row(
                   children: [
                     Expanded(
-                      child: submitButton('OK', () {
+                      child: submitButton(
+                          TextLanguage.of(context).ok.toUpperCase(), () {
                         function();
                       }),
                     ),
@@ -474,7 +477,7 @@ void parametersDialog(
                 child: Row(
                   children: [
                     Expanded(
-                      child: submitButton('Done', () {
+                      child: submitButton(TextLanguage.of(context).done, () {
                         functionDone();
                       }),
                     ),
@@ -529,7 +532,7 @@ void boatNameDialog(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4.0)),
-                          hintText: 'Type boat name',
+                          hintText: TextLanguage.of(context).typeBoatName,
 
                           //counterText: snapshot.data,
 
@@ -547,7 +550,7 @@ void boatNameDialog(
                 child: Row(
                   children: [
                     Expanded(
-                      child: submitButton('Done', () {
+                      child: submitButton(TextLanguage.of(context).done, () {
                         functionDone();
                       }),
                     ),
