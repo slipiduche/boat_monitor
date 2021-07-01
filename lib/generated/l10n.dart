@@ -45,6 +45,16 @@ class TextLanguage {
     );
   }
 
+  /// `Restoring`
+  String get restoring {
+    return Intl.message(
+      'Restoring',
+      name: 'restoring',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Restore`
   String get restore {
     return Intl.message(

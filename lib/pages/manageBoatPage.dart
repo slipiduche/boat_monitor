@@ -118,9 +118,11 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                                                 print(checks);
                                                 print(indexs);
                                                 if (showDeleted) {
-                                                  restoreItems(checks, indexs);
+                                                  restoreItems(
+                                                      context, checks, indexs);
                                                 } else {
-                                                  deleteItems(checks, indexs);
+                                                  deleteItems(
+                                                      context, checks, indexs);
                                                 }
                                               },
                                               child: Text(
@@ -466,8 +468,9 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
   }
 }
 
-void deleteItems(List<bool> checks, List<int> indexs) async {
-  AlertsBloc().setAlert = Alerts('Deleting', "Updating");
+void deleteItems(
+    BuildContext context, List<bool> checks, List<int> indexs) async {
+  AlertsBloc().setAlert = Alerts(TextLanguage.of(context).deleting, "Updating");
   var _change = await BoatProvider().deleteBoats(indexs);
   if (_change["ok"] == true) {
     // Navigator.of(context).pop();
@@ -481,8 +484,10 @@ void deleteItems(List<bool> checks, List<int> indexs) async {
   }
 }
 
-void restoreItems(List<bool> checks, List<int> indexs) async {
-  AlertsBloc().setAlert = Alerts('Restoring', "Updating");
+void restoreItems(
+    BuildContext context, List<bool> checks, List<int> indexs) async {
+  AlertsBloc().setAlert =
+      Alerts(TextLanguage.of(context).restoring, "Updating");
   var _change = await BoatProvider().restoreBoats(indexs);
   if (_change["ok"] == true) {
     // Navigator.of(context).pop();
@@ -500,7 +505,7 @@ void changeBoatName(String name, int boatId, BuildContext context) async {
   print(name);
   print(boatId);
 
-  AlertsBloc().setAlert = Alerts('Updating', "Updating");
+  AlertsBloc().setAlert = Alerts(TextLanguage.of(context).updating, "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
   var _change = await BoatProvider().changeBoatName(name, boatId);
   print(_change);

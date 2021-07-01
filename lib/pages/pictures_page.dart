@@ -107,8 +107,9 @@ class _PicturesPageState extends State<PicturesPage>
                               children: [
                                 GestureDetector(
                                   onTap: () async {
-                                    AlertsBloc().setAlert =
-                                        Alerts('Downloading', "Updating");
+                                    AlertsBloc().setAlert = Alerts(
+                                        TextLanguage.of(context).downloading,
+                                        "Updating");
                                     final _resp = await JourneyProvider()
                                         .getFilesZip(
                                             journeyId: _pictures

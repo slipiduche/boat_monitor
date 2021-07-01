@@ -100,8 +100,9 @@ class _LocationPageState extends State<LocationPage> {
                               children: [
                                 GestureDetector(
                                   onTap: () async {
-                                    AlertsBloc().setAlert =
-                                        Alerts('Downloading', "Updating");
+                                    AlertsBloc().setAlert = Alerts(
+                                        TextLanguage.of(context).downloading,
+                                        "Updating");
                                     final _resp = await HistoricsProvider()
                                         .getHistorics(
                                             journeyId: [_location.journey.id],

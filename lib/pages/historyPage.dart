@@ -125,8 +125,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                     Expanded(child: Container()),
                                     GestureDetector(
                                       onTap: () async {
-                                        AlertsBloc().setAlert =
-                                            Alerts('Downloading', "Updating");
+                                        AlertsBloc().setAlert = Alerts(
+                                            TextLanguage.of(context)
+                                                .downloading,
+                                            "Updating");
                                         final _resp = await JourneyProvider()
                                             .getJourneysBy(_journeysFiltered);
                                         if (_resp['ok']) {

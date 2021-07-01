@@ -314,12 +314,11 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
   }
 }
 
-void deleteItems(List<bool> checks, List<int> indexs) async {}
 void changeBoatName(String name, int boatId, BuildContext context) async {
   print(name);
   print(boatId);
 
-  AlertsBloc().setAlert = Alerts('Updating', "Updating");
+  AlertsBloc().setAlert = Alerts(TextLanguage.of(context).updating, "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
   var _change = await BoatProvider().changeBoatName(name, boatId);
   print(_change);

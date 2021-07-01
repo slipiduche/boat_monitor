@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "recoveryText" : MessageLookupByLibrary.simpleMessage("Please introduce your email and check your inbox."),
     "resetPasswordButtonText" : MessageLookupByLibrary.simpleMessage("Acept"),
     "restore" : MessageLookupByLibrary.simpleMessage("Restore"),
+    "restoring" : MessageLookupByLibrary.simpleMessage("Restoring"),
     "sail" : MessageLookupByLibrary.simpleMessage("Sail"),
     "sailing" : MessageLookupByLibrary.simpleMessage("Sailing"),
     "sailingDays" : MessageLookupByLibrary.simpleMessage("Sailing days"),
