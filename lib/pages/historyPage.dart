@@ -547,7 +547,7 @@ Widget _historySearch(BuildContext context) {
           style: TextStyle(color: blue1, fontSize: 15.0),
           decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Type any boat name, data travel, supervisor'),
+              hintText: TextLanguage.of(context).historyHintText),
           onChanged: (value) {
             HistorySearchBloc().setHistorySearch =
                 HistorySearch(content: value);

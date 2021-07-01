@@ -454,16 +454,16 @@ Widget _homeButtons(BuildContext context) {
         _filterButton(() {
           print('salling filter');
           HomeFilterBloc().sethomeFilter = 'Salling';
-        }, 'Salling'),
+        }, TextLanguage.of(context).sailing),
         _filterButton(() {
           HomeFilterBloc().sethomeFilter = 'Arrived';
-        }, 'Arrived'),
+        }, TextLanguage.of(context).arrived),
         _filterButton(() {
           HomeFilterBloc().sethomeFilter = 'unavailable';
-        }, 'unavailable'),
+        }, TextLanguage.of(context).unavailable),
         _filterButton(() {
           HomeFilterBloc().sethomeFilter = 'available';
-        }, 'available')
+        }, TextLanguage.of(context).available)
       ],
     ),
   );
@@ -532,7 +532,8 @@ Widget _homeSearch(BuildContext context) {
             child: TextField(
           style: TextStyle(color: blue1),
           decoration: InputDecoration(
-              border: InputBorder.none, hintText: 'Type any boat name'),
+              border: InputBorder.none,
+              hintText: TextLanguage.of(context).typeAnyBoatName),
           onChanged: (value) {
             HomeSearchBloc().setHomeSearch = value;
           },

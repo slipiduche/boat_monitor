@@ -341,7 +341,8 @@ Widget _storageSearch(BuildContext context) {
             child: TextField(
           style: TextStyle(color: blue1),
           decoration: InputDecoration(
-              border: InputBorder.none, hintText: 'Type any boat name'),
+              border: InputBorder.none,
+              hintText: TextLanguage.of(context).typeAnyBoatName),
           onChanged: (value) {
             StorageSearchBloc().setStorageSearch = value;
           },

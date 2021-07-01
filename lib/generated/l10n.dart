@@ -45,6 +45,26 @@ class TextLanguage {
     );
   }
 
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type any boat name, data travel, supervisor`
+  String get historyHintText {
+    return Intl.message(
+      'Type any boat name, data travel, supervisor',
+      name: 'historyHintText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Restoring`
   String get restoring {
     return Intl.message(
@@ -145,6 +165,26 @@ class TextLanguage {
     );
   }
 
+  /// `Type any boat name`
+  String get typeAnyBoatName {
+    return Intl.message(
+      'Type any boat name',
+      name: 'typeAnyBoatName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type any travel`
+  String get typeAnyTravel {
+    return Intl.message(
+      'Type any travel',
+      name: 'typeAnyTravel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Type number`
   String get typeNumber {
     return Intl.message(
@@ -170,6 +210,16 @@ class TextLanguage {
     return Intl.message(
       'Unavailable',
       name: 'unavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message(
+      'Available',
+      name: 'available',
       desc: '',
       args: [],
     );
@@ -635,10 +685,10 @@ class TextLanguage {
     );
   }
 
-  /// `Departure Confirmation`
+  /// `Are you sure you want to mark this boat At`
   String get departureMessageConfirmation {
     return Intl.message(
-      'Departure Confirmation',
+      'Are you sure you want to mark this boat At',
       name: 'departureMessageConfirmation',
       desc: '',
       args: [],

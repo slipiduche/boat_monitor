@@ -74,7 +74,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
       key: _scaffoldKey,
       appBar: gradientAppBar2(
           _journey.boatName, boatIconBlue(25.0, Colors.white), () {
-        Navigator.of(context).pop();
+        Navigator.of(context).pushReplacementNamed('homePage');
       }),
       body: Container(
         child: Column(
@@ -117,8 +117,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                             LiteRollingSwitch(
                               //initial value
                               value: confirm,
-                              textOn: 'Arrived',
-                              textOff: 'Confirm',
+                              textOn: TextLanguage.of(context).arrived,
+                              textOff: TextLanguage.of(context).confirm,
                               colorOn: gray,
                               colorOff: gray,
                               iconOn: Icons.done,

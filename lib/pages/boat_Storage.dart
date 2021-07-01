@@ -165,7 +165,8 @@ Widget _boatStorageSearch(BuildContext context) {
             child: TextField(
           style: TextStyle(color: blue1),
           decoration: InputDecoration(
-              border: InputBorder.none, hintText: 'Type any travel'),
+              border: InputBorder.none,
+              hintText: TextLanguage.of(context).typeAnyTravel),
           onChanged: (value) {
             BoatStorageSearchBloc().setBoatStorageSearch = value;
           },
