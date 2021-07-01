@@ -45,6 +45,36 @@ class TextLanguage {
     );
   }
 
+  /// `Timeout`
+  String get timeout {
+    return Intl.message(
+      'Timeout',
+      name: 'timeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unavailable`
+  String get unavailable {
+    return Intl.message(
+      'Unavailable',
+      name: 'unavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to change boat name?`
+  String get changeBoatNameMessage {
+    return Intl.message(
+      'Are you sure you want to change boat name?',
+      name: 'changeBoatNameMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hours`
   String get hours {
     return Intl.message(
@@ -405,6 +435,56 @@ class TextLanguage {
     );
   }
 
+  /// `Change Confirmation`
+  String get changeConfirmation {
+    return Intl.message(
+      'Change Confirmation',
+      name: 'changeConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change`
+  String get change {
+    return Intl.message(
+      'Change',
+      name: 'change',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmation`
+  String get confirmation {
+    return Intl.message(
+      'Confirmation',
+      name: 'confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure to log out?`
+  String get logoutConfirmation {
+    return Intl.message(
+      'Are you sure to log out?',
+      name: 'logoutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this Journey data?`
+  String get deleteStorageConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this Journey data?',
+      name: 'deleteStorageConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to acept this users?`
   String get aceptUsers {
     return Intl.message(
@@ -430,6 +510,86 @@ class TextLanguage {
     return Intl.message(
       'Decline Confirmation',
       name: 'declineConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Departure Confirmation`
+  String get departureConfirmation {
+    return Intl.message(
+      'Departure Confirmation',
+      name: 'departureConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Departure Confirmation`
+  String get departureMessageConfirmation {
+    return Intl.message(
+      'Departure Confirmation',
+      name: 'departureMessageConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Confirmation`
+  String get deleteConfirmation {
+    return Intl.message(
+      'Delete Confirmation',
+      name: 'deleteConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setpoint Confirmation`
+  String get setPointConfirmation {
+    return Intl.message(
+      'Setpoint Confirmation',
+      name: 'setPointConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to mark weight?`
+  String get changeWeightConfirmation {
+    return Intl.message(
+      'Are you sure you want to mark weight?',
+      name: 'changeWeightConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to mark timeout?`
+  String get changeTimeoutConfirmation {
+    return Intl.message(
+      'Are you sure you want to mark timeout?',
+      name: 'changeTimeoutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to mark temperature?`
+  String get changeTemperatureConfirmation {
+    return Intl.message(
+      'Are you sure you want to mark temperature?',
+      name: 'changeTemperatureConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrival Confirmation`
+  String get arrivalConfirmation {
+    return Intl.message(
+      'Arrival Confirmation',
+      name: 'arrivalConfirmation',
       desc: '',
       args: [],
     );
@@ -665,6 +825,16 @@ class TextLanguage {
     );
   }
 
+  /// `deleting`
+  String get deleting {
+    return Intl.message(
+      'deleting',
+      name: 'deleting',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name`
   String get name {
     return Intl.message(
@@ -842,6 +1012,16 @@ class TextLanguage {
       name: 'textWithPlaceholder',
       desc: '',
       args: [name],
+    );
+  }
+
+  /// `Are you sure you want to change {boatName} responsible to {userName}?`
+  String changeResponsibleMessage(Object boatName, Object userName) {
+    return Intl.message(
+      'Are you sure you want to change $boatName responsible to $userName?',
+      name: 'changeResponsibleMessage',
+      desc: '',
+      args: [boatName, userName],
     );
   }
 

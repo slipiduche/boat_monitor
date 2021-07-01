@@ -66,22 +66,27 @@ class _ParametersPageState extends State<ParametersPage> {
                         children: [
                           _parametersHeader(context),
                           _parametersItem(context, {
-                            "name": 'weight',
+                            "name":
+                                TextLanguage.of(context).weight.toLowerCase(),
                             "value": 50,
                             "default": 35.0
                             // ignore: missing_return
                           }, () {
-                            parametersDialog(context, 'weight', () {
+                            parametersDialog(
+                                context, TextLanguage.of(context).weight, () {
                               Navigator.of(context).pop();
                               confirmationDialog(
                                   context,
-                                  'Are you sure you want to mark weight',
+                                  TextLanguage.of(context)
+                                      .changeWeightConfirmation,
                                   // ignore: missing_return
-                                  'Setpoint Confirmation', () {
+                                  TextLanguage.of(context).setPointConfirmation,
+                                  () {
                                 AlertsBloc().setAlertClosed = false;
                                 print('yess');
-                                AlertsBloc().setAlert =
-                                    Alerts('Updating', "Updating");
+                                AlertsBloc().setAlert = Alerts(
+                                    TextLanguage.of(context).updating,
+                                    "Updating");
                                 ParametersProvider().setParameters(
                                     ParametersBloc()
                                         .parametersValue
@@ -105,22 +110,29 @@ class _ParametersPageState extends State<ParametersPage> {
                             print('weight');
                           }),
                           _parametersItem(context, {
-                            "name": 'temperature',
+                            "name": TextLanguage.of(context)
+                                .temperature
+                                .toLowerCase(),
                             "value": 25,
                             "default": 20.0
                             // ignore: missing_return
                           }, () {
-                            parametersDialog(context, 'temperature', () {
+                            parametersDialog(
+                                context, TextLanguage.of(context).temperature,
+                                () {
                               Navigator.of(context).pop();
                               confirmationDialog(
                                   context,
-                                  'Are you sure you want to mark temperature',
+                                  TextLanguage.of(context)
+                                      .changeTemperatureConfirmation,
                                   // ignore: missing_return
-                                  'Setpoint Confirmation', () {
+                                  TextLanguage.of(context).setPointConfirmation,
+                                  () {
                                 print('yess');
                                 AlertsBloc().setAlertClosed = false;
-                                AlertsBloc().setAlert =
-                                    Alerts('Updating', "Updating");
+                                AlertsBloc().setAlert = Alerts(
+                                    TextLanguage.of(context).updating,
+                                    "Updating");
                                 ParametersProvider().setParameters(
                                     ParametersBloc()
                                         .parametersValue
@@ -144,22 +156,28 @@ class _ParametersPageState extends State<ParametersPage> {
                             print('temp');
                           }),
                           _parametersItem(context, {
-                            "name": 'unavailable',
+                            "name": TextLanguage.of(context)
+                                .unavailable
+                                .toLowerCase(),
                             "value": 6,
                             "default": 7.0
                             // ignore: missing_return
                           }, () {
-                            parametersDialog(context, 'timeout', () {
+                            parametersDialog(
+                                context, TextLanguage.of(context).timeout, () {
                               Navigator.of(context).pop();
                               confirmationDialog(
                                   context,
-                                  'Are you sure you want to mark timeout',
+                                  TextLanguage.of(context)
+                                      .changeTimeoutConfirmation,
                                   // ignore: missing_return
-                                  'Setpoint Confirmation', () {
+                                  TextLanguage.of(context).setPointConfirmation,
+                                  () {
                                 AlertsBloc().setAlertClosed = false;
                                 print('yess');
-                                AlertsBloc().setAlert =
-                                    Alerts('Updating', "Updating");
+                                AlertsBloc().setAlert = Alerts(
+                                    TextLanguage.of(context).updating,
+                                    "Updating");
                                 ParametersProvider().setParameters(
                                     ParametersBloc()
                                         .parametersValue

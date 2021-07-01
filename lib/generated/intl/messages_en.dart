@@ -19,11 +19,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(name) => "Welcome ${name}";
+  static m0(boatName, userName) => "Are you sure you want to change ${boatName} responsible to ${userName}?";
 
-  static m1(firstName, lastName) => "My name is ${lastName}, ${firstName} ${lastName}";
+  static m1(name) => "Welcome ${name}";
 
-  static m2(howMany) => "${Intl.plural(howMany, one: 'You have 1 notification', other: 'You have ${howMany} notifications')}";
+  static m2(firstName, lastName) => "My name is ${lastName}, ${firstName} ${lastName}";
+
+  static m3(howMany) => "${Intl.plural(howMany, one: 'You have 1 notification', other: 'You have ${howMany} notifications')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -35,13 +37,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "approval" : MessageLookupByLibrary.simpleMessage("Approval"),
     "aprove" : MessageLookupByLibrary.simpleMessage("Aprove"),
     "arrival" : MessageLookupByLibrary.simpleMessage("Arrival"),
+    "arrivalConfirmation" : MessageLookupByLibrary.simpleMessage("Arrival Confirmation"),
     "arrived" : MessageLookupByLibrary.simpleMessage("Arrived"),
     "averageTemperature" : MessageLookupByLibrary.simpleMessage("Average temperature"),
     "boat" : MessageLookupByLibrary.simpleMessage("Boat"),
     "camera" : MessageLookupByLibrary.simpleMessage("Camera"),
+    "change" : MessageLookupByLibrary.simpleMessage("Change"),
+    "changeBoatNameMessage" : MessageLookupByLibrary.simpleMessage("Are you sure you want to change boat name?"),
+    "changeConfirmation" : MessageLookupByLibrary.simpleMessage("Change Confirmation"),
     "changePassword" : MessageLookupByLibrary.simpleMessage("Change password"),
+    "changeResponsibleMessage" : m0,
+    "changeTemperatureConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to mark temperature?"),
+    "changeTimeoutConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to mark timeout?"),
+    "changeWeightConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to mark weight?"),
     "clicHere" : MessageLookupByLibrary.simpleMessage("Clic here"),
     "confirmPassword" : MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "confirmation" : MessageLookupByLibrary.simpleMessage("Confirmation"),
     "currentStatus" : MessageLookupByLibrary.simpleMessage("Current status"),
     "currentWeight" : MessageLookupByLibrary.simpleMessage("Current weight"),
     "date" : MessageLookupByLibrary.simpleMessage("Date"),
@@ -50,8 +61,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "declineConfirmation" : MessageLookupByLibrary.simpleMessage("Decline Confirmation"),
     "declineUsers" : MessageLookupByLibrary.simpleMessage("Are you sure you want to decline this users?"),
     "defaultt" : MessageLookupByLibrary.simpleMessage("Default"),
+    "deleteConfirmation" : MessageLookupByLibrary.simpleMessage("Delete Confirmation"),
     "deleteFromSsd" : MessageLookupByLibrary.simpleMessage("Delete from SSD"),
+    "deleteStorageConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to delete this Journey data?"),
+    "deleting" : MessageLookupByLibrary.simpleMessage("deleting"),
     "departure" : MessageLookupByLibrary.simpleMessage("Departure"),
+    "departureConfirmation" : MessageLookupByLibrary.simpleMessage("Departure Confirmation"),
+    "departureMessageConfirmation" : MessageLookupByLibrary.simpleMessage("Departure Confirmation"),
     "desiredTemperature" : MessageLookupByLibrary.simpleMessage("Desired temperature"),
     "diskSpace" : MessageLookupByLibrary.simpleMessage("Disk space: "),
     "dontHaveAccount" : MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
@@ -71,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "location" : MessageLookupByLibrary.simpleMessage("Location"),
     "loginButtonText" : MessageLookupByLibrary.simpleMessage("Login"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "logoutConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure to log out?"),
     "manageBoat" : MessageLookupByLibrary.simpleMessage("Manage boat"),
     "manager" : MessageLookupByLibrary.simpleMessage("Manager"),
     "mustBeEqual" : MessageLookupByLibrary.simpleMessage("Passwords must be equal"),
@@ -93,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sailingTime" : MessageLookupByLibrary.simpleMessage("Sailing time"),
     "selectUserResponsible" : MessageLookupByLibrary.simpleMessage("Select user responsible"),
     "selected" : MessageLookupByLibrary.simpleMessage("Selected"),
+    "setPointConfirmation" : MessageLookupByLibrary.simpleMessage("Setpoint Confirmation"),
     "signUp" : MessageLookupByLibrary.simpleMessage("Sign Up"),
     "signUpMessage" : MessageLookupByLibrary.simpleMessage("Sign up and start working with us"),
     "signupHere" : MessageLookupByLibrary.simpleMessage("Sign up here"),
@@ -101,11 +119,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "storage" : MessageLookupByLibrary.simpleMessage("Storage"),
     "supervisor" : MessageLookupByLibrary.simpleMessage("Supervisor"),
     "temperature" : MessageLookupByLibrary.simpleMessage("Temperature"),
-    "textWithPlaceholder" : m0,
-    "textWithPlaceholders" : m1,
-    "textWithPlural" : m2,
+    "textWithPlaceholder" : m1,
+    "textWithPlaceholders" : m2,
+    "textWithPlural" : m3,
     "time" : MessageLookupByLibrary.simpleMessage("Time"),
+    "timeout" : MessageLookupByLibrary.simpleMessage("Timeout"),
     "travel" : MessageLookupByLibrary.simpleMessage("Travel"),
+    "unavailable" : MessageLookupByLibrary.simpleMessage("Unavailable"),
     "updating" : MessageLookupByLibrary.simpleMessage("Updating"),
     "user" : MessageLookupByLibrary.simpleMessage("User"),
     "value" : MessageLookupByLibrary.simpleMessage("Value"),

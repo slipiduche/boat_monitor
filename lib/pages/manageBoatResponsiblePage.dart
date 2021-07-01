@@ -162,9 +162,11 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
   void changeResponsible(BuildContext context, User user, BoatData boat) async {
     confirmationDialog(
         context,
-        'Are you sure you want to change ${boat.boatName} responsible to ${user.username}?',
-        'Change Confirmation', () {
-      AlertsBloc().setAlert = Alerts('Change', "Updating");
+        TextLanguage.of(context)
+            .changeResponsibleMessage(boat.boatName, user.username),
+        TextLanguage.of(context).changeConfirmation, () {
+      AlertsBloc().setAlert =
+          Alerts(TextLanguage.of(context).change, "Updating");
       BoatProvider().changeBoatResponsible(user, boat.id);
     }, () {
       Navigator.of(context).pop();

@@ -328,8 +328,9 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                               Navigator.of(context).pop();
                               confirmationDialog(
                                   context,
-                                  'Are you sure you want to change boat name?',
-                                  'Confirmation', () {
+                                  TextLanguage.of(context)
+                                      .changeBoatNameMessage,
+                                  TextLanguage.of(context).confirmation, () {
                                 Navigator.of(context).pop();
                                 changeBoatName(BoatsBloc().boatNameValue,
                                     boat.id, context);

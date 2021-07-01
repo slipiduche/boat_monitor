@@ -172,8 +172,10 @@ class _ManagerPageState extends State<ManagerPage> {
                         ),
                         managerOption(TextLanguage.of(context).logout, blue1,
                             logoutIcon(20.0, blue1), () {
-                          confirmationDialog(context,
-                              'Are you sure to log out?', 'Confirmation', () {
+                          confirmationDialog(
+                              context,
+                              TextLanguage.of(context).logoutConfirmation,
+                              TextLanguage.of(context).confirmation, () {
                             _prefs.token = '';
                             _prefs.userType = 0;
                             Navigator.of(context).pop();

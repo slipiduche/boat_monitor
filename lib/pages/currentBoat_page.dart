@@ -131,12 +131,16 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                 if (_boat.onJourney == 0 && state == true) {
                                   confirmationDialog(
                                       context,
-                                      'Are you sure you want to mark this boat with at ${DateTime.now().toString().substring(0, 16)} ?',
-                                      'Departure Confirmation', () {
+                                      TextLanguage.of(context)
+                                              .departureMessageConfirmation +
+                                          ' ${DateTime.now().toString().substring(0, 16)} ?',
+                                      TextLanguage.of(context)
+                                          .departureConfirmation, () {
                                     Navigator.of(context).pop();
                                     //setOnJourney(_boat.id, context);
-                                    AlertsBloc().setAlert =
-                                        Alerts('Updating', "Updating");
+                                    AlertsBloc().setAlert = Alerts(
+                                        TextLanguage.of(context).updating,
+                                        "Updating");
                                     mqtt.journeyStart(_boat.id);
                                     return;
                                   }, () {
@@ -150,12 +154,16 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                     state == false) {
                                   confirmationDialog(
                                       context,
-                                      'Are you sure you want to mark this boat with at ${DateTime.now().toString().substring(0, 16)} ?',
-                                      'Arrival Confirmation', () {
+                                      TextLanguage.of(context)
+                                              .departureMessageConfirmation +
+                                          ' ${DateTime.now().toString().substring(0, 16)} ?',
+                                      TextLanguage.of(context)
+                                          .arrivalConfirmation, () {
                                     Navigator.of(context).pop();
                                     //setOnJourney(_boat.id, context);
-                                    AlertsBloc().setAlert =
-                                        Alerts('Updating', "Updating");
+                                    AlertsBloc().setAlert = Alerts(
+                                        TextLanguage.of(context).updating,
+                                        "Updating");
                                     mqtt.journeyStop(_boat.id);
                                   }, () {
                                     Navigator.of(context).pop();

@@ -1,5 +1,8 @@
 {
     "boat": "Boat",
+    "timeout": "Timeout",
+    "unavailable": "Unavailable",
+    "changeBoatNameMessage": "Are you sure you want to change boat name?",
     "hours": "Hours",
     "temperature": "Temperature",
     "desiredTemperature": "Desired temperature",
@@ -36,9 +39,22 @@
     "deleteFromSsd": "Delete from SSD",
     "aprove": "Aprove",
     "aceptConfirmation": "Acept Confirmation",
+    "changeConfirmation": "Change Confirmation",
+    "change": "Change",
+    "confirmation": "Confirmation",
+    "logoutConfirmation": "Are you sure to log out?",
+    "deleteStorageConfirmation": "Are you sure you want to delete this Journey data?",
     "aceptUsers": "Are you sure you want to acept this users?",
     "date": "Date",
     "declineConfirmation": "Decline Confirmation",
+    "departureConfirmation": "Departure Confirmation",
+    "departureMessageConfirmation": "Departure Confirmation",
+    "deleteConfirmation": "Delete Confirmation",
+    "setPointConfirmation": "Setpoint Confirmation",
+    "changeWeightConfirmation": "Are you sure you want to mark weight?",
+    "changeTimeoutConfirmation": "Are you sure you want to mark timeout?",
+    "changeTemperatureConfirmation": "Are you sure you want to mark temperature?",
+    "arrivalConfirmation": "Arrival Confirmation",
     "declineUsers": "Are you sure you want to decline this users?",
     "user": "User",
     "selected": "Selected",
@@ -62,6 +78,7 @@
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
     "updating": "Updating",
+    "deleting": "deleting",
     "name": "Name",
     "email": "Email",
     "passWord": "Password",
@@ -80,6 +97,13 @@
     "mustBeEqual": "Passwords must be equal",
     "simpleText": "Hello world",
     "textWithPlaceholder": "Welcome {name}",
+    "changeResponsibleMessage": "Are you sure you want to change {boatName} responsible to {userName}?",
+    "@changeResponsibleMessage": {
+        "placeholders": {
+            "boatName": {},
+            "userName": {}
+        }
+    },
     "textWithPlaceholders": "My name is {lastName}, {firstName} {lastName}",
     "@textWithPlaceholders": {
         "placeholders": {

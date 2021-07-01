@@ -456,11 +456,12 @@ class _BoatDataPageState extends State<BoatDataPage> {
       BuildContext context, List<bool> checks, List<int> indexs) async {
     confirmationDialog(
         context,
-        'Are you sure you want to delete this Journey data?',
-        'Delete Confirmation', () {
+        TextLanguage.of(context).deleteStorageConfirmation,
+        TextLanguage.of(context).deleteConfirmation, () {
       Navigator.of(context).pop();
       //setOnJourney(_boat.id, context);
-      AlertsBloc().setAlert = Alerts('Deleting', "Updating");
+      AlertsBloc().setAlert =
+          Alerts(TextLanguage.of(context).deleting, "Updating");
       //mqtt.journeyStop(_boat.id);
       for (var i = 0; i < checks.length; i++) {
         if (checks[i]) {
