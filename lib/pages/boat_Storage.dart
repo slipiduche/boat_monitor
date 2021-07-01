@@ -118,7 +118,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          TextLanguage.of(context).saillingDays,
+                          TextLanguage.of(context).sailingDays,
                           style: TextStyle(color: blue1, fontSize: correoSize),
                         ),
                       ],
