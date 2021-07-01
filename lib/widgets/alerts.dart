@@ -392,7 +392,8 @@ void confirmationDialog(BuildContext _context, String contain, String title,
                             Expanded(
                               child: Container(
                                 height: 50.0,
-                                child: submitButtonS('Yes', () async {
+                                child: submitButtonS(
+                                    TextLanguage.of(context).yes, () async {
                                   await functionYes();
                                 }),
                               ),
@@ -400,7 +401,8 @@ void confirmationDialog(BuildContext _context, String contain, String title,
                             Expanded(
                               child: Container(
                                 height: 50.0,
-                                child: submitButtonNo('No', () async {
+                                child: submitButtonNo(
+                                    TextLanguage.of(context).no, () async {
                                   await functionNo();
                                 }),
                               ),
@@ -459,7 +461,7 @@ void parametersDialog(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4.0)),
-                          hintText: 'Type number',
+                          hintText: TextLanguage.of(context).typeNumber,
 
                           //counterText: snapshot.data,
 

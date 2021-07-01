@@ -65,11 +65,41 @@ class TextLanguage {
     );
   }
 
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Type boat name`
   String get typeBoatName {
     return Intl.message(
       'Type boat name',
       name: 'typeBoatName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type number`
+  String get typeNumber {
+    return Intl.message(
+      'Type number',
+      name: 'typeNumber',
       desc: '',
       args: [],
     );

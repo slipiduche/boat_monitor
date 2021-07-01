@@ -95,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mustHave" : MessageLookupByLibrary.simpleMessage("Passwords must be at least 6 characters long"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "newPassword" : MessageLookupByLibrary.simpleMessage("New Password"),
+    "no" : MessageLookupByLibrary.simpleMessage("No"),
     "noData" : MessageLookupByLibrary.simpleMessage("No data"),
     "ok" : MessageLookupByLibrary.simpleMessage("Ok"),
     "parameter" : MessageLookupByLibrary.simpleMessage("Parameter"),
@@ -128,11 +129,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "timeout" : MessageLookupByLibrary.simpleMessage("Timeout"),
     "travel" : MessageLookupByLibrary.simpleMessage("Travel"),
     "typeBoatName" : MessageLookupByLibrary.simpleMessage("Type boat name"),
+    "typeNumber" : MessageLookupByLibrary.simpleMessage("Type number"),
     "unavailable" : MessageLookupByLibrary.simpleMessage("Unavailable"),
     "updating" : MessageLookupByLibrary.simpleMessage("Updating"),
     "user" : MessageLookupByLibrary.simpleMessage("User"),
     "value" : MessageLookupByLibrary.simpleMessage("Value"),
     "waiting" : MessageLookupByLibrary.simpleMessage("Waiting for approval"),
-    "weight" : MessageLookupByLibrary.simpleMessage("weight")
+    "weight" : MessageLookupByLibrary.simpleMessage("weight"),
+    "yes" : MessageLookupByLibrary.simpleMessage("Yes")
   };
 }
