@@ -45,6 +45,46 @@ class TextLanguage {
     );
   }
 
+  /// `Restore`
+  String get restore {
+    return Intl.message(
+      'Restore',
+      name: 'restore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active boats`
+  String get activeBoats {
+    return Intl.message(
+      'Active boats',
+      name: 'activeBoats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive boats`
+  String get inactiveBoats {
+    return Intl.message(
+      'Inactive boats',
+      name: 'inactiveBoats',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Done`
   String get done {
     return Intl.message(

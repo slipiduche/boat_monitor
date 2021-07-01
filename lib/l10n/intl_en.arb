@@ -1,5 +1,9 @@
 {
     "boat": "Boat",
+    "restore": "Restore",
+    "delete": "Delete",
+    "activeBoats": "Active boats",
+    "inactiveBoats": "Inactive boats",
     "done": "Done",
     "ok": "Ok",
     "yes": "Yes",

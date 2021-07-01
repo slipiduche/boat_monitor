@@ -83,14 +83,14 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                 });
                 if (showDeleted) {
                   showBoats = deletedBoats;
-                  activeInactiveText =
-                      'Active boats (${availableBoats.length})';
-                  deleteRestoreText = 'Restore';
+                  activeInactiveText = TextLanguage.of(context).activeBoats +
+                      ' (${availableBoats.length})';
+                  deleteRestoreText = TextLanguage.of(context).restore;
                 } else {
                   showBoats = availableBoats;
-                  activeInactiveText =
-                      'Inactive boats (${deletedBoats.length})';
-                  deleteRestoreText = 'Delete';
+                  activeInactiveText = TextLanguage.of(context).inactiveBoats +
+                      ' (${deletedBoats.length})';
+                  deleteRestoreText = TextLanguage.of(context).delete;
                 }
 
                 return Container(
