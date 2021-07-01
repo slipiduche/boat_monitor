@@ -80,7 +80,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Disk space: ',
+                          TextLanguage.of(context).diskSpace,
                           style: TextStyle(
                               color: blue1,
                               fontSize: messageTitle,
@@ -118,7 +118,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Sailling days',
+                          TextLanguage.of(context).saillingDays,
                           style: TextStyle(color: blue1, fontSize: correoSize),
                         ),
                       ],

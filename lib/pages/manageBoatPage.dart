@@ -186,7 +186,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                                   width: 10.0,
                                 ),
                                 Text(
-                                  'Selected',
+                                  TextLanguage.of(context).selected,
                                   style: TextStyle(
                                       color: blue1,
                                       fontWeight: FontWeight.bold),
@@ -237,7 +237,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                         height: 20.0,
                       ),
                       Text(
-                        'No data',
+                        TextLanguage.of(context).noData,
                         style: TextStyle(color: blue1, fontSize: correoSize),
                         textAlign: TextAlign.center,
                       ),
@@ -427,21 +427,21 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 220) / 3,
                             child: Text(
-                              'Boat',
+                              TextLanguage.of(context).boat,
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
                             )),
                         Container(
                             width: (MediaQuery.of(context).size.width - 80) / 3,
-                            child: Text("Date created",
+                            child: Text(TextLanguage.of(context).dateCreated,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 3,
-                            child: Text("Manager",
+                            child: Text(TextLanguage.of(context).manager,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.ellipsis)),

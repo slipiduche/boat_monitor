@@ -77,7 +77,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
                             Expanded(
                                 child: Container(
                               child: Text(
-                                'Select user responsible',
+                                TextLanguage.of(context).selectUserResponsible,
                                 style: TextStyle(
                                   color: blue1,
                                   fontSize: 24,
@@ -114,7 +114,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
                         height: 20.0,
                       ),
                       Text(
-                        'No data',
+                        TextLanguage.of(context).noData,
                         style: TextStyle(color: blue1, fontSize: correoSize),
                         textAlign: TextAlign.center,
                       ),
@@ -274,21 +274,21 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
                             width:
                                 (MediaQuery.of(context).size.width - 220) / 3,
                             child: Text(
-                              'Boat',
+                              TextLanguage.of(context).boat,
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
                             )),
                         Container(
                             width: (MediaQuery.of(context).size.width - 80) / 3,
-                            child: Text("Date created",
+                            child: Text(TextLanguage.of(context).dateCreated,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 3,
-                            child: Text("Manager",
+                            child: Text(TextLanguage.of(context).manager,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),

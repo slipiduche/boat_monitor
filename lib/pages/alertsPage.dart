@@ -135,24 +135,6 @@ class _AlertPageState extends State<AlertPage> {
           Expanded(
             child: Row(
               children: [
-                // Checkbox(
-                //   value: checks[index],
-                //   activeColor: blue1,
-                //   onChanged: (value) {
-                //     checks[index] = value;
-
-                //     if (value == true) {
-                //       indexs.add(alert.pendingalertId);
-                //       PendingAlertsBloc().setCheck =
-                //           PendingAlertsBloc().checkValue + 1;
-                //     } else {
-                //       indexs.remove(alert.pendingalertId);
-                //       PendingAlertsBloc().setCheck =
-                //           PendingAlertsBloc().checkValue - 1;
-                //     }
-                //     setState(() {});
-                //   },
-                // ),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -177,7 +159,6 @@ class _AlertPageState extends State<AlertPage> {
             ),
           ),
           Container(
-            //margin: EdgeInsets.only(left: marginExt1 * 2),
             child: Divider(
               color: blue1,
               height: 1.0,

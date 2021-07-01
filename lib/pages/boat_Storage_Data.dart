@@ -114,7 +114,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
                                                             checks, indexs);
                                                       },
                                                       child: Text(
-                                                        'Delete from SSD',
+                                                        TextLanguage.of(context)
+                                                            .deleteFromSsd,
                                                         style: TextStyle(
                                                             decorationThickness:
                                                                 2.0,
@@ -148,7 +149,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'Selected',
+                                          TextLanguage.of(context).selected,
                                           style: TextStyle(
                                               color: blue1,
                                               fontWeight: FontWeight.bold),
@@ -206,7 +207,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
                                 height: 20.0,
                               ),
                               Text(
-                                'No data',
+                                TextLanguage.of(context).noData,
                                 style: TextStyle(
                                     color: blue1, fontSize: correoSize),
                                 textAlign: TextAlign.center,
@@ -230,7 +231,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
                       height: 20.0,
                     ),
                     Text(
-                      'No data',
+                      TextLanguage.of(context).noData,
                       style: TextStyle(color: blue1, fontSize: correoSize),
                       textAlign: TextAlign.center,
                     ),
@@ -307,7 +308,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 180) / 4,
                             child: Text(
-                              'Travel ' + boat.id.toString(),
+                              TextLanguage.of(context).travel +
+                                  boat.id.toString(),
                               overflow: TextOverflow.ellipsis,
                             )),
                         SizedBox(width: 5.0),
@@ -405,28 +407,29 @@ class _BoatDataPageState extends State<BoatDataPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 180) / 4,
                             child: Text(
-                              'Travel',
+                              TextLanguage.of(context).travel,
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
                             )),
                         Container(
                             width: (MediaQuery.of(context).size.width - 80) / 4,
-                            child: Text("Date ",
+                            child: Text(TextLanguage.of(context).date + " ",
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 4,
-                            child: Text("Weight (KG)",
+                            child: Text(
+                                TextLanguage.of(context).weight + " (KG)",
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 4,
-                            child: Text("Time",
+                            child: Text(TextLanguage.of(context).time,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.ellipsis)),

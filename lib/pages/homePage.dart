@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                         height: 20.0,
                                       ),
                                       Text(
-                                        'No data',
+                                        TextLanguage.of(context).noData,
                                         style: TextStyle(
                                             color: blue1, fontSize: correoSize),
                                         textAlign: TextAlign.center,
@@ -186,7 +186,7 @@ Widget makeBoatList(BuildContext context, List<BoatData> boats) {
             height: 20.0,
           ),
           Text(
-            'No data',
+            TextLanguage.of(context).noData,
             style: TextStyle(color: blue1, fontSize: correoSize),
             textAlign: TextAlign.center,
           ),
@@ -274,7 +274,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                         Row(
                           children: [
                             Text(
-                              'Departure:',
+                              TextLanguage.of(context).departure + ':',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -295,7 +295,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                         Row(
                           children: [
                             Text(
-                              'Arrival:',
+                              TextLanguage.of(context).arrival + ':',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -316,7 +316,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                         Row(
                           children: [
                             Text(
-                              'Final Weight:',
+                              TextLanguage.of(context).finalWeight + ':',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -355,7 +355,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                               width: 5.0,
                             ),
                             Text(
-                              'Status:',
+                              TextLanguage.of(context).status + ':',
                               style: TextStyle(
                                   color: blue1,
                                   fontWeight: FontWeight.bold,
@@ -367,7 +367,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                             Builder(builder: (context) {
                               if (boat.onJourney == 0) {
                                 return Text(
-                                  'Arrived',
+                                  TextLanguage.of(context).arrived,
                                   style: TextStyle(
                                       color: blue1,
                                       fontWeight: FontWeight.bold,
@@ -375,7 +375,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                                 );
                               } else {
                                 return Text(
-                                  'Salling',
+                                  TextLanguage.of(context).sailing,
                                   style: TextStyle(
                                       color: blue1,
                                       fontWeight: FontWeight.bold,

@@ -132,7 +132,7 @@ class _StoragePageState extends State<StoragePage> {
                                           height: 20.0,
                                         ),
                                         Text(
-                                          'No data',
+                                          TextLanguage.of(context).noData,
                                           style: TextStyle(
                                               color: blue1,
                                               fontSize: correoSize),
@@ -157,7 +157,7 @@ class _StoragePageState extends State<StoragePage> {
                                   height: 20.0,
                                 ),
                                 Text(
-                                  'No data',
+                                  TextLanguage.of(context).noData,
                                   style: TextStyle(
                                       color: blue1, fontSize: correoSize),
                                   textAlign: TextAlign.center,
@@ -190,7 +190,7 @@ class _StoragePageState extends State<StoragePage> {
               height: 20.0,
             ),
             Text(
-              'No data',
+              TextLanguage.of(context).noData,
               style: TextStyle(color: blue1, fontSize: correoSize),
               textAlign: TextAlign.center,
             ),

@@ -35,6 +35,456 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
+  /// `Boat`
+  String get boat {
+    return Intl.message(
+      'Boat',
+      name: 'boat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hours`
+  String get hours {
+    return Intl.message(
+      'Hours',
+      name: 'hours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temperature`
+  String get temperature {
+    return Intl.message(
+      'Temperature',
+      name: 'temperature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Desired temperature`
+  String get desiredTemperature {
+    return Intl.message(
+      'Desired temperature',
+      name: 'desiredTemperature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average temperature`
+  String get averageTemperature {
+    return Intl.message(
+      'Average temperature',
+      name: 'averageTemperature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pictures`
+  String get pictures {
+    return Intl.message(
+      'Pictures',
+      name: 'pictures',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Value`
+  String get value {
+    return Intl.message(
+      'Value',
+      name: 'value',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Default`
+  String get defaultt {
+    return Intl.message(
+      'Default',
+      name: 'defaultt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select user responsible`
+  String get selectUserResponsible {
+    return Intl.message(
+      'Select user responsible',
+      name: 'selectUserResponsible',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date created`
+  String get dateCreated {
+    return Intl.message(
+      'Date created',
+      name: 'dateCreated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `duration`
+  String get duration {
+    return Intl.message(
+      'duration',
+      name: 'duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Initial date`
+  String get initialDate {
+    return Intl.message(
+      'Initial date',
+      name: 'initialDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final date`
+  String get finalDate {
+    return Intl.message(
+      'Final date',
+      name: 'finalDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final weight`
+  String get finalWeight {
+    return Intl.message(
+      'Final weight',
+      name: 'finalWeight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ice weight`
+  String get iceWeight {
+    return Intl.message(
+      'Ice weight',
+      name: 'iceWeight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `all`
+  String get all {
+    return Intl.message(
+      'all',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sailing time`
+  String get sailingTime {
+    return Intl.message(
+      'Sailing time',
+      name: 'sailingTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sailing`
+  String get sailing {
+    return Intl.message(
+      'Sailing',
+      name: 'sailing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sail`
+  String get sail {
+    return Intl.message(
+      'Sail',
+      name: 'sail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Downloading`
+  String get downloading {
+    return Intl.message(
+      'Downloading',
+      name: 'downloading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current weight`
+  String get currentWeight {
+    return Intl.message(
+      'Current weight',
+      name: 'currentWeight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Departure`
+  String get departure {
+    return Intl.message(
+      'Departure',
+      name: 'departure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrived`
+  String get arrived {
+    return Intl.message(
+      'Arrived',
+      name: 'arrived',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrival`
+  String get arrival {
+    return Intl.message(
+      'Arrival',
+      name: 'arrival',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current status`
+  String get currentStatus {
+    return Intl.message(
+      'Current status',
+      name: 'currentStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disk space: `
+  String get diskSpace {
+    return Intl.message(
+      'Disk space: ',
+      name: 'diskSpace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sailing days`
+  String get sailingDays {
+    return Intl.message(
+      'Sailing days',
+      name: 'sailingDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message(
+      'Time',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `weight`
+  String get weight {
+    return Intl.message(
+      'weight',
+      name: 'weight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Travel`
+  String get travel {
+    return Intl.message(
+      'Travel',
+      name: 'travel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data`
+  String get noData {
+    return Intl.message(
+      'No data',
+      name: 'noData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete from SSD`
+  String get deleteFromSsd {
+    return Intl.message(
+      'Delete from SSD',
+      name: 'deleteFromSsd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aprove`
+  String get aprove {
+    return Intl.message(
+      'Aprove',
+      name: 'aprove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acept Confirmation`
+  String get aceptConfirmation {
+    return Intl.message(
+      'Acept Confirmation',
+      name: 'aceptConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to acept this users?`
+  String get aceptUsers {
+    return Intl.message(
+      'Are you sure you want to acept this users?',
+      name: 'aceptUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Decline Confirmation`
+  String get declineConfirmation {
+    return Intl.message(
+      'Decline Confirmation',
+      name: 'declineConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to decline this users?`
+  String get declineUsers {
+    return Intl.message(
+      'Are you sure you want to decline this users?',
+      name: 'declineUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get user {
+    return Intl.message(
+      'User',
+      name: 'user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected`
+  String get selected {
+    return Intl.message(
+      'Selected',
+      name: 'selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Decline`
+  String get decline {
+    return Intl.message(
+      'Decline',
+      name: 'decline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acept`
+  String get acept {
+    return Intl.message(
+      'Acept',
+      name: 'acept',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Storage`
   String get storage {
     return Intl.message(
@@ -90,6 +540,16 @@ class TextLanguage {
     return Intl.message(
       'Parameters',
       name: 'parameters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parameter`
+  String get parameter {
+    return Intl.message(
+      'Parameter',
+      name: 'parameter',
       desc: '',
       args: [],
     );
@@ -404,6 +864,16 @@ class TextLanguage {
       name: 'textWithPlural',
       desc: '',
       args: [howMany],
+    );
+  }
+
+  /// `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+  String get privacyPolicyText {
+    return Intl.message(
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: 'privacyPolicyText',
+      desc: '',
+      args: [],
     );
   }
 }

@@ -87,7 +87,8 @@ class _LocationPageState extends State<LocationPage> {
                           children: [
                             Expanded(child: Container()),
                             Text(
-                              'TRAVEL ${_location.journey.id}',
+                              TextLanguage.of(context).travel.toUpperCase() +
+                                  ' ${_location.journey.id}',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: statusSize,
@@ -126,7 +127,7 @@ class _LocationPageState extends State<LocationPage> {
                         height: 10.0,
                       ),
                       Text(
-                        'LOCATION',
+                        TextLanguage.of(context).location.toUpperCase(),
                         style: TextStyle(
                           color: blue1,
                           fontSize: correoSize,
@@ -159,7 +160,7 @@ class _LocationPageState extends State<LocationPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Departure:',
+                                  TextLanguage.of(context).departure + ':',
                                   style: TextStyle(
                                       color: blue1,
                                       fontSize: titleBarSize,
@@ -169,7 +170,7 @@ class _LocationPageState extends State<LocationPage> {
                                   height: 10.0,
                                 ),
                                 Text(
-                                  'Arrival:',
+                                  TextLanguage.of(context).arrival + ':',
                                   style: TextStyle(
                                       color: blue1,
                                       fontSize: titleBarSize,
@@ -179,7 +180,7 @@ class _LocationPageState extends State<LocationPage> {
                                   height: 10.0,
                                 ),
                                 Text(
-                                  'Duration:',
+                                  TextLanguage.of(context).duration + ':',
                                   style: TextStyle(
                                       color: blue1,
                                       fontSize: titleBarSize,

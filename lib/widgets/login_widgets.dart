@@ -115,11 +115,6 @@ _login1(BuildContext context) async {
   } else {
     print(_login["message"]);
     AlertsBloc().setAlert = Alerts(_login["message"], "Error");
-    // Navigator.of(context).pop();
-    // //errorPopUp(context, _login["message"], () {
-    //   Navigator.of(context).pop();
-    //   Navigator.of(context).pushReplacementNamed('homePage');
-    //});
   }
 }
 
@@ -135,11 +130,7 @@ Widget createEmail(BuildContext context) {
           _errorText = null;
         }
         return Container(
-          //padding: EdgeInsets.only(left: 18.0, right: 18.0),
           child: TextField(
-            //autofocus: true,
-            //textCapitalization: TextCapitalization.sentences,
-
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -147,12 +138,8 @@ Widget createEmail(BuildContext context) {
                 hintText: TextLanguage.of(context).email,
                 labelText: TextLanguage.of(context).email,
                 suffixIcon: Icon(Icons.email),
-                //counterText: snapshot.data,
-                errorText: _errorText
-                //icon: Icon(Icons.email)
-                ),
+                errorText: _errorText),
             onChanged: (valor) {
-              //setState(() {});
               auth.setEmail = valor;
             },
           ),
@@ -172,9 +159,7 @@ Widget createPassword(BuildContext context) {
           _errorText = null;
         }
         return Container(
-          
           child: TextField(
-            
             obscureText: true,
             decoration: InputDecoration(
               border:
@@ -182,13 +167,9 @@ Widget createPassword(BuildContext context) {
               hintText: TextLanguage.of(context).passWord,
               labelText: TextLanguage.of(context).passWord,
               suffixIcon: Icon(Icons.vpn_key_rounded),
-              //counterText: snapshot.data,
               errorText: _errorText,
-              // icon: Icon(Icons.lock)
             ),
             onChanged: (valor) {
-              //setState(() {});
-
               auth.setPassword = valor;
             },
           ),

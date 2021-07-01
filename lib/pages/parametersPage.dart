@@ -308,20 +308,20 @@ Widget _parametersHeader(BuildContext context) {
                       Container(
                           width: (MediaQuery.of(context).size.width - 180) / 3,
                           child: Text(
-                            'Parameter',
+                            TextLanguage.of(context).parameter,
                             style: TextStyle(
                                 color: blue1, fontWeight: FontWeight.bold),
                             overflow: TextOverflow.ellipsis,
                           )),
                       Container(
                           width: (MediaQuery.of(context).size.width - 220) / 3,
-                          child: Text("Default",
+                          child: Text(TextLanguage.of(context).defaultt,
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.clip)),
                       Container(
                           width: (MediaQuery.of(context).size.width - 125) / 3,
-                          child: Text("Value",
+                          child: Text(TextLanguage.of(context).value,
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis)),

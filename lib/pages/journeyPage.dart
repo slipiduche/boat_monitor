@@ -90,7 +90,10 @@ class _JourneyPageState extends State<JourneyPage> {
                                     children: [
                                       Expanded(child: Container()),
                                       Text(
-                                        'TRAVEL ${_journey.journey.id}',
+                                        TextLanguage.of(context)
+                                                .travel
+                                                .toUpperCase() +
+                                            ' ${_journey.journey.id}',
                                         style: TextStyle(
                                             color: blue1,
                                             fontSize: statusSize,
@@ -104,7 +107,9 @@ class _JourneyPageState extends State<JourneyPage> {
                                           GestureDetector(
                                             onTap: () async {
                                               AlertsBloc().setAlert = Alerts(
-                                                  'Downloading', "Updating");
+                                                  TextLanguage.of(context)
+                                                      .downloading,
+                                                  "Updating");
                                               final _resp =
                                                   await JourneyProvider()
                                                       .getFilesZip(
@@ -137,14 +142,16 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        'Sail: ${_journey.journey.startUserNames}',
+                                        TextLanguage.of(context).sail +
+                                            ': ${_journey.journey.startUserNames}',
                                         style: TextStyle(
                                             color: blue1,
                                             fontSize: journeySailSize),
                                       ),
                                       Expanded(child: Container()),
                                       Text(
-                                        'Arrived: ${_journey.journey.endUserNames}',
+                                        TextLanguage.of(context).arrived +
+                                            ': ${_journey.journey.endUserNames}',
                                         style: TextStyle(
                                             color: blue1,
                                             fontSize: journeySailSize),

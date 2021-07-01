@@ -67,7 +67,6 @@ class _ApprovalPageState extends State<ApprovalPage> {
               SizedBox(
                 height: 20.0,
               ),
-
               Expanded(
                   child: StreamBuilder(
                       stream: UsersBloc().users,
@@ -98,7 +97,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                             context, indexs);
                                                       },
                                                       child: Text(
-                                                        'Acept',
+                                                        TextLanguage.of(context)
+                                                            .acept,
                                                         style: TextStyle(
                                                             decorationThickness:
                                                                 2.0,
@@ -131,7 +131,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                             context, indexs);
                                                       },
                                                       child: Text(
-                                                        'Decline',
+                                                        TextLanguage.of(context)
+                                                            .decline,
                                                         style: TextStyle(
                                                             decorationThickness:
                                                                 2.0,
@@ -165,7 +166,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'Selected',
+                                          TextLanguage.of(context).selected,
                                           style: TextStyle(
                                               color: blue1,
                                               fontWeight: FontWeight.bold),
@@ -211,12 +212,6 @@ class _ApprovalPageState extends State<ApprovalPage> {
                           return Container();
                         }
                       })),
-              // StreamBuilder(
-              //   stream: PendingApprovalsBloc().pendingApprovals,
-              //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //     return Container();
-              //   },
-              // ),
             ],
           ),
         ),
@@ -383,7 +378,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 220) / 3,
                             child: Text(
-                              'User',
+                              TextLanguage.of(context).user,
                               style: TextStyle(
                                   color: blue1, fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
@@ -391,14 +386,14 @@ class _ApprovalPageState extends State<ApprovalPage> {
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 220) / 3,
-                            child: Text("Date",
+                            child: Text(TextLanguage.of(context).date,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 3,
-                            child: Text("Email",
+                            child: Text(TextLanguage.of(context).email,
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.ellipsis)),
@@ -423,11 +418,10 @@ class _ApprovalPageState extends State<ApprovalPage> {
   }
 
   void approveItems(BuildContext context, List<int> ids) async {
-    confirmationDialog(context, 'Are you sure you want to acept this users?',
-        'Acept Confirmation', () {
-      //Navigator.of(context).pop();
-      //setOnJourney(_boat.id, context);
-      AlertsBloc().setAlert = Alerts('Aprove', "Updating");
+    confirmationDialog(context, TextLanguage.of(context).aceptUsers,
+        TextLanguage.of(context).aceptConfirmation, () {
+      AlertsBloc().setAlert =
+          Alerts(TextLanguage.of(context).aprove, "Updating");
       UserProvider().approveUsers(ids);
     }, () {
       Navigator.of(context).pop();
@@ -435,11 +429,12 @@ class _ApprovalPageState extends State<ApprovalPage> {
   }
 
   void declineItems(BuildContext context, List<int> ids) async {
-    confirmationDialog(context, 'Are you sure you want to decline this users?',
-        'Decline Confirmation', () {
+    confirmationDialog(context, TextLanguage.of(context).declineUsers,
+        TextLanguage.of(context).declineConfirmation, () {
       //Navigator.of(context).pop();
       //setOnJourney(_boat.id, context);
-      AlertsBloc().setAlert = Alerts('Decline', "Updating");
+      AlertsBloc().setAlert =
+          Alerts(TextLanguage.of(context).decline, "Updating");
       UserProvider().declineUsers(ids);
     }, () {
       Navigator.of(context).pop();

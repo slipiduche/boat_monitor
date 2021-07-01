@@ -70,7 +70,8 @@ class _TemperaturePageState extends State<TemperaturePage> {
                             children: [
                               Expanded(child: Container()),
                               Text(
-                                'TRAVEL ${_temperature.journey.id}',
+                                TextLanguage.of(context).travel.toUpperCase() +
+                                    ' ${_temperature.journey.id}',
                                 style: TextStyle(
                                     color: blue1,
                                     fontSize: statusSize,
@@ -109,7 +110,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                           height: 10.0,
                         ),
                         Text(
-                          'TEMPERATURE',
+                          TextLanguage.of(context).temperature.toUpperCase(),
                           style: TextStyle(
                             color: blue1,
                             fontSize: correoSize,
@@ -121,7 +122,8 @@ class _TemperaturePageState extends State<TemperaturePage> {
                         Row(
                           children: [
                             Text(
-                              'Desired temperature: ${_temperature.historics.historics.last.temp} º',
+                              TextLanguage.of(context).desiredTemperature +
+                                  ': ${_temperature.historics.historics.last.temp} º',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -135,7 +137,8 @@ class _TemperaturePageState extends State<TemperaturePage> {
                         Row(
                           children: [
                             Text(
-                              'Average temperature: ${_temperature.historics.historics.last.temp} º',
+                              TextLanguage.of(context).averageTemperature +
+                                  ': ${_temperature.historics.historics.last.temp} º',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -149,7 +152,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                         Row(
                           children: [
                             Text(
-                              'Temperature',
+                              TextLanguage.of(context).temperature,
                               style: TextStyle(
                                   color: gray,
                                   fontSize: titleBarSize,
@@ -164,7 +167,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              'Hours',
+                              TextLanguage.of(context).hours,
                               style: TextStyle(
                                   color: gray,
                                   fontSize: titleBarSize,

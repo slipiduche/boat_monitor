@@ -113,7 +113,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                         } else {
                                           return Container(
                                             child: Text(
-                                              'All',
+                                              TextLanguage.of(context).all,
                                               style: TextStyle(
                                                   color: blue1,
                                                   fontSize: titleBarSize),
@@ -220,7 +220,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         5 -
                                                     30,
                                                 child: Text(
-                                                  'Travel',
+                                                  TextLanguage.of(context)
+                                                      .travel,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                       color: blue1,
@@ -240,7 +241,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         .width /
                                                     5,
                                                 child: Text(
-                                                  'Initial date',
+                                                  TextLanguage.of(context)
+                                                      .initialDate,
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: blue1,
@@ -260,7 +262,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         .width /
                                                     5,
                                                 child: Text(
-                                                  'Final date',
+                                                  TextLanguage.of(context)
+                                                      .finalDate,
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: blue1,
@@ -281,7 +284,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         5 -
                                                     45,
                                                 child: Text(
-                                                  'Boat',
+                                                  TextLanguage.of(context).boat,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                       color: blue1,
@@ -301,7 +304,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         .width /
                                                     5,
                                                 child: Text(
-                                                  'Supervisor',
+                                                  TextLanguage.of(context)
+                                                      .supervisor,
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                       color: blue1,
@@ -347,7 +351,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                             height: 20.0,
                                           ),
                                           Text(
-                                            'No data',
+                                            TextLanguage.of(context).noData,
                                             style: TextStyle(
                                                 color: blue1,
                                                 fontSize: correoSize),

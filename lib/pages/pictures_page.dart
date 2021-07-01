@@ -94,7 +94,8 @@ class _PicturesPageState extends State<PicturesPage>
                           children: [
                             Expanded(child: Container()),
                             Text(
-                              'TRAVEL ${_pictures.journeyCardArgument.journey.id}',
+                              TextLanguage.of(context).travel.toUpperCase() +
+                                  ' ${_pictures.journeyCardArgument.journey.id}',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: statusSize,
@@ -135,7 +136,7 @@ class _PicturesPageState extends State<PicturesPage>
                         height: 10.0,
                       ),
                       Text(
-                        'PICTURES',
+                        TextLanguage.of(context).pictures.toUpperCase(),
                         style: TextStyle(
                           color: blue1,
                           fontSize: correoSize,
@@ -169,7 +170,10 @@ class _PicturesPageState extends State<PicturesPage>
                                           _fontWeight = FontWeight.bold;
                                         }
                                         return Text(
-                                          'CAMERA 1',
+                                          TextLanguage.of(context)
+                                                  .camera
+                                                  .toUpperCase() +
+                                              ' 1',
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                               color: blue1,
@@ -186,7 +190,10 @@ class _PicturesPageState extends State<PicturesPage>
                                           _fontWeight = FontWeight.bold;
                                         }
                                         return Text(
-                                          'CAMERA 2',
+                                          TextLanguage.of(context)
+                                                  .camera
+                                                  .toUpperCase() +
+                                              ' 2',
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                               color: blue1,
@@ -203,7 +210,10 @@ class _PicturesPageState extends State<PicturesPage>
                                           _fontWeight = FontWeight.bold;
                                         }
                                         return Text(
-                                          'CAMERA 3',
+                                          TextLanguage.of(context)
+                                                  .camera
+                                                  .toUpperCase() +
+                                              ' 3',
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                               color: blue1,
@@ -224,7 +234,8 @@ class _PicturesPageState extends State<PicturesPage>
                             picturesIcon(20.0, blue1),
                             SizedBox(width: 3.0),
                             Text(
-                              '${listFiltered.length} Pictures',
+                              '${listFiltered.length} ' +
+                                  TextLanguage.of(context).pictures,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: blue1,

@@ -76,7 +76,8 @@ class _WeightPageState extends State<WeightPage> {
                             children: [
                               Expanded(child: Container()),
                               Text(
-                                'TRAVEL ${_weight.journey.id}',
+                                TextLanguage.of(context).travel.toUpperCase() +
+                                    ' ${_weight.journey.id}',
                                 style: TextStyle(
                                     color: blue1,
                                     fontSize: statusSize,
@@ -115,7 +116,7 @@ class _WeightPageState extends State<WeightPage> {
                           height: 10.0,
                         ),
                         Text(
-                          'WEIGHT',
+                          TextLanguage.of(context).weight.toUpperCase(),
                           style: TextStyle(
                             color: blue1,
                             fontSize: correoSize,
@@ -127,7 +128,8 @@ class _WeightPageState extends State<WeightPage> {
                         Row(
                           children: [
                             Text(
-                              'Ice weight: ${_weight.journey.iWeight} Kgs',
+                              TextLanguage.of(context).iceWeight +
+                                  ': ${_weight.journey.iWeight} Kgs',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -141,7 +143,8 @@ class _WeightPageState extends State<WeightPage> {
                         Row(
                           children: [
                             Text(
-                              'Final weight: ${_weight.journey.fWeight} Kg',
+                              TextLanguage.of(context).finalWeight +
+                                  ': ${_weight.journey.fWeight} Kg',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,
@@ -155,7 +158,7 @@ class _WeightPageState extends State<WeightPage> {
                         Row(
                           children: [
                             Text(
-                              'Weight',
+                              TextLanguage.of(context).weight,
                               style: TextStyle(
                                   color: gray,
                                   fontSize: titleBarSize,
@@ -170,7 +173,7 @@ class _WeightPageState extends State<WeightPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              'Hours',
+                              TextLanguage.of(context).hours,
                               style: TextStyle(
                                   color: gray,
                                   fontSize: titleBarSize,
