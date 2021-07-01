@@ -36,14 +36,18 @@ class _AlertPageState extends State<AlertPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushReplacementNamed('managerPage');
+        if (_prefs.userType > 1) {
+          Navigator.of(context).pushReplacementNamed('managerPage');
+        } else {
+          Navigator.of(context).pushReplacementNamed('supervisorPage');
+        }
       },
       child: SafeArea(
           child: Scaffold(
         appBar: gradientAppBar2(
             TextLanguage.of(context).alerts, alertsIcon(25.0, Colors.white),
             () {
-          if (_prefs.userType > 1 && _prefs.userType < 4) {
+          if (_prefs.userType > 1) {
             Navigator.of(context).pushReplacementNamed('managerPage');
           } else {
             Navigator.of(context).pushReplacementNamed('supervisorPage');

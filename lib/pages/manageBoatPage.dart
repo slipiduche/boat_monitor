@@ -52,7 +52,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
     print(_boats);
     return WillPopScope(
       onWillPop: () {
-        if (_prefs.userType > 1 && _prefs.userType < 4) {
+        if (_prefs.userType > 1) {
           Navigator.of(context).pushReplacementNamed('managerPage');
         } else {
           Navigator.of(context).pushReplacementNamed('supervisorPage');
@@ -62,7 +62,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
           child: Scaffold(
         appBar: gradientAppBar2(TextLanguage.of(context).manageBoat,
             boatIconBlue(25.0, Colors.white), () {
-          if (_prefs.userType > 1 && _prefs.userType < 4) {
+          if (_prefs.userType > 1) {
             Navigator.of(context).pushReplacementNamed('managerPage');
           } else {
             Navigator.of(context).pushReplacementNamed('supervisorPage');

@@ -35,7 +35,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        if (_prefs.userType > 1 && _prefs.userType < 4) {
+        if (_prefs.userType > 1) {
           Navigator.of(context).pushReplacementNamed('managerPage');
         } else {
           Navigator.of(context).pushReplacementNamed('supervisorPage');
@@ -44,7 +44,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       child: SafeArea(
           child: Scaffold(
         appBar: gradientAppBar(TextLanguage.of(context).newPassword, () {
-          if (_prefs.userType > 1 && _prefs.userType < 4) {
+          if (_prefs.userType > 1) {
             Navigator.of(context).pushReplacementNamed('managerPage');
           } else {
             Navigator.of(context).pushReplacementNamed('supervisorPage');

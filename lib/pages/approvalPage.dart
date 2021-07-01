@@ -41,177 +41,188 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar2(
-          TextLanguage.of(context).approval, approvalsIcon(25.0, Colors.white),
-          () {
-        if (_prefs.userType > 1 && _prefs.userType < 4) {
+    return WillPopScope(
+      onWillPop: () {
+        if (_prefs.userType > 1) {
           Navigator.of(context).pushReplacementNamed('managerPage');
         } else {
           Navigator.of(context).pushReplacementNamed('supervisorPage');
         }
-      }),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar2(TextLanguage.of(context).approval,
+            approvalsIcon(25.0, Colors.white), () {
+          if (_prefs.userType > 1) {
+            Navigator.of(context).pushReplacementNamed('managerPage');
+          } else {
+            Navigator.of(context).pushReplacementNamed('supervisorPage');
+          }
+        }),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
 
-            Expanded(
-                child: StreamBuilder(
-                    stream: UsersBloc().users,
-                    builder: (context, AsyncSnapshot<Users> snapshot) {
-                      if (snapshot.hasData) {
-                        return Column(
-                          children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.symmetric(horizontal: marginExt1),
-                              child: Row(
-                                children: [
-                                  StreamBuilder(
-                                      stream: PendingApprovalsBloc().check,
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData) {
-                                          if (snapshot.data > 0) {
-                                            return Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      print('acept');
-                                                      print(checks);
-                                                      print(indexs);
-                                                      approveItems(
-                                                          context, indexs);
-                                                    },
-                                                    child: Text(
-                                                      'Acept',
-                                                      style: TextStyle(
-                                                          decorationThickness:
-                                                              2.0,
-                                                          decorationColor:
-                                                              blue1,
-                                                          decorationStyle:
-                                                              TextDecorationStyle
-                                                                  .solid,
-                                                          decoration:
+              Expanded(
+                  child: StreamBuilder(
+                      stream: UsersBloc().users,
+                      builder: (context, AsyncSnapshot<Users> snapshot) {
+                        if (snapshot.hasData) {
+                          return Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: marginExt1),
+                                child: Row(
+                                  children: [
+                                    StreamBuilder(
+                                        stream: PendingApprovalsBloc().check,
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            if (snapshot.data > 0) {
+                                              return Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        print('acept');
+                                                        print(checks);
+                                                        print(indexs);
+                                                        approveItems(
+                                                            context, indexs);
+                                                      },
+                                                      child: Text(
+                                                        'Acept',
+                                                        style: TextStyle(
+                                                            decorationThickness:
+                                                                2.0,
+                                                            decorationColor:
+                                                                blue1,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .combine([
                                                               TextDecoration
-                                                                  .combine([
-                                                            TextDecoration
-                                                                .underline
-                                                          ]),
-                                                          color: blue1,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                                  .underline
+                                                            ]),
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 20.0,
-                                                  ),
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      print('Decline');
-                                                      print(checks);
-                                                      print(indexs);
-                                                      declineItems(
-                                                          context, indexs);
-                                                    },
-                                                    child: Text(
-                                                      'Decline',
-                                                      style: TextStyle(
-                                                          decorationThickness:
-                                                              2.0,
-                                                          decorationColor:
-                                                              blue1,
-                                                          decorationStyle:
-                                                              TextDecorationStyle
-                                                                  .solid,
-                                                          decoration:
+                                                    SizedBox(
+                                                      width: 20.0,
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        print('Decline');
+                                                        print(checks);
+                                                        print(indexs);
+                                                        declineItems(
+                                                            context, indexs);
+                                                      },
+                                                      child: Text(
+                                                        'Decline',
+                                                        style: TextStyle(
+                                                            decorationThickness:
+                                                                2.0,
+                                                            decorationColor:
+                                                                blue1,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .combine([
                                                               TextDecoration
-                                                                  .combine([
-                                                            TextDecoration
-                                                                .underline
-                                                          ]),
-                                                          color: blue1,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                                  .underline
+                                                            ]),
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ]);
+                                                  ]);
+                                            } else {
+                                              return Container();
+                                            }
                                           } else {
                                             return Container();
                                           }
-                                        } else {
-                                          return Container();
-                                        }
-                                      }),
-                                  Expanded(child: Container()),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        'Selected',
-                                        style: TextStyle(
-                                            color: blue1,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(' (',
+                                        }),
+                                    Expanded(child: Container()),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Selected',
                                           style: TextStyle(
                                               color: blue1,
-                                              fontWeight: FontWeight.bold)),
-                                      StreamBuilder(
-                                          stream: PendingApprovalsBloc().check,
-                                          builder: (context, snapshot) {
-                                            final _checked =
-                                                snapshot.data != null
-                                                    ? snapshot.data
-                                                    : 0;
-                                            return Text(_checked.toString(),
-                                                style: TextStyle(
-                                                    color: blue1,
-                                                    fontWeight:
-                                                        FontWeight.bold));
-                                          }),
-                                      Text(')',
-                                          style: TextStyle(
-                                              color: blue1,
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                ],
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(' (',
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontWeight: FontWeight.bold)),
+                                        StreamBuilder(
+                                            stream:
+                                                PendingApprovalsBloc().check,
+                                            builder: (context, snapshot) {
+                                              final _checked =
+                                                  snapshot.data != null
+                                                      ? snapshot.data
+                                                      : 0;
+                                              return Text(_checked.toString(),
+                                                  style: TextStyle(
+                                                      color: blue1,
+                                                      fontWeight:
+                                                          FontWeight.bold));
+                                            }),
+                                        Text(')',
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Container(
-                                height:
-                                    MediaQuery.of(context).size.height - 180,
-                                child:
-                                    makeApprovalList(context, snapshot.data)),
-                          ],
-                        );
-                      } else {
-                        return Container();
-                      }
-                    })),
-            // StreamBuilder(
-            //   stream: PendingApprovalsBloc().pendingApprovals,
-            //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //     return Container();
-            //   },
-            // ),
-          ],
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Container(
+                                  height:
+                                      MediaQuery.of(context).size.height - 180,
+                                  child:
+                                      makeApprovalList(context, snapshot.data)),
+                            ],
+                          );
+                        } else {
+                          return Container();
+                        }
+                      })),
+              // StreamBuilder(
+              //   stream: PendingApprovalsBloc().pendingApprovals,
+              //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+              //     return Container();
+              //   },
+              // ),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: botomBar(3, context),
-    ));
+        bottomNavigationBar: botomBar(3, context),
+      )),
+    );
   }
 
   Widget makeApprovalList(BuildContext context, Users users) {

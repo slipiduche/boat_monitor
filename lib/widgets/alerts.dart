@@ -27,7 +27,7 @@ onAfterBuild(BuildContext context) {
         if (!AlertsBloc().alertClosedValue) {
           Navigator.of(context).pop();
         }
-
+        AlertsBloc().setAlertClosed = false;
         errorPopUp(context, AlertsBloc().alertValue.message, () {
           print(argument);
           AlertsBloc().setAlertClosed = true;
@@ -53,7 +53,7 @@ onAfterBuild(BuildContext context) {
         if (!AlertsBloc().alertClosedValue) {
           Navigator.of(context).pop();
         }
-
+        AlertsBloc().setAlertClosed = false;
         updated(context, AlertsBloc().alertValue.message, () {
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();

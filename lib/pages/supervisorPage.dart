@@ -46,7 +46,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
       onWillPop: () {},
       child: SafeArea(
           child: Scaffold(
-        //appBar: gradientAppBar(TextLanguage.of(context).supervisorButtonText, () {}),
+        appBar: gradientAppBar(TextLanguage.of(context).supervisor, () {}),
         body: SingleChildScrollView(
           child: Container(
             child: Column(
@@ -56,7 +56,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
                 supervisorIcon(100.0),
                 SizedBox(height: 17.0),
                 Builder(builder: (context) {
-                  if (_prefs.userType > 1) {
+                  if (_prefs.userType == 1) {
                     return Column(
                       children: [
                         Text(

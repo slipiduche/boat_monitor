@@ -185,10 +185,10 @@ void _onItemTapped(context, index) async {
         .pushReplacementNamed('storagePage', arguments: null);
   }
   if (index == 3) {
-    if (_prefs.userType > 1 && _prefs.userType < 4) {
-      await Navigator.of(context).pushReplacementNamed('managerPage');
+    if (_prefs.userType > 1) {
+      Navigator.of(context).pushReplacementNamed('managerPage');
     } else {
-      await Navigator.of(context).pushReplacementNamed('supervisorPage');
+      Navigator.of(context).pushReplacementNamed('supervisorPage');
     }
   }
 }
