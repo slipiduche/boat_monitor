@@ -203,7 +203,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                               ),
                               Container(
                                   height:
-                                      MediaQuery.of(context).size.height - 180,
+                                      MediaQuery.of(context).size.height - 190,
                                   child:
                                       makeApprovalList(context, snapshot.data)),
                             ],

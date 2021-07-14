@@ -260,7 +260,7 @@ class _PicturesPageState extends State<PicturesPage>
                       Builder(builder: (context) {
                         if (_gridView && (listFiltered.length > 0)) {
                           return Container(
-                              height: MediaQuery.of(context).size.height - 338,
+                              height: MediaQuery.of(context).size.height - 350,
                               width: MediaQuery.of(context).size.width -
                                   (marginExt1 * 2),
                               child: GridView.count(
@@ -279,7 +279,7 @@ class _PicturesPageState extends State<PicturesPage>
                               ));
                         } else if (listFiltered.length > 0) {
                           return Container(
-                            height: MediaQuery.of(context).size.height - 338,
+                            height: MediaQuery.of(context).size.height - 350,
                             width: MediaQuery.of(context).size.width -
                                 (marginExt1 * 2),
                             child: ListView(
@@ -298,7 +298,7 @@ class _PicturesPageState extends State<PicturesPage>
                           );
                         } else {
                           return Container(
-                            height: MediaQuery.of(context).size.height - 338,
+                            height: MediaQuery.of(context).size.height - 350,
                             width: MediaQuery.of(context).size.width -
                                 (marginExt1 * 2),
                           );
