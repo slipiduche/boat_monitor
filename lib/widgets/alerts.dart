@@ -11,8 +11,8 @@ import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 
 onAfterBuild(BuildContext context) {
-  dynamic argument = ArgumentBloc().argumentValue;
   if (AlertsBloc().alertValue != null) {
+    dynamic argument = ArgumentBloc().argumentValue;
     switch (AlertsBloc().alertValue.type) {
       case "Updating":
         if (!AlertsBloc().alertClosedValue) {
@@ -59,6 +59,7 @@ onAfterBuild(BuildContext context) {
           AlertsBloc().setAlertClosed = true;
           Navigator.of(context).pop();
           print(AuthBloc().routeValue);
+          print(argument);
           if (AuthBloc().routeValue == 'signUpPage') {
             Navigator.pushReplacementNamed(context, 'loginPage');
           } else if (AuthBloc().routeValue == 'currentBoatPage') {

@@ -378,8 +378,12 @@ class _HistoryPageState extends State<HistoryPage> {
               StreamBuilder(
                 stream: AlertsBloc().alert,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  WidgetsBinding.instance.addPostFrameCallback(
-                      (_) => onAfterBuild(_scaffoldKey.currentContext));
+                  if (auth.routeValue == 'historyPage') {
+                    print('paso por aca');
+                    WidgetsBinding.instance.addPostFrameCallback(
+                        (_) => onAfterBuild(_scaffoldKey.currentContext));
+                  }
+
                   return Container();
                 },
               ),

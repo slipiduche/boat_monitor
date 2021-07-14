@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
-import 'package:boat_monitor/bloc/Argument_bloc.dart';
+
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
+import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/bloc/pictures_bloc.dart';
@@ -249,11 +250,16 @@ class _JourneyPageState extends State<JourneyPage> {
               StreamBuilder(
                 stream: AlertsBloc().alert,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  ArgumentBloc().setArgument = JourneyCardArgument(
-                      journey: _journey.journey,
-                      historics: HistoricsBloc().historicsValue);
-                  WidgetsBinding.instance.addPostFrameCallback(
-                      (_) => onAfterBuild(_scaffoldKey.currentContext));
+                  if (snapshot.hasData && (auth.routeValue == 'journeyPage')) {
+                    print('paso por aca');
+                    ArgumentBloc().setArgument = JourneyCardArgument(
+                        journey: _journey.journey,
+                        historics: HistoricsBloc().historicsValue);
+                    print(ArgumentBloc().argumentValue);
+                    WidgetsBinding.instance.addPostFrameCallback(
+                        (_) => onAfterBuild(_scaffoldKey.currentContext));
+                  }
+
                   return Container();
                 },
               ),

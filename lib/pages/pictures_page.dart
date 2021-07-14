@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:boat_monitor/Icons/icons.dart';
-import 'package:boat_monitor/bloc/Argument_bloc.dart';
+import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 
