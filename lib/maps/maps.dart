@@ -8,45 +8,49 @@ LatLng latLongFromString(String location) {
   int sign;
   String direction;
   String sLatitude, sLongitude;
-  sLatitude = location.split(' ')[0];
-  print(sLatitude);
-  grades = double.parse(sLatitude.split('°')[0]);
-  minutes = double.parse(sLatitude.split('°')[1].split("'").first);
-  seconds =
-      double.parse(sLatitude.split('°')[1].split("'")[1].split('"').first);
-  direction = sLatitude.split('"').last;
-  if (direction == 'N') {
-    sign = 1;
-  } else {
-    sign = -1;
-  }
-  print(direction);
-  print(grades);
-  print(minutes);
-  print(seconds);
-  print(sign);
-  latitude = (grades + (minutes / 60) + (seconds / 3600)) * sign;
-  print(latitude);
-  sLongitude = location.split(' ')[1];
-  print(sLongitude);
-  grades = double.parse(sLongitude.split('°')[0]);
-  minutes = double.parse(sLongitude.split('°')[1].split("'").first);
-  seconds =
-      double.parse(sLongitude.split('°')[1].split("'")[1].split('"').first);
-  direction = sLongitude.split('"').last;
-  if (direction == 'E') {
-    sign = 1;
-  } else {
-    sign = -1;
-  }
-  print(direction);
-  //if(){}
-  print(grades);
-  print(minutes);
-  print(seconds);
-  print(sign);
-  longitude = (grades + (minutes / 60) + (seconds / 3600)) * sign;
-  print(longitude);
+  sLatitude = location.split(',')[0];
+  sLongitude = location.split(',')[1];
+  latitude = double.parse(sLatitude);
+  longitude = double.parse(sLongitude);
+  // sLatitude = location.split(' ')[0];
+  // print(sLatitude);
+  // grades = double.parse(sLatitude.split('°')[0]);
+  // minutes = double.parse(sLatitude.split('°')[1].split("'").first);
+  // seconds =
+  //     double.parse(sLatitude.split('°')[1].split("'")[1].split('"').first);
+  // direction = sLatitude.split('"').last;
+  // if (direction == 'N') {
+  //   sign = 1;
+  // } else {
+  //   sign = -1;
+  // }
+  // print(direction);
+  // print(grades);
+  // print(minutes);
+  // print(seconds);
+  // print(sign);
+  // latitude = (grades + (minutes / 60) + (seconds / 3600)) * sign;
+  // print(latitude);
+  // sLongitude = location.split(' ')[1];
+  // print(sLongitude);
+  // grades = double.parse(sLongitude.split('°')[0]);
+  // minutes = double.parse(sLongitude.split('°')[1].split("'").first);
+  // seconds =
+  //     double.parse(sLongitude.split('°')[1].split("'")[1].split('"').first);
+  // direction = sLongitude.split('"').last;
+  // if (direction == 'E') {
+  //   sign = 1;
+  // } else {
+  //   sign = -1;
+  // }
+  // print(direction);
+  // //if(){}
+  // print(grades);
+  // print(minutes);
+  // print(seconds);
+  // print(sign);
+  // longitude = (grades + (minutes / 60) + (seconds / 3600)) * sign;
+  // print(longitude);
   return LatLng(latitude, longitude);
 }
 
