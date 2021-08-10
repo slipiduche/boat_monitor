@@ -38,142 +38,148 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     HomeFilterBloc().sethomeFilter = '';
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar3(
-          TextLanguage.of(context).home, homeIcon(25.0, Colors.white), () {}),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          margin: EdgeInsets.symmetric(horizontal: marginExt1),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                  child: Column(
-                children: [
-                  _homeSearch(context),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  StreamBuilder<Object>(
-                      stream: HomeFilterBloc().homeFilter,
-                      builder: (context, snapshot) {
-                        return Container(
-                          child: StreamBuilder(
-                            stream: BoatsBloc().boats,
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.hasData) {
-                                return Column(
-                                  children: [
-                                    _homeButtons(context),
-                                    StreamBuilder(
-                                        stream: HomeSearchBloc().homeSearch,
-                                        builder: (context,
-                                            AsyncSnapshot<String> snapshot) {
-                                          List<BoatData> _boats =
-                                              BoatsBloc().boatsValue;
-                                          List<BoatData> _boatsFiltered = [];
-                                          List<BoatData> _boatsFiltered2 = [];
-                                          if (snapshot.hasData) {
-                                            _boats.forEach((element) {
-                                              if (element.boatName
-                                                  .toLowerCase()
-                                                  .contains(snapshot.data
-                                                      .toLowerCase())) {
-                                                print(element.boatName);
-                                                print(snapshot.data
-                                                    .toLowerCase());
-                                                _boatsFiltered.add(element);
-                                              }
-                                            });
-                                          } else {
-                                            _boatsFiltered = _boats;
-                                          }
-                                          if (HomeFilterBloc()
-                                                      .homeFilterValue !=
-                                                  null &&
-                                              HomeFilterBloc()
-                                                      .homeFilterValue !=
-                                                  '') {
-                                            String _filter = HomeFilterBloc()
-                                                .homeFilterValue;
-                                            _boatsFiltered.forEach((element) {
-                                              switch (_filter) {
-                                                case 'Salling':
-                                                  if (element.onJourney == 1) {
-                                                    _boatsFiltered2
-                                                        .add(element);
-                                                  }
-                                                  break;
-                                                case 'Arrived':
-                                                  if (element.onJourney == 0) {
-                                                    _boatsFiltered2
-                                                        .add(element);
-                                                  }
-                                                  break;
-                                                case 'unavailable':
-                                                  if (element.st == 0) {
-                                                    _boatsFiltered2
-                                                        .add(element);
-                                                  }
-                                                  break;
-                                                case 'available':
-                                                  if (element.st == 1) {
-                                                    _boatsFiltered2
-                                                        .add(element);
-                                                  }
-                                                  break;
-                                                default:
-                                              }
-                                            });
-                                          } else {
-                                            _boatsFiltered2 = _boatsFiltered;
-                                          }
-                                          return makeBoatList(
-                                              context, _boatsFiltered2);
-                                        })
-                                  ],
-                                );
-                              } else {
-                                return Container(
-                                  //margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                                  child: Column(
+    return WillPopScope(
+      onWillPop: () {},
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar3(
+            TextLanguage.of(context).home, homeIcon(25.0, Colors.white), () {}),
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            margin: EdgeInsets.symmetric(horizontal: marginExt1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 20.0,
+                ),
+                Expanded(
+                    child: Column(
+                  children: [
+                    _homeSearch(context),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    StreamBuilder<Object>(
+                        stream: HomeFilterBloc().homeFilter,
+                        builder: (context, snapshot) {
+                          return Container(
+                            child: StreamBuilder(
+                              stream: BoatsBloc().boats,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  return Column(
                                     children: [
                                       _homeButtons(context),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      Text(
-                                        TextLanguage.of(context).noData,
-                                        style: TextStyle(
-                                            color: blue1, fontSize: correoSize),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Divider(
-                                        thickness: 1.0,
-                                        color: gray1,
-                                      )
+                                      StreamBuilder(
+                                          stream: HomeSearchBloc().homeSearch,
+                                          builder: (context,
+                                              AsyncSnapshot<String> snapshot) {
+                                            List<BoatData> _boats =
+                                                BoatsBloc().boatsValue;
+                                            List<BoatData> _boatsFiltered = [];
+                                            List<BoatData> _boatsFiltered2 = [];
+                                            if (snapshot.hasData) {
+                                              _boats.forEach((element) {
+                                                if (element.boatName
+                                                    .toLowerCase()
+                                                    .contains(snapshot.data
+                                                        .toLowerCase())) {
+                                                  print(element.boatName);
+                                                  print(snapshot.data
+                                                      .toLowerCase());
+                                                  _boatsFiltered.add(element);
+                                                }
+                                              });
+                                            } else {
+                                              _boatsFiltered = _boats;
+                                            }
+                                            if (HomeFilterBloc()
+                                                        .homeFilterValue !=
+                                                    null &&
+                                                HomeFilterBloc()
+                                                        .homeFilterValue !=
+                                                    '') {
+                                              String _filter = HomeFilterBloc()
+                                                  .homeFilterValue;
+                                              _boatsFiltered.forEach((element) {
+                                                switch (_filter) {
+                                                  case 'Salling':
+                                                    if (element.onJourney ==
+                                                        1) {
+                                                      _boatsFiltered2
+                                                          .add(element);
+                                                    }
+                                                    break;
+                                                  case 'Arrived':
+                                                    if (element.onJourney ==
+                                                        0) {
+                                                      _boatsFiltered2
+                                                          .add(element);
+                                                    }
+                                                    break;
+                                                  case 'unavailable':
+                                                    if (element.st == 0) {
+                                                      _boatsFiltered2
+                                                          .add(element);
+                                                    }
+                                                    break;
+                                                  case 'available':
+                                                    if (element.st == 1) {
+                                                      _boatsFiltered2
+                                                          .add(element);
+                                                    }
+                                                    break;
+                                                  default:
+                                                }
+                                              });
+                                            } else {
+                                              _boatsFiltered2 = _boatsFiltered;
+                                            }
+                                            return makeBoatList(
+                                                context, _boatsFiltered2);
+                                          })
                                     ],
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        );
-                      }),
-                ],
-              )),
-            ],
+                                  );
+                                } else {
+                                  return Container(
+                                    //margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                                    child: Column(
+                                      children: [
+                                        _homeButtons(context),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        Text(
+                                          TextLanguage.of(context).noData,
+                                          style: TextStyle(
+                                              color: blue1,
+                                              fontSize: correoSize),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Divider(
+                                          thickness: 1.0,
+                                          color: gray1,
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          );
+                        }),
+                  ],
+                )),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: botomBar(0, context),
-    ));
+        bottomNavigationBar: botomBar(0, context),
+      )),
+    );
   }
 }
 

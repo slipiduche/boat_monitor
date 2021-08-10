@@ -62,123 +62,128 @@ class _StoragePageState extends State<StoragePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar3(TextLanguage.of(context).storage,
-          storageIcon(25.0, Colors.white), () {}),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                  child: Column(
-                children: [
-                  _storageSearch(context),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  StreamBuilder(
-                      stream: BoatsBloc().boats,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return StreamBuilder<Object>(
-                              stream: HistoricsBloc().historics,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  return Container(
-                                    child: StreamBuilder(
-                                      stream: StorageSearchBloc().storageSearch,
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot snapshot) {
-                                        List<BoatData> _boats =
-                                            BoatsBloc().boatsValue;
-                                        List<BoatData> _boatsFiltered = [];
-                                        List<BoatData> _boatsFiltered2 = [];
-                                        if (snapshot.hasData) {
-                                          _boats.forEach((element) {
-                                            if (element.boatName
-                                                .toLowerCase()
-                                                .contains(snapshot.data
-                                                    .toLowerCase())) {
-                                              print(element.boatName);
-                                              print(
-                                                  snapshot.data.toLowerCase());
-                                              _boatsFiltered.add(element);
-                                            }
-                                          });
-                                        } else {
-                                          _boatsFiltered = _boats;
-                                        }
-                                        return Column(
-                                          children: [
-                                            makeBoatStorageList(context, _boats)
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  );
-                                } else {
-                                  return Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: marginExt1),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 20.0,
-                                        ),
-                                        Text(
-                                          TextLanguage.of(context).noData,
-                                          style: TextStyle(
-                                              color: blue1,
-                                              fontSize: correoSize),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Divider(
-                                          thickness: 1.0,
-                                          color: gray1,
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                }
-                              });
-                        } else {
-                          return Container(
-                            margin:
-                                EdgeInsets.symmetric(horizontal: marginExt1),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Text(
-                                  TextLanguage.of(context).noData,
-                                  style: TextStyle(
-                                      color: blue1, fontSize: correoSize),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Divider(
-                                  thickness: 1.0,
-                                  color: gray1,
-                                )
-                              ],
-                            ),
-                          );
-                        }
-                      }),
-                ],
-              )),
-            ],
+    return WillPopScope(
+      onWillPop: () {},
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar3(TextLanguage.of(context).storage,
+            storageIcon(25.0, Colors.white), () {}),
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 20.0,
+                ),
+                Expanded(
+                    child: Column(
+                  children: [
+                    _storageSearch(context),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    StreamBuilder(
+                        stream: BoatsBloc().boats,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return StreamBuilder<Object>(
+                                stream: HistoricsBloc().historics,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Container(
+                                      child: StreamBuilder(
+                                        stream:
+                                            StorageSearchBloc().storageSearch,
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot snapshot) {
+                                          List<BoatData> _boats =
+                                              BoatsBloc().boatsValue;
+                                          List<BoatData> _boatsFiltered = [];
+                                          List<BoatData> _boatsFiltered2 = [];
+                                          if (snapshot.hasData) {
+                                            _boats.forEach((element) {
+                                              if (element.boatName
+                                                  .toLowerCase()
+                                                  .contains(snapshot.data
+                                                      .toLowerCase())) {
+                                                print(element.boatName);
+                                                print(snapshot.data
+                                                    .toLowerCase());
+                                                _boatsFiltered.add(element);
+                                              }
+                                            });
+                                          } else {
+                                            _boatsFiltered = _boats;
+                                          }
+                                          return Column(
+                                            children: [
+                                              makeBoatStorageList(
+                                                  context, _boats)
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    return Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: marginExt1),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 20.0,
+                                          ),
+                                          Text(
+                                            TextLanguage.of(context).noData,
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontSize: correoSize),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            thickness: 1.0,
+                                            color: gray1,
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                });
+                          } else {
+                            return Container(
+                              margin:
+                                  EdgeInsets.symmetric(horizontal: marginExt1),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  Text(
+                                    TextLanguage.of(context).noData,
+                                    style: TextStyle(
+                                        color: blue1, fontSize: correoSize),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Divider(
+                                    thickness: 1.0,
+                                    color: gray1,
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                        }),
+                  ],
+                )),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: botomBar(2, context),
-    ));
+        bottomNavigationBar: botomBar(2, context),
+      )),
+    );
   }
 
   Widget makeBoatStorageList(BuildContext context, List<BoatData> boats) {
