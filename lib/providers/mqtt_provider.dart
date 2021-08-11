@@ -178,11 +178,11 @@ class MQTTClientWrapper {
 
   void journeyStop(int boatId) {
     final _request = {"token": _prefs.token, "id": boatId.toString()};
-    publishData(jsonEncode(_request), 'APP/STOP');
+    publishData(jsonEncode(_request), 'APP/END');
   }
 
   void journeyDelete({int journeyId}) {
     final _request = {"token": _prefs.token, "id": journeyId.toString()};
-    publishData(jsonEncode(_request), 'APP/STOP');
+    publishData(jsonEncode(_request), 'APP/CLEAR');
   }
 }
