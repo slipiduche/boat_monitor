@@ -121,7 +121,7 @@ class MQTTClientWrapper {
   }
 
   void _preData(serverDataJson, topicName) async {
-    if (serverDataJson["status"] == "succses") {
+    if (serverDataJson["status"] == "succsess") {
       print(serverDataJson["message"]);
       AlertsBloc().setAlert = Alerts(serverDataJson["message"], "Updated");
     } else {
