@@ -110,3 +110,19 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
   }
 }
 //desde lap
+
+/*
+MaterialApp(
+  builder:  (BuildContext context, Widget child) {
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0, ), //set desired text scale factor here
+      child: child,
+    );
+  },
+  title: 'Flutter Demo',
+  theme: ThemeData(
+    primarySwatch: Colors.blue,
+  ),
+  home: MyHomePage(title: 'Flutter Demo Home Page'),
+);
+*/
