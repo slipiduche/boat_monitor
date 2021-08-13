@@ -75,6 +75,14 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return MaterialApp(
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaleFactor: 1.0,
+          ), //set desired text scale factor here
+          child: child,
+        );
+      },
       theme: //ThemeData.lerp(
           ThemeData(
         backgroundColor: Colors.white,
