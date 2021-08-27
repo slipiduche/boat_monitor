@@ -41,7 +41,7 @@ class _StoragePageState extends State<StoragePage> {
   }
 
   void _predata() async {
-    await BoatProvider().getBoats();
+    await BoatProvider().getBoats(context);
     AuthBloc().setRoute = 'storagePage';
     StorageSearchBloc().setStorageSearch = '';
     final _boats = BoatsBloc().boatsValue;

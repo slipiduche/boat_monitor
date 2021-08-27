@@ -95,12 +95,14 @@ class Journey {
   factory Journey.fromJson(Map<String, dynamic> json) => Journey(
         id: json["id"],
         ini: DateTime.parse(json["ini"]),
-        ed: DateTime.parse(json["ed"]),
+        ed: json["ed"] == null
+            ? DateTime.parse(json["ini"])
+            : DateTime.parse(json["ed"]),
         startUser: json["start_user"],
         endUser: json["end_user"],
         boatId: json["boat_id"],
-        iWeight: json["i_weight"].toDouble(),
-        fWeight: json["f_weight"].toDouble(),
+        iWeight: json["i_weight"] == null ? 0 : json["i_weight"].toDouble(),
+        fWeight: json["f_weight"] == null ? 0 : json["f_weight"].toDouble(),
         sImg: json["s_img"],
         totalImg: json["total_img"],
         synced: json["synced"],

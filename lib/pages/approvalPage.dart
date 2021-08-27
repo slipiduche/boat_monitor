@@ -419,7 +419,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
   void approveItems(BuildContext context, List<int> ids) async {
     confirmationDialog(context, TextLanguage.of(context).aceptUsers,
-        TextLanguage.of(context).aceptConfirmation, () {
+        TextLanguage.of(context).acceptConfirmation, () {
       AlertsBloc().setAlert =
           Alerts(TextLanguage.of(context).aprove, "Updating");
       UserProvider().approveUsers(ids);

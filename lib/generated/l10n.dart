@@ -585,11 +585,11 @@ class TextLanguage {
     );
   }
 
-  /// `Acept Confirmation`
-  String get aceptConfirmation {
+  /// `Accept Confirmation`
+  String get acceptConfirmation {
     return Intl.message(
-      'Acept Confirmation',
-      name: 'aceptConfirmation',
+      'Accept Confirmation',
+      name: 'acceptConfirmation',
       desc: '',
       args: [],
     );
@@ -1085,10 +1085,10 @@ class TextLanguage {
     );
   }
 
-  /// `Clic here`
+  /// `Click here`
   String get clicHere {
     return Intl.message(
-      'Clic here',
+      'Click here',
       name: 'clicHere',
       desc: '',
       args: [],
@@ -1115,20 +1115,20 @@ class TextLanguage {
     );
   }
 
-  /// `Acept`
+  /// `Accept`
   String get resetPasswordButtonText {
     return Intl.message(
-      'Acept',
+      'Accept',
       name: 'resetPasswordButtonText',
       desc: '',
       args: [],
     );
   }
 
-  /// `Is not an email`
+  /// `Invalid Email`
   String get isNotEmail {
     return Intl.message(
-      'Is not an email',
+      'Invalid Email',
       name: 'isNotEmail',
       desc: '',
       args: [],

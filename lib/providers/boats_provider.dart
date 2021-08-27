@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/models/boats_model.dart';
@@ -12,7 +12,7 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class BoatProvider {
-  Future<Map<String, dynamic>> getBoats() async {
+  Future<Map<String, dynamic>> getBoats(BuildContext context) async {
     Map<String, dynamic> decodedResp;
     final _resp = jsonEncode({"token": _prefs.token});
     final _resp2 = {"body": _resp};
@@ -47,6 +47,7 @@ class BoatProvider {
     } catch (e) {
       print('error:');
       print(e.toString());
+      Navigator.of(context).pushReplacementNamed('loginPage');
       return {'ok': false, 'message': e.toString()};
     }
   }

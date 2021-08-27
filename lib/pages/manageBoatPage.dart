@@ -48,7 +48,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
 
   @override
   Widget build(BuildContext context) {
-    BoatProvider().getBoats();
+    BoatProvider().getBoats(context);
     print(_boats);
     return WillPopScope(
       onWillPop: () {

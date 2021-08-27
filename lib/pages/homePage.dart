@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
-    BoatProvider().getBoats();
+    BoatProvider().getBoats(context);
     HomeSearchBloc().setHomeSearch = '';
   }
 

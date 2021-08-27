@@ -29,8 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "acceptConfirmation" : MessageLookupByLibrary.simpleMessage("Accept Confirmation"),
     "acept" : MessageLookupByLibrary.simpleMessage("Acept"),
-    "aceptConfirmation" : MessageLookupByLibrary.simpleMessage("Acept Confirmation"),
     "aceptUsers" : MessageLookupByLibrary.simpleMessage("Are you sure you want to acept this users?"),
     "activeBoats" : MessageLookupByLibrary.simpleMessage("Active boats"),
     "alerts" : MessageLookupByLibrary.simpleMessage("Alerts"),
@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "changeTemperatureConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to mark temperature?"),
     "changeTimeoutConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to mark timeout?"),
     "changeWeightConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to mark weight?"),
-    "clicHere" : MessageLookupByLibrary.simpleMessage("Clic here"),
+    "clicHere" : MessageLookupByLibrary.simpleMessage("Click here"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword" : MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmation" : MessageLookupByLibrary.simpleMessage("Confirmation"),
@@ -90,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "iceWeight" : MessageLookupByLibrary.simpleMessage("Ice weight"),
     "inactiveBoats" : MessageLookupByLibrary.simpleMessage("Inactive boats"),
     "initialDate" : MessageLookupByLibrary.simpleMessage("Initial date"),
-    "isNotEmail" : MessageLookupByLibrary.simpleMessage("Is not an email"),
+    "isNotEmail" : MessageLookupByLibrary.simpleMessage("Invalid Email"),
     "location" : MessageLookupByLibrary.simpleMessage("Location"),
     "loginButtonText" : MessageLookupByLibrary.simpleMessage("Login"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
@@ -112,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "privacyPolicyText" : MessageLookupByLibrary.simpleMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
     "recoveryText" : MessageLookupByLibrary.simpleMessage("Please introduce your email and check your inbox."),
-    "resetPasswordButtonText" : MessageLookupByLibrary.simpleMessage("Acept"),
+    "resetPasswordButtonText" : MessageLookupByLibrary.simpleMessage("Accept"),
     "restore" : MessageLookupByLibrary.simpleMessage("Restore"),
     "restoring" : MessageLookupByLibrary.simpleMessage("Restoring"),
     "sail" : MessageLookupByLibrary.simpleMessage("Sail"),

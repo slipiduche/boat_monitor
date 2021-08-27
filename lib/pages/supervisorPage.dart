@@ -46,7 +46,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
       onWillPop: () {},
       child: SafeArea(
           child: Scaffold(
-        appBar: gradientAppBar(TextLanguage.of(context).supervisor, () {}),
+        //appBar: gradientAppBar(TextLanguage.of(context).supervisor, () {}),
         body: SingleChildScrollView(
           child: Container(
             child: Column(
