@@ -120,7 +120,7 @@ class _StoragePageState extends State<StoragePage> {
                                           return Column(
                                             children: [
                                               makeBoatStorageList(
-                                                  context, _boats)
+                                                  context, _boatsFiltered)
                                             ],
                                           );
                                         },
