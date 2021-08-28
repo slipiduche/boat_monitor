@@ -220,28 +220,28 @@ class _HistoryPageState extends State<HistoryPage> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          5 -
-                                                      30,
-                                                  child: Text(
-                                                    TextLanguage.of(context)
-                                                        .travel,
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                        color: blue1,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize:
-                                                            privacyPolicySize +
-                                                                2.0),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5.0,
-                                                ),
+                                                // Container(
+                                                //   width: MediaQuery.of(context)
+                                                //               .size
+                                                //               .width /
+                                                //           5 -
+                                                //       30,
+                                                //   child: Text(
+                                                //     TextLanguage.of(context)
+                                                //         .travel,
+                                                //     textAlign: TextAlign.start,
+                                                //     style: TextStyle(
+                                                //         color: blue1,
+                                                //         fontWeight:
+                                                //             FontWeight.bold,
+                                                //         fontSize:
+                                                //             privacyPolicySize +
+                                                //                 2.0),
+                                                //   ),
+                                                // ),
+                                                // SizedBox(
+                                                //   width: 5.0,
+                                                // ),
                                                 Container(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -436,21 +436,21 @@ Widget _travelCard(BuildContext context, Journey journey) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width / 5 - 30,
-                      child: Text(
-                        '${journey.id}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width / 5 - 30,
+                    //   child: Text(
+                    //     '${journey.id}',
+                    //     textAlign: TextAlign.center,
+                    //     style: TextStyle(
 
-                            //color: blue1,
-                            //fontWeight: FontWeight.bold,
-                            fontSize: privacyPolicySize + 2.0),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
+                    //         //color: blue1,
+                    //         //fontWeight: FontWeight.bold,
+                    //         fontSize: privacyPolicySize + 2.0),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   width: 10.0,
+                    // ),
                     Container(
                       width: MediaQuery.of(context).size.width / 5 - 20,
                       child: Text(
