@@ -41,7 +41,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    JourneyProvider().getJourneys();
+    JourneyProvider().getJourneys(context);
     return WillPopScope(
       onWillPop: () {},
       child: SafeArea(

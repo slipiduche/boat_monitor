@@ -217,7 +217,7 @@ Widget makeBoatList(BuildContext context, List<BoatData> boats) {
 
 Widget _boatCard(BuildContext context, BoatData boat) {
   if (JourneysBloc().journeysValue == null) {
-    JourneyProvider().getJourneys();
+    JourneyProvider().getJourneys(context);
   }
   return StreamBuilder(
       stream: JourneysBloc().journeys,

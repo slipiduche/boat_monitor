@@ -61,7 +61,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
 
   @override
   Widget build(BuildContext context) {
-    JourneyProvider().getJourneys(journeyIds: [boatId]);
+    JourneyProvider().getJourneys(context, journeyIds: [boatId]);
     print(_boats);
     return Container(
       height: MediaQuery.of(context).size.height - 400,

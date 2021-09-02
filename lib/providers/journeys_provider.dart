@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/journeys_bloc.dart';
 
@@ -14,7 +14,8 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class JourneyProvider {
-  Future<Map<String, dynamic>> getJourneys({List<int> journeyIds}) async {
+  Future<Map<String, dynamic>> getJourneys(BuildContext context,
+      {List<int> journeyIds}) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({"token": _prefs.token});
     if (journeyIds != null) {
@@ -36,6 +37,11 @@ class JourneyProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         print(decodedResp["JOURNEYS"]);
         List<dynamic> _journeysJson = decodedResp["JOURNEYS"];
