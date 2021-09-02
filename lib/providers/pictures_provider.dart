@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/pictures_bloc.dart';
 import 'package:boat_monitor/models/files_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
@@ -11,7 +11,7 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class PicturesProvider {
-  Future<Map<String, dynamic>> getPictures(
+  Future<Map<String, dynamic>> getPictures(BuildContext context,
       {int journeyId, bool download = false}) async {
     Map<String, dynamic> decodedResp;
     Object bodyRequest = {"token": _prefs.token};
@@ -45,6 +45,11 @@ class PicturesProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp["PICTURES"]);
         if (!download) {

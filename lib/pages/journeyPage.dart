@@ -49,7 +49,7 @@ class _JourneyPageState extends State<JourneyPage> {
   Widget build(BuildContext context) {
     JourneyCardArgument _journey = ModalRoute.of(context).settings.arguments;
     HistoricsProvider().getHistorics(context, journeyId: [_journey.journey.id]);
-    PicturesProvider().getPictures(journeyId: _journey.journey.id);
+    PicturesProvider().getPictures(context, journeyId: _journey.journey.id);
     return SafeArea(
         child: Scaffold(
       key: _scaffoldKey,
