@@ -134,7 +134,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                                   .downloading,
                                               "Updating");
                                           final _resp = await JourneyProvider()
-                                              .getJourneysBy(_journeysFiltered);
+                                              .getJourneysBy(
+                                                  context, _journeysFiltered);
                                           if (_resp['ok']) {
                                             AlertsBloc().setAlert = Alerts(
                                                 _resp['message'], 'Updated');

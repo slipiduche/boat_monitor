@@ -111,7 +111,7 @@ class _PicturesPageState extends State<PicturesPage>
                                         TextLanguage.of(context).downloading,
                                         "Updating");
                                     final _resp = await JourneyProvider()
-                                        .getFilesZip(
+                                        .getFilesZip(context,
                                             journeyId: _pictures
                                                 .journeyCardArgument
                                                 .journey

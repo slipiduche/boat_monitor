@@ -113,7 +113,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                                   "Updating");
                                               final _resp =
                                                   await JourneyProvider()
-                                                      .getFilesZip(
+                                                      .getFilesZip(context,
                                                           journeyId: _journey
                                                               .journey.id);
                                               if (_resp['ok']) {

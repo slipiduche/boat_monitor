@@ -62,7 +62,8 @@ class JourneyProvider {
     }
   }
 
-  Future<Map<String, dynamic>> getJourneysBy(List<Journey> journeys) async {
+  Future<Map<String, dynamic>> getJourneysBy(
+      BuildContext context, List<Journey> journeys) async {
     Map<String, dynamic> decodedResp;
     List<int> idsRequest = [];
     Map<String, dynamic> _request;
@@ -92,6 +93,11 @@ class JourneyProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
       });
       return {'ok': true, 'message': decodedResp["message"]};
@@ -102,7 +108,7 @@ class JourneyProvider {
     }
   }
 
-  Future<Map<String, dynamic>> getFilesZip(
+  Future<Map<String, dynamic>> getFilesZip(BuildContext context,
       {int journeyId, bool download = false}) async {
     Map<String, dynamic> decodedResp;
     Object bodyRequest = {"token": _prefs.token};
@@ -128,6 +134,11 @@ class JourneyProvider {
           .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         decodedResp = json.decode(response.body);
       });
       return {'ok': true, 'message': decodedResp['message']};
@@ -139,7 +150,7 @@ class JourneyProvider {
   }
 
   Future<Map<String, dynamic>> changeJourneyName(
-      String journeyName, int journeyId) async {
+      BuildContext context, String journeyName, int journeyId) async {
     Map<String, dynamic> decodedResp;
     final _request = <String, dynamic>{
       "token": _prefs.token,
@@ -161,6 +172,11 @@ class JourneyProvider {
           .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         decodedResp = json.decode(response.body);
         //String token = decodedResp["token"];
       });
