@@ -480,7 +480,7 @@ void changeBoatName(String name, int boatId, BuildContext context) async {
 
   AlertsBloc().setAlert = Alerts(TextLanguage.of(context).updating, "Updating");
   //updating(context, TextLanguage.of(context).loginButtonText);
-  var _change = await BoatProvider().changeBoatName(name, boatId);
+  var _change = await BoatProvider().changeBoatName(name, boatId, context);
   print(_change);
   if (_change["ok"] == true) {
     // Navigator.of(context).pop();
