@@ -26,7 +26,7 @@ class _ParametersPageState extends State<ParametersPage> {
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
-    ParametersProvider().getParameters();
+    ParametersProvider().getParameters(context);
     AuthBloc().setRoute = 'parametersPage';
   }
 
@@ -88,6 +88,7 @@ class _ParametersPageState extends State<ParametersPage> {
                                     TextLanguage.of(context).updating,
                                     "Updating");
                                 ParametersProvider().setParameters(
+                                    context,
                                     ParametersBloc()
                                         .parametersValue
                                         .params[0]
@@ -134,6 +135,7 @@ class _ParametersPageState extends State<ParametersPage> {
                                     TextLanguage.of(context).updating,
                                     "Updating");
                                 ParametersProvider().setParameters(
+                                    context,
                                     ParametersBloc()
                                         .parametersValue
                                         .params[0]
@@ -179,6 +181,7 @@ class _ParametersPageState extends State<ParametersPage> {
                                     TextLanguage.of(context).updating,
                                     "Updating");
                                 ParametersProvider().setParameters(
+                                    context,
                                     ParametersBloc()
                                         .parametersValue
                                         .params[0]

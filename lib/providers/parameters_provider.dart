@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/parameters_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
@@ -16,7 +16,7 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class ParametersProvider {
-  Future<Map<String, dynamic>> getParameters() async {
+  Future<Map<String, dynamic>> getParameters(BuildContext context) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode(
         {"token": _prefs.token, "user_id": _prefs.userId, "last": true});
@@ -36,12 +36,17 @@ class ParametersProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
 
         ParametersBloc().setParameters = UserParameters.fromJson(decodedResp);
         if (ParametersBloc().parametersValue.params.length < 1) {
-          setDefaultParameters();
+          setDefaultParameters(context);
         }
       });
       return {'ok': true, 'message': decodedResp["message"]};
@@ -53,7 +58,8 @@ class ParametersProvider {
     }
   }
 
-  Future<Map<String, dynamic>> getParameterById(int parameterId) async {
+  Future<Map<String, dynamic>> getParameterById(
+      BuildContext context, int parameterId) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -76,6 +82,11 @@ class ParametersProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
       });
       return {'ok': true, 'message': decodedResp["message"]};
     } catch (e) {
@@ -86,7 +97,7 @@ class ParametersProvider {
     }
   }
 
-  Future<Map<String, dynamic>> setParameters(parametersId,
+  Future<Map<String, dynamic>> setParameters(BuildContext context, parametersId,
       {double weight, double temperature, double timeout}) async {
     Map<String, dynamic> decodedResp;
     var _req;
@@ -133,6 +144,11 @@ class ParametersProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
@@ -146,7 +162,8 @@ class ParametersProvider {
     }
   }
 
-  Future<Map<String, dynamic>> setDefaultParameters() async {
+  Future<Map<String, dynamic>> setDefaultParameters(
+      BuildContext context) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -171,6 +188,11 @@ class ParametersProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
