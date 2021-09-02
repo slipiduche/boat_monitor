@@ -167,7 +167,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
         TextLanguage.of(context).changeConfirmation, () {
       AlertsBloc().setAlert =
           Alerts(TextLanguage.of(context).change, "Updating");
-      BoatProvider().changeBoatResponsible(user, boat.id);
+      BoatProvider().changeBoatResponsible(user, boat.id, context);
     }, () {
       Navigator.of(context).pop();
     });

@@ -471,7 +471,7 @@ class _ManageBoatPageState extends State<ManageBoatPage> {
 void deleteItems(
     BuildContext context, List<bool> checks, List<int> indexs) async {
   AlertsBloc().setAlert = Alerts(TextLanguage.of(context).deleting, "Updating");
-  var _change = await BoatProvider().deleteBoats(indexs);
+  var _change = await BoatProvider().deleteBoats(indexs, context);
   if (_change["ok"] == true) {
     // Navigator.of(context).pop();
     print(_change["message"]);
@@ -488,7 +488,7 @@ void restoreItems(
     BuildContext context, List<bool> checks, List<int> indexs) async {
   AlertsBloc().setAlert =
       Alerts(TextLanguage.of(context).restoring, "Updating");
-  var _change = await BoatProvider().restoreBoats(indexs);
+  var _change = await BoatProvider().restoreBoats(indexs, context);
   if (_change["ok"] == true) {
     // Navigator.of(context).pop();
     print(_change["message"]);

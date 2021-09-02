@@ -100,7 +100,7 @@ class BoatProvider {
   }
 
   Future<Map<String, dynamic>> changeBoatResponsible(
-      User responsible, int boatId) async {
+      User responsible, int boatId, BuildContext context) async {
     Map<String, dynamic> decodedResp;
     final _request = <String, dynamic>{
       "token": _prefs.token,
@@ -125,6 +125,11 @@ class BoatProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
       });
       AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
@@ -137,7 +142,8 @@ class BoatProvider {
     }
   }
 
-  Future<Map<String, dynamic>> deleteBoats(List<int> boatIds) async {
+  Future<Map<String, dynamic>> deleteBoats(
+      List<int> boatIds, BuildContext context) async {
     Map<String, dynamic> decodedResp;
     final _request = <String, dynamic>{
       "token": _prefs.token,
@@ -161,6 +167,12 @@ class BoatProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
+
         //String token = decodedResp["token"];
       });
       //AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
@@ -173,7 +185,8 @@ class BoatProvider {
     }
   }
 
-  Future<Map<String, dynamic>> restoreBoats(List<int> boatIds) async {
+  Future<Map<String, dynamic>> restoreBoats(
+      List<int> boatIds, BuildContext context) async {
     Map<String, dynamic> decodedResp;
     final _request = <String, dynamic>{
       "token": _prefs.token,
@@ -197,6 +210,11 @@ class BoatProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
       });
       //AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
