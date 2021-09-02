@@ -93,7 +93,7 @@ class _WeightPageState extends State<WeightPage> {
                                           TextLanguage.of(context).downloading,
                                           "Updating");
                                       final _resp = await HistoricsProvider()
-                                          .getHistorics(
+                                          .getHistorics(context,
                                               journeyId: [_weight.journey.id],
                                               download: true);
                                       if (_resp['ok']) {

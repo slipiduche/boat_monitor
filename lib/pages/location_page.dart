@@ -104,7 +104,7 @@ class _LocationPageState extends State<LocationPage> {
                                         TextLanguage.of(context).downloading,
                                         "Updating");
                                     final _resp = await HistoricsProvider()
-                                        .getHistorics(
+                                        .getHistorics(context,
                                             journeyId: [_location.journey.id],
                                             download: true);
                                     if (_resp['ok']) {

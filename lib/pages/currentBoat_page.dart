@@ -67,7 +67,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     Journey _journey = arguments.journey;
     BoatData _boat = arguments.boat;
     bool confirm = _boat.onJourney == 1;
-    HistoricsProvider().getHistorics(journeyId: [_journey.id]);
+    HistoricsProvider().getHistorics(context, journeyId: [_journey.id]);
 
     return SafeArea(
         child: Scaffold(

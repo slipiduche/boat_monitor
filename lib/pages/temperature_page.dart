@@ -87,9 +87,11 @@ class _TemperaturePageState extends State<TemperaturePage> {
                                           TextLanguage.of(context).downloading,
                                           "Updating");
                                       final _resp = await HistoricsProvider()
-                                          .getHistorics(journeyId: [
-                                        _temperature.journey.id
-                                      ], download: true);
+                                          .getHistorics(context,
+                                              journeyId: [
+                                                _temperature.journey.id
+                                              ],
+                                              download: true);
                                       if (_resp['ok']) {
                                         AlertsBloc().setAlert =
                                             Alerts(_resp['message'], 'Updated');

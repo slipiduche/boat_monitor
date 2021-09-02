@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
 import 'package:boat_monitor/models/historics_model.dart';
 
@@ -12,7 +12,7 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class HistoricsProvider {
-  Future<Map<String, dynamic>> getHistorics(
+  Future<Map<String, dynamic>> getHistorics(BuildContext context,
       {List<int> journeyId, bool download = false, bool last = false}) async {
     Map<String, dynamic> decodedResp;
     Object bodyRequest = {"token": _prefs.token};
@@ -47,6 +47,11 @@ class HistoricsProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp["HISTORICS"]);
         if (!download) {

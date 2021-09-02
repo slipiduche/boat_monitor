@@ -46,7 +46,8 @@ class _StoragePageState extends State<StoragePage> {
     StorageSearchBloc().setStorageSearch = '';
     final _boats = BoatsBloc().boatsValue;
     List<int> _listId;
-    await HistoricsProvider().getHistorics(journeyId: _listId, last: true);
+    await HistoricsProvider()
+        .getHistorics(context, journeyId: _listId, last: true);
     final historicsStorage = HistoricsBloc().historicsValue;
     _boats.forEach((element) {
       historicsStorage.historics.lastWhere((historic) {
