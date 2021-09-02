@@ -34,9 +34,9 @@ class _SupervisorPageState extends State<SupervisorPage> {
     super.initState();
     auth.deleteAll();
     AuthBloc().setRoute = 'supervisorPage';
-    UserProvider().getUsers();
+    UserProvider().getUsers(context);
 
-    UserProvider().getUserById(_prefs.userId);
+    UserProvider().getUserById(context, _prefs.userId);
     AlertsProvider().getAlerts(context);
   }
 
@@ -99,6 +99,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
                                     blue1,
                                     alertsIcon(20.0, blue1), () async {
                                   await UserProvider().alertViewed(
+                                      context,
                                       _prefs.userId,
                                       snapshot.data.alerts.last.id);
                                   Navigator.of(context)

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
@@ -14,7 +14,7 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class UserProvider {
-  Future<Map<String, dynamic>> getUsers() async {
+  Future<Map<String, dynamic>> getUsers(BuildContext context) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({"token": _prefs.token});
 
@@ -33,6 +33,11 @@ class UserProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
 
@@ -60,7 +65,8 @@ class UserProvider {
     }
   }
 
-  Future<Map<String, dynamic>> getUserById(int userId) async {
+  Future<Map<String, dynamic>> getUserById(
+      BuildContext context, int userId) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -83,6 +89,11 @@ class UserProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
 
@@ -98,7 +109,8 @@ class UserProvider {
     }
   }
 
-  Future<Map<String, dynamic>> alertViewed(int userId, int lastAlertId) async {
+  Future<Map<String, dynamic>> alertViewed(
+      BuildContext context, int userId, int lastAlertId) async {
     print("sending last viewed");
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
@@ -123,6 +135,11 @@ class UserProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
@@ -136,7 +153,8 @@ class UserProvider {
     }
   }
 
-  Future<Map<String, dynamic>> approveUsers(List<int> usersId) async {
+  Future<Map<String, dynamic>> approveUsers(
+      BuildContext context, List<int> usersId) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -161,6 +179,11 @@ class UserProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
@@ -174,7 +197,8 @@ class UserProvider {
     }
   }
 
-  Future<Map<String, dynamic>> declineUsers(List<int> usersId) async {
+  Future<Map<String, dynamic>> declineUsers(
+      BuildContext context, List<int> usersId) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -198,6 +222,11 @@ class UserProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
       });

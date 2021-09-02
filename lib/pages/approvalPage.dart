@@ -36,7 +36,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
     PendingApprovalsBloc().setCheck = 0;
 
     AuthBloc().setRoute = 'approvalPage';
-    UserProvider().getUsers();
+    UserProvider().getUsers(context);
   }
 
   @override
@@ -422,7 +422,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
         TextLanguage.of(context).acceptConfirmation, () {
       AlertsBloc().setAlert =
           Alerts(TextLanguage.of(context).aprove, "Updating");
-      UserProvider().approveUsers(ids);
+      UserProvider().approveUsers(context, ids);
     }, () {
       Navigator.of(context).pop();
     });
@@ -435,7 +435,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
       //setOnJourney(_boat.id, context);
       AlertsBloc().setAlert =
           Alerts(TextLanguage.of(context).decline, "Updating");
-      UserProvider().declineUsers(ids);
+      UserProvider().declineUsers(context, ids);
     }, () {
       Navigator.of(context).pop();
     });

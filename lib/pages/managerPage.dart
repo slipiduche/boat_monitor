@@ -34,9 +34,9 @@ class _ManagerPageState extends State<ManagerPage> {
     super.initState();
     auth.deleteAll();
     AuthBloc().setRoute = 'managerPage';
-    UserProvider().getUsers();
+    UserProvider().getUsers(context);
 
-    UserProvider().getUserById(_prefs.userId);
+    UserProvider().getUserById(context, _prefs.userId);
     AlertsProvider().getAlerts(context);
   }
 
@@ -134,6 +134,7 @@ class _ManagerPageState extends State<ManagerPage> {
                                     blue1,
                                     alertsIcon(20.0, blue1), () async {
                                   await UserProvider().alertViewed(
+                                      context,
                                       _prefs.userId,
                                       snapshot.data.alerts.last.id);
                                   Navigator.of(context)

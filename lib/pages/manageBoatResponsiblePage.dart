@@ -46,7 +46,7 @@ class _ManageBoatResponsiblePageState extends State<ManageBoatResponsiblePage> {
   @override
   Widget build(BuildContext context) {
     BoatData _boat = ModalRoute.of(context).settings.arguments;
-    UserProvider().getUsers();
+    UserProvider().getUsers(context);
     print(_boats);
     return WillPopScope(
       onWillPop: () {
