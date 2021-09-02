@@ -37,7 +37,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
     UserProvider().getUsers();
 
     UserProvider().getUserById(_prefs.userId);
-    AlertsProvider().getAlerts();
+    AlertsProvider().getAlerts(context);
   }
 
   @override

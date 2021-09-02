@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/server_alerts_bloc.dart';
@@ -14,7 +14,7 @@ import 'package:http/io_client.dart';
 final _prefs = new UserPreferences();
 
 class AlertsProvider {
-  Future<Map<String, dynamic>> getAlerts() async {
+  Future<Map<String, dynamic>> getAlerts(BuildContext context) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({"token": _prefs.token});
 
@@ -33,6 +33,11 @@ class AlertsProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         print(decodedResp);
         ServerAlerts _alerts = ServerAlerts.fromJson(decodedResp);
@@ -47,7 +52,8 @@ class AlertsProvider {
     }
   }
 
-  Future<Map<String, dynamic>> approveAlertss(List<int> alertssId) async {
+  Future<Map<String, dynamic>> approveAlertss(
+      BuildContext context, List<int> alertssId) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -71,6 +77,11 @@ class AlertsProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
         //String token = decodedResp["token"];
         //print(decodedResp);
       });
@@ -84,7 +95,8 @@ class AlertsProvider {
     }
   }
 
-  Future<Map<String, dynamic>> declineAlertss(List<int> alertssId) async {
+  Future<Map<String, dynamic>> declineAlertss(
+      BuildContext context, List<int> alertssId) async {
     Map<String, dynamic> decodedResp;
     var _req = jsonEncode({
       "token": _prefs.token,
@@ -108,6 +120,11 @@ class AlertsProvider {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
         decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
       });
       AlertsBloc().setAlert = Alerts(decodedResp["message"], "Updated");
       return {'ok': true, 'message': decodedResp["message"]};

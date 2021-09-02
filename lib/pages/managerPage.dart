@@ -37,7 +37,7 @@ class _ManagerPageState extends State<ManagerPage> {
     UserProvider().getUsers();
 
     UserProvider().getUserById(_prefs.userId);
-    AlertsProvider().getAlerts();
+    AlertsProvider().getAlerts(context);
   }
 
   @override
