@@ -231,8 +231,17 @@ class _JourneyPageState extends State<JourneyPage> {
                                             final picturesPreviewList =
                                                 snapshot.data;
                                             if (snapshot.hasData) {
-                                              return picturesPreview(
-                                                  context, picturesPreviewList);
+                                              if (picturesPreviewList
+                                                      .files.length ==
+                                                  0) {
+                                                return Image(
+                                                  image: AssetImage(
+                                                      'assets/no-image.jpg'),
+                                                );
+                                              } else {
+                                                return picturesPreview(context,
+                                                    picturesPreviewList);
+                                              }
                                             } else {
                                               return Container();
                                             }

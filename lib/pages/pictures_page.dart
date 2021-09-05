@@ -266,7 +266,7 @@ class _PicturesPageState extends State<PicturesPage>
                               child: GridView.count(
                                 crossAxisCount: 3,
                                 children:
-                                    List.generate(_picturesUrl.length, (index) {
+                                    List.generate(listFiltered.length, (index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(1.0),
                                     child: picture2(
@@ -284,7 +284,7 @@ class _PicturesPageState extends State<PicturesPage>
                                 (marginExt1 * 2),
                             child: ListView(
                               children:
-                                  List.generate(_picturesUrl.length, (index) {
+                                  List.generate(listFiltered.length, (index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(1.0),
                                   child: picture2(
