@@ -8,10 +8,16 @@ LatLng latLongFromString(String location) {
   int sign;
   String direction;
   String sLatitude, sLongitude;
-  sLatitude = location.split(',')[0];
-  sLongitude = location.split(',')[1];
-  latitude = double.parse(sLatitude);
-  longitude = double.parse(sLongitude);
+  if (location == null) {
+    latitude = 0;
+    longitude = 0;
+  } else {
+    sLatitude = location.split(',')[0];
+    sLongitude = location.split(',')[1];
+    latitude = double.parse(sLatitude);
+    longitude = double.parse(sLongitude);
+  }
+
   // sLatitude = location.split(' ')[0];
   // print(sLatitude);
   // grades = double.parse(sLatitude.split('°')[0]);
