@@ -49,10 +49,14 @@ class _LoginPageState extends State<LoginPage> {
                   stream: auth.formValidStream,
                   builder: (context, snapshot) {
                     double _height = 260;
+                    double _textSize = 20.0;
                     if (snapshot.hasError) {
                       _height = 200.0;
                     } else {
                       _height = 260.0;
+                    }
+                    if (MediaQuery.of(context).size.width < 900) {
+                      _textSize = 18.0;
                     }
                     return Container(
                       margin: EdgeInsets.symmetric(horizontal: marginExt),
@@ -66,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                               Text(TextLanguage.of(context).dontHaveAccount,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 20.0,
+                                      fontSize: _textSize,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center),
                               GestureDetector(
@@ -78,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ' ' + TextLanguage.of(context).signupHere,
                                     style: TextStyle(
                                         color: blue1,
-                                        fontSize: 20.0,
+                                        fontSize: _textSize,
                                         fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center),
                               ),
@@ -96,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Text(TextLanguage.of(context).forgot,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 20.0,
+                                        fontSize: _textSize,
                                         fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center),
                                 GestureDetector(
@@ -108,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ' ' + TextLanguage.of(context).clicHere,
                                       style: TextStyle(
                                           color: blue1,
-                                          fontSize: 20.0,
+                                          fontSize: _textSize,
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center),
                                 ),

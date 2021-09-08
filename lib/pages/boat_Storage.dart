@@ -87,7 +87,7 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '${_usedStorage}GB/${_maxStorage}GB',
+                          '${_usedStorage.toStringAsFixed(1)}GB/${_maxStorage.toStringAsFixed(1)}GB',
                           style: TextStyle(
                               color: blue1,
                               fontSize: messageTitle,

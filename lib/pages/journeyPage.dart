@@ -50,6 +50,10 @@ class _JourneyPageState extends State<JourneyPage> {
     JourneyCardArgument _journey = ModalRoute.of(context).settings.arguments;
     HistoricsProvider().getHistorics(context, journeyId: [_journey.journey.id]);
     PicturesProvider().getPictures(context, journeyId: _journey.journey.id);
+    double _extraHeight = 0;
+    if (MediaQuery.of(context).size.height < 2000) {
+      _extraHeight = 50.0;
+    }
     return SafeArea(
         child: Scaffold(
       key: _scaffoldKey,
@@ -59,7 +63,7 @@ class _JourneyPageState extends State<JourneyPage> {
       }),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height + _extraHeight,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -73,13 +77,6 @@ class _JourneyPageState extends State<JourneyPage> {
                       stream: HistoricsBloc().historics,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          // controller.move(
-                          //     latLongFromString(HistoricsBloc()
-                          //         .historicsValue
-                          //         .historics
-                          //         .last
-                          //         .bLocation),
-                          //     13.0);
                           return Container(
                             child: Column(
                               children: [
