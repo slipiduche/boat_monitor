@@ -268,7 +268,7 @@ Widget _boatDiskCard(BuildContext context, BoatData boat, double storage) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '$storage %',
+                      '${storage.round()} %',
                       style: TextStyle(
                           color: blue1,
                           fontWeight: FontWeight.bold,
@@ -289,7 +289,7 @@ Widget _boatDiskCard(BuildContext context, BoatData boat, double storage) {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '$_usedStorage GB/$_maxStorage GB',
+                      '${_usedStorage.round()} GB/${_maxStorage.round()} GB',
                       style: TextStyle(
                           color: blue1,
                           fontWeight: FontWeight.bold,
