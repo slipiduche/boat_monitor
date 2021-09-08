@@ -364,6 +364,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               LatLng _currenMapView;
                               if (snapshot.hasData) {
                                 for (var i = 0; i < snapshot.data.length; i++) {
+                                  print(
+                                      '${snapshot.data.length}snapshot.data.length');
                                   if (snapshot.data[i]) {
                                     _currenMapView = lastLocation[i];
                                   }
@@ -432,7 +434,12 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                 stream: CurrentBoatBloc().viewPosition,
                                 builder: (context,
                                     AsyncSnapshot<List<bool>> snapshot) {
-                                  for (var i = 0; i < 4; i++) {
+                                  print(
+                                      '${lastLocation.length}lastlocationlength');
+                                  for (var i = 0;
+                                      i < lastLocation.length;
+                                      i++) {
+                                    print('${i}for index');
                                     if (_visible[i] == false) {
                                       lastLocation[i] =
                                           LatLng(0.1151545454, 0.1454545454);
@@ -475,7 +482,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                 Container(
                                                   width: 70.0,
                                                   child: Text(
-                                                    '${lastLocation[0].latitude.toString().substring(0, 5)}:${lastLocation[0].longitude.toString().substring(0, 5)}',
+                                                    '${lastLocation[0].latitude.toString().length > 5 ? lastLocation[0].latitude.toString().substring(0, 5) : lastLocation[0].latitude.toString()}:${lastLocation[0].longitude.toString().length > 5 ? lastLocation[0].longitude.toString().substring(0, 5) : lastLocation[0].longitude.toString()}',
                                                     overflow: TextOverflow.clip,
                                                     style: TextStyle(
                                                         color: blue1,
@@ -512,7 +519,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                 Container(
                                                   width: 70.0,
                                                   child: Text(
-                                                    '${lastLocation[1].latitude.toString().substring(0, 5)}:${lastLocation[1].longitude.toString().substring(0, 5)}',
+                                                    '${lastLocation[1].latitude.toString().length > 5 ? lastLocation[1].latitude.toString().substring(0, 5) : lastLocation[1].latitude.toString()}:${lastLocation[1].longitude.toString().length > 5 ? lastLocation[1].longitude.toString().substring(0, 5) : lastLocation[1].longitude.toString()}',
                                                     style: TextStyle(
                                                         color: blue1,
                                                         fontSize: 12),
@@ -548,7 +555,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                 Container(
                                                   width: 70.0,
                                                   child: Text(
-                                                    '${lastLocation[2].latitude.toString().substring(0, 5)}:${lastLocation[2].longitude.toString().substring(0, 5)}',
+                                                    '${lastLocation[2].latitude.toString().length > 5 ? lastLocation[2].latitude.toString().substring(0, 5) : lastLocation[2].latitude.toString()}:${lastLocation[2].longitude.toString().length > 5 ? lastLocation[2].longitude.toString().substring(0, 5) : lastLocation[2].longitude.toString()}',
                                                     style: TextStyle(
                                                         color: blue1,
                                                         fontSize: 12),
@@ -584,7 +591,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                 Container(
                                                   width: 70.0,
                                                   child: Text(
-                                                    '${lastLocation[3].latitude.toString().substring(0, 5)}:${lastLocation[3].longitude.toString().substring(0, 5)}',
+                                                    '${lastLocation[3].latitude.toString().length > 5 ? lastLocation[3].latitude.toString().substring(0, 5) : lastLocation[3].latitude.toString()}:${lastLocation[3].longitude.toString().length > 5 ? lastLocation[3].longitude.toString().substring(0, 5) : lastLocation[3].longitude.toString()}',
                                                     style: TextStyle(
                                                         color: blue1,
                                                         fontSize: 12),
