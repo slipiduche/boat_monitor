@@ -191,7 +191,10 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               if (_boat.onJourney == 0) {
                                 return arrivedIcon(25.0, blue1);
                               } else {
-                                return Container();
+                                return Container(
+                                  height: 25.0,
+                                  width: 25.0,
+                                );
                               }
                             }),
                             SizedBox(
@@ -227,7 +230,13 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                       fontSize: messageTitle),
                                 );
                               } else {
-                                return Container();
+                                return Text(
+                                  '    ',
+                                  style: TextStyle(
+                                      color: blue1,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: messageTitle),
+                                );
                               }
                             }),
                             SizedBox(
