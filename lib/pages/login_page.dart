@@ -60,31 +60,29 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, 'signUpPage');
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(TextLanguage.of(context).dontHaveAccount,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(TextLanguage.of(context).dontHaveAccount,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, 'signUpPage');
+                                },
+                                child: Text(
+                                    ' ' + TextLanguage.of(context).signupHere,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: blue1,
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center),
-                                GestureDetector(
-                                  child: Text(
-                                      ' ' + TextLanguage.of(context).signupHere,
-                                      style: TextStyle(
-                                          color: blue1,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                           Expanded(
                               child: SizedBox(
