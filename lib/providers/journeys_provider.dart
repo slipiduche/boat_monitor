@@ -134,12 +134,12 @@ class JourneyProvider {
           .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
         if (decodedResp["message"] == 'Token expired') {
           print(decodedResp);
           Navigator.of(context).pushReplacementNamed('loginPage');
           return {'ok': false, 'message': 'Token expired'};
         }
-        decodedResp = json.decode(response.body);
       });
       return {'ok': true, 'message': decodedResp['message']};
     } catch (e) {
@@ -172,12 +172,13 @@ class JourneyProvider {
           .then((response) {
         print("Reponse status : ${response.statusCode}");
         print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
         if (decodedResp["message"] == 'Token expired') {
           print(decodedResp);
           Navigator.of(context).pushReplacementNamed('loginPage');
           return {'ok': false, 'message': 'Token expired'};
         }
-        decodedResp = json.decode(response.body);
+
         //String token = decodedResp["token"];
       });
       return {'ok': true, 'message': 'success'};
