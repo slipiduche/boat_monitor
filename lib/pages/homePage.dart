@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                                   .homeFilterValue;
                                               _boatsFiltered.forEach((element) {
                                                 switch (_filter) {
-                                                  case 'Salling':
+                                                  case 'Sailing':
                                                     if (element.onJourney ==
                                                         1) {
                                                       _boatsFiltered2
@@ -459,23 +459,23 @@ Widget _homeButtons(BuildContext context) {
       children: [
         _filterButton(() {
           print('salling filter');
-          HomeFilterBloc().sethomeFilter = 'Salling';
-        }, TextLanguage.of(context).sailing),
+          HomeFilterBloc().sethomeFilter = 'Sailing';
+        }, TextLanguage.of(context).sailing, 'Sailing'),
         _filterButton(() {
           HomeFilterBloc().sethomeFilter = 'Arrived';
-        }, TextLanguage.of(context).arrived),
+        }, TextLanguage.of(context).arrived, 'Arrived'),
         _filterButton(() {
           HomeFilterBloc().sethomeFilter = 'unavailable';
-        }, TextLanguage.of(context).unavailable),
+        }, TextLanguage.of(context).unavailable, 'unavailable'),
         _filterButton(() {
           HomeFilterBloc().sethomeFilter = 'available';
-        }, TextLanguage.of(context).available)
+        }, TextLanguage.of(context).available, 'available')
       ],
     ),
   );
 }
 
-Widget _filterButton(Function onTap, String text) {
+Widget _filterButton(Function onTap, String text, String status) {
   Color _color = gray;
   Color _textColor = gray1;
   return StreamBuilder(
@@ -484,7 +484,7 @@ Widget _filterButton(Function onTap, String text) {
         if (snapshot.hasData) {
           print(snapshot.data);
           print(text);
-          if (snapshot.data == text) {
+          if (snapshot.data == status) {
             _color = blue1;
             _textColor = Colors.white;
           } else {
