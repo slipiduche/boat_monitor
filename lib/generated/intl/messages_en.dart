@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "finalDate" : MessageLookupByLibrary.simpleMessage("Final date"),
     "finalWeight" : MessageLookupByLibrary.simpleMessage("Final weight"),
     "forgot" : MessageLookupByLibrary.simpleMessage("Forgot your password ?"),
-    "history" : MessageLookupByLibrary.simpleMessage("Historial"),
+    "history" : MessageLookupByLibrary.simpleMessage("Historics"),
     "historyHintText" : MessageLookupByLibrary.simpleMessage("Type any boat name, data travel, supervisor"),
     "home" : MessageLookupByLibrary.simpleMessage("Home"),
     "hours" : MessageLookupByLibrary.simpleMessage("Hours"),

@@ -42,6 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     JourneyProvider().getJourneys(context);
+    double _extraSize = 0;
     return WillPopScope(
       onWillPop: () {},
       child: SafeArea(
@@ -210,6 +211,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                       } else {
                                         _journeysFiltered = _journeys;
                                       }
+                                      if (MediaQuery.of(context).size.width <
+                                          770) {
+                                        _extraSize = 5.0;
+                                      }
 
                                       return Column(
                                         children: [
@@ -287,9 +292,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                                 ),
                                                 Container(
                                                   width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
+                                                              .size
+                                                              .width /
+                                                          5 +
+                                                      _extraSize,
                                                   child: Text(
                                                     TextLanguage.of(context)
                                                         .supervisor,

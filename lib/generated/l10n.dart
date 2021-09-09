@@ -815,10 +815,10 @@ class TextLanguage {
     );
   }
 
-  /// `Historial`
+  /// `Historics`
   String get history {
     return Intl.message(
-      'Historial',
+      'Historics',
       name: 'history',
       desc: '',
       args: [],
