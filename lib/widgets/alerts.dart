@@ -341,79 +341,90 @@ void errorPopUp(BuildContext _context, String message, Function function) {
 void confirmationDialog(BuildContext _context, String contain, String title,
     Function functionYes(), void functionNo()) {
   showDialog(
+      //useRootNavigator: false,
       context: _context,
       barrierDismissible: false,
       builder: (context) {
-        return Container(
-          //width: MediaQuery.of(context).size.width - 28,
-          child: Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            insetPadding: EdgeInsets.symmetric(horizontal: 28.0),
-            child: Container(
-              //height: 200.0,
-              //decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 20.0),
-                    width: double.infinity,
-                    //height: 30.0,
-                    //color: colorMedico,
-                    child: Center(
-                        child: Text(
-                      title,
-                      style: TextStyle(fontSize: statusSize, color: blue1),
-                    )),
-                  ),
-                  Container(
-                    //height: 40.0,
-
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 20.0,
-                        ),
+        return WillPopScope(
+          onWillPop: () {
+            print('popopop');
+          },
+          child: Container(
+            //width: MediaQuery.of(context).size.width - 28,
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              insetPadding: EdgeInsets.symmetric(horizontal: 28.0),
+              child: Container(
+                //height: 200.0,
+                //decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: marginInt),
-                          child: Text(contain,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 20.0)),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 50.0,
-                                child: submitButtonS(
-                                    TextLanguage.of(context).yes, () async {
-                                  await functionYes();
-                                }),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 50.0,
-                                child: submitButtonNo(
-                                    TextLanguage.of(context).no, () async {
-                                  await functionNo();
-                                }),
-                              ),
-                            ),
-                          ],
+                          padding: EdgeInsets.only(top: 20.0),
+                          width: 200,
+                          child: Text(
+                            title,
+                            overflow: TextOverflow.clip,
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(fontSize: statusSize, color: blue1),
+                          ),
                         ),
                       ],
                     ),
-                  )
-                ],
+                    Container(
+                      //height: 40.0,
+
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: marginInt),
+                            child: Text(contain,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 20.0)),
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 50.0,
+                                  child: submitButtonS(
+                                      TextLanguage.of(context).yes, () async {
+                                    await functionYes();
+                                  }),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 50.0,
+                                  child: submitButtonNo(
+                                      TextLanguage.of(context).no, () async {
+                                    await functionNo();
+                                  }),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
