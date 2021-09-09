@@ -289,7 +289,9 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                             SizedBox(
                               width: 5.0,
                             ),
-                            Text(_journey.ini.toString(),
+                            Text(
+                                _journey.ini.toString().substring(
+                                    0, _journey.ini.toString().length - 2),
                                 style: TextStyle(
                                     color: blueTextBoatCard,
                                     fontSize: boatCardContent))
@@ -310,7 +312,9 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                             SizedBox(
                               width: 5.0,
                             ),
-                            Text(_journey.ed.toString(),
+                            Text(
+                                _journey.ed.toString().substring(
+                                    0, _journey.ed.toString().length - 2),
                                 style: TextStyle(
                                     color: blueTextBoatCard,
                                     fontSize: boatCardContent))
@@ -478,6 +482,10 @@ Widget _homeButtons(BuildContext context) {
 Widget _filterButton(Function onTap, String text, String status) {
   Color _color = gray;
   Color _textColor = gray1;
+  double _buttonWidth = 80.0;
+  if (text.length < 12) {
+    _buttonWidth = 7.27 * (text.length + 1);
+  }
   return StreamBuilder(
       stream: HomeFilterBloc().homeFilter,
       builder: (context, snapshot) {
@@ -501,7 +509,7 @@ Widget _filterButton(Function onTap, String text, String status) {
           },
           child: Container(
               height: 20.0,
-              width: 80.0,
+              width: _buttonWidth,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

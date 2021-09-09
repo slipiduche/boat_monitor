@@ -69,8 +69,14 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     bool confirm = _boat.onJourney == 1;
     HistoricsProvider().getHistorics(context, journeyId: [_journey.id]);
     double _extraHeight = 0;
+    double _minusSize = 0;
+    double _extraSizeBox = 0;
     if (MediaQuery.of(context).size.height < 2000) {
       _extraHeight = 50.0;
+    }
+    if (MediaQuery.of(context).size.width < 770) {
+      _minusSize = 3.0;
+      _extraSizeBox = 2.0;
     }
     return SafeArea(
         child: Scaffold(
@@ -288,27 +294,27 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                   fontSize: messageTitle),
                             ),
                             SizedBox(
-                              height: 10.0,
+                              height: 10.0 + _extraSizeBox,
                             ),
                             Text(
                               _journey.ini.toString().substring(0, 16),
                               style: TextStyle(
                                   color: blue1,
                                   //fontWeight: FontWeight.w800,
-                                  fontSize: messageTitle),
+                                  fontSize: messageTitle - _minusSize),
                             ),
                             SizedBox(
-                              height: 10.0,
+                              height: 10.0 + _extraSizeBox,
                             ),
                             Text(
                               _journey.fWeight.toString() + ' KG',
                               style: TextStyle(
                                   color: blue1,
                                   //fontWeight: FontWeight.w800,
-                                  fontSize: messageTitle),
+                                  fontSize: messageTitle - _minusSize),
                             ),
                             SizedBox(
-                              height: 10.0,
+                              height: 10.0 + _extraSizeBox,
                             ),
                             Text(
                               (DateTime.now().difference(_journey.ini).inHours)
@@ -317,7 +323,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               style: TextStyle(
                                   color: blue1,
                                   //fontWeight: FontWeight.w800,
-                                  fontSize: messageTitle),
+                                  fontSize: messageTitle - _minusSize),
                             ),
                           ],
                         )
