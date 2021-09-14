@@ -41,7 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "arrivalConfirmation" : MessageLookupByLibrary.simpleMessage("Arrival Confirmation"),
     "arrived" : MessageLookupByLibrary.simpleMessage("Arrived"),
     "available" : MessageLookupByLibrary.simpleMessage("Available"),
-    "averageTemperature" : MessageLookupByLibrary.simpleMessage("Average temperature"),
+    "averageTemperature" : MessageLookupByLibrary.simpleMessage("Last temperature"),
     "boat" : MessageLookupByLibrary.simpleMessage("Boat"),
     "camera" : MessageLookupByLibrary.simpleMessage("Camera"),
     "change" : MessageLookupByLibrary.simpleMessage("Change"),

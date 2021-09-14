@@ -22,7 +22,7 @@
     "hours": "Hours",
     "temperature": "Temperature",
     "desiredTemperature": "Desired temperature",
-    "averageTemperature": "Average temperature",
+    "averageTemperature": "Last temperature",
     "camera": "Camera",
     "pictures": "Pictures",
     "value": "Value",

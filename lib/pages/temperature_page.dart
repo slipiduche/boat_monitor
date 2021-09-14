@@ -119,21 +119,21 @@ class _TemperaturePageState extends State<TemperaturePage> {
                             fontSize: correoSize,
                           ),
                         ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              TextLanguage.of(context).desiredTemperature +
-                                  ': ${_temperature.historics.historics.last.temp} º',
-                              style: TextStyle(
-                                  color: blue1,
-                                  fontSize: titleBarSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
+                        // SizedBox(
+                        //   height: 10.0,
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     Text(
+                        //       TextLanguage.of(context).desiredTemperature +
+                        //           ': ${_temperature.historics.historics.last.temp} º',
+                        //       style: TextStyle(
+                        //           color: blue1,
+                        //           fontSize: titleBarSize,
+                        //           fontWeight: FontWeight.bold),
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(
                           height: 10.0,
                         ),

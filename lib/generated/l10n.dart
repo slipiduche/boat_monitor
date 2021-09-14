@@ -265,10 +265,10 @@ class TextLanguage {
     );
   }
 
-  /// `Average temperature`
+  /// `Last temperature`
   String get averageTemperature {
     return Intl.message(
-      'Average temperature',
+      'Last temperature',
       name: 'averageTemperature',
       desc: '',
       args: [],
