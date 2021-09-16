@@ -172,8 +172,12 @@ class _HistoryPageState extends State<HistoryPage> {
                                           _journeys.forEach((element) {
                                             if (element.ini.isAfter(snapshot
                                                     .data.range.start) &&
-                                                element.ini.isBefore(
-                                                    snapshot.data.range.end)) {
+                                                element.ini.isBefore(snapshot
+                                                    .data.range.end
+                                                    .add(Duration(
+                                                        hours: 23,
+                                                        minutes: 59,
+                                                        seconds: 59)))) {
                                               _journeysFiltered.add(element);
                                             }
                                           });
