@@ -62,6 +62,54 @@ class JourneyProvider {
     }
   }
 
+  Future<Map<String, dynamic>> getJourneysByBoatId(BuildContext context,
+      {List<int> boatIds}) async {
+    Map<String, dynamic> decodedResp;
+    var _req = jsonEncode({"token": _prefs.token});
+    if (boatIds != null) {
+      _req = jsonEncode({"token": _prefs.token, "boat_id": boatIds});
+    }
+
+    final _req2 = {"body": _req};
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      await http
+          .get(
+              Uri.parse(Parameters()
+                  .journeysUrl), //modificado en archivo fuente de la libreria para enviar body
+              body: _req2)
+          .then((response) {
+        print("Reponse status : ${response.statusCode}");
+        print("Response body : ${response.body}");
+        decodedResp = json.decode(response.body);
+        if (decodedResp["message"] == 'Token expired') {
+          print(decodedResp);
+          Navigator.of(context).pushReplacementNamed('loginPage');
+          return {'ok': false, 'message': 'Token expired'};
+        }
+        //String token = decodedResp["token"];
+        print(decodedResp["JOURNEYS"]);
+        List<dynamic> _journeysJson = decodedResp["JOURNEYS"];
+        List<Journey> _journeys = [];
+        _journeysJson.forEach((element) {
+          Journey _journey = Journey.fromJson(element);
+          _journeys.add(_journey);
+        });
+        JourneysBloc().setJourneys = _journeys;
+
+        print(_journeys[0].ini);
+      });
+      return {'ok': true, 'message': 'success'};
+    } catch (e) {
+      print('error:');
+      print(e.toString());
+      return {'ok': false, 'message': e.toString()};
+    }
+  }
+
   Future<Map<String, dynamic>> getJourneysBy(
       BuildContext context, List<Journey> journeys) async {
     Map<String, dynamic> decodedResp;
