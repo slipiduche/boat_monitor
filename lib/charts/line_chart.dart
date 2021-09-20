@@ -37,11 +37,14 @@ class _LineChartBasicState extends State<LineChartBasic> {
      */
     if (historics != null) {
       samples = historics.historics.length;
-      historics.historics.forEach((element) {
-        xData.add(element.dt.hour.toDouble());
-        yData.add(element.contWeight.toDouble());
-        //spots.add(FlSpot(, y));
-      });
+      print(samples);
+      for (var i = 0; i < samples; i++) {
+        xData.add(historics.historics[i].dt.hour.toDouble());
+        print(
+            'dt:${historics.historics[i].dt} id:${historics.historics[i].id}x:${historics.historics[i].dt.hour.toDouble()}:${historics.historics[i].dt.minute.toDouble()} y:+${historics.historics[i].contWeight.toDouble()}');
+        yData.add(historics.historics[i].contWeight.toDouble());
+      }
+
       for (var i = 0; i < samples; i++) {
         spots.add(FlSpot((i).toDouble(), yData[i]));
       }
@@ -58,25 +61,7 @@ class _LineChartBasicState extends State<LineChartBasic> {
                 // ),
                 color: Colors.white10),
             child: LineChart(
-              showAvg ? avgData() : mainData(),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 60,
-          height: 34,
-          child: FlatButton(
-            onPressed: () {
-              setState(() {
-                showAvg = !showAvg;
-              });
-            },
-            child: Text(
-              'avg',
-              style: TextStyle(
-                  fontSize: 12,
-                  color:
-                      showAvg ? Colors.white.withOpacity(0.5) : Colors.white),
+              mainData(historics),
             ),
           ),
         ),
@@ -84,8 +69,27 @@ class _LineChartBasicState extends State<LineChartBasic> {
     );
   }
 
-  LineChartData mainData() {
+  LineChartData mainData(Historics historics) {
     return LineChartData(
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+            maxContentWidth: 40,
+            tooltipBgColor: Colors.white,
+            getTooltipItems: (touchedSpots) {
+              return touchedSpots.map((LineBarSpot touchedSpot) {
+                final textStyle = TextStyle(
+                  color: touchedSpot.bar.colors[0],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                );
+                return LineTooltipItem(
+                    '${historics.historics[touchedSpot.spotIndex].dt.toString().substring(0, historics.historics[touchedSpot.spotIndex].dt.toString().length - 8)}, ${touchedSpot.y.toStringAsFixed(2)}',
+                    textStyle);
+              }).toList();
+            }),
+        handleBuiltInTouches: true,
+        getTouchLineStart: (data, index) => 0,
+      ),
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
@@ -113,21 +117,15 @@ class _LineChartBasicState extends State<LineChartBasic> {
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
-          showTitles: false,
+          showTitles: true,
           reservedSize: 20,
           getTextStyles: (value) => const TextStyle(
               color: Color(0xff68737d),
               fontWeight: FontWeight.bold,
               fontSize: 12),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return '12:00';
-              case 5:
-                return '15:00';
-              case 8:
-                return '18:00';
-            }
+            print('value:$value');
+            print(historics.historics[value.toInt()].dt);
             return '';
           },
           margin: 8,
@@ -180,103 +178,6 @@ class _LineChartBasicState extends State<LineChartBasic> {
             colors:
                 gradientColors.map((color) => color.withOpacity(0.3)).toList(),
           ),
-        ),
-      ],
-    );
-  }
-
-  LineChartData avgData() {
-    return LineChartData(
-      lineTouchData: LineTouchData(enabled: false),
-      gridData: FlGridData(
-        show: true,
-        drawHorizontalLine: true,
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: Colors.blueAccent,
-            strokeWidth: 1,
-          );
-        },
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: Colors.blueAccent,
-            strokeWidth: 1,
-          );
-        },
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 22,
-          getTextStyles: (value) => const TextStyle(
-              color: Color(0xff68737d),
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return '12:00';
-              case 5:
-                return '15:00';
-              case 8:
-                return '16:00';
-            }
-            return '';
-          },
-          margin: 8,
-        ),
-        leftTitles: SideTitles(
-          showTitles: true,
-          getTextStyles: (value) => const TextStyle(
-            color: Color(0xff67727d),
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '800Kg';
-              case 3:
-                return '500Kg';
-              case 5:
-                return '200Kg';
-            }
-            return '';
-          },
-          reservedSize: 28,
-          margin: 12,
-        ),
-      ),
-      borderData: FlBorderData(
-          show: true, border: Border.all(color: Colors.blueAccent, width: 1)),
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
-      lineBarsData: [
-        LineChartBarData(
-          spots: spots,
-          isCurved: true,
-          colors: [
-            ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                .lerp(0.2),
-            ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                .lerp(0.2),
-          ],
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: FlDotData(
-            show: false,
-          ),
-          belowBarData: BarAreaData(show: true, colors: [
-            ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                .lerp(0.2)
-                .withOpacity(0.1),
-            ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                .lerp(0.2)
-                .withOpacity(0.1),
-          ]),
         ),
       ],
     );
