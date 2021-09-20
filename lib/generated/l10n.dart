@@ -535,10 +535,10 @@ class TextLanguage {
     );
   }
 
-  /// `weight`
+  /// `Weight`
   String get weight {
     return Intl.message(
-      'weight',
+      'Weight',
       name: 'weight',
       desc: '',
       args: [],

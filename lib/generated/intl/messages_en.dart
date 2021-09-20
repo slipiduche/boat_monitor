@@ -145,7 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "user" : MessageLookupByLibrary.simpleMessage("User"),
     "value" : MessageLookupByLibrary.simpleMessage("Value"),
     "waiting" : MessageLookupByLibrary.simpleMessage("Waiting for approval"),
-    "weight" : MessageLookupByLibrary.simpleMessage("weight"),
+    "weight" : MessageLookupByLibrary.simpleMessage("Weight"),
     "yes" : MessageLookupByLibrary.simpleMessage("Yes")
   };
 }

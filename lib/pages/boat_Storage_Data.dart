@@ -417,7 +417,8 @@ class _BoatDataPageState extends State<BoatDataPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 125) / 4,
                             child: Text(
-                                TextLanguage.of(context).weight + " (KG)",
+                                TextLanguage.of(context).weight.toLowerCase() +
+                                    " (KG)",
                                 style: TextStyle(
                                     color: blue1, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip)),
