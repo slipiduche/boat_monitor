@@ -152,13 +152,14 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(
                                           height: 20.0,
                                         ),
-                                        Text(
-                                          TextLanguage.of(context).noData,
-                                          style: TextStyle(
-                                              color: blue1,
-                                              fontSize: correoSize),
-                                          textAlign: TextAlign.center,
-                                        ),
+                                        // Text(
+                                        //   TextLanguage.of(context).noData,
+                                        //   style: TextStyle(
+                                        //       color: blue1,
+                                        //       fontSize: correoSize),
+                                        //   textAlign: TextAlign.center,
+                                        // ),
+                                        circularProgressCustom(),
                                         Divider(
                                           thickness: 1.0,
                                           color: gray1,
