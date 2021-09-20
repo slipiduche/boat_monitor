@@ -169,7 +169,9 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: journeyCard(
                                       context,
                                       weightIcon(50.0, blue1),
-                                      'WEIGHT',
+                                      TextLanguage.of(context)
+                                          .weight
+                                          .toUpperCase(),
                                       LineChartBasic(
                                           HistoricsBloc().historicsValue)),
                                 ),
@@ -185,7 +187,9 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: journeyCard(
                                       context,
                                       locationIcon(50.0, blue1),
-                                      'LOCATION',
+                                      TextLanguage.of(context)
+                                          .location
+                                          .toUpperCase(),
                                       createFlutterMap(
                                           context,
                                           latLongFromString(HistoricsBloc()
@@ -204,7 +208,9 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: journeyCard(
                                       context,
                                       temperatureIcon(50.0, blue1),
-                                      'TEMPERTURE',
+                                      TextLanguage.of(context)
+                                          .temperature
+                                          .toUpperCase(),
                                       LineChartTemp(
                                           HistoricsBloc().historicsValue)),
                                 ),
@@ -220,7 +226,9 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: journeyCard(
                                       context,
                                       picturesIcon(50.0, blue1),
-                                      'PICTURES',
+                                      TextLanguage.of(context)
+                                          .pictures
+                                          .toUpperCase(),
                                       StreamBuilder(
                                           stream: PicturesBloc().pictures,
                                           builder: (context,
@@ -231,16 +239,15 @@ class _JourneyPageState extends State<JourneyPage> {
                                               if (picturesPreviewList
                                                       .files.length ==
                                                   0) {
-                                                return Image(
-                                                  image: AssetImage(
-                                                      'assets/no-image.jpg'),
-                                                );
+                                                return Text(
+                                                    TextLanguage.of(context)
+                                                        .noData);
                                               } else {
                                                 return picturesPreview(context,
                                                     picturesPreviewList);
                                               }
                                             } else {
-                                              return Container();
+                                              return circularProgressCustom();
                                             }
                                           })),
                                 ),
@@ -305,7 +312,7 @@ Widget journeyCard(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   icon,
-                  Text(text, style: TextStyle(color: blue1, fontSize: 20.0))
+                  Text(text, style: TextStyle(color: blue1, fontSize: 18.0))
                 ],
               ),
               Expanded(

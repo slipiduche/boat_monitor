@@ -206,12 +206,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Text(
-                                TextLanguage.of(context).noData,
-                                style: TextStyle(
-                                    color: blue1, fontSize: correoSize),
-                                textAlign: TextAlign.center,
-                              ),
+                              circularProgressCustom(),
                               Divider(
                                 thickness: 1.0,
                                 color: gray1,
@@ -230,11 +225,12 @@ class _BoatDataPageState extends State<BoatDataPage> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Text(
-                      TextLanguage.of(context).noData,
-                      style: TextStyle(color: blue1, fontSize: correoSize),
-                      textAlign: TextAlign.center,
-                    ),
+                    circularProgressCustom(),
+                    // Text(
+                    //   TextLanguage.of(context).noData,
+                    //   style: TextStyle(color: blue1, fontSize: correoSize),
+                    //   textAlign: TextAlign.center,
+                    // ),
                     Divider(
                       thickness: 1.0,
                       color: gray1,
@@ -308,8 +304,7 @@ class _BoatDataPageState extends State<BoatDataPage> {
                             width:
                                 (MediaQuery.of(context).size.width - 180) / 4,
                             child: Text(
-                              TextLanguage.of(context).travel +
-                                  boat.id.toString(),
+                              boat.id.toString(),
                               overflow: TextOverflow.ellipsis,
                             )),
                         SizedBox(width: 5.0),
