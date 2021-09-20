@@ -43,6 +43,8 @@ class _JourneyPageState extends State<JourneyPage> {
     super.initState();
     auth.deleteAll();
     AuthBloc().setRoute = 'journeyPage';
+    PicturesBloc().setPictures = null;
+    HistoricsBloc().setHistorics = null;
   }
 
   @override
@@ -255,7 +257,9 @@ class _JourneyPageState extends State<JourneyPage> {
                             ),
                           );
                         } else {
-                          return Container();
+                          return Center(
+                            child: circularProgressCustom(),
+                          );
                         }
                       }),
                 ],
