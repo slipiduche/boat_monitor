@@ -63,6 +63,12 @@ class _PicturesPageState extends State<PicturesPage>
       }
     }).toList();
     print(listFiltered);
+
+    double _textSize = 16.0;
+
+    if (MediaQuery.of(context).size.width < 900) {
+      _textSize = 14.0;
+    }
     //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
     return SafeArea(
         child: Scaffold(
@@ -178,7 +184,7 @@ class _PicturesPageState extends State<PicturesPage>
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                               color: blue1,
-                                              fontSize: 16.0,
+                                              fontSize: _textSize,
                                               fontWeight: _fontWeight),
                                         );
                                       }),
@@ -198,7 +204,7 @@ class _PicturesPageState extends State<PicturesPage>
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                               color: blue1,
-                                              fontSize: 16.0,
+                                              fontSize: _textSize,
                                               fontWeight: _fontWeight),
                                         );
                                       }),
@@ -218,7 +224,7 @@ class _PicturesPageState extends State<PicturesPage>
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                               color: blue1,
-                                              fontSize: 16.0,
+                                              fontSize: _textSize,
                                               fontWeight: _fontWeight),
                                         );
                                       }),
