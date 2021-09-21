@@ -381,6 +381,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                     break;
                                   default:
                                 }
+
                                 if (_fourPositions > 3) {
                                   break;
                                 }
@@ -399,6 +400,16 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                           '${snapshot.data.length}snapshot.data.length');
                                       if (snapshot.data[i]) {
                                         _currenMapView = lastLocation[i];
+                                        if (_currenMapView == LatLng(0, 0)) {
+                                          _visible = [
+                                            false,
+                                            false,
+                                            false,
+                                            false
+                                          ];
+                                          CurrentBoatBloc().setVisibility =
+                                              _visible;
+                                        }
                                       }
                                     }
                                     return Container(
@@ -406,8 +417,11 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                             horizontal: marginExt),
                                         height: 291.0,
                                         padding: EdgeInsets.all(0.0),
-                                        child: createFlutterMap(context,
-                                            _currenMapView, controller));
+                                        child: createFlutterMap(
+                                            context,
+                                            _currenMapView,
+                                            controller,
+                                            _historics));
                                   } else {
                                     return Center(
                                       child: circularProgressCustom(),

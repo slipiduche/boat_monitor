@@ -11,6 +11,7 @@ import 'package:boat_monitor/charts/line_chart_temp.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/files_model.dart';
+import 'package:boat_monitor/models/historics_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/pictures/pictures.dart';
 import 'package:boat_monitor/providers/historics_provider.dart';
@@ -79,6 +80,7 @@ class _JourneyPageState extends State<JourneyPage> {
                       stream: HistoricsBloc().historics,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          Historics _historics = snapshot.data;
                           return Container(
                             child: Column(
                               children: [
@@ -199,7 +201,8 @@ class _JourneyPageState extends State<JourneyPage> {
                                               .historics
                                               .last
                                               .bLocation),
-                                          controller)),
+                                          controller,
+                                          _historics)),
                                 ),
                                 GestureDetector(
                                   onTap: () {

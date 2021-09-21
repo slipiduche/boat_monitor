@@ -1,3 +1,5 @@
+import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/historics_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
@@ -60,10 +62,56 @@ LatLng latLongFromString(String location) {
   return LatLng(latitude, longitude);
 }
 
-Widget createFlutterMap(
-    BuildContext context, LatLng position, MapController controller) {
+List<Marker> markers(Historics historics) {
+  List<Marker> _markers = [];
+  LatLng _position;
+
+  for (var i = 0; i < historics.historics.length; i++) {
+    _position = latLongFromString(historics.historics[i].bLocation);
+    if (i == 0 && historics.historics.length > 1) {
+      _markers.add(Marker(
+        width: 10.0,
+        height: 10.0,
+        point: _position,
+        builder: (ctx) => Container(
+          child: Icon(
+            Icons.circle,
+            color: Colors.red,
+          ),
+        ),
+      ));
+    }
+    if (i == historics.historics.length) {
+    } else {
+      _markers.add(Marker(
+        width: 5.0,
+        height: 5.0,
+        point: _position,
+        builder: (ctx) => Container(
+          child: Icon(
+            Icons.circle,
+            color: Colors.blue,
+          ),
+        ),
+      ));
+    }
+  }
+  return _markers;
+}
+
+Widget createFlutterMap(BuildContext context, LatLng position,
+    MapController controller, Historics historics) {
   print(position);
   // LatLng location = latLongFromString(position);
+  if (position == LatLng(0, 0)) {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(5.0),
+        child: Container(
+          child: Center(
+            child: Text(TextLanguage.of(context).noData),
+          ),
+        ));
+  }
   return ClipRRect(
     borderRadius: BorderRadius.circular(5.0),
     child: Container(
@@ -102,7 +150,7 @@ Widget createFlutterMap(
                   subdomains: ['a', 'b', 'c'])),
           MarkerLayerWidget(
               options: MarkerLayerOptions(
-            markers: [],
+            markers: markers(historics),
           )),
         ],
       ),

@@ -94,7 +94,7 @@ class _LineChartTempState extends State<LineChartTemp> {
               }).toList();
             }),
         handleBuiltInTouches: true,
-        getTouchLineStart: (data, index) => 0,
+        getTouchLineStart: (data, index) => -30,
       ),
       gridData: FlGridData(
         show: true,
