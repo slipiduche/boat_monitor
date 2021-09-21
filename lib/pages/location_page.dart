@@ -5,15 +5,12 @@ import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
-import 'package:boat_monitor/bloc/currentView_bloc.dart';
 
-import 'package:boat_monitor/charts/line_chart.dart';
-import 'package:boat_monitor/charts/line_chart_temp.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/maps/maps.dart';
 import 'package:boat_monitor/models/historics_model.dart';
 import 'package:boat_monitor/models/journney_model.dart';
-import 'package:boat_monitor/pictures/pictures.dart';
+
 import 'package:boat_monitor/providers/historics_provider.dart';
 
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
@@ -48,7 +45,7 @@ class _LocationPageState extends State<LocationPage> {
   void initState() {
     CurrentBoatBloc().setViewPosition = [true, false, false, false];
     CurrentBoatBloc().setVisibility = _visible;
-    CurrentViewBloc().setcurrentViewZoom = 5.0;
+
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
