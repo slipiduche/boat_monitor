@@ -114,7 +114,8 @@ class _ManagerPageState extends State<ManagerPage> {
                                 final _lastAlertViewedId =
                                     PendingAlertsBloc().lastAlertViewedValue;
                                 int pendingAlerts = 0;
-                                if (_lastAlertViewedId != null) {
+                                if (_lastAlertViewedId != null &&
+                                    snapshot.data.alerts.length > 0) {
                                   pendingAlerts = snapshot.data.alerts.last.id -
                                       _lastAlertViewedId;
                                 } else {
