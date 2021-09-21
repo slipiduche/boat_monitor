@@ -5,6 +5,7 @@ import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
 import 'package:boat_monitor/bloc/historics_bloc.dart';
+import 'package:boat_monitor/bloc/currentView_bloc.dart';
 
 import 'package:boat_monitor/charts/line_chart.dart';
 import 'package:boat_monitor/charts/line_chart_temp.dart';
@@ -47,6 +48,7 @@ class _LocationPageState extends State<LocationPage> {
   void initState() {
     CurrentBoatBloc().setViewPosition = [true, false, false, false];
     CurrentBoatBloc().setVisibility = _visible;
+    CurrentViewBloc().setcurrentViewZoom = 5.0;
     // TODO: implement initState
     super.initState();
     auth.deleteAll();
@@ -404,7 +406,8 @@ class _LocationPageState extends State<LocationPage> {
                                                         false
                                                       ];
                                                       controller.move(
-                                                          lastLocation[0], 5.0);
+                                                          lastLocation[0],
+                                                          controller.zoom);
                                                     },
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -453,7 +456,8 @@ class _LocationPageState extends State<LocationPage> {
                                                         false
                                                       ];
                                                       controller.move(
-                                                          lastLocation[1], 5.0);
+                                                          lastLocation[1],
+                                                          controller.zoom);
                                                     },
                                                     child: Column(
                                                       children: [
@@ -493,7 +497,8 @@ class _LocationPageState extends State<LocationPage> {
                                                         false
                                                       ];
                                                       controller.move(
-                                                          lastLocation[2], 5.0);
+                                                          lastLocation[2],
+                                                          controller.zoom);
                                                     },
                                                     child: Column(
                                                       children: [
@@ -533,7 +538,8 @@ class _LocationPageState extends State<LocationPage> {
                                                         true
                                                       ];
                                                       controller.move(
-                                                          lastLocation[3], 5.0);
+                                                          lastLocation[3],
+                                                          controller.zoom);
                                                     },
                                                     child: Column(
                                                       children: [

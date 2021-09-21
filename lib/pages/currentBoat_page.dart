@@ -500,7 +500,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                     false
                                                   ];
                                                   controller.move(
-                                                      lastLocation[0], 13.0);
+                                                      lastLocation[0],
+                                                      controller.zoom);
                                                 },
                                                 child: Column(
                                                   mainAxisAlignment:
@@ -544,7 +545,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                     false
                                                   ];
                                                   controller.move(
-                                                      lastLocation[1], 13.0);
+                                                      lastLocation[1],
+                                                      controller.zoom);
                                                 },
                                                 child: Column(
                                                   children: [
@@ -582,7 +584,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                     false
                                                   ];
                                                   controller.move(
-                                                      lastLocation[2], 13.0);
+                                                      lastLocation[2],
+                                                      controller.zoom);
                                                 },
                                                 child: Column(
                                                   children: [
@@ -620,7 +623,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                                     true
                                                   ];
                                                   controller.move(
-                                                      lastLocation[3], 13.0);
+                                                      lastLocation[3],
+                                                      controller.zoom);
                                                 },
                                                 child: Column(
                                                   children: [
