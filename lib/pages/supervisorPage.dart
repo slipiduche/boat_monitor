@@ -79,7 +79,8 @@ class _SupervisorPageState extends State<SupervisorPage> {
                                 final _lastAlertViewedId =
                                     PendingAlertsBloc().lastAlertViewedValue;
                                 int pendingAlerts = 0;
-                                if (_lastAlertViewedId != null) {
+                                if (_lastAlertViewedId != null &&
+                                    snapshot.data.alerts.length > 0) {
                                   pendingAlerts = snapshot.data.alerts.last.id -
                                       _lastAlertViewedId;
                                 } else {
@@ -105,14 +106,15 @@ class _SupervisorPageState extends State<SupervisorPage> {
                                   Navigator.of(context)
                                       .pushReplacementNamed('alertsPage');
                                 }, pendingAlerts);
+                              } else {
+                                return managerOption(
+                                    TextLanguage.of(context).alerts,
+                                    blue1,
+                                    alertsIcon(20.0, blue1), () {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('alertsPage');
+                                }, 0);
                               }
-                              return managerOption(
-                                  TextLanguage.of(context).alerts,
-                                  blue1,
-                                  alertsIcon(20.0, blue1), () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('alertsPage');
-                              }, 0);
                             }),
                         Divider(
                           height: 1.0,

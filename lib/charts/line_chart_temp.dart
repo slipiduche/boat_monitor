@@ -29,25 +29,25 @@ class _LineChartTempState extends State<LineChartTemp> {
     spots = [];
     if (historics != null) {
       samples = historics.historics.length;
-      historics.historics.forEach((element) {
-        xData.add(element.dt.hour.toDouble());
-        yData.add(element.temp.toDouble());
-        //spots.add(FlSpot(, y));
-      });
+      print(samples);
+      for (var i = 0; i < samples; i++) {
+        xData.add(historics.historics[i].dt.hour.toDouble());
+        print(
+            'dt:${historics.historics[i].dt} id:${historics.historics[i].id}x:${historics.historics[i].dt.hour.toDouble()}:${historics.historics[i].dt.minute.toDouble()} y:+${historics.historics[i].contWeight.toDouble()}');
+        yData.add(historics.historics[i].temp.toDouble());
+      }
+
       for (var i = 0; i < samples; i++) {
         spots.add(FlSpot((i).toDouble(), yData[i]));
       }
     }
+
     return Stack(
       children: <Widget>[
         AspectRatio(
           aspectRatio: 1.5,
           child: Container(
-            decoration: const BoxDecoration(
-                // borderRadius: BorderRadius.all(
-                //   Radius.circular(18),
-                // ),
-                color: Colors.white10),
+            decoration: const BoxDecoration(color: Colors.white10),
             child: LineChart(
               showAvg ? avgData() : mainData(),
             ),
@@ -77,6 +77,25 @@ class _LineChartTempState extends State<LineChartTemp> {
 
   LineChartData mainData() {
     return LineChartData(
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+            maxContentWidth: 40,
+            tooltipBgColor: Colors.white,
+            getTooltipItems: (touchedSpots) {
+              return touchedSpots.map((LineBarSpot touchedSpot) {
+                final textStyle = TextStyle(
+                  color: touchedSpot.bar.colors[0],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                );
+                return LineTooltipItem(
+                    '${historics.historics[touchedSpot.spotIndex].dt.toString().substring(0, historics.historics[touchedSpot.spotIndex].dt.toString().length - 8)}, ${touchedSpot.y.toStringAsFixed(2)}',
+                    textStyle);
+              }).toList();
+            }),
+        handleBuiltInTouches: true,
+        getTouchLineStart: (data, index) => 0,
+      ),
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
