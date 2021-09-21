@@ -330,19 +330,9 @@ class _LocationPageState extends State<LocationPage> {
                                       }
                                     });
                               } else {
-                                return Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: marginExt),
-                                    height: 291.0,
-                                    padding: EdgeInsets.all(0.0),
-                                    child: Container(
-                                      height: 50.0,
-                                      width: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation(blue1),
-                                      ),
-                                    ));
+                                return Center(
+                                  child: circularProgressCustom(),
+                                );
                               }
                             }),
                         SizedBox(

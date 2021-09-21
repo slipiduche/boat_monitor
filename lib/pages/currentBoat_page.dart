@@ -96,8 +96,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                Expanded(
-                    child: Column(
+                Column(
                   children: [
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: marginExt),
@@ -651,7 +650,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                       },
                     ),
                   ],
-                )),
+                ),
               ],
             ),
           ),
