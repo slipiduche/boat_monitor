@@ -404,8 +404,7 @@ class _LocationPageState extends State<LocationPage> {
                                                         false
                                                       ];
                                                       controller.move(
-                                                          lastLocation[0],
-                                                          13.0);
+                                                          lastLocation[0], 5.0);
                                                     },
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -454,8 +453,7 @@ class _LocationPageState extends State<LocationPage> {
                                                         false
                                                       ];
                                                       controller.move(
-                                                          lastLocation[1],
-                                                          13.0);
+                                                          lastLocation[1], 5.0);
                                                     },
                                                     child: Column(
                                                       children: [
@@ -495,8 +493,7 @@ class _LocationPageState extends State<LocationPage> {
                                                         false
                                                       ];
                                                       controller.move(
-                                                          lastLocation[2],
-                                                          13.0);
+                                                          lastLocation[2], 5.0);
                                                     },
                                                     child: Column(
                                                       children: [
@@ -536,8 +533,7 @@ class _LocationPageState extends State<LocationPage> {
                                                         true
                                                       ];
                                                       controller.move(
-                                                          lastLocation[3],
-                                                          13.0);
+                                                          lastLocation[3], 5.0);
                                                     },
                                                     child: Column(
                                                       children: [

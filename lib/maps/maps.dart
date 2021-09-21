@@ -13,6 +13,7 @@ LatLng latLongFromString(String location) {
   if (location == null) {
     latitude = 0;
     longitude = 0;
+    return null;
   } else {
     sLatitude = location.split(',')[0];
     sLongitude = location.split(',')[1];
@@ -65,35 +66,64 @@ LatLng latLongFromString(String location) {
 List<Marker> markers(Historics historics) {
   List<Marker> _markers = [];
   LatLng _position;
-
+  int firstPosition = 0;
   for (var i = 0; i < historics.historics.length; i++) {
     _position = latLongFromString(historics.historics[i].bLocation);
-    if (i == 0 && historics.historics.length > 1) {
-      _markers.add(Marker(
-        width: 10.0,
-        height: 10.0,
-        point: _position,
-        builder: (ctx) => Container(
-          child: Icon(
-            Icons.circle,
-            color: Colors.red,
+    if (_position != null) {
+      if (firstPosition == 0) {
+        firstPosition = i;
+      }
+
+      if (i == firstPosition && historics.historics.length > 1) {
+        _markers.add(Marker(
+          width: 20.0,
+          height: 20.0,
+          point: _position,
+          builder: (ctx) => Container(
+            child: Container(
+              width: 20.0,
+              height: 20.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                color: Colors.green[700],
+              ),
+            ),
           ),
-        ),
-      ));
-    }
-    if (i == historics.historics.length) {
-    } else {
-      _markers.add(Marker(
-        width: 5.0,
-        height: 5.0,
-        point: _position,
-        builder: (ctx) => Container(
-          child: Icon(
-            Icons.circle,
-            color: Colors.blue,
+        ));
+      }
+      if (i == historics.historics.length - 1) {
+        _markers.add(Marker(
+          width: 20.0,
+          height: 20.0,
+          point: _position,
+          builder: (ctx) => Container(
+            child: Container(
+              width: 20.0,
+              height: 20.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                color: Colors.red,
+              ),
+            ),
           ),
-        ),
-      ));
+        ));
+      } else {
+        _markers.add(Marker(
+          width: 10.0,
+          height: 10.0,
+          point: _position,
+          builder: (ctx) => Container(
+            child: Container(
+              width: 10.0,
+              height: 10.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                color: Colors.blue[900],
+              ),
+            ),
+          ),
+        ));
+      }
     }
   }
   return _markers;
@@ -123,7 +153,7 @@ Widget createFlutterMap(BuildContext context, LatLng position,
         mapController: controller,
         options: MapOptions(
           center: position,
-          zoom: 13.0,
+          zoom: 10.0,
         ),
         layers: [
           MarkerLayerOptions(
@@ -135,7 +165,7 @@ Widget createFlutterMap(BuildContext context, LatLng position,
                 builder: (ctx) => Container(
                   child: Icon(
                     Icons.location_on,
-                    color: Colors.red,
+                    color: Colors.purple,
                   ),
                 ),
               ),
