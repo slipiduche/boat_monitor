@@ -26,15 +26,7 @@ class _LineChartBasicState extends State<LineChartBasic> {
     xData = [];
     yData = [];
     spots = [];
-    /*
-    FlSpot(0, 3.44),
-            FlSpot(2.6, 3.44),
-            FlSpot(4.9, 3.44),
-            FlSpot(6.8, 3.44),
-            FlSpot(8, 3.44),
-            FlSpot(9.5, 3.44),
-            FlSpot(11, 3.44),
-     */
+
     if (historics != null) {
       samples = historics.historics.length;
       print(samples);
