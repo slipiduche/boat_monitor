@@ -214,9 +214,12 @@ class _LocationPageState extends State<LocationPage> {
                                     height: 10.0,
                                   ),
                                   Text(
-                                    _location.journey.ed
-                                        .toString()
-                                        .substring(0, 16),
+                                    _location.journey.ed ==
+                                            _location.journey.ini
+                                        ? '-'
+                                        : _location.journey.ed
+                                            .toString()
+                                            .substring(0, 16),
                                     style: TextStyle(
                                       color: blue1,
                                       fontSize: titleBarSize,
@@ -327,7 +330,8 @@ class _LocationPageState extends State<LocationPage> {
                                                 context,
                                                 _currenMapView,
                                                 controller,
-                                                _historics));
+                                                _historics,
+                                                true));
                                       } else {
                                         return Container(
                                             margin: EdgeInsets.symmetric(
@@ -382,8 +386,7 @@ class _LocationPageState extends State<LocationPage> {
                                                 snapshot) {
                                           for (var i = 0; i < 4; i++) {
                                             if (_visible[i] == false) {
-                                              lastLocation[i] = LatLng(
-                                                  0, 0);
+                                              lastLocation[i] = LatLng(0, 0);
                                             }
                                           }
                                           return Container(

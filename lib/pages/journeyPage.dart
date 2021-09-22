@@ -202,7 +202,8 @@ class _JourneyPageState extends State<JourneyPage> {
                                               .last
                                               .bLocation),
                                           controller,
-                                          _historics)),
+                                          _historics,
+                                          false)),
                                 ),
                                 GestureDetector(
                                   onTap: () {

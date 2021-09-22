@@ -133,7 +133,7 @@ List<Marker> markers(Historics historics) {
 }
 
 Widget createFlutterMap(BuildContext context, LatLng position,
-    MapController controller, Historics historics) {
+    MapController controller, Historics historics, bool controls) {
   print(position);
   // LatLng location = latLongFromString(position);
   if (position == LatLng(0, 0) || position == null) {
@@ -189,87 +189,90 @@ Widget createFlutterMap(BuildContext context, LatLng position,
               )),
             ],
           ),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: marginInt3, vertical: marginInt3),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(child: Container()),
-                    GestureDetector(
-                      child: boatIconBlue(40.0, blue1),
-                      onTap: () {
-                        for (var i = 0; i < historics.historics.length; i++) {
-                          if (latLongFromString(
-                                  historics.historics[i].bLocation) !=
-                              null) {
-                            controller.move(
-                                latLongFromString(
-                                    historics.historics[i].bLocation),
-                                controller.zoom);
-                            break;
+          Visibility(
+            visible: controls,
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: marginInt3, vertical: marginInt3),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(child: Container()),
+                      GestureDetector(
+                        child: boatIconBlue(40.0, blue1),
+                        onTap: () {
+                          for (var i = 0; i < historics.historics.length; i++) {
+                            if (latLongFromString(
+                                    historics.historics[i].bLocation) !=
+                                null) {
+                              controller.move(
+                                  latLongFromString(
+                                      historics.historics[i].bLocation),
+                                  controller.zoom);
+                              break;
+                            }
                           }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(child: Container()),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      child: Icon(
+                        Icons.zoom_in,
+                        size: 45.0,
+                        color: blue1,
+                      ),
+                      onTap: () {
+                        if (controller.zoom < 15.0) {
+                          controller.move(
+                              controller.center, controller.zoom + 1.0);
                         }
                       },
                     ),
+                    GestureDetector(
+                      child: Icon(
+                        Icons.zoom_out,
+                        size: 45.0,
+                        color: blue1,
+                      ),
+                      onTap: () {
+                        if (controller.zoom > 1.0) {
+                          controller.move(
+                              controller.center, controller.zoom - 1.0);
+                        }
+                      },
+                    ),
+                    // Expanded(child: Container()),
+                    // Row(
+                    //   children: [
+                    //     GestureDetector(
+                    //       child: arrivedIcon(40.0, blue1),
+                    //       onTap: () {
+                    //         if (controller.zoom > 1.0) {
+                    //           controller.move(
+                    //               controller.center, controller.zoom - 1.0);
+                    //         }
+                    //       },
+                    //     ),
+                    //     SizedBox(
+                    //       width: 8.0,
+                    //     )
+                    //   ],
+                    // ),
+                    // SizedBox(
+                    //   height: 8.0,
+                    // )
                   ],
                 ),
-              ),
-              Expanded(child: Container()),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    child: Icon(
-                      Icons.zoom_in,
-                      size: 45.0,
-                      color: blue1,
-                    ),
-                    onTap: () {
-                      if (controller.zoom < 15.0) {
-                        controller.move(
-                            controller.center, controller.zoom + 1.0);
-                      }
-                    },
-                  ),
-                  GestureDetector(
-                    child: Icon(
-                      Icons.zoom_out,
-                      size: 45.0,
-                      color: blue1,
-                    ),
-                    onTap: () {
-                      if (controller.zoom > 1.0) {
-                        controller.move(
-                            controller.center, controller.zoom - 1.0);
-                      }
-                    },
-                  ),
-                  // Expanded(child: Container()),
-                  // Row(
-                  //   children: [
-                  //     GestureDetector(
-                  //       child: arrivedIcon(40.0, blue1),
-                  //       onTap: () {
-                  //         if (controller.zoom > 1.0) {
-                  //           controller.move(
-                  //               controller.center, controller.zoom - 1.0);
-                  //         }
-                  //       },
-                  //     ),
-                  //     SizedBox(
-                  //       width: 8.0,
-                  //     )
-                  //   ],
-                  // ),
-                  // SizedBox(
-                  //   height: 8.0,
-                  // )
-                ],
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),

@@ -71,7 +71,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     double _extraHeight = 0;
     double _minusSize = 0;
     double _extraSizeBox = 0;
-    if (MediaQuery.of(context).size.height < 2000) {
+    print('height:${MediaQuery.of(context).size.height}');
+    if (MediaQuery.of(context).size.height < 750) {
       _extraHeight = 50.0;
     }
     if (MediaQuery.of(context).size.width < 770) {
@@ -91,7 +92,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
           child: Container(
             height: MediaQuery.of(context).size.height + _extraHeight,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 20.0,
@@ -421,7 +422,8 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                             context,
                                             _currenMapView,
                                             controller,
-                                            _historics));
+                                            _historics,
+                                            true));
                                   } else {
                                     return Center(
                                       child: circularProgressCustom(),
