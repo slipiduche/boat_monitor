@@ -1,5 +1,8 @@
+import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/models/historics_model.dart';
+import 'package:boat_monitor/styles/colors.dart';
+import 'package:boat_monitor/styles/margins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
@@ -133,7 +136,7 @@ Widget createFlutterMap(BuildContext context, LatLng position,
     MapController controller, Historics historics) {
   print(position);
   // LatLng location = latLongFromString(position);
-  if (position == LatLng(0, 0)) {
+  if (position == LatLng(0, 0) || position == null) {
     return ClipRRect(
         borderRadius: BorderRadius.circular(5.0),
         child: Container(
@@ -149,39 +152,125 @@ Widget createFlutterMap(BuildContext context, LatLng position,
       // decoration: BoxDecoration(
       //     border: Border.all(color: blue, style: BorderStyle.solid, width: 2.0),
       //     borderRadius: BorderRadius.circular(5.0)),
-      child: FlutterMap(
-        mapController: controller,
-        options: MapOptions(
-          center: position,
-          zoom: 10.0,
-        ),
-        layers: [
-          MarkerLayerOptions(
-            markers: [
-              Marker(
-                width: 20.0,
-                height: 20.0,
-                point: position,
-                builder: (ctx) => Container(
-                  child: Icon(
-                    Icons.location_on,
-                    color: Colors.purple,
+      child: Stack(
+        children: [
+          FlutterMap(
+            mapController: controller,
+            options: MapOptions(
+              center: position,
+              zoom: 10.0,
+            ),
+            layers: [
+              MarkerLayerOptions(
+                markers: [
+                  Marker(
+                    width: 20.0,
+                    height: 20.0,
+                    point: position,
+                    builder: (ctx) => Container(
+                      child: Icon(
+                        Icons.location_on,
+                        color: Colors.purple,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
+            children: <Widget>[
+              TileLayerWidget(
+                  options: TileLayerOptions(
+                      urlTemplate:
+                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      subdomains: ['a', 'b', 'c'])),
+              MarkerLayerWidget(
+                  options: MarkerLayerOptions(
+                markers: markers(historics),
+              )),
+            ],
           ),
-        ],
-        children: <Widget>[
-          TileLayerWidget(
-              options: TileLayerOptions(
-                  urlTemplate:
-                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  subdomains: ['a', 'b', 'c'])),
-          MarkerLayerWidget(
-              options: MarkerLayerOptions(
-            markers: markers(historics),
-          )),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: marginInt3, vertical: marginInt3),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(child: Container()),
+                    GestureDetector(
+                      child: boatIconBlue(40.0, blue1),
+                      onTap: () {
+                        for (var i = 0; i < historics.historics.length; i++) {
+                          if (latLongFromString(
+                                  historics.historics[i].bLocation) !=
+                              null) {
+                            controller.move(
+                                latLongFromString(
+                                    historics.historics[i].bLocation),
+                                controller.zoom);
+                            break;
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(child: Container()),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.zoom_in,
+                      size: 45.0,
+                      color: blue1,
+                    ),
+                    onTap: () {
+                      if (controller.zoom < 15.0) {
+                        controller.move(
+                            controller.center, controller.zoom + 1.0);
+                      }
+                    },
+                  ),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.zoom_out,
+                      size: 45.0,
+                      color: blue1,
+                    ),
+                    onTap: () {
+                      if (controller.zoom > 1.0) {
+                        controller.move(
+                            controller.center, controller.zoom - 1.0);
+                      }
+                    },
+                  ),
+                  // Expanded(child: Container()),
+                  // Row(
+                  //   children: [
+                  //     GestureDetector(
+                  //       child: arrivedIcon(40.0, blue1),
+                  //       onTap: () {
+                  //         if (controller.zoom > 1.0) {
+                  //           controller.move(
+                  //               controller.center, controller.zoom - 1.0);
+                  //         }
+                  //       },
+                  //     ),
+                  //     SizedBox(
+                  //       width: 8.0,
+                  //     )
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 8.0,
+                  // )
+                ],
+              ),
+            ],
+          )
         ],
       ),
     ),

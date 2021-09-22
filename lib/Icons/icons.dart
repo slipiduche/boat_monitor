@@ -65,10 +65,11 @@ Widget approvalsIcon(size, color) {
 }
 
 Widget arrivedIcon(size, color) {
-  return ImageIcon(
-    AssetImage('assets/arrivedIcon.png'),
-    size: size,
+  return Image(
+    image: AssetImage('assets/arrivedIcon.png'),
+    height: size,
     color: color,
+    fit: BoxFit.contain,
   );
 }
 
@@ -142,6 +143,7 @@ Widget searchIcon(size, color) {
     color: color,
   );
 }
+
 Widget gridListIcon(size, color) {
   return ImageIcon(
     AssetImage('assets/gridListIcon.png'),

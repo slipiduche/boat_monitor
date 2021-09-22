@@ -141,7 +141,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                           children: [
                             Text(
                               TextLanguage.of(context).averageTemperature +
-                                  ': ${_temperature.historics.historics.last.temp} º',
+                                  ': ${_temperature.historics != null ? _temperature.historics.historics.last.temp : 0.0} º',
                               style: TextStyle(
                                   color: blue1,
                                   fontSize: titleBarSize,

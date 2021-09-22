@@ -207,8 +207,12 @@ class _JourneyPageState extends State<JourneyPage> {
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.of(context).pushReplacementNamed(
-                                        'temperaturePage',
-                                        arguments: _journey);
+                                      'temperaturePage',
+                                      arguments: JourneyCardArgument(
+                                          journey: _journey.journey,
+                                          historics:
+                                              HistoricsBloc().historicsValue),
+                                    );
                                   },
                                   child: journeyCard(
                                       context,
