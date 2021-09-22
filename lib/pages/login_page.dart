@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
@@ -27,77 +29,51 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar(TextLanguage.of(context).loginButtonText, () {}),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: marginSupicon),
-              boatIconBlue(100.0, blue1),
-              SizedBox(height: 73.0),
-
-              //dialogConfirmation(context, 'Confirm?', 'Confirmation', false),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: marginExt),
-                child: form(context),
-              ),
-              SizedBox(height: 20.0),
-              StreamBuilder(
-                  stream: auth.formValidStream,
-                  builder: (context, snapshot) {
-                    double _height = 260;
-                    double _textSize = 20.0;
-                    if (snapshot.hasError) {
-                      _height = 200.0;
-                    } else {
-                      _height = 260.0;
-                    }
-                    if (MediaQuery.of(context).size.width < 900) {
-                      _textSize = 18.0;
-                    }
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: marginExt),
-                      height: _height,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(TextLanguage.of(context).dontHaveAccount,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: _textSize,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'signUpPage');
-                                },
-                                child: Text(
-                                    ' ' + TextLanguage.of(context).signupHere,
-                                    style: TextStyle(
-                                        color: blue1,
-                                        fontSize: _textSize,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                              child: SizedBox(
-                            width: 50.0,
-                          )),
-                          Container(
-                            //margin: EdgeInsets.symmetric(horizontal: marginExt),
-                            child: Row(
+    return WillPopScope(
+      onWillPop: () {
+        exit(0);
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar(TextLanguage.of(context).loginButtonText, () {
+          exit(0);
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: marginSupicon),
+                boatIconBlue(100.0, blue1),
+                SizedBox(height: 73.0),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt),
+                  child: form(context),
+                ),
+                SizedBox(height: 20.0),
+                StreamBuilder(
+                    stream: auth.formValidStream,
+                    builder: (context, snapshot) {
+                      double _height = 260;
+                      double _textSize = 20.0;
+                      if (snapshot.hasError) {
+                        _height = 200.0;
+                      } else {
+                        _height = 260.0;
+                      }
+                      if (MediaQuery.of(context).size.width < 900) {
+                        _textSize = 18.0;
+                      }
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: marginExt),
+                        height: _height,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(TextLanguage.of(context).forgot,
+                                Text(TextLanguage.of(context).dontHaveAccount,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: _textSize,
@@ -105,39 +81,71 @@ class _LoginPageState extends State<LoginPage> {
                                     textAlign: TextAlign.center),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).pushReplacementNamed(
-                                        'resetPasswordPage');
+                                    Navigator.pushReplacementNamed(
+                                        context, 'signUpPage');
                                   },
                                   child: Text(
-                                      ' ' + TextLanguage.of(context).clicHere,
+                                      ' ' + TextLanguage.of(context).signupHere,
                                       style: TextStyle(
                                           color: blue1,
                                           fontSize: _textSize,
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center),
                                 ),
-                                StreamBuilder(
-                                  stream: AlertsBloc().alert,
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot snapshot) {
-                                    WidgetsBinding.instance
-                                        .addPostFrameCallback(
-                                            (_) => onAfterBuild(context));
-                                    return Container();
-                                  },
-                                ),
                               ],
                             ),
-                          ),
-                          SizedBox(height: 60)
-                        ],
-                      ),
-                    );
-                  })
-            ],
+                            Expanded(
+                                child: SizedBox(
+                              width: 50.0,
+                            )),
+                            Container(
+                              //margin: EdgeInsets.symmetric(horizontal: marginExt),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(TextLanguage.of(context).forgot,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: _textSize,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              'resetPasswordPage');
+                                    },
+                                    child: Text(
+                                        ' ' + TextLanguage.of(context).clicHere,
+                                        style: TextStyle(
+                                            color: blue1,
+                                            fontSize: _textSize,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center),
+                                  ),
+                                  StreamBuilder(
+                                    stream: AlertsBloc().alert,
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback(
+                                              (_) => onAfterBuild(context));
+                                      return Container();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 60)
+                          ],
+                        ),
+                      );
+                    })
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }
