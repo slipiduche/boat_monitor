@@ -43,10 +43,10 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
 
   List<bool> _visible = [false, false, false, false];
   List<LatLng> lastLocation = [
-    LatLng(0.144455, 0.144455),
-    LatLng(0.444155, 0.4444155),
-    LatLng(0.444155, 0.444155),
-    LatLng(0.444155, 0.444155)
+    LatLng(0, 0),
+    LatLng(0, 0),
+    LatLng(0, 0),
+    LatLng(0, 0)
   ];
   @override
   void initState() {
@@ -357,7 +357,9 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                 if (i == _historics.historics.length - 1) {
                                   LatLng _latlong = latLongFromString(
                                       _historics.historics[i].bLocation);
-                                  lastLocation[_fourPositions] = _latlong;
+                                  if (_latlong != null) {
+                                    lastLocation[_fourPositions] = _latlong;
+                                  }
                                   _fourPositions++;
                                 } else if (_historics.historics[i].tiP > 49) {
                                   LatLng _latlong = latLongFromString(
@@ -476,15 +478,16 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                         AsyncSnapshot<List<bool>> snapshot) {
                                       print(
                                           '${lastLocation.length}lastlocationlength');
+                                      print(_visible);
                                       for (var i = 0;
                                           i < lastLocation.length;
                                           i++) {
                                         print('${i}for index');
                                         if (_visible[i] == false) {
-                                          lastLocation[i] = LatLng(
-                                              0.1151545454, 0.1454545454);
+                                          lastLocation[i] = LatLng(0, 0);
                                         }
                                       }
+
                                       return Container(
                                         margin: EdgeInsets.symmetric(
                                             horizontal: marginExt),

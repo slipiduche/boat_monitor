@@ -446,7 +446,7 @@ Widget _travelCard(BuildContext context, Journey journey) {
                     Container(
                       width: MediaQuery.of(context).size.width / 5 - 20,
                       child: Text(
-                        '${journey.ini}',
+                        '${journey.ini.toString().substring(0, journey.ini.toString().length - 5)}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             //color: blue1,
@@ -460,7 +460,7 @@ Widget _travelCard(BuildContext context, Journey journey) {
                     Container(
                       width: MediaQuery.of(context).size.width / 5 - 20,
                       child: Text(
-                        '${journey.ed}',
+                        '${journey.ed.toString().substring(0, journey.ed.toString().length - 5)}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             //color: blue1,
