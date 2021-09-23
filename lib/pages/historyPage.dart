@@ -44,7 +44,9 @@ class _HistoryPageState extends State<HistoryPage> {
     JourneyProvider().getJourneys(context);
     double _extraSize = 0;
     return WillPopScope(
-      onWillPop: () {},
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('homePage');
+      },
       child: SafeArea(
           child: Scaffold(
         key: _scaffoldKey,

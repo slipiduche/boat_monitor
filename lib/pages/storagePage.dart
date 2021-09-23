@@ -64,11 +64,16 @@ class _StoragePageState extends State<StoragePage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {},
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('homePage');
+      },
       child: SafeArea(
           child: Scaffold(
-        appBar: gradientAppBar3(TextLanguage.of(context).storage,
-            storageIcon(25.0, Colors.white), () {}),
+        appBar: gradientAppBar3(
+            TextLanguage.of(context).storage, storageIcon(25.0, Colors.white),
+            () {
+          Navigator.of(context).pushReplacementNamed('homePage');
+        }),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height,

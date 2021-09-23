@@ -39,167 +39,177 @@ class _TemperaturePageState extends State<TemperaturePage> {
     JourneyCardArgument _temperature =
         ModalRoute.of(context).settings.arguments;
 
-    return SafeArea(
-        child: Scaffold(
-      key: _scaffoldKey,
-      appBar: gradientAppBar2(
-          _temperature.journey.boatName, boatIconBlue(25.0, Colors.white), () {
+    return WillPopScope(
+      onWillPop: () {
         Navigator.of(context)
             .pushReplacementNamed('journeyPage', arguments: _temperature);
-      }),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: marginExt1),
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                  child: Column(
-                children: [
-                  Container(
+      },
+      child: SafeArea(
+          child: Scaffold(
+        key: _scaffoldKey,
+        appBar: gradientAppBar2(
+            _temperature.journey.boatName, boatIconBlue(25.0, Colors.white),
+            () {
+          Navigator.of(context)
+              .pushReplacementNamed('journeyPage', arguments: _temperature);
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: marginExt1),
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 10.0,
+                ),
+                Expanded(
                     child: Column(
-                      children: [
-                        Container(
-                          // margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(child: Container()),
+                                Text(
+                                  TextLanguage.of(context)
+                                          .travel
+                                          .toUpperCase() +
+                                      ' ${_temperature.journey.id}',
+                                  style: TextStyle(
+                                      color: blue1,
+                                      fontSize: statusSize,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () async {
+                                        AlertsBloc().setAlert = Alerts(
+                                            TextLanguage.of(context)
+                                                .downloading,
+                                            "Updating");
+                                        final _resp = await HistoricsProvider()
+                                            .getHistorics(context,
+                                                journeyId: [
+                                                  _temperature.journey.id
+                                                ],
+                                                download: true);
+                                        if (_resp['ok']) {
+                                          AlertsBloc().setAlert = Alerts(
+                                              _resp['message'], 'Updated');
+                                        } else {
+                                          AlertsBloc().setAlert =
+                                              Alerts(_resp['message'], 'Error');
+                                        }
+                                      },
+                                      child: Container(
+                                        child: downloadIcon(40.0, blue1),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            TextLanguage.of(context).temperature.toUpperCase(),
+                            style: TextStyle(
+                              color: blue1,
+                              fontSize: correoSize,
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 10.0,
+                          // ),
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //       TextLanguage.of(context).desiredTemperature +
+                          //           ': ${_temperature.historics.historics.last.temp} º',
+                          //       style: TextStyle(
+                          //           color: blue1,
+                          //           fontSize: titleBarSize,
+                          //           fontWeight: FontWeight.bold),
+                          //     ),
+                          //   ],
+                          // ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Row(
                             children: [
-                              Expanded(child: Container()),
                               Text(
-                                TextLanguage.of(context).travel.toUpperCase() +
-                                    ' ${_temperature.journey.id}',
+                                TextLanguage.of(context).averageTemperature +
+                                    ': ${_temperature.historics != null ? _temperature.historics.historics.last.temp : 0.0} º',
                                 style: TextStyle(
                                     color: blue1,
-                                    fontSize: statusSize,
+                                    fontSize: titleBarSize,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Expanded(
-                                  child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () async {
-                                      AlertsBloc().setAlert = Alerts(
-                                          TextLanguage.of(context).downloading,
-                                          "Updating");
-                                      final _resp = await HistoricsProvider()
-                                          .getHistorics(context,
-                                              journeyId: [
-                                                _temperature.journey.id
-                                              ],
-                                              download: true);
-                                      if (_resp['ok']) {
-                                        AlertsBloc().setAlert =
-                                            Alerts(_resp['message'], 'Updated');
-                                      } else {
-                                        AlertsBloc().setAlert =
-                                            Alerts(_resp['message'], 'Error');
-                                      }
-                                    },
-                                    child: Container(
-                                      child: downloadIcon(40.0, blue1),
-                                    ),
-                                  ),
-                                ],
-                              )),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                          TextLanguage.of(context).temperature.toUpperCase(),
-                          style: TextStyle(
-                            color: blue1,
-                            fontSize: correoSize,
+                          SizedBox(
+                            height: 20.0,
                           ),
-                        ),
-                        // SizedBox(
-                        //   height: 10.0,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Text(
-                        //       TextLanguage.of(context).desiredTemperature +
-                        //           ': ${_temperature.historics.historics.last.temp} º',
-                        //       style: TextStyle(
-                        //           color: blue1,
-                        //           fontSize: titleBarSize,
-                        //           fontWeight: FontWeight.bold),
-                        //     ),
-                        //   ],
-                        // ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              TextLanguage.of(context).averageTemperature +
-                                  ': ${_temperature.historics != null ? _temperature.historics.historics.last.temp : 0.0} º',
-                              style: TextStyle(
-                                  color: blue1,
-                                  fontSize: titleBarSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              TextLanguage.of(context).temperature,
-                              style: TextStyle(
-                                  color: gray,
-                                  fontSize: titleBarSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        Container(
-                            child:
-                                LineChartTemp(HistoricsBloc().historicsValue)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              TextLanguage.of(context).hours,
-                              style: TextStyle(
-                                  color: gray,
-                                  fontSize: titleBarSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ],
+                          Row(
+                            children: [
+                              Text(
+                                TextLanguage.of(context).temperature,
+                                style: TextStyle(
+                                    color: gray,
+                                    fontSize: titleBarSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Container(
+                              child: LineChartTemp(
+                                  HistoricsBloc().historicsValue)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                TextLanguage.of(context).hours,
+                                style: TextStyle(
+                                    color: gray,
+                                    fontSize: titleBarSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )),
-              StreamBuilder(
-                stream: AlertsBloc().alert,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  ArgumentBloc().setArgument = JourneyCardArgument(
-                      journey: _temperature.journey,
-                      historics: HistoricsBloc().historicsValue);
-                  WidgetsBinding.instance.addPostFrameCallback(
-                      (_) => onAfterBuild(_scaffoldKey.currentContext));
-                  return Container();
-                },
-              )
-            ],
+                  ],
+                )),
+                StreamBuilder(
+                  stream: AlertsBloc().alert,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    ArgumentBloc().setArgument = JourneyCardArgument(
+                        journey: _temperature.journey,
+                        historics: HistoricsBloc().historicsValue);
+                    WidgetsBinding.instance.addPostFrameCallback(
+                        (_) => onAfterBuild(_scaffoldKey.currentContext));
+                    return Container();
+                  },
+                )
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: botomBar(1, context),
-    ));
+        bottomNavigationBar: botomBar(1, context),
+      )),
+    );
   }
 }
 

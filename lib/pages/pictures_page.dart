@@ -70,207 +70,231 @@ class _PicturesPageState extends State<PicturesPage>
       _textSize = 14.0;
     }
     //TabController _tabcontroller=TabController(length: 1, initialIndex: 0,vsync: );
-    return SafeArea(
-        child: Scaffold(
-      key: _scaffoldKey,
-      appBar: gradientAppBar2(_pictures.journeyCardArgument.journey.boatName,
-          boatIconBlue(25.0, Colors.white), () {
+    return WillPopScope(
+      onWillPop: () {
         Navigator.of(context).pushReplacementNamed('journeyPage',
             arguments: _pictures.journeyCardArgument);
-      }),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: marginExt1),
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 10.0,
-            ),
-            Expanded(
-                child: Column(
-              children: [
-                Container(
+      },
+      child: SafeArea(
+          child: Scaffold(
+        key: _scaffoldKey,
+        appBar: gradientAppBar2(_pictures.journeyCardArgument.journey.boatName,
+            boatIconBlue(25.0, Colors.white), () {
+          Navigator.of(context).pushReplacementNamed('journeyPage',
+              arguments: _pictures.journeyCardArgument);
+        }),
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: marginExt1),
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 10.0,
+              ),
+              Expanded(
                   child: Column(
-                    children: [
-                      Container(
-                        // margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(child: Container()),
-                            Text(
-                              TextLanguage.of(context).travel.toUpperCase() +
-                                  ' ${_pictures.journeyCardArgument.journey.id}',
-                              style: TextStyle(
-                                  color: blue1,
-                                  fontSize: statusSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Expanded(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () async {
-                                    AlertsBloc().setAlert = Alerts(
-                                        TextLanguage.of(context).downloading,
-                                        "Updating");
-                                    final _resp = await JourneyProvider()
-                                        .getFilesZip(context,
-                                            journeyId: _pictures
-                                                .journeyCardArgument
-                                                .journey
-                                                .id);
-                                    if (_resp['ok']) {
-                                      AlertsBloc().setAlert =
-                                          Alerts(_resp['message'], 'Updated');
-                                    } else {
-                                      AlertsBloc().setAlert =
-                                          Alerts(_resp['message'], 'Error');
-                                    }
-                                  },
-                                  child: Container(
-                                    child: downloadIcon(40.0, blue1),
-                                  ),
-                                ),
-                              ],
-                            )),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(
-                        TextLanguage.of(context).pictures.toUpperCase(),
-                        style: TextStyle(
-                          color: blue1,
-                          fontSize: correoSize,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Container(
-                        // margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 30.0,
-                              width: MediaQuery.of(context).size.width -
-                                  (marginExt1 * 2),
-                              child: Builder(builder: (context) {
-                                return TabBar(
-                                    controller: _tabController,
-                                    indicatorColor: blue1,
-                                    onTap: (index) {
-                                      setState(() {});
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(child: Container()),
+                              Text(
+                                TextLanguage.of(context).travel.toUpperCase() +
+                                    ' ${_pictures.journeyCardArgument.journey.id}',
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontSize: statusSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      AlertsBloc().setAlert = Alerts(
+                                          TextLanguage.of(context).downloading,
+                                          "Updating");
+                                      final _resp = await JourneyProvider()
+                                          .getFilesZip(context,
+                                              journeyId: _pictures
+                                                  .journeyCardArgument
+                                                  .journey
+                                                  .id);
+                                      if (_resp['ok']) {
+                                        AlertsBloc().setAlert =
+                                            Alerts(_resp['message'], 'Updated');
+                                      } else {
+                                        AlertsBloc().setAlert =
+                                            Alerts(_resp['message'], 'Error');
+                                      }
                                     },
-                                    tabs: [
-                                      Builder(builder: (context) {
-                                        FontWeight _fontWeight =
-                                            FontWeight.normal;
-                                        print(
-                                            '_tabController.index=${_tabController.index}');
-                                        if (_tabController.index == 0) {
-                                          _fontWeight = FontWeight.bold;
-                                        }
-                                        return Text(
-                                          TextLanguage.of(context)
-                                                  .camera
-                                                  .toUpperCase() +
-                                              ' 1',
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              color: blue1,
-                                              fontSize: _textSize,
-                                              fontWeight: _fontWeight),
-                                        );
-                                      }),
-                                      Builder(builder: (context) {
-                                        FontWeight _fontWeight =
-                                            FontWeight.normal;
-                                        print(
-                                            '_tabController.index=${_tabController.index}');
-                                        if (_tabController.index == 1) {
-                                          _fontWeight = FontWeight.bold;
-                                        }
-                                        return Text(
-                                          TextLanguage.of(context)
-                                                  .camera
-                                                  .toUpperCase() +
-                                              ' 2',
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              color: blue1,
-                                              fontSize: _textSize,
-                                              fontWeight: _fontWeight),
-                                        );
-                                      }),
-                                      Builder(builder: (context) {
-                                        FontWeight _fontWeight =
-                                            FontWeight.normal;
-                                        print(
-                                            '_tabController.index=${_tabController.index}');
-                                        if (_tabController.index == 2) {
-                                          _fontWeight = FontWeight.bold;
-                                        }
-                                        return Text(
-                                          TextLanguage.of(context)
-                                                  .camera
-                                                  .toUpperCase() +
-                                              ' 3',
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              color: blue1,
-                                              fontSize: _textSize,
-                                              fontWeight: _fontWeight),
-                                        );
-                                      }),
-                                    ]);
-                              }),
-                            ),
-                          ],
+                                    child: Container(
+                                      child: downloadIcon(40.0, blue1),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            picturesIcon(20.0, blue1),
-                            SizedBox(width: 3.0),
-                            Text(
-                              '${listFiltered.length} ' +
-                                  TextLanguage.of(context).pictures,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: blue1,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Expanded(child: Container()),
-                            GestureDetector(
-                              child: gridListIcon(60.0, blue1),
-                              onTap: () {
-                                _gridView = !_gridView;
-                                setState(() {});
-                              },
-                            )
-                          ],
+                        SizedBox(
+                          height: 10.0,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Builder(builder: (context) {
-                        if (_gridView && (listFiltered.length > 0)) {
-                          return Container(
+                        Text(
+                          TextLanguage.of(context).pictures.toUpperCase(),
+                          style: TextStyle(
+                            color: blue1,
+                            fontSize: correoSize,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          // margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 30.0,
+                                width: MediaQuery.of(context).size.width -
+                                    (marginExt1 * 2),
+                                child: Builder(builder: (context) {
+                                  return TabBar(
+                                      controller: _tabController,
+                                      indicatorColor: blue1,
+                                      onTap: (index) {
+                                        setState(() {});
+                                      },
+                                      tabs: [
+                                        Builder(builder: (context) {
+                                          FontWeight _fontWeight =
+                                              FontWeight.normal;
+                                          print(
+                                              '_tabController.index=${_tabController.index}');
+                                          if (_tabController.index == 0) {
+                                            _fontWeight = FontWeight.bold;
+                                          }
+                                          return Text(
+                                            TextLanguage.of(context)
+                                                    .camera
+                                                    .toUpperCase() +
+                                                ' 1',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontSize: _textSize,
+                                                fontWeight: _fontWeight),
+                                          );
+                                        }),
+                                        Builder(builder: (context) {
+                                          FontWeight _fontWeight =
+                                              FontWeight.normal;
+                                          print(
+                                              '_tabController.index=${_tabController.index}');
+                                          if (_tabController.index == 1) {
+                                            _fontWeight = FontWeight.bold;
+                                          }
+                                          return Text(
+                                            TextLanguage.of(context)
+                                                    .camera
+                                                    .toUpperCase() +
+                                                ' 2',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontSize: _textSize,
+                                                fontWeight: _fontWeight),
+                                          );
+                                        }),
+                                        Builder(builder: (context) {
+                                          FontWeight _fontWeight =
+                                              FontWeight.normal;
+                                          print(
+                                              '_tabController.index=${_tabController.index}');
+                                          if (_tabController.index == 2) {
+                                            _fontWeight = FontWeight.bold;
+                                          }
+                                          return Text(
+                                            TextLanguage.of(context)
+                                                    .camera
+                                                    .toUpperCase() +
+                                                ' 3',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                color: blue1,
+                                                fontSize: _textSize,
+                                                fontWeight: _fontWeight),
+                                          );
+                                        }),
+                                      ]);
+                                }),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              picturesIcon(20.0, blue1),
+                              SizedBox(width: 3.0),
+                              Text(
+                                '${listFiltered.length} ' +
+                                    TextLanguage.of(context).pictures,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(child: Container()),
+                              GestureDetector(
+                                child: gridListIcon(60.0, blue1),
+                                onTap: () {
+                                  _gridView = !_gridView;
+                                  setState(() {});
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Builder(builder: (context) {
+                          if (_gridView && (listFiltered.length > 0)) {
+                            return Container(
+                                height:
+                                    MediaQuery.of(context).size.height - 350,
+                                width: MediaQuery.of(context).size.width -
+                                    (marginExt1 * 2),
+                                child: GridView.count(
+                                  crossAxisCount: 3,
+                                  children: List.generate(listFiltered.length,
+                                      (index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(1.0),
+                                      child: picture2(
+                                          context,
+                                          Parameters().domain +
+                                              listFiltered[index].flUrl,
+                                          false),
+                                    );
+                                  }),
+                                ));
+                          } else if (listFiltered.length > 0) {
+                            return Container(
                               height: MediaQuery.of(context).size.height - 350,
                               width: MediaQuery.of(context).size.width -
                                   (marginExt1 * 2),
-                              child: GridView.count(
-                                crossAxisCount: 3,
+                              child: ListView(
                                 children:
                                     List.generate(listFiltered.length, (index) {
                                   return Padding(
@@ -282,52 +306,35 @@ class _PicturesPageState extends State<PicturesPage>
                                         false),
                                   );
                                 }),
-                              ));
-                        } else if (listFiltered.length > 0) {
-                          return Container(
-                            height: MediaQuery.of(context).size.height - 350,
-                            width: MediaQuery.of(context).size.width -
-                                (marginExt1 * 2),
-                            child: ListView(
-                              children:
-                                  List.generate(listFiltered.length, (index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(1.0),
-                                  child: picture2(
-                                      context,
-                                      Parameters().domain +
-                                          listFiltered[index].flUrl,
-                                      false),
-                                );
-                              }),
-                            ),
-                          );
-                        } else {
-                          return Container(
-                            height: MediaQuery.of(context).size.height - 350,
-                            width: MediaQuery.of(context).size.width -
-                                (marginExt1 * 2),
-                          );
-                        }
-                      })
-                    ],
+                              ),
+                            );
+                          } else {
+                            return Container(
+                              height: MediaQuery.of(context).size.height - 350,
+                              width: MediaQuery.of(context).size.width -
+                                  (marginExt1 * 2),
+                            );
+                          }
+                        })
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )),
-            StreamBuilder(
-              stream: AlertsBloc().alert,
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                ArgumentBloc().setArgument = _pictures;
-                WidgetsBinding.instance.addPostFrameCallback(
-                    (_) => onAfterBuild(_scaffoldKey.currentContext));
-                return Container();
-              },
-            )
-          ],
+                ],
+              )),
+              StreamBuilder(
+                stream: AlertsBloc().alert,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  ArgumentBloc().setArgument = _pictures;
+                  WidgetsBinding.instance.addPostFrameCallback(
+                      (_) => onAfterBuild(_scaffoldKey.currentContext));
+                  return Container();
+                },
+              )
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: botomBar(1, context),
-    ));
+        bottomNavigationBar: botomBar(1, context),
+      )),
+    );
   }
 }
