@@ -28,50 +28,55 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar(TextLanguage.of(context).passwordRecovery, () {
+    return WillPopScope(
+      onWillPop: () {
         Navigator.of(context).pushReplacementNamed('loginPage');
-      }),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: marginSupicon),
-              ImageIcon(
-                AssetImage('assets/keyIcon.png'),
-                size: 100.0,
-                color: blue1,
-              ),
-              SizedBox(height: 20.0),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: marginExt),
-                child: Text(TextLanguage.of(context).recoveryText,
-                    style: TextStyle(
-                        color: blue1,
-                        fontSize: messageTitle,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center),
-              ),
-              SizedBox(height: 30.0),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: marginExt),
-                child: formReset(context),
-              ),
-              SizedBox(height: 20.0),
-              StreamBuilder(
-                stream: AlertsBloc().alert,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  WidgetsBinding.instance
-                      .addPostFrameCallback((_) => onAfterBuild(context));
-                  return Container();
-                },
-              ),
-            ],
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar(TextLanguage.of(context).passwordRecovery, () {
+          Navigator.of(context).pushReplacementNamed('loginPage');
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: marginSupicon),
+                ImageIcon(
+                  AssetImage('assets/keyIcon.png'),
+                  size: 100.0,
+                  color: blue1,
+                ),
+                SizedBox(height: 20.0),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt),
+                  child: Text(TextLanguage.of(context).recoveryText,
+                      style: TextStyle(
+                          color: blue1,
+                          fontSize: messageTitle,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center),
+                ),
+                SizedBox(height: 30.0),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt),
+                  child: formReset(context),
+                ),
+                SizedBox(height: 20.0),
+                StreamBuilder(
+                  stream: AlertsBloc().alert,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    WidgetsBinding.instance
+                        .addPostFrameCallback((_) => onAfterBuild(context));
+                    return Container();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

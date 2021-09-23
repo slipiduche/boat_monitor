@@ -15,29 +15,34 @@ class PrivacyPage extends StatefulWidget {
 class _PrivacyPageState extends State<PrivacyPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar(TextLanguage.of(context).privacyPolicy, () {
+    return WillPopScope(
+      onWillPop: () {
         Navigator.of(context).pushReplacementNamed('signUpPage');
-      }),
-      body: SingleChildScrollView(
-        child: Container(
-          margin:
-              EdgeInsets.symmetric(horizontal: marginExt, vertical: marginExt),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(TextLanguage.of(context).privacyPolicyText,
-                  style: TextStyle(
-                      color: blue1,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.justify)
-            ],
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar(TextLanguage.of(context).privacyPolicy, () {
+          Navigator.of(context).pushReplacementNamed('signUpPage');
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: marginExt, vertical: marginExt),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(TextLanguage.of(context).privacyPolicyText,
+                    style: TextStyle(
+                        color: blue1,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.justify)
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

@@ -42,106 +42,113 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
     final _maxStorage = _boat.maxSt;
     _usedStorage = _storage.usedStorage * _maxStorage / 100;
 
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar2(
-          TextLanguage.of(context).storage, storageIcon(25.0, Colors.white),
-          () {
-        Navigator.of(context).pop();
-      }),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height - 50,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                  child: Container(
-                margin: EdgeInsets.symmetric(horizontal: marginExt1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          _boat.boatName,
-                          style: TextStyle(color: blue1, fontSize: correoSize),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          TextLanguage.of(context).diskSpace,
-                          style: TextStyle(
-                              color: blue1,
-                              fontSize: messageTitle,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '${_usedStorage.toStringAsFixed(1)}GB/${_maxStorage.toStringAsFixed(1)}GB',
-                          style: TextStyle(
-                              color: blue1,
-                              fontSize: messageTitle,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              '${_storage.usedStorage} %',
-                              style: TextStyle(
-                                  color: blue1,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: messageTitle),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    DiskSpace(_storage.usedStorage),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          TextLanguage.of(context).sailingDays,
-                          style: TextStyle(color: blue1, fontSize: correoSize),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    _boatStorageSearch(context),
-                    Container(
-                        height: MediaQuery.of(context).size.height - 350,
-                        child: BoatDataPage(
-                          boatId: _boat.id,
-                          argument: _storage,
-                        )),
-                  ],
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('homePage');
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar2(
+            TextLanguage.of(context).storage, storageIcon(25.0, Colors.white),
+            () {
+          Navigator.of(context).pushReplacementNamed('homePage');
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height - 50,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 20.0,
                 ),
-              )),
-            ],
+                Expanded(
+                    child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            _boat.boatName,
+                            style:
+                                TextStyle(color: blue1, fontSize: correoSize),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            TextLanguage.of(context).diskSpace,
+                            style: TextStyle(
+                                color: blue1,
+                                fontSize: messageTitle,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '${_usedStorage.toStringAsFixed(1)}GB/${_maxStorage.toStringAsFixed(1)}GB',
+                            style: TextStyle(
+                                color: blue1,
+                                fontSize: messageTitle,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                '${_storage.usedStorage} %',
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: messageTitle),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      DiskSpace(_storage.usedStorage),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            TextLanguage.of(context).sailingDays,
+                            style:
+                                TextStyle(color: blue1, fontSize: correoSize),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      _boatStorageSearch(context),
+                      Container(
+                          height: MediaQuery.of(context).size.height - 350,
+                          child: BoatDataPage(
+                            boatId: _boat.id,
+                            argument: _storage,
+                          )),
+                    ],
+                  ),
+                )),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: botomBar(2, context),
-    ));
+        bottomNavigationBar: botomBar(2, context),
+      )),
+    );
   }
 }
 

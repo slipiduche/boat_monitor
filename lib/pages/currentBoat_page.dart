@@ -80,7 +80,9 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
       _extraSizeBox = 2.0;
     }
     return WillPopScope(
-      onWillPop: () {},
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('homePage');
+      },
       child: SafeArea(
           child: Scaffold(
         key: _scaffoldKey,

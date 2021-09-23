@@ -31,43 +31,48 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: gradientAppBar(TextLanguage.of(context).signUp, () {
+    return WillPopScope(
+      onWillPop: () {
         Navigator.of(context).pushReplacementNamed('loginPage');
-      }),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: marginSupicon),
-              signUpIcon(100.0, blue1),
-              SizedBox(height: 14.0),
-              Text(
-                TextLanguage.of(context).signUpMessage,
-                style: TextStyle(
-                    color: blue1,
-                    fontSize: messageTitle,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 40.0),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: marginExt),
-                child: FormSignup(),
-              ),
-              StreamBuilder(
-                stream: AlertsBloc().alert,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  WidgetsBinding.instance
-                      .addPostFrameCallback((_) => onAfterBuild(context));
-                  return Container();
-                },
-              ),
-            ],
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: gradientAppBar(TextLanguage.of(context).signUp, () {
+          Navigator.of(context).pushReplacementNamed('loginPage');
+        }),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: marginSupicon),
+                signUpIcon(100.0, blue1),
+                SizedBox(height: 14.0),
+                Text(
+                  TextLanguage.of(context).signUpMessage,
+                  style: TextStyle(
+                      color: blue1,
+                      fontSize: messageTitle,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 40.0),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: marginExt),
+                  child: FormSignup(),
+                ),
+                StreamBuilder(
+                  stream: AlertsBloc().alert,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    WidgetsBinding.instance
+                        .addPostFrameCallback((_) => onAfterBuild(context));
+                    return Container();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }
