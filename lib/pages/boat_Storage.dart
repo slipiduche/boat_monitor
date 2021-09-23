@@ -44,14 +44,14 @@ class _BoatStoragePageState extends State<BoatStoragePage> {
 
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushReplacementNamed('homePage');
+        Navigator.of(context).pushReplacementNamed('storagePage');
       },
       child: SafeArea(
           child: Scaffold(
         appBar: gradientAppBar2(
             TextLanguage.of(context).storage, storageIcon(25.0, Colors.white),
             () {
-          Navigator.of(context).pushReplacementNamed('homePage');
+          Navigator.of(context).pushReplacementNamed('storagePage');
         }),
         body: SingleChildScrollView(
           child: Container(

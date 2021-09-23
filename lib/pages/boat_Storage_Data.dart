@@ -206,7 +206,12 @@ class _BoatDataPageState extends State<BoatDataPage> {
                               SizedBox(
                                 height: 20.0,
                               ),
-                              circularProgressCustom(),
+                              Text(
+                                TextLanguage.of(context).noData,
+                                style: TextStyle(
+                                    color: blue1, fontSize: correoSize),
+                                textAlign: TextAlign.center,
+                              ),
                               Divider(
                                 thickness: 1.0,
                                 color: gray1,
