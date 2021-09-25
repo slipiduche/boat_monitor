@@ -1,4 +1,5 @@
 import 'package:boat_monitor/models/historics_model.dart';
+import 'package:boat_monitor/styles/colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -163,8 +164,14 @@ class _LineChartBasicState extends State<LineChartBasic> {
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: FlDotData(
-            show: false,
-          ),
+              show: true,
+              getDotPainter: (spot, percent, barData, index) {
+                return FlDotCirclePainter(
+                    radius: 3,
+                    color: blue1,
+                    strokeWidth: 5,
+                    strokeColor: blue1);
+              }),
           belowBarData: BarAreaData(
             show: true,
             colors:
