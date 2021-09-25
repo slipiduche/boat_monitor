@@ -184,9 +184,9 @@ class _LineChartTempState extends State<LineChartTemp> {
               show: true,
               getDotPainter: (spot, percent, barData, index) {
                 return FlDotCirclePainter(
-                    radius: 3,
+                    radius: 1.5,
                     color: blue1,
-                    strokeWidth: 5,
+                    strokeWidth: 1.5,
                     strokeColor: blue1);
               }),
           belowBarData: BarAreaData(

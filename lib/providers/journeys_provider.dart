@@ -17,10 +17,9 @@ class JourneyProvider {
   Future<Map<String, dynamic>> getJourneys(BuildContext context,
       {List<int> journeyIds}) async {
     Map<String, dynamic> decodedResp;
-    var _req = jsonEncode({"token": _prefs.token, "in_boat": 1});
+    var _req = jsonEncode({"token": _prefs.token});
     if (journeyIds != null) {
-      _req =
-          jsonEncode({"token": _prefs.token, "id": journeyIds, "in_boat": 1});
+      _req = jsonEncode({"token": _prefs.token, "id": journeyIds});
     }
 
     final _req2 = {"body": _req};
@@ -125,10 +124,9 @@ class JourneyProvider {
         "token": _prefs.token,
         "id": idsRequest,
         "csv": true,
-        "in_boat": 1
       };
     } else {
-      _request = {"token": _prefs.token, "csv": true, "in_boat": 1};
+      _request = {"token": _prefs.token, "csv": true};
     }
     print(jsonEncode(_request));
     final req = jsonEncode(_request);

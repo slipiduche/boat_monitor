@@ -1,6 +1,9 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/bloc/historics_bloc.dart';
+import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/server_alerts_bloc.dart';
@@ -137,6 +140,10 @@ class _SupervisorPageState extends State<SupervisorPage> {
                               TextLanguage.of(context).confirmation, () {
                             _prefs.token = '';
                             _prefs.userType = 0;
+                            HistoricsBloc().setHistorics = null;
+                            BoatsBloc().setBoats = null;
+                            JourneysBloc().setJourneys = null;
+                            ServerAlertsBloc().setAlerts = null;
                             Navigator.of(context).pop();
                             Navigator.of(context)
                                 .pushReplacementNamed('loginPage');

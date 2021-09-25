@@ -1,10 +1,14 @@
 import 'package:boat_monitor/Icons/icons.dart';
 import 'package:boat_monitor/bloc/alerts_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
+import 'package:boat_monitor/bloc/boats_bloc.dart';
+import 'package:boat_monitor/bloc/historics_bloc.dart';
+import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/bloc/pendingAlerts_bloc.dart';
 import 'package:boat_monitor/bloc/pendingApprovals_bloc.dart';
 import 'package:boat_monitor/bloc/server_alerts_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
+import 'package:boat_monitor/models/journney_model.dart';
 import 'package:boat_monitor/models/pendingApprovals_model.dart';
 import 'package:boat_monitor/models/server_alerts_model.dart';
 import 'package:boat_monitor/providers/server_alerts_provider.dart';
@@ -180,7 +184,12 @@ class _ManagerPageState extends State<ManagerPage> {
                               TextLanguage.of(context).confirmation, () {
                             _prefs.token = '';
                             _prefs.userType = 0;
+                            HistoricsBloc().setHistorics = null;
+                            BoatsBloc().setBoats = null;
+                            JourneysBloc().setJourneys = null;
+                            ServerAlertsBloc().setAlerts = null;
                             Navigator.of(context).pop();
+
                             Navigator.of(context)
                                 .pushReplacementNamed('loginPage');
                           }, () {

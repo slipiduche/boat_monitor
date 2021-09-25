@@ -71,331 +71,359 @@ class _HistoryPageState extends State<HistoryPage> {
                         stream: JourneysBloc().journeys,
                         builder:
                             (context, AsyncSnapshot<List<Journey>> snapshot) {
-                          if (snapshot.data != null
-                              ? snapshot.data.length > 0
-                              : false) {
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: marginExt1),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () async {
-                                              range = await showDateRangePicker(
-                                                currentDate: DateTime.now(),
-                                                context: context,
-                                                initialEntryMode:
-                                                    DatePickerEntryMode.input,
-                                                firstDate: DateTime(2020),
-                                                lastDate: DateTime(2050),
-                                              );
+                          if (snapshot.hasData) {
+                            if (snapshot.data.length > 0) {
+                              return Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: marginExt1),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          GestureDetector(
+                                              onTap: () async {
+                                                range =
+                                                    await showDateRangePicker(
+                                                  currentDate: DateTime.now(),
+                                                  context: context,
+                                                  initialEntryMode:
+                                                      DatePickerEntryMode.input,
+                                                  firstDate: DateTime(2020),
+                                                  lastDate: DateTime(2050),
+                                                );
 
-                                              HistorySearchBloc()
-                                                      .setHistorySearch =
-                                                  HistorySearch(
-                                                      range: range,
-                                                      content: '');
+                                                HistorySearchBloc()
+                                                        .setHistorySearch =
+                                                    HistorySearch(
+                                                        range: range,
+                                                        content: '');
 
-                                              print(range);
-                                            },
-                                            child: calendarIcon(40.0, blue1)),
-                                        SizedBox(
-                                          width: 10.0,
-                                        ),
-                                        StreamBuilder(
-                                          stream:
-                                              HistorySearchBloc().historySearch,
-                                          builder: (BuildContext context,
-                                              AsyncSnapshot<HistorySearch>
-                                                  snapshot) {
-                                            if (snapshot.hasData &&
-                                                snapshot.data.range != null) {
-                                              return Container(
-                                                child: Text(
-                                                  '${snapshot.data.range.start.toString().substring(0, 11)} - ${snapshot.data.range.end.toString().substring(0, 11)}',
-                                                  style: TextStyle(
-                                                      color: blue1,
-                                                      fontSize: titleBarSize),
-                                                ),
-                                              );
-                                            } else {
-                                              return Container(
-                                                child: Text(
-                                                  TextLanguage.of(context).all,
-                                                  style: TextStyle(
-                                                      color: blue1,
-                                                      fontSize: titleBarSize),
-                                                ),
-                                              );
-                                            }
-                                          },
-                                        ),
-                                        Expanded(child: Container()),
-                                        GestureDetector(
-                                          onTap: () async {
-                                            AlertsBloc().setAlert = Alerts(
-                                                TextLanguage.of(context)
-                                                    .downloading,
-                                                "Updating");
-                                            final _resp =
-                                                await JourneyProvider()
-                                                    .getJourneysBy(context,
-                                                        _journeysFiltered);
-                                            if (_resp['ok']) {
-                                              AlertsBloc().setAlert = Alerts(
-                                                  _resp['message'], 'Updated');
-                                            } else {
-                                              AlertsBloc().setAlert = Alerts(
-                                                  _resp['message'], 'Error');
-                                            }
-                                          },
-                                          child: Container(
-                                            child: downloadIcon(40.0, blue1),
+                                                print(range);
+                                              },
+                                              child: calendarIcon(40.0, blue1)),
+                                          SizedBox(
+                                            width: 10.0,
                                           ),
-                                        )
-                                      ],
+                                          StreamBuilder(
+                                            stream: HistorySearchBloc()
+                                                .historySearch,
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<HistorySearch>
+                                                    snapshot) {
+                                              if (snapshot.hasData &&
+                                                  snapshot.data.range != null) {
+                                                return Container(
+                                                  child: Text(
+                                                    '${snapshot.data.range.start.toString().substring(0, 11)} - ${snapshot.data.range.end.toString().substring(0, 11)}',
+                                                    style: TextStyle(
+                                                        color: blue1,
+                                                        fontSize: titleBarSize),
+                                                  ),
+                                                );
+                                              } else {
+                                                return Container(
+                                                  child: Text(
+                                                    TextLanguage.of(context)
+                                                        .all,
+                                                    style: TextStyle(
+                                                        color: blue1,
+                                                        fontSize: titleBarSize),
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          ),
+                                          Expanded(child: Container()),
+                                          GestureDetector(
+                                            onTap: () async {
+                                              AlertsBloc().setAlert = Alerts(
+                                                  TextLanguage.of(context)
+                                                      .downloading,
+                                                  "Updating");
+                                              final _resp =
+                                                  await JourneyProvider()
+                                                      .getJourneysBy(context,
+                                                          _journeysFiltered);
+                                              if (_resp['ok']) {
+                                                AlertsBloc().setAlert = Alerts(
+                                                    _resp['message'],
+                                                    'Updated');
+                                              } else {
+                                                AlertsBloc().setAlert = Alerts(
+                                                    _resp['message'], 'Error');
+                                              }
+                                            },
+                                            child: Container(
+                                              child: downloadIcon(40.0, blue1),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  _historySearch(context),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  StreamBuilder(
-                                    stream: HistorySearchBloc().historySearch,
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<HistorySearch> snapshot) {
-                                      List<Journey> _journeys =
-                                          JourneysBloc().journeysValue;
-                                      _journeysFiltered = [];
-                                      if (_journeys != null) {
-                                        if (snapshot.hasData) {
-                                          if (snapshot.data.range != null) {
-                                            _journeys.forEach((element) {
-                                              if (element.ini.isAfter(snapshot
-                                                      .data.range.start) &&
-                                                  element.ini.isBefore(snapshot
-                                                      .data.range.end
-                                                      .add(Duration(
-                                                          hours: 23,
-                                                          minutes: 59,
-                                                          seconds: 59)))) {
-                                                _journeysFiltered.add(element);
-                                              }
-                                            });
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    _historySearch(context),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    StreamBuilder(
+                                      stream: HistorySearchBloc().historySearch,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<HistorySearch>
+                                              snapshot) {
+                                        List<Journey> _journeys =
+                                            JourneysBloc().journeysValue;
+                                        _journeysFiltered = [];
+                                        if (_journeys != null) {
+                                          if (snapshot.hasData) {
+                                            if (snapshot.data.range != null) {
+                                              _journeys.forEach((element) {
+                                                if (element.ini.isAfter(snapshot
+                                                        .data.range.start) &&
+                                                    element.ini.isBefore(
+                                                        snapshot.data.range.end
+                                                            .add(
+                                                                Duration(
+                                                                    hours: 23,
+                                                                    minutes: 59,
+                                                                    seconds:
+                                                                        59)))) {
+                                                  _journeysFiltered
+                                                      .add(element);
+                                                }
+                                              });
+                                            } else {
+                                              _journeys.forEach((element) {
+                                                if (element.boatName
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .startsWith(snapshot
+                                                            .data.content) ||
+                                                    element.endUserNames
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .startsWith(snapshot
+                                                            .data.content) ||
+                                                    element.ini
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .startsWith(snapshot
+                                                            .data.content) ||
+                                                    element.ed
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .startsWith(snapshot
+                                                            .data.content) ||
+                                                    element.id
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .startsWith(snapshot
+                                                            .data.content)) {
+                                                  _journeysFiltered
+                                                      .add(element);
+                                                }
+                                              });
+                                            }
                                           } else {
-                                            _journeys.forEach((element) {
-                                              if (element.boatName
-                                                      .toString()
-                                                      .toLowerCase()
-                                                      .startsWith(snapshot
-                                                          .data.content) ||
-                                                  element.endUserNames
-                                                      .toString()
-                                                      .toLowerCase()
-                                                      .startsWith(snapshot
-                                                          .data.content) ||
-                                                  element.ini
-                                                      .toString()
-                                                      .toLowerCase()
-                                                      .startsWith(snapshot
-                                                          .data.content) ||
-                                                  element.ed
-                                                      .toString()
-                                                      .toLowerCase()
-                                                      .startsWith(snapshot
-                                                          .data.content) ||
-                                                  element.id
-                                                      .toString()
-                                                      .toLowerCase()
-                                                      .startsWith(snapshot
-                                                          .data.content)) {
-                                                _journeysFiltered.add(element);
-                                              }
-                                            });
+                                            _journeysFiltered = _journeys;
                                           }
-                                        } else {
-                                          _journeysFiltered = _journeys;
-                                        }
-                                        if (MediaQuery.of(context).size.width <
-                                            770) {
-                                          _extraSize = 5.0;
-                                        }
+                                          if (MediaQuery.of(context)
+                                                  .size
+                                                  .width <
+                                              770) {
+                                            _extraSize = 5.0;
+                                          }
 
-                                        return Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: marginExt1),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                    child: Text(
-                                                      TextLanguage.of(context)
-                                                          .initialDate,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: blue1,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize:
-                                                              privacyPolicySize +
-                                                                  2.0),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5.0,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                    child: Text(
-                                                      TextLanguage.of(context)
-                                                          .finalDate,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: blue1,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize:
-                                                              privacyPolicySize +
-                                                                  2.0),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5.0,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                5 -
-                                                            40,
-                                                    child: Text(
-                                                      TextLanguage.of(context)
-                                                          .boat,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                          color: blue1,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize:
-                                                              privacyPolicySize +
-                                                                  2.0),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5.0,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                5 +
-                                                            _extraSize,
-                                                    child: Text(
-                                                      TextLanguage.of(context)
-                                                          .supervisor,
-                                                      textAlign: TextAlign.end,
-                                                      style: TextStyle(
-                                                          color: blue1,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize:
-                                                              privacyPolicySize +
-                                                                  2.0),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10.0,
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: marginExt1),
-                                              child: Divider(
-                                                color: gray1,
-                                                thickness: 1.0,
-                                              ),
-                                            ),
-                                            Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height -
-                                                    254,
+                                          return Column(
+                                            children: [
+                                              Container(
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: marginExt1),
-                                                child: makeTravelList(context,
-                                                    _journeysFiltered)),
-                                          ],
-                                        );
-                                      } else {
-                                        return Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: marginExt1),
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 20.0,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      child: Text(
+                                                        TextLanguage.of(context)
+                                                            .initialDate,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize:
+                                                                privacyPolicySize +
+                                                                    2.0),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.0,
+                                                    ),
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      child: Text(
+                                                        TextLanguage.of(context)
+                                                            .finalDate,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize:
+                                                                privacyPolicySize +
+                                                                    2.0),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.0,
+                                                    ),
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width /
+                                                                  5 -
+                                                              40,
+                                                      child: Text(
+                                                        TextLanguage.of(context)
+                                                            .boat,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: TextStyle(
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize:
+                                                                privacyPolicySize +
+                                                                    2.0),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.0,
+                                                    ),
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width /
+                                                                  5 +
+                                                              _extraSize,
+                                                      child: Text(
+                                                        TextLanguage.of(context)
+                                                            .supervisor,
+                                                        textAlign:
+                                                            TextAlign.end,
+                                                        style: TextStyle(
+                                                            color: blue1,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize:
+                                                                privacyPolicySize +
+                                                                    2.0),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                              // Text(
-                                              //   TextLanguage.of(context).noData,
-                                              //   style: TextStyle(
-                                              //       color: blue1,
-                                              //       fontSize: correoSize),
-                                              //   textAlign: TextAlign.center,
-                                              // ),
-                                              circularProgressCustom(),
-                                              Divider(
-                                                thickness: 1.0,
-                                                color: gray1,
-                                              )
+                                              SizedBox(
+                                                height: 10.0,
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: marginExt1),
+                                                child: Divider(
+                                                  color: gray1,
+                                                  thickness: 1.0,
+                                                ),
+                                              ),
+                                              Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height -
+                                                      254,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: marginExt1),
+                                                  child: makeTravelList(context,
+                                                      _journeysFiltered)),
                                             ],
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ],
-                              ),
-                            );
+                                          );
+                                        } else {
+                                          return Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: marginExt1),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 20.0,
+                                                ),
+                                                // Text(
+                                                //   TextLanguage.of(context).noData,
+                                                //   style: TextStyle(
+                                                //       color: blue1,
+                                                //       fontSize: correoSize),
+                                                //   textAlign: TextAlign.center,
+                                                // ),
+                                                circularProgressCustom(),
+                                                Divider(
+                                                  thickness: 1.0,
+                                                  color: gray1,
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              return Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: marginExt1),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      TextLanguage.of(context).noData,
+                                      style: TextStyle(
+                                          color: blue1, fontSize: correoSize),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Divider(
+                                      thickness: 1.0,
+                                      color: gray1,
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
                           } else {
                             return Container(
                               margin:
                                   EdgeInsets.symmetric(horizontal: marginExt1),
                               child: Column(
                                 children: [
-                                  Text(
-                                    TextLanguage.of(context).noData,
-                                    style: TextStyle(
-                                        color: blue1, fontSize: correoSize),
-                                    textAlign: TextAlign.center,
+                                  SizedBox(
+                                    height: 20.0,
                                   ),
+                                  circularProgressCustom(),
                                   Divider(
                                     thickness: 1.0,
                                     color: gray1,
