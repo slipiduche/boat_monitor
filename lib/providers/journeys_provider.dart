@@ -17,9 +17,10 @@ class JourneyProvider {
   Future<Map<String, dynamic>> getJourneys(BuildContext context,
       {List<int> journeyIds}) async {
     Map<String, dynamic> decodedResp;
-    var _req = jsonEncode({"token": _prefs.token});
+    var _req = jsonEncode({"token": _prefs.token, "in_boat": 1});
     if (journeyIds != null) {
-      _req = jsonEncode({"token": _prefs.token, "id": journeyIds});
+      _req =
+          jsonEncode({"token": _prefs.token, "id": journeyIds, "in_boat": 1});
     }
 
     final _req2 = {"body": _req};
@@ -65,9 +66,10 @@ class JourneyProvider {
   Future<Map<String, dynamic>> getJourneysByBoatId(BuildContext context,
       {List<int> boatIds}) async {
     Map<String, dynamic> decodedResp;
-    var _req = jsonEncode({"token": _prefs.token});
+    var _req = jsonEncode({"token": _prefs.token, "in_boat": 1});
     if (boatIds != null) {
-      _req = jsonEncode({"token": _prefs.token, "boat_id": boatIds});
+      _req =
+          jsonEncode({"token": _prefs.token, "boat_id": boatIds, "in_boat": 1});
     }
 
     final _req2 = {"body": _req};
@@ -119,9 +121,14 @@ class JourneyProvider {
       journeys.forEach((element) {
         idsRequest.add(element.id);
       });
-      _request = {"token": _prefs.token, "id": idsRequest, "csv": true};
+      _request = {
+        "token": _prefs.token,
+        "id": idsRequest,
+        "csv": true,
+        "in_boat": 1
+      };
     } else {
-      _request = {"token": _prefs.token, "csv": true};
+      _request = {"token": _prefs.token, "csv": true, "in_boat": 1};
     }
     print(jsonEncode(_request));
     final req = jsonEncode(_request);
