@@ -337,7 +337,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: marginExt1),
                                               child: makeTravelList(
-                                                  context, _journeysFiltered))
+                                                  context, _journeysFiltered)),
                                         ],
                                       );
                                     } else {
@@ -401,7 +401,20 @@ Widget makeTravelList(BuildContext context, List<Journey> journeys) {
       itemCount: journeys.length,
       itemBuilder: (BuildContext context, int index) {
         print(journeys[index]);
-        return _travelCard(context, journeys[index]);
+        bool _visible = false;
+        if (index == journeys.length - 1) {
+          _visible = true;
+        }
+        return Column(
+          children: [
+            _travelCard(context, journeys[index]),
+            Visibility(
+                visible: _visible,
+                child: SizedBox(
+                  height: 100.0,
+                ))
+          ],
+        );
       },
     ),
   );
