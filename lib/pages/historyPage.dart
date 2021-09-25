@@ -71,7 +71,9 @@ class _HistoryPageState extends State<HistoryPage> {
                         stream: JourneysBloc().journeys,
                         builder:
                             (context, AsyncSnapshot<List<Journey>> snapshot) {
-                          if (snapshot.data.length > 0) {
+                          if (snapshot.data != null
+                              ? snapshot.data.length > 0
+                              : false) {
                             return Container(
                               child: Column(
                                 children: [
