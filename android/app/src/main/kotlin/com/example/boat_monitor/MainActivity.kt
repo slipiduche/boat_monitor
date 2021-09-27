@@ -1,4 +1,4 @@
-package com.example.boat_monitor
+package com.boat_monitor
 
 import io.flutter.embedding.android.FlutterActivity
 
