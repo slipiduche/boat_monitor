@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
-import 'package:get_mac/get_mac.dart';
+import 'package:uuid/uuid.dart';
 
 class MQTTClientWrapper {
   MqttServerClient client;
@@ -70,7 +70,11 @@ class MQTTClientWrapper {
   }
 
   Future<String> _setupMqttClient() async {
-    String _id = await GetMac.macAddress;
+    var uuid = Uuid();
+
+    // String _id = await GetMac.macAddress;
+    String _id = uuid.v1().toString();
+
     print(_id);
     print('MQTTClientWrapper::Connecting with id BM-APP_$_id');
     client = MqttServerClient(Parameters().domainMqtt, 'BM-APP_$_id');
@@ -163,7 +167,10 @@ class MQTTClientWrapper {
   }
 
   void _onConnected() async {
-    String _id = await GetMac.macAddress;
+    var uuid = Uuid();
+
+    // String _id = await GetMac.macAddress;
+    String _id = uuid.v1().toString();
     connectionState = MqttCurrentConnectionState.CONNECTED;
     print(
         'MQTTClientWrapper::OnConnected client callback - Client connection was sucessful');
