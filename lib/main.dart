@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
       ),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
+      title: 'BoatMonitor App',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

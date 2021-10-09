@@ -247,7 +247,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               Builder(builder: (context) {
                                 if (_boat.onJourney == 0 && _boat.lj != null) {
                                   return Text(
-                                    TextLanguage.of(context).arrived,
+                                    TextLanguage.of(context).arrived + ':',
                                     style: TextStyle(
                                         color: blue1,
                                         fontWeight: FontWeight.w800,
@@ -316,23 +316,47 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               SizedBox(
                                 height: 5.0,
                               ),
-                              Text(
-                                '',
-                                style: TextStyle(
-                                    color: blue1,
-                                    //fontWeight: FontWeight.w800,
-                                    fontSize: messageTitle),
-                              ),
+                              Builder(builder: (context) {
+                                if (_boat.lj != null && _boat.onJourney == 0) {
+                                  return Text(
+                                    _journey.ed.toString().substring(0, 16),
+                                    style: TextStyle(
+                                        color: blue1,
+                                        //fontWeight: FontWeight.w800,
+                                        fontSize: messageTitle - _minusSize),
+                                  );
+                                } else {
+                                  return Text(
+                                    '    ',
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: messageTitle),
+                                  );
+                                }
+                              }),
                               SizedBox(
                                 height: 10.0 + _extraSizeBox,
                               ),
-                              Text(
-                                _journey.ini.toString().substring(0, 16),
-                                style: TextStyle(
-                                    color: blue1,
-                                    //fontWeight: FontWeight.w800,
-                                    fontSize: messageTitle - _minusSize),
-                              ),
+                              Builder(builder: (context) {
+                                if (_boat.lj != null) {
+                                  return Text(
+                                    _journey.ini.toString().substring(0, 16),
+                                    style: TextStyle(
+                                        color: blue1,
+                                        //fontWeight: FontWeight.w800,
+                                        fontSize: messageTitle - _minusSize),
+                                  );
+                                } else {
+                                  return Text(
+                                    '    ',
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: messageTitle),
+                                  );
+                                }
+                              }),
                               SizedBox(
                                 height: 10.0 + _extraSizeBox,
                               ),
