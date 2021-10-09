@@ -14,6 +14,7 @@ import 'package:uuid/uuid.dart';
 
 class MQTTClientWrapper {
   MqttServerClient client;
+  String _id;
   final _prefs = new UserPreferences();
   // LocationToJsonConverter locationToJsonConverter = LocationToJsonConverter();
   // JsonToLocationConverter jsonToLocationConverter = JsonToLocationConverter();
@@ -73,8 +74,9 @@ class MQTTClientWrapper {
     var uuid = Uuid();
 
     // String _id = await GetMac.macAddress;
-    String _id = uuid.v1().toString();
-
+    // String _id =
+    //     uuid.v1().toString().substring(24, uuid.v1().toString().length);
+    _id = uuid.v1().toString();
     print(_id);
     print('MQTTClientWrapper::Connecting with id BM-APP_$_id');
     client = MqttServerClient(Parameters().domainMqtt, 'BM-APP_$_id');
@@ -167,10 +169,6 @@ class MQTTClientWrapper {
   }
 
   void _onConnected() async {
-    var uuid = Uuid();
-
-    // String _id = await GetMac.macAddress;
-    String _id = uuid.v1().toString();
     connectionState = MqttCurrentConnectionState.CONNECTED;
     print(
         'MQTTClientWrapper::OnConnected client callback - Client connection was sucessful');
