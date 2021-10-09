@@ -17,12 +17,12 @@ class _PrivacyPageState extends State<PrivacyPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushReplacementNamed('signUpPage');
+        Navigator.of(context).pop();
       },
       child: SafeArea(
           child: Scaffold(
         appBar: gradientAppBar(TextLanguage.of(context).privacyPolicy, () {
-          Navigator.of(context).pushReplacementNamed('signUpPage');
+          Navigator.of(context).pop();
         }),
         body: SingleChildScrollView(
           child: Container(

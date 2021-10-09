@@ -69,8 +69,7 @@ class _FormSignupState extends State<FormSignup> {
                         textAlign: TextAlign.center),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed('privacyPage');
+                        Navigator.of(context).pushNamed('privacyPage');
                       },
                       child: Text(' ' + TextLanguage.of(context).privacyPolicy,
                           style: TextStyle(
@@ -113,8 +112,7 @@ _signUp(BuildContext context) {
 }
 
 _signUp1(BuildContext context) async {
-  AlertsBloc().setAlert =
-      Alerts(TextLanguage.of(context).signUp, "Updating");
+  AlertsBloc().setAlert = Alerts(TextLanguage.of(context).signUp, "Updating");
   print(AuthBloc().nameValue);
   print(AuthBloc().emailValue);
   print(AuthBloc().passwordValue);

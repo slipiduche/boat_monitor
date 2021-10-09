@@ -3,6 +3,7 @@ import 'package:boat_monitor/bloc/argument_bloc.dart';
 import 'package:boat_monitor/bloc/authentication_bloc.dart';
 import 'package:boat_monitor/bloc/boats_bloc.dart';
 import 'package:boat_monitor/bloc/currenBoatBloc.dart';
+import 'package:boat_monitor/bloc/journeys_bloc.dart';
 import 'package:boat_monitor/bloc/parameters_bloc.dart';
 import 'package:boat_monitor/generated/l10n.dart';
 import 'package:boat_monitor/styles/colors.dart';
@@ -63,6 +64,7 @@ onAfterBuild(BuildContext context) {
           if (AuthBloc().routeValue == 'signUpPage') {
             Navigator.pushReplacementNamed(context, 'loginPage');
           } else if (AuthBloc().routeValue == 'currentBoatPage') {
+            JourneysBloc().setJourneys = null;
             Navigator.of(context).pushReplacementNamed('homePage');
           } else if (AuthBloc().routeValue == 'changePasswordPage') {
             Navigator.of(context).pushReplacementNamed('loginPage');
