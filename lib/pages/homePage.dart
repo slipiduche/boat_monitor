@@ -236,6 +236,188 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                 ed: DateTime.now(),
                 ini: DateTime.now(),
                 boatName: boat.boatName);
+            return GestureDetector(
+              onTap: () {
+                final FocusScopeNode focus = FocusScope.of(context);
+                if (!focus.hasPrimaryFocus && focus.hasFocus) {
+                  FocusManager.instance.primaryFocus.unfocus();
+                }
+
+                Navigator.of(context).pushNamed(
+                  'currentBoatPage',
+                  arguments: BoatCardArguments(journey: _journey, boat: boat),
+                );
+              },
+              child: Container(
+                height: 150,
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: blue1, style: BorderStyle.solid, width: 2.0),
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: marginInt, vertical: marginSupBoatCard),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                boat.boatName,
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: messageTitle),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                TextLanguage.of(context).departure + ':',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: boatCardContent),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(TextLanguage.of(context).noData,
+                                  style: TextStyle(
+                                      color: blueTextBoatCard,
+                                      fontSize: boatCardContent))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                TextLanguage.of(context).arrival + ':',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: boatCardContent),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(TextLanguage.of(context).noData,
+                                  style: TextStyle(
+                                      color: blueTextBoatCard,
+                                      fontSize: boatCardContent))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                TextLanguage.of(context).finalWeight + ':',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: boatCardContent),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(TextLanguage.of(context).noData,
+                                  style: TextStyle(
+                                      color: blueTextBoatCard,
+                                      fontSize: boatCardContent))
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          right: marginInt, top: marginSupBoatCard),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Builder(builder: (context) {
+                                if (boat.st == 1) {
+                                  return statusIcon(20.0, 1);
+                                } else {
+                                  return statusIcon(20.0, 0);
+                                }
+                              }),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                TextLanguage.of(context).status + ':',
+                                style: TextStyle(
+                                    color: blue1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Builder(builder: (context) {
+                                if (boat.onJourney == 0 && boat.lj != null) {
+                                  return Text(
+                                    TextLanguage.of(context).arrived,
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.0),
+                                  );
+                                } else if (boat.lj != null) {
+                                  return Text(
+                                    TextLanguage.of(context).sailing,
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.0),
+                                  );
+                                } else {
+                                  return Text(
+                                    TextLanguage.of(context).noData,
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.0),
+                                  );
+                                }
+                              }),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Builder(builder: (context) {
+                                if (boat.onJourney == 0 && boat.lj != null) {
+                                  return arrivedIcon(20.0, blue1);
+                                } else if (boat.lj != null) {
+                                  return boatIconBlue(25.0, blue1);
+                                } else {
+                                  return Container();
+                                }
+                              }),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
           }
           return GestureDetector(
             onTap: () {
@@ -278,49 +460,61 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                         SizedBox(
                           height: 10.0,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              TextLanguage.of(context).departure + ':',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: boatCardContent),
-                            ),
-                            SizedBox(
-                              width: 5.0,
-                            ),
-                            Text(
-                                _journey.ini.toString().substring(
-                                    0, _journey.ini.toString().length - 2),
-                                style: TextStyle(
-                                    color: blueTextBoatCard,
-                                    fontSize: boatCardContent))
-                          ],
-                        ),
+                        Builder(builder: (context) {
+                          if (boat.lj != null) {
+                            return Row(
+                              children: [
+                                Text(
+                                  TextLanguage.of(context).departure + ':',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: boatCardContent),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                    _journey.ini.toString().substring(
+                                        0, _journey.ini.toString().length - 2),
+                                    style: TextStyle(
+                                        color: blueTextBoatCard,
+                                        fontSize: boatCardContent))
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }),
                         SizedBox(
                           height: 5.0,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              TextLanguage.of(context).arrival + ':',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: boatCardContent),
-                            ),
-                            SizedBox(
-                              width: 5.0,
-                            ),
-                            Text(
-                                _journey.ed.toString().substring(
-                                    0, _journey.ed.toString().length - 2),
-                                style: TextStyle(
-                                    color: blueTextBoatCard,
-                                    fontSize: boatCardContent))
-                          ],
-                        ),
+                        Builder(builder: (context) {
+                          if (boat.onJourney == 0 && boat.lj != null) {
+                            return Row(
+                              children: [
+                                Text(
+                                  TextLanguage.of(context).arrival + ':',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: boatCardContent),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                    _journey.ed.toString().substring(
+                                        0, _journey.ed.toString().length - 2),
+                                    style: TextStyle(
+                                        color: blueTextBoatCard,
+                                        fontSize: boatCardContent))
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }),
                         SizedBox(
                           height: 5.0,
                         ),
@@ -376,7 +570,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                               width: 5.0,
                             ),
                             Builder(builder: (context) {
-                              if (boat.onJourney == 0) {
+                              if (boat.onJourney == 0 && boat.lj != null) {
                                 return Text(
                                   TextLanguage.of(context).arrived,
                                   style: TextStyle(
@@ -384,9 +578,17 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14.0),
                                 );
-                              } else {
+                              } else if (boat.lj != null) {
                                 return Text(
                                   TextLanguage.of(context).sailing,
+                                  style: TextStyle(
+                                      color: blue1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14.0),
+                                );
+                              } else {
+                                return Text(
+                                  TextLanguage.of(context).noData,
                                   style: TextStyle(
                                       color: blue1,
                                       fontWeight: FontWeight.bold,
@@ -397,7 +599,15 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                             SizedBox(
                               width: 5.0,
                             ),
-                            arrivedIcon(20.0, blue1)
+                            Builder(builder: (context) {
+                              if (boat.onJourney == 0 && boat.lj != null) {
+                                return arrivedIcon(20.0, blue1);
+                              } else if (boat.lj != null) {
+                                return boatIconBlue(25.0, blue1);
+                              } else {
+                                return Container();
+                              }
+                            }),
                           ],
                         ),
                       ],

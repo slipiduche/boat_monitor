@@ -1,6 +1,7 @@
 import 'package:boat_monitor/providers/mqtt_provider.dart';
 import 'package:boat_monitor/routes/routes.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -111,8 +112,10 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
       onGenerateRoute: (RouteSettings settings) {
         print('ruta llamada ${settings.name}');
         //Navigator.pop(context);
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
             builder: (BuildContext context) => LoginPage());
+        // return MaterialPageRoute(
+        //     builder: (BuildContext context) => LoginPage());
       },
     );
   }

@@ -203,7 +203,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                           Column(
                             children: [
                               Builder(builder: (context) {
-                                if (_boat.onJourney == 0) {
+                                if (_boat.onJourney == 0 && _boat.lj != null) {
                                   return arrivedIcon(25.0, blue1);
                                 } else {
                                   return Container(
@@ -215,7 +215,16 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               SizedBox(
                                 height: 5.0,
                               ),
-                              boatIconBlue(25.0, blue1),
+                              Builder(builder: (context) {
+                                if (_boat.lj != null) {
+                                  return boatIconBlue(25.0, blue1);
+                                } else {
+                                  return Container(
+                                    height: 25.0,
+                                    width: 25.0,
+                                  );
+                                }
+                              }),
                               SizedBox(
                                 height: 5.0,
                               ),
@@ -236,7 +245,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                 height: 5.0,
                               ),
                               Builder(builder: (context) {
-                                if (_boat.onJourney == 0) {
+                                if (_boat.onJourney == 0 && _boat.lj != null) {
                                   return Text(
                                     TextLanguage.of(context).arrived,
                                     style: TextStyle(
@@ -257,13 +266,25 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               SizedBox(
                                 height: 10.0,
                               ),
-                              Text(
-                                TextLanguage.of(context).departure + ':',
-                                style: TextStyle(
-                                    color: blue1,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: messageTitle),
-                              ),
+                              Builder(builder: (context) {
+                                if (_boat.lj != null) {
+                                  return Text(
+                                    TextLanguage.of(context).departure + ':',
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: messageTitle),
+                                  );
+                                } else {
+                                  return Text(
+                                    '    ',
+                                    style: TextStyle(
+                                        color: blue1,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: messageTitle),
+                                  );
+                                }
+                              }),
                               SizedBox(
                                 height: 10.0,
                               ),

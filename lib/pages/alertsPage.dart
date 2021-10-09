@@ -9,6 +9,7 @@ import 'package:boat_monitor/models/server_alerts_model.dart';
 import 'package:boat_monitor/share_prefs/user_preferences.dart';
 import 'package:boat_monitor/styles/margins.dart';
 import 'package:boat_monitor/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
