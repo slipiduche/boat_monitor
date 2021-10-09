@@ -106,9 +106,9 @@ _login1(BuildContext context) async {
     print('usertype:${_prefs.userType}');
     AlertsBloc().setAlertClosed = true;
     if (_prefs.userType > 1) {
-      Navigator.of(context).pushReplacementNamed('managerPage');
+      Navigator.of(context).pushReplacementNamed('homePage');
     } else {
-      Navigator.of(context).pushReplacementNamed('supervisorPage');
+      Navigator.of(context).pushReplacementNamed('homePage');
     }
 
     //

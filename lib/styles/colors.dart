@@ -35,6 +35,12 @@ final LinearGradient blueGradient3 = LinearGradient(
   begin: FractionalOffset.topCenter,
   end: FractionalOffset.bottomCenter,
 );
+final LinearGradient greenGradient = LinearGradient(
+  colors: [Colors.green, Colors.green[700]],
+  stops: [0.0, 1.0],
+  begin: FractionalOffset.topCenter,
+  end: FractionalOffset.bottomCenter,
+);
 final LinearGradient redGradient = LinearGradient(
   colors: [redAlert, blue1],
   stops: [0.0, 1.0],
