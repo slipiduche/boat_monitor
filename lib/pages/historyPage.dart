@@ -469,7 +469,7 @@ Widget makeTravelList(BuildContext context, List<Journey> journeys) {
         }
         return Column(
           children: [
-            _travelCard(context, journeys[index]),
+            _travelCard(context, journeys[journeys.length - index - 1]),
             Visibility(
                 visible: _visible,
                 child: SizedBox(
@@ -506,21 +506,6 @@ Widget _travelCard(BuildContext context, Journey journey) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Container(
-                    //   width: MediaQuery.of(context).size.width / 5 - 30,
-                    //   child: Text(
-                    //     '${journey.id}',
-                    //     textAlign: TextAlign.center,
-                    //     style: TextStyle(
-
-                    //         //color: blue1,
-                    //         //fontWeight: FontWeight.bold,
-                    //         fontSize: privacyPolicySize + 2.0),
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   width: 10.0,
-                    // ),
                     Container(
                       width: MediaQuery.of(context).size.width / 5 - 15,
                       child: Text(
