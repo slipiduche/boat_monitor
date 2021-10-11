@@ -197,6 +197,7 @@ class _StoragePageState extends State<StoragePage> {
   Widget makeBoatStorageList(BuildContext context, List<BoatData> boats) {
     if (boats.length == 0 || listStorage.length < 1) {
       return Container(
+        margin: EdgeInsets.symmetric(horizontal: marginExt1, vertical: 10.0),
         child: Column(
           children: [
             SizedBox(
