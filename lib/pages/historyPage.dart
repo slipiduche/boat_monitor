@@ -552,6 +552,7 @@ Widget _travelCard(BuildContext context, Journey journey) {
                       width: MediaQuery.of(context).size.width / 5 - 10,
                       child: Text(
                         '${journey.startUserNames}',
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.end,
                         style: TextStyle(
                             //color: blue1,

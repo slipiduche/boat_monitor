@@ -230,7 +230,7 @@ Widget createFlutterMap(BuildContext context, LatLng position,
                         color: blue1,
                       ),
                       onTap: () {
-                        if (controller.zoom < 15.0) {
+                        if (controller.zoom < 18.0) {
                           controller.move(
                               controller.center, controller.zoom + 1.0);
                         }

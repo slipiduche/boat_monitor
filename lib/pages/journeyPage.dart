@@ -185,9 +185,11 @@ class _JourneyPageState extends State<JourneyPage> {
                                       child: journeyCard(
                                           context,
                                           weightIcon(50.0, blue1),
-                                          TextLanguage.of(context)
-                                              .weight
-                                              .toUpperCase(),
+                                          '  ' +
+                                              TextLanguage.of(context)
+                                                  .weight
+                                                  .toUpperCase() +
+                                              '  ',
                                           LineChartBasic(
                                               HistoricsBloc().historicsValue)),
                                     ),
@@ -232,9 +234,12 @@ class _JourneyPageState extends State<JourneyPage> {
                                       child: journeyCard(
                                           context,
                                           temperatureIcon(50.0, blue1),
-                                          TextLanguage.of(context)
-                                              .temperature
-                                              .toUpperCase(),
+                                          '    ' +
+                                              TextLanguage.of(context)
+                                                  .temperature
+                                                  .toUpperCase()
+                                                  .substring(0, 4) +
+                                              '   ',
                                           LineChartTemp(
                                               HistoricsBloc().historicsValue)),
                                     ),
