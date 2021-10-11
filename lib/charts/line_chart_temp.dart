@@ -5,17 +5,20 @@ import 'package:boat_monitor/models/historics_model.dart';
 
 class LineChartTemp extends StatefulWidget {
   Historics historics;
-  LineChartTemp(this.historics);
+  int previewMode; //0 disabled 1 enabled
+  LineChartTemp(this.historics, this.previewMode);
   @override
-  _LineChartTempState createState() => _LineChartTempState(historics);
+  _LineChartTempState createState() =>
+      _LineChartTempState(historics, previewMode);
 }
 
 class _LineChartTempState extends State<LineChartTemp> {
   int samples = 1;
   Historics historics;
+  int previewMode;
   List<double> xData, yData;
   List<FlSpot> spots;
-  _LineChartTempState(this.historics);
+  _LineChartTempState(this.historics, this.previewMode);
   List<Color> gradientColors = [
     Colors.blueAccent,
     Colors.blue,
@@ -79,6 +82,7 @@ class _LineChartTempState extends State<LineChartTemp> {
   LineChartData mainData() {
     return LineChartData(
       lineTouchData: LineTouchData(
+        enabled: previewMode == 0 ? true : false,
         touchTooltipData: LineTouchTooltipData(
             maxContentWidth: 40,
             tooltipBgColor: Colors.white,

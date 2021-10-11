@@ -177,7 +177,7 @@ class _WeightPageState extends State<WeightPage> {
                           ),
                           Container(
                               child: LineChartBasic(
-                                  HistoricsBloc().historicsValue)),
+                                  HistoricsBloc().historicsValue, 0)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

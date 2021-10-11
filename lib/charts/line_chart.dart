@@ -5,15 +5,18 @@ import 'package:flutter/material.dart';
 
 class LineChartBasic extends StatefulWidget {
   Historics historics;
-  LineChartBasic(this.historics);
+  int previewMode; // enabled 1 disabled 0
+  LineChartBasic(this.historics, this.previewMode);
   @override
-  _LineChartBasicState createState() => _LineChartBasicState(historics);
+  _LineChartBasicState createState() =>
+      _LineChartBasicState(historics, previewMode);
 }
 
 class _LineChartBasicState extends State<LineChartBasic> {
   int samples = 1;
   Historics historics;
-  _LineChartBasicState(this.historics);
+  int previewMode; // enabled 1 disabled 0
+  _LineChartBasicState(this.historics, this.previewMode);
   List<Color> gradientColors = [
     Colors.blueAccent,
     Colors.blue,
@@ -65,6 +68,7 @@ class _LineChartBasicState extends State<LineChartBasic> {
   LineChartData mainData(Historics historics) {
     return LineChartData(
       lineTouchData: LineTouchData(
+        enabled: previewMode == 0 ? true : false,
         touchTooltipData: LineTouchTooltipData(
             maxContentWidth: 40,
             tooltipBgColor: Colors.white,

@@ -191,7 +191,8 @@ class _JourneyPageState extends State<JourneyPage> {
                                                   .toUpperCase() +
                                               '  ',
                                           LineChartBasic(
-                                              HistoricsBloc().historicsValue)),
+                                              HistoricsBloc().historicsValue,
+                                              1)),
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -241,7 +242,8 @@ class _JourneyPageState extends State<JourneyPage> {
                                                   .substring(0, 4) +
                                               '   ',
                                           LineChartTemp(
-                                              HistoricsBloc().historicsValue)),
+                                              HistoricsBloc().historicsValue,
+                                              1)),
                                     ),
                                     GestureDetector(
                                       onTap: () {

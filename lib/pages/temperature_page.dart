@@ -174,7 +174,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                           ),
                           Container(
                               child: LineChartTemp(
-                                  HistoricsBloc().historicsValue)),
+                                  HistoricsBloc().historicsValue, 0)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
