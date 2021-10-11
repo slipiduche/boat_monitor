@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return MaterialApp(
+    return CupertinoApp(
       builder: (BuildContext context, Widget child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
@@ -85,19 +85,23 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
         );
       },
       theme: //ThemeData.lerp(
-          ThemeData(
-        backgroundColor: Colors.white,
-        fontFamily: 'Roboto',
-        primaryColor: blue1,
-        accentColor: blue1,
-        colorScheme: ColorScheme.light(
-          primary: blue1,
-        ),
-        buttonTheme: ButtonThemeData(
-          textTheme: ButtonTextTheme.primary,
-        ),
-      ),
-      themeMode: ThemeMode.system,
+          CupertinoThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              textTheme: CupertinoTextThemeData(
+                  textStyle: TextStyle(
+                fontFamily: 'Roboto',
+              )),
+              primaryColor: blue1,
+              primaryContrastingColor: blue1,
+              barBackgroundColor: blue1
+              // colorScheme: ColorScheme.light(
+              //   primary: blue1,
+              // ),
+              // buttonTheme: ButtonThemeData(
+              //   textTheme: ButtonTextTheme.primary,
+              // ),
+              ),
+      //themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       title: 'BoatMonitor App',
       localizationsDelegates: [
