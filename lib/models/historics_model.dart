@@ -65,7 +65,7 @@ class Historic {
   double dsk;
   double temp;
   String bLocation;
-  int tiP;
+  double tiP;
   String flName;
   DateTime dt;
   DateTime reg;
@@ -82,7 +82,7 @@ class Historic {
         dsk: json["dsk"] == null ? 0 : json["dsk"].toDouble(),
         temp: json["temp"] == null ? 0 : json["temp"].toDouble(),
         bLocation: json["b_location"],
-        tiP: json["TiP"],
+        tiP: json["TiP"] == null ? 0 : json["TiP"].toDouble(),
         flName: json["fl_name"],
         dt: DateTime.parse(json["dt"]),
         reg: DateTime.parse(json["reg"]),
