@@ -475,8 +475,9 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                                   width: 5.0,
                                 ),
                                 Text(
-                                    _journey.ini.toString().substring(
-                                        0, _journey.ini.toString().length - 2),
+                                    '${_journey.ini.day > 9 ? _journey.ini.day : '0${_journey.ini.day}'}/${_journey.ini.month > 9 ? _journey.ini.month : '0${_journey.ini.month}'}/${_journey.ini.year} ' +
+                                        _journey.ini.toString().substring(11,
+                                            _journey.ini.toString().length - 2),
                                     style: TextStyle(
                                         color: blueTextBoatCard,
                                         fontSize: boatCardContent))
@@ -504,8 +505,9 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                                   width: 5.0,
                                 ),
                                 Text(
-                                    _journey.ed.toString().substring(
-                                        0, _journey.ed.toString().length - 2),
+                                    '${_journey.ed.day > 9 ? _journey.ed.day : '0${_journey.ed.day}'}/${_journey.ed.month > 9 ? _journey.ed.month : '0${_journey.ed.month}'}/${_journey.ed.year} ' +
+                                        _journey.ed.toString().substring(11,
+                                            _journey.ed.toString().length - 2),
                                     style: TextStyle(
                                         color: blueTextBoatCard,
                                         fontSize: boatCardContent))
