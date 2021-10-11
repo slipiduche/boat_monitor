@@ -84,9 +84,10 @@ class _HomePageState extends State<HomePage> {
                                             if (snapshot.hasData) {
                                               _boats.forEach((element) {
                                                 if (element.boatName
-                                                    .toLowerCase()
-                                                    .contains(snapshot.data
-                                                        .toLowerCase())) {
+                                                        .toLowerCase()
+                                                        .contains(snapshot.data
+                                                            .toLowerCase()) &&
+                                                    element.st == 1) {
                                                   print(element.boatName);
                                                   print(snapshot.data
                                                       .toLowerCase());
@@ -94,7 +95,13 @@ class _HomePageState extends State<HomePage> {
                                                 }
                                               });
                                             } else {
-                                              _boatsFiltered = _boats;
+                                              _boats.forEach((element) {
+                                                if (element.st == 1) {
+                                                  print(element.boatName);
+
+                                                  _boatsFiltered.add(element);
+                                                }
+                                              });
                                             }
                                             if (HomeFilterBloc()
                                                         .homeFilterValue !=
@@ -108,26 +115,32 @@ class _HomePageState extends State<HomePage> {
                                                 switch (_filter) {
                                                   case 'Sailing':
                                                     if (element.onJourney ==
-                                                        1) {
+                                                            1 &&
+                                                        element.st == 1) {
                                                       _boatsFiltered2
                                                           .add(element);
                                                     }
                                                     break;
                                                   case 'Arrived':
                                                     if (element.onJourney ==
-                                                        0) {
+                                                            0 &&
+                                                        element.st == 1) {
                                                       _boatsFiltered2
                                                           .add(element);
                                                     }
                                                     break;
                                                   case 'unavailable':
-                                                    if (element.st == 0) {
+                                                    if (element.st == 1 &&
+                                                        element.connected ==
+                                                            0) {
                                                       _boatsFiltered2
                                                           .add(element);
                                                     }
                                                     break;
                                                   case 'available':
-                                                    if (element.st == 1) {
+                                                    if (element.st == 1 &&
+                                                        element.connected ==
+                                                            1) {
                                                       _boatsFiltered2
                                                           .add(element);
                                                     }
@@ -351,6 +364,8 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Builder(builder: (context) {
+                                print('aqui estoy colocando esto' +
+                                    boat.toString());
                                 if (boat.connected == 1) {
                                   return statusIcon(20.0, 1);
                                 } else {
@@ -552,7 +567,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Builder(builder: (context) {
-                              if (boat.st == 1) {
+                              if (boat.connected == 1) {
                                 return statusIcon(20.0, 1);
                               } else {
                                 return statusIcon(20.0, 0);
