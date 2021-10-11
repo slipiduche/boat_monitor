@@ -55,10 +55,10 @@ class TextLanguage {
     );
   }
 
-  /// `Type any boat name, data travel, supervisor`
+  /// `Type any boat name, travel id, supervisor`
   String get historyHintText {
     return Intl.message(
-      'Type any boat name, data travel, supervisor',
+      'Type any boat name, travel id, supervisor',
       name: 'historyHintText',
       desc: '',
       args: [],

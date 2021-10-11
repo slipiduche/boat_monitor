@@ -1,7 +1,7 @@
 {
     "boat": "Boat",
     "confirm": "Confirm",
-    "historyHintText": "Type any boat name, data travel, supervisor",
+    "historyHintText": "Type any boat name, travel id, supervisor",
     "restoring": "Restoring",
     "restore": "Restore",
     "delete": "Delete",

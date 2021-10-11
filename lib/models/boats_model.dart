@@ -65,6 +65,7 @@ class BoatData {
       this.boatName,
       this.maxSt,
       this.st,
+      this.connected,
       this.resp,
       this.respName,
       this.obs,
@@ -77,6 +78,7 @@ class BoatData {
   String boatName;
   double maxSt;
   int st;
+  int connected;
   int resp;
   int lj;
   int onJourney;
@@ -90,6 +92,7 @@ class BoatData {
         boatName: json["boat_name"],
         maxSt: json["max_st"].toDouble(),
         st: json["st"],
+        connected: json["connected"],
         resp: json["resp"],
         lj: json["lj"],
         onJourney: json["on_journey"],

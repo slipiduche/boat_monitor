@@ -351,7 +351,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Builder(builder: (context) {
-                                if (boat.st == 1) {
+                                if (boat.connected == 1) {
                                   return statusIcon(20.0, 1);
                                 } else {
                                   return statusIcon(20.0, 0);

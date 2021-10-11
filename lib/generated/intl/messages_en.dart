@@ -83,7 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "finalWeight" : MessageLookupByLibrary.simpleMessage("Final weight"),
     "forgot" : MessageLookupByLibrary.simpleMessage("Forgot your password ?"),
     "history" : MessageLookupByLibrary.simpleMessage("Historics"),
-    "historyHintText" : MessageLookupByLibrary.simpleMessage("Type any boat name, data travel, supervisor"),
+    "historyHintText" : MessageLookupByLibrary.simpleMessage("Type any boat name, travel id, supervisor"),
     "home" : MessageLookupByLibrary.simpleMessage("Home"),
     "hours" : MessageLookupByLibrary.simpleMessage("Hours"),
     "iRead" : MessageLookupByLibrary.simpleMessage("I’ve read and accept all the"),
