@@ -33,6 +33,7 @@ class JourneyPage extends StatefulWidget {
 }
 
 class _JourneyPageState extends State<JourneyPage> {
+  ScrollController scrollController = ScrollController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   UserPreferences _prefs = UserPreferences();
   AuthBloc auth = AuthBloc();
@@ -57,6 +58,9 @@ class _JourneyPageState extends State<JourneyPage> {
     if (MediaQuery.of(context).size.height < 2000) {
       _extraHeight = 50.0;
     }
+    scrollController.addListener(() {
+      print(scrollController.position.pixels);
+    });
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).pushReplacementNamed('historyPage');
@@ -68,269 +72,288 @@ class _JourneyPageState extends State<JourneyPage> {
             _journey.journey.boatName, boatIconBlue(25.0, Colors.white), () {
           Navigator.of(context).pushReplacementNamed('historyPage');
         }),
-        body: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height + _extraHeight,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 10.0,
-                ),
-                Expanded(
-                    child: Column(
-                  children: [
-                    StreamBuilder(
-                        stream: HistoricsBloc().historics,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            Historics _historics = snapshot.data;
-                            if (_historics.historics.length > 0) {
-                              return Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: marginExt1),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Expanded(child: Container()),
-                                          Text(
-                                            TextLanguage.of(context)
-                                                    .travel
+        body: RefreshIndicator(
+          color: blue1,
+          onRefresh: () {
+            print('posicion');
+            print(scrollController.position);
+            HistoricsProvider()
+                .getHistorics(context, journeyId: [_journey.journey.id]);
+            PicturesProvider()
+                .getPictures(context, journeyId: _journey.journey.id);
+            return Future.delayed(Duration(seconds: 1));
+          },
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Container(
+              height: MediaQuery.of(context).size.height + _extraHeight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Expanded(
+                      child: Column(
+                    children: [
+                      StreamBuilder(
+                          stream: HistoricsBloc().historics,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              Historics _historics = snapshot.data;
+                              if (_historics.historics.length > 0) {
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: marginExt1),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(child: Container()),
+                                            Text(
+                                              TextLanguage.of(context)
+                                                      .travel
+                                                      .toUpperCase() +
+                                                  ' ${_journey.journey.id}',
+                                              style: TextStyle(
+                                                  color: blue1,
+                                                  fontSize: statusSize,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Expanded(
+                                                child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    AlertsBloc().setAlert =
+                                                        Alerts(
+                                                            TextLanguage.of(
+                                                                    context)
+                                                                .downloading,
+                                                            "Updating");
+                                                    final _resp =
+                                                        await JourneyProvider()
+                                                            .getFilesZip(
+                                                                context,
+                                                                journeyId:
+                                                                    _journey
+                                                                        .journey
+                                                                        .id);
+                                                    if (_resp['ok']) {
+                                                      AlertsBloc().setAlert =
+                                                          Alerts(
+                                                              _resp['message'],
+                                                              'Updated');
+                                                    } else {
+                                                      AlertsBloc().setAlert =
+                                                          Alerts(
+                                                              _resp['message'],
+                                                              'Error');
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    child: downloadIcon(
+                                                        40.0, blue1),
+                                                  ),
+                                                ),
+                                              ],
+                                            )),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: marginExt1),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              TextLanguage.of(context).sail +
+                                                  ': ${_journey.journey.startUserNames}',
+                                              style: TextStyle(
+                                                  color: blue1,
+                                                  fontSize: journeySailSize),
+                                            ),
+                                            Expanded(child: Container()),
+                                            Text(
+                                              TextLanguage.of(context).arrived +
+                                                  ': ${_journey.journey.endUserNames}',
+                                              style: TextStyle(
+                                                  color: blue1,
+                                                  fontSize: journeySailSize),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  'weightPage',
+                                                  arguments: _journey);
+                                        },
+                                        child: journeyCard(
+                                            context,
+                                            weightIcon(50.0, blue1),
+                                            '  ' +
+                                                TextLanguage.of(context)
+                                                    .weight
                                                     .toUpperCase() +
-                                                ' ${_journey.journey.id}',
-                                            style: TextStyle(
-                                                color: blue1,
-                                                fontSize: statusSize,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Expanded(
-                                              child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  AlertsBloc().setAlert =
-                                                      Alerts(
+                                                '  ',
+                                            LineChartBasic(
+                                                HistoricsBloc().historicsValue,
+                                                1)),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  'locationPage',
+                                                  arguments: JourneyCardArgument(
+                                                      journey: _journey.journey,
+                                                      historics: HistoricsBloc()
+                                                          .historicsValue));
+                                        },
+                                        child: journeyCard(
+                                            context,
+                                            locationIcon(50.0, blue1),
+                                            TextLanguage.of(context)
+                                                .location
+                                                .toUpperCase(),
+                                            createFlutterMap(
+                                                context,
+                                                latLongFromString(
+                                                    HistoricsBloc()
+                                                        .historicsValue
+                                                        .historics
+                                                        .last
+                                                        .bLocation),
+                                                controller,
+                                                _historics,
+                                                false)),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                            'temperaturePage',
+                                            arguments: JourneyCardArgument(
+                                                journey: _journey.journey,
+                                                historics: HistoricsBloc()
+                                                    .historicsValue),
+                                          );
+                                        },
+                                        child: journeyCard(
+                                            context,
+                                            temperatureIcon(50.0, blue1),
+                                            '    ' +
+                                                TextLanguage.of(context)
+                                                    .temperature
+                                                    .toUpperCase()
+                                                    .substring(0, 4) +
+                                                '   ',
+                                            LineChartTemp(
+                                                HistoricsBloc().historicsValue,
+                                                1)),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  'picturesPage',
+                                                  arguments: PicturePageArgument(
+                                                      journeyCardArgument:
+                                                          _journey,
+                                                      pictures: PicturesBloc()
+                                                          .picturesValue));
+                                        },
+                                        child: journeyCard(
+                                            context,
+                                            picturesIcon(50.0, blue1),
+                                            TextLanguage.of(context)
+                                                .pictures
+                                                .toUpperCase(),
+                                            StreamBuilder(
+                                                stream: PicturesBloc().pictures,
+                                                builder: (context,
+                                                    AsyncSnapshot<Files>
+                                                        snapshot) {
+                                                  final picturesPreviewList =
+                                                      snapshot.data;
+                                                  if (snapshot.hasData) {
+                                                    if (picturesPreviewList
+                                                            .files.length ==
+                                                        0) {
+                                                      return Text(
                                                           TextLanguage.of(
                                                                   context)
-                                                              .downloading,
-                                                          "Updating");
-                                                  final _resp =
-                                                      await JourneyProvider()
-                                                          .getFilesZip(context,
-                                                              journeyId:
-                                                                  _journey
-                                                                      .journey
-                                                                      .id);
-                                                  if (_resp['ok']) {
-                                                    AlertsBloc().setAlert =
-                                                        Alerts(_resp['message'],
-                                                            'Updated');
+                                                              .noData);
+                                                    } else {
+                                                      return picturesPreview(
+                                                          context,
+                                                          picturesPreviewList);
+                                                    }
                                                   } else {
-                                                    AlertsBloc().setAlert =
-                                                        Alerts(_resp['message'],
-                                                            'Error');
+                                                    return circularProgressCustom();
                                                   }
-                                                },
-                                                child: Container(
-                                                  child:
-                                                      downloadIcon(40.0, blue1),
-                                                ),
-                                              ),
-                                            ],
-                                          )),
-                                        ],
+                                                })),
                                       ),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return Column(
+                                  children: [
+                                    Text(
+                                      TextLanguage.of(context).noData,
+                                      style: TextStyle(
+                                          color: blue1, fontSize: correoSize),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: marginExt1),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            TextLanguage.of(context).sail +
-                                                ': ${_journey.journey.startUserNames}',
-                                            style: TextStyle(
-                                                color: blue1,
-                                                fontSize: journeySailSize),
-                                          ),
-                                          Expanded(child: Container()),
-                                          Text(
-                                            TextLanguage.of(context).arrived +
-                                                ': ${_journey.journey.endUserNames}',
-                                            style: TextStyle(
-                                                color: blue1,
-                                                fontSize: journeySailSize),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed('weightPage',
-                                                arguments: _journey);
-                                      },
-                                      child: journeyCard(
-                                          context,
-                                          weightIcon(50.0, blue1),
-                                          '  ' +
-                                              TextLanguage.of(context)
-                                                  .weight
-                                                  .toUpperCase() +
-                                              '  ',
-                                          LineChartBasic(
-                                              HistoricsBloc().historicsValue,
-                                              1)),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                'locationPage',
-                                                arguments: JourneyCardArgument(
-                                                    journey: _journey.journey,
-                                                    historics: HistoricsBloc()
-                                                        .historicsValue));
-                                      },
-                                      child: journeyCard(
-                                          context,
-                                          locationIcon(50.0, blue1),
-                                          TextLanguage.of(context)
-                                              .location
-                                              .toUpperCase(),
-                                          createFlutterMap(
-                                              context,
-                                              latLongFromString(HistoricsBloc()
-                                                  .historicsValue
-                                                  .historics
-                                                  .last
-                                                  .bLocation),
-                                              controller,
-                                              _historics,
-                                              false)),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                          'temperaturePage',
-                                          arguments: JourneyCardArgument(
-                                              journey: _journey.journey,
-                                              historics: HistoricsBloc()
-                                                  .historicsValue),
-                                        );
-                                      },
-                                      child: journeyCard(
-                                          context,
-                                          temperatureIcon(50.0, blue1),
-                                          '    ' +
-                                              TextLanguage.of(context)
-                                                  .temperature
-                                                  .toUpperCase()
-                                                  .substring(0, 4) +
-                                              '   ',
-                                          LineChartTemp(
-                                              HistoricsBloc().historicsValue,
-                                              1)),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                                'picturesPage',
-                                                arguments: PicturePageArgument(
-                                                    journeyCardArgument:
-                                                        _journey,
-                                                    pictures: PicturesBloc()
-                                                        .picturesValue));
-                                      },
-                                      child: journeyCard(
-                                          context,
-                                          picturesIcon(50.0, blue1),
-                                          TextLanguage.of(context)
-                                              .pictures
-                                              .toUpperCase(),
-                                          StreamBuilder(
-                                              stream: PicturesBloc().pictures,
-                                              builder: (context,
-                                                  AsyncSnapshot<Files>
-                                                      snapshot) {
-                                                final picturesPreviewList =
-                                                    snapshot.data;
-                                                if (snapshot.hasData) {
-                                                  if (picturesPreviewList
-                                                          .files.length ==
-                                                      0) {
-                                                    return Text(
-                                                        TextLanguage.of(context)
-                                                            .noData);
-                                                  } else {
-                                                    return picturesPreview(
-                                                        context,
-                                                        picturesPreviewList);
-                                                  }
-                                                } else {
-                                                  return circularProgressCustom();
-                                                }
-                                              })),
+                                    Divider(
+                                      thickness: 1.0,
+                                      color: gray1,
                                     ),
                                   ],
-                                ),
-                              );
+                                );
+                              }
                             } else {
-                              return Column(
-                                children: [
-                                  Text(
-                                    TextLanguage.of(context).noData,
-                                    style: TextStyle(
-                                        color: blue1, fontSize: correoSize),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Divider(
-                                    thickness: 1.0,
-                                    color: gray1,
-                                  ),
-                                ],
+                              return Center(
+                                child: circularProgressCustom(),
                               );
                             }
-                          } else {
-                            return Center(
-                              child: circularProgressCustom(),
-                            );
-                          }
-                        }),
-                  ],
-                )),
-                StreamBuilder(
-                  stream: AlertsBloc().alert,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData &&
-                        (auth.routeValue == 'journeyPage')) {
-                      print('paso por aca');
-                      ArgumentBloc().setArgument = JourneyCardArgument(
-                          journey: _journey.journey,
-                          historics: HistoricsBloc().historicsValue);
-                      print(ArgumentBloc().argumentValue);
-                      WidgetsBinding.instance.addPostFrameCallback(
-                          (_) => onAfterBuild(_scaffoldKey.currentContext));
-                    }
+                          }),
+                    ],
+                  )),
+                  StreamBuilder(
+                    stream: AlertsBloc().alert,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData &&
+                          (auth.routeValue == 'journeyPage')) {
+                        print('paso por aca');
+                        ArgumentBloc().setArgument = JourneyCardArgument(
+                            journey: _journey.journey,
+                            historics: HistoricsBloc().historicsValue);
+                        print(ArgumentBloc().argumentValue);
+                        WidgetsBinding.instance.addPostFrameCallback(
+                            (_) => onAfterBuild(_scaffoldKey.currentContext));
+                      }
 
-                    return Container();
-                  },
-                ),
-              ],
+                      return Container();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
