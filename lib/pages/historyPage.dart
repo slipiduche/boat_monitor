@@ -500,6 +500,9 @@ Widget _travelCard(BuildContext context, Journey journey) {
           Container(
             child: Column(
               children: [
+                SizedBox(
+                  height: 10.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -519,9 +522,9 @@ Widget _travelCard(BuildContext context, Journey journey) {
                     //   width: 10.0,
                     // ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 5 - 20,
+                      width: MediaQuery.of(context).size.width / 5 - 15,
                       child: Text(
-                        '${journey.ini.toString().substring(0, journey.ini.toString().length - 5)}',
+                        '${journey.ini.day > 9 ? '${journey.ini.day}' : '0${journey.ini.day}'}/${journey.ini.month > 9 ? '${journey.ini.month}' : '0${journey.ini.month}'}/${journey.ini.year.toString().substring(2, 4)}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             //color: blue1,
@@ -533,9 +536,9 @@ Widget _travelCard(BuildContext context, Journey journey) {
                       width: 30.0,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 5 - 20,
+                      width: MediaQuery.of(context).size.width / 5 - 15,
                       child: Text(
-                        '${journey.ed.toString().substring(0, journey.ed.toString().length - 5)}',
+                        '${journey.ed.day > 9 ? '${journey.ed.day}' : '0${journey.ed.day}'}/${journey.ed.month > 9 ? '${journey.ed.month}' : '0${journey.ed.month}'}/${journey.ed.year.toString().substring(2, 4)}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             //color: blue1,
