@@ -315,7 +315,10 @@ class _BoatDataPageState extends State<BoatDataPage> {
                         SizedBox(width: 5.0),
                         Container(
                             width: (MediaQuery.of(context).size.width - 80) / 4,
-                            child: Text(boat.ini.toString(),
+                            child: Text(
+                                '${boat.ini.day > 9 ? boat.ini.day : '0${boat.ini.day}'}/${boat.ini.month > 9 ? boat.ini.month : '0${boat.ini.month}'}/${boat.ini.year} ' +
+                                    boat.ini.toString().substring(
+                                        11, boat.ini.toString().length - 2),
                                 overflow: TextOverflow.clip)),
                         Container(
                             width:
