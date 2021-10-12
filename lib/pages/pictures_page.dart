@@ -62,7 +62,6 @@ class _PicturesPageState extends State<PicturesPage>
         return false;
       }
     }).toList();
-    print(listFiltered);
 
     double _textSize = 16.0;
 
@@ -176,8 +175,7 @@ class _PicturesPageState extends State<PicturesPage>
                                         Builder(builder: (context) {
                                           FontWeight _fontWeight =
                                               FontWeight.normal;
-                                          print(
-                                              '_tabController.index=${_tabController.index}');
+
                                           if (_tabController.index == 0) {
                                             _fontWeight = FontWeight.bold;
                                           }
@@ -196,8 +194,7 @@ class _PicturesPageState extends State<PicturesPage>
                                         Builder(builder: (context) {
                                           FontWeight _fontWeight =
                                               FontWeight.normal;
-                                          print(
-                                              '_tabController.index=${_tabController.index}');
+
                                           if (_tabController.index == 1) {
                                             _fontWeight = FontWeight.bold;
                                           }
@@ -216,8 +213,7 @@ class _PicturesPageState extends State<PicturesPage>
                                         Builder(builder: (context) {
                                           FontWeight _fontWeight =
                                               FontWeight.normal;
-                                          print(
-                                              '_tabController.index=${_tabController.index}');
+
                                           if (_tabController.index == 2) {
                                             _fontWeight = FontWeight.bold;
                                           }
@@ -285,7 +281,7 @@ class _PicturesPageState extends State<PicturesPage>
                                           context,
                                           Parameters().domain +
                                               listFiltered[index].flUrl,
-                                          false),
+                                          true),
                                     );
                                   }),
                                 ));
@@ -303,7 +299,7 @@ class _PicturesPageState extends State<PicturesPage>
                                         context,
                                         Parameters().domain +
                                             listFiltered[index].flUrl,
-                                        false),
+                                        true),
                                   );
                                 }),
                               ),

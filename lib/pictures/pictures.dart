@@ -43,6 +43,13 @@ Widget picture2(BuildContext context, String imageUrl, bool compress) {
     child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: FadeInImage(
+          imageErrorBuilder: (context, object, stackTrace) {
+            return Image(image: AssetImage('assets/no-image.jpg'));
+          },
+
+          fadeInDuration: Duration(milliseconds: 150),
+
+          // image: AssetImage('assets/no-image.jpg'),
           image: NetworkImage(
             imageUrl,
             headers: _req2,
