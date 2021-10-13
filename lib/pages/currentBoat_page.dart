@@ -371,9 +371,14 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                 height: 10.0 + _extraSizeBox,
                               ),
                               Text(
-                                (DateTime.now()
-                                            .difference(_journey.ini)
-                                            .inHours)
+                                (_journey.ed != null &&
+                                                _journey.ed != _journey.ini
+                                            ? _journey.ed
+                                                .difference(_journey.ini)
+                                                .inHours
+                                            : DateTime.now()
+                                                .difference(_journey.ini)
+                                                .inHours)
                                         .toString() +
                                     ' HS',
                                 style: TextStyle(
