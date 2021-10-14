@@ -71,7 +71,24 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     double _extraHeight = 0;
     double _minusSize = 0;
     double _extraSizeBox = 0;
-    print('height:${MediaQuery.of(context).size.height}');
+    String sailingTime = '';
+    int diferenceInMinutes;
+    int diferenceInHours;
+    if (_journey.ed != null && _journey.ed != _journey.ini) {
+      diferenceInMinutes = _journey.ed.difference(_journey.ini).inMinutes;
+    } else {
+      diferenceInMinutes = DateTime.now().difference(_journey.ini).inMinutes;
+    }
+
+    diferenceInHours = diferenceInHours = diferenceInMinutes ~/ 60;
+    diferenceInMinutes = diferenceInMinutes % 60;
+
+    print('minutos:$diferenceInMinutes}');
+    print('Horas:$diferenceInHours}');
+    sailingTime = diferenceInHours > 0
+        ? '$diferenceInHours HS ${diferenceInMinutes > 0 ? '$diferenceInMinutes MIN' : ''}'
+        : '$diferenceInMinutes MIN';
+
     if (MediaQuery.of(context).size.height < 750) {
       _extraHeight = 50.0;
     }
@@ -371,16 +388,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                                 height: 10.0 + _extraSizeBox,
                               ),
                               Text(
-                                (_journey.ed != null &&
-                                                _journey.ed != _journey.ini
-                                            ? _journey.ed
-                                                .difference(_journey.ini)
-                                                .inHours
-                                            : DateTime.now()
-                                                .difference(_journey.ini)
-                                                .inHours)
-                                        .toString() +
-                                    ' HS',
+                                sailingTime,
                                 style: TextStyle(
                                     color: blue1,
                                     //fontWeight: FontWeight.w800,
