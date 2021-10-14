@@ -69,6 +69,10 @@ class _AlertPageState extends State<AlertPage> {
                         if (snapshot.hasData) {
                           snapshot.data.alerts.forEach((element) {
                             _alerts.add(PendingAlert(
+                                sus: element.sus,
+                                ua: element.ua,
+                                ta: element.ta,
+                                wa: element.wa,
                                 boatId: element.boatId,
                                 message: element.descr,
                                 pendingalertId: element.id,
@@ -101,9 +105,9 @@ class _AlertPageState extends State<AlertPage> {
           if (checks.length < alerts.length) {
             checks.add(false);
           }
-          print(checks);
-          print(alerts[index]);
-          if (index < 1) {
+          // print(checks);
+          // print(alerts[index]);
+          if (index < alerts.length) {
             return Column(
               children: [
                 // _alertHeader(context),
@@ -127,6 +131,28 @@ class _AlertPageState extends State<AlertPage> {
   }
 
   Widget _alertItem(BuildContext context, PendingAlert alert, int index) {
+    String typeAlert, alertMessage;
+    // print("Alert:");
+    // print(alert.ua);
+    // print("Date:");
+    // print(alert.date);
+    if (alert.ta == 1) {
+      typeAlert = TextLanguage.of(context).tempAlert;
+    } else if (alert.ua == 1) {
+      typeAlert = TextLanguage.of(context).unreachableAlert;
+    } else if (alert.wa == 1) {
+      typeAlert = TextLanguage.of(context).weigthAlert;
+    } else if (alert.sus == 1) {
+      typeAlert = TextLanguage.of(context).suspiciousAlert;
+    }
+    if (alert.travelId != null) {
+      alertMessage =
+          '$typeAlert, ${TextLanguage.of(context).inJourney} ${alert.travelId}, ${TextLanguage.of(context).inBoat} ${alert.boatId}, ${TextLanguage.of(context).at} "${alert.date.day > 9 ? '${alert.date.day}' : '0${alert.date.day}'}/${alert.date.month > 9 ? '${alert.date.month}' : '0${alert.date.month}'}/${alert.date.year.toString().substring(2, 4)}" ${alert.date.toString().substring(11, alert.date.toString().length - 5)}';
+    } else {
+      alertMessage =
+          '$typeAlert, ${TextLanguage.of(context).inBoat} ${alert.boatId}, ${TextLanguage.of(context).at} "${alert.date.day > 9 ? '${alert.date.day}' : '0${alert.date.day}'}/${alert.date.month > 9 ? '${alert.date.month}' : '0${alert.date.month}'}/${alert.date.year.toString().substring(2, 4)}" ${alert.date.toString().substring(11, alert.date.toString().length - 5)}';
+    }
+
     return Container(
       height: 50.0,
       margin: EdgeInsets.only(left: marginExt1, right: marginExt1),
@@ -146,8 +172,7 @@ class _AlertPageState extends State<AlertPage> {
                           Container(
                               width: (MediaQuery.of(context).size.width -
                                   (marginExt1 * 2)),
-                              child: Text(
-                                  '${alert.message} in boat ${alert.boatId} at ${alert.date}',
+                              child: Text(alertMessage,
                                   maxLines: 2,
                                   textAlign: TextAlign.start,
                                   overflow: TextOverflow.clip)),

@@ -1,5 +1,12 @@
 {
+    "tempAlert": "Temperature Alert detected",
+    "weigthAlert": "Weight Alert detected",
+    "unreachableAlert": "Docked Boat out of reach",
+    "suspiciousAlert": "Suspicious activity detected",
     "boat": "Boat",
+    "inBoat": "in boat",
+    "at": "at",
+    "inJourney": "in journey",
     "confirm": "Confirm",
     "historyHintText": "Type any boat name, travel id, supervisor",
     "restoring": "Restoring",

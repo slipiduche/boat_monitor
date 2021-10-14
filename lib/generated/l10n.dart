@@ -35,11 +35,81 @@ class TextLanguage {
     return Localizations.of<TextLanguage>(context, TextLanguage);
   }
 
+  /// `Temperature Alert detected`
+  String get tempAlert {
+    return Intl.message(
+      'Temperature Alert detected',
+      name: 'tempAlert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight Alert detected`
+  String get weigthAlert {
+    return Intl.message(
+      'Weight Alert detected',
+      name: 'weigthAlert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Docked Boat out of reach`
+  String get unreachableAlert {
+    return Intl.message(
+      'Docked Boat out of reach',
+      name: 'unreachableAlert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suspicious activity detected`
+  String get suspiciousAlert {
+    return Intl.message(
+      'Suspicious activity detected',
+      name: 'suspiciousAlert',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Boat`
   String get boat {
     return Intl.message(
       'Boat',
       name: 'boat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `in boat`
+  String get inBoat {
+    return Intl.message(
+      'in boat',
+      name: 'inBoat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at`
+  String get at {
+    return Intl.message(
+      'at',
+      name: 'at',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `in journey`
+  String get inJourney {
+    return Intl.message(
+      'in journey',
+      name: 'inJourney',
       desc: '',
       args: [],
     );

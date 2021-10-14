@@ -20,6 +20,10 @@ class PendingAlert {
   int pendingalertId;
   int travelId;
   int boatId;
+  int ta;
+  int ua;
+  int wa;
+  int sus;
   DateTime date;
   String message;
   PendingAlert(
@@ -27,12 +31,20 @@ class PendingAlert {
       this.travelId,
       this.message,
       this.boatId,
-      this.date});
+      this.date,
+      this.sus,
+      this.ta,
+      this.ua,
+      this.wa});
   factory PendingAlert.fromJson(Map<String, dynamic> json) => PendingAlert(
-      pendingalertId: json["pendingalertId"],
-      travelId: json["travelId"],
-      message: json["message"],
-      boatId: json["boatId"],
+      pendingalertId: json["id"],
+      travelId: json["journey_id"],
+      message: json["descr"],
+      boatId: json["boat_id"],
+      wa: json["wa"],
+      ua: json["ua"],
+      ta: json["ta"],
+      sus: json["sus"],
       date: json["dt"]);
 }
 
