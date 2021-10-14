@@ -520,17 +520,33 @@ Widget _travelCard(BuildContext context, Journey journey) {
                     SizedBox(
                       width: 30.0,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 5 - 15,
-                      child: Text(
-                        '${journey.ed.day > 9 ? '${journey.ed.day}' : '0${journey.ed.day}'}/${journey.ed.month > 9 ? '${journey.ed.month}' : '0${journey.ed.month}'}/${journey.ed.year.toString().substring(2, 4)}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            //color: blue1,
-                            //fontWeight: FontWeight.bold,
-                            fontSize: privacyPolicySize + 2.0),
-                      ),
-                    ),
+                    Builder(builder: (context) {
+                      if (journey.ed == journey.ini || journey.ed == null) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width / 5 - 15,
+                          child: Text(
+                            '--',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                //color: blue1,
+                                //fontWeight: FontWeight.bold,
+                                fontSize: privacyPolicySize + 2.0),
+                          ),
+                        );
+                      } else {
+                        return Container(
+                          width: MediaQuery.of(context).size.width / 5 - 15,
+                          child: Text(
+                            '${journey.ed.day > 9 ? '${journey.ed.day}' : '0${journey.ed.day}'}/${journey.ed.month > 9 ? '${journey.ed.month}' : '0${journey.ed.month}'}/${journey.ed.year.toString().substring(2, 4)}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                //color: blue1,
+                                //fontWeight: FontWeight.bold,
+                                fontSize: privacyPolicySize + 2.0),
+                          ),
+                        );
+                      }
+                    }),
                     SizedBox(
                       width: 1.0,
                     ),
