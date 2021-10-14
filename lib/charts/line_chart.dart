@@ -171,9 +171,9 @@ class _LineChartBasicState extends State<LineChartBasic> {
               show: true,
               getDotPainter: (spot, percent, barData, index) {
                 return FlDotCirclePainter(
-                    radius: 1.5,
+                    radius: 1.0,
                     color: blue1,
-                    strokeWidth: 1.5,
+                    strokeWidth: 1.0,
                     strokeColor: blue1);
               }),
           belowBarData: BarAreaData(
