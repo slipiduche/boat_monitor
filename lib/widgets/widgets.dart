@@ -196,11 +196,14 @@ void _onItemTapped(context, index) async {
 Widget statusIcon(double size, int status) {
   LinearGradient _gradiente;
   if (status == 1) {
-    _gradiente = greenGradient;
+    _gradiente = blueGradient1;
     print('status1');
   } else if (status == 0) {
     _gradiente = grayGradient;
     print('estatus0:$status');
+  } else if (status == 2) {
+    _gradiente = greenGradient;
+    print('estatus3:$status');
   } else {
     _gradiente = redGradient;
     print('estatus3:$status');

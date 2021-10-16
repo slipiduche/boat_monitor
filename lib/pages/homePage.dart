@@ -367,7 +367,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                                 print('aqui estoy colocando esto' +
                                     boat.toString());
                                 if (boat.connected == 1) {
-                                  return statusIcon(20.0, 1);
+                                  return statusIcon(20.0, 2);
                                 } else {
                                   return statusIcon(20.0, 0);
                                 }
@@ -568,7 +568,7 @@ Widget _boatCard(BuildContext context, BoatData boat) {
                           children: [
                             Builder(builder: (context) {
                               if (boat.connected == 1) {
-                                return statusIcon(20.0, 1);
+                                return statusIcon(20.0, 2);
                               } else {
                                 return statusIcon(20.0, 0);
                               }

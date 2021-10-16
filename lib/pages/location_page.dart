@@ -58,6 +58,26 @@ class _LocationPageState extends State<LocationPage> {
     print(_location.journey);
     HistoricsBloc().setHistorics = _location.historics;
     double _extraHeight = 0;
+    String sailingTime = '';
+    int diferenceInMinutes;
+    int diferenceInHours;
+    if (_location.journey.ed != null &&
+        _location.journey.ed != _location.journey.ini) {
+      diferenceInMinutes =
+          _location.journey.ed.difference(_location.journey.ini).inMinutes;
+    } else {
+      diferenceInMinutes =
+          DateTime.now().difference(_location.journey.ini).inMinutes;
+    }
+    print('minutos:$diferenceInMinutes}');
+    diferenceInHours = diferenceInHours = diferenceInMinutes ~/ 60;
+    diferenceInMinutes = diferenceInMinutes % 60;
+
+    print('minutos:$diferenceInMinutes}');
+    print('Horas:$diferenceInHours}');
+    sailingTime = diferenceInHours > 0
+        ? '$diferenceInHours HS ${diferenceInMinutes > 0 ? '$diferenceInMinutes MIN' : ''}'
+        : '$diferenceInMinutes MIN';
     if (MediaQuery.of(context).size.height < 2000) {
       _extraHeight = 50.0;
     }
@@ -241,7 +261,7 @@ class _LocationPageState extends State<LocationPage> {
                                       height: 10.0,
                                     ),
                                     Text(
-                                      '${_location.journey.ed.difference(_location.journey.ini).inHours} HS',
+                                      sailingTime,
                                       style: TextStyle(
                                         color: blue1,
                                         fontSize: titleBarSize,

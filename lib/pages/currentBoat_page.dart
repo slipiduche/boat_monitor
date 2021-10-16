@@ -40,7 +40,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
   LatLng _position;
   MapController controller = MapController();
   MQTTClientWrapper mqtt;
-
+  String currentWeight = '0.0';
   List<bool> _visible = [false, false, false, false];
   List<LatLng> lastLocation = [
     LatLng(0, 0),
@@ -79,7 +79,7 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
     } else {
       diferenceInMinutes = DateTime.now().difference(_journey.ini).inMinutes;
     }
-
+    print('minutos:$diferenceInMinutes}');
     diferenceInHours = diferenceInHours = diferenceInMinutes ~/ 60;
     diferenceInMinutes = diferenceInMinutes % 60;
 
@@ -377,12 +377,20 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                               SizedBox(
                                 height: 10.0 + _extraSizeBox,
                               ),
-                              Text(
-                                _journey.fWeight.toString() + ' KG',
-                                style: TextStyle(
-                                    color: blue1,
-                                    //fontWeight: FontWeight.w800,
-                                    fontSize: messageTitle - _minusSize),
+                              StreamBuilder(
+                                stream: HistoricsBloc().historics,
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  return Container(
+                                    child: Text(
+                                      currentWeight + ' KG',
+                                      style: TextStyle(
+                                          color: blue1,
+                                          //fontWeight: FontWeight.w800,
+                                          fontSize: messageTitle - _minusSize),
+                                    ),
+                                  );
+                                },
                               ),
                               SizedBox(
                                 height: 10.0 + _extraSizeBox,
@@ -407,7 +415,10 @@ class _CurrentBoatPageState extends State<CurrentBoatPage> {
                         builder: (context, AsyncSnapshot<Historics> snapshot) {
                           if (snapshot.hasData) {
                             Historics _historics = snapshot.data;
+
                             if (_historics.historics.length > 0) {
+                              currentWeight =
+                                  '${_historics.historics.last.contWeight}';
                               var _fourPositions = 0;
                               for (var i = _historics.historics.length - 1;
                                   i >= 0;
